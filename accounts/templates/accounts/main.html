@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTIPE html>
+<html>
+<head>
+    <title>Planty Options</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yrsa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    {% include 'accounts/navbar.html' %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'accounts/footer.html' %}
+</body>
+
+</html>
