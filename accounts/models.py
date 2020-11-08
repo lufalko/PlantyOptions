@@ -45,7 +45,13 @@ class Food(models.Model):
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     price = models.FloatField(null=True)
-    description = models.CharField(max_length=400, null=True, Blank=True)
+    description = models.CharField(max_length=400, null=True)
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    date_created = models.DateTimeField(auto_now_add=True)
+    content = models.FloatField(null=True)
