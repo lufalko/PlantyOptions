@@ -8,8 +8,8 @@ def home(request):
     return render(request, 'accounts/dashboard.html')
 
 
-def restaurants(request):
-    return render(request, 'accounts/restaurants.html')
+def map(request):
+    return render(request, 'accounts/map.html')
 
 
 def user(request):
