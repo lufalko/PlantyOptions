@@ -5,4 +5,5 @@ urlpatterns = (
     path('', views.home),
     path('map/', views.map),
     path('user/', views.user),
+    path('restaurants/', views.restaurants),
 )
