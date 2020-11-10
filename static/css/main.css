@@ -12,7 +12,7 @@ body {
     overflow-x: hidden;
 }
 
-//navbar
+
 
 #icon{
     width:50px;
@@ -40,13 +40,12 @@ footer{
 
 }
 
-#restaurant_background{
+#restaurant_background {
     height: 100vh;
     width: 100vw;
     position: relative;
+}
 
-
-//dashboard page
 
 .background{
     width:100%;
@@ -54,11 +53,11 @@ footer{
 }
 
 
-}
+
 
 #restaurants_searchbar{
     height: 5vh;
     width:35vw;
     position: relative;
-    background-color: black;
+    background-color: orange;
 }
