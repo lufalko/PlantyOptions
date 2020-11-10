@@ -12,19 +12,24 @@ body {
     overflow-x: hidden;
 }
 
+#icon{
+    width:50px;
+    float:left;
+    margin-left: 10px;
+}
+
 nav{
     position: fixed;
     width: 100%;
     background-color: white;
-}
-
-nav ul{
     position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 nav li{
     display: inline;
-    margin-left: 55px;
+    margin-left: 5%;
     text-decoration: none;
 }
 
