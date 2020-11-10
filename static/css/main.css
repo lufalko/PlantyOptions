@@ -37,9 +37,10 @@ nav li{
 
 
 /*dashboard page*/
+
 .background{
-    width:100%;
-    background-image: url('static/assets/dashboard-BG.jpg');
+    width:100vw;
+    height: 70vh;
 }
 
 
