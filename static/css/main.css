@@ -8,14 +8,13 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
     text-align: center;
-    margin:0px;
     overflow-x: hidden;
 }
 
 
 
 #icon{
-    width:50px;
+    width:60px;
     float:left;
     margin-left: 10px;
 }
@@ -35,12 +34,44 @@ nav li{
     text-decoration: none;
 }
 
+.nav-account{
+    float: right;
+}
+
 
 /*dashboard page*/
 
 .background{
-    width:100vw;
-    height: 70vh;
+    width: 100%;
+    height: 50vh;
+}
+
+.dashboard_searchbar{
+    position:relative;
+    width:40%;
+    height:60px;
+    left:30%;
+    top:-25vh;
+    background:white;
+    border-radius: 20px;
+}
+
+.searchbar_textfeld{
+    font-size: 18;
+    padding: 18px;
+    color: rgb(200,200,200);
+    float: left;
+}
+
+.search_button{
+    float: right;
+    background: rgb(196,242,192);
+    border-radius: 20px;
+    padding: 15px;
+}
+#lupe{
+    width:30px;
+    height:30px;
 }
 
 
