@@ -25,9 +25,6 @@ nav ul{
 nav li{
     display: inline;
     margin-left: 50px;
-}
-
-.navbar-right{
-align: right;
+    text-decoration: none;
 }
 
