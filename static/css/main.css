@@ -5,7 +5,29 @@ html, body {
 }
 
 body {
-    font-family: 'Yrsa', serif;
-    font-weight: light;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    margin:0px;
+    overflow-x: hidden;
+}
+
+nav{
+    position: fixed;
+    width: 100%;
+    background-color: white;
+}
+
+nav ul{
+    position: relative;
+}
+
+nav li{
+    display: inline;
+    margin-left: 50px;
+}
+
+.navbar-right{
+align: right;
 }
 
