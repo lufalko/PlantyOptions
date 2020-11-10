@@ -11,6 +11,9 @@ def home(request):
 def map(request):
     return render(request, 'accounts/map.html')
 
+def restaurants(request):
+    return render(request, 'accounts/restaurants.html')
+
 
 def user(request):
     return render(request, 'accounts/user.html')

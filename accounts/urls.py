@@ -3,6 +3,7 @@ from accounts import views
 
 urlpatterns = (
     path('', views.home),
-    path('map/', views.map),
+    path('restaurants/', views.restaurants),
     path('user/', views.user),
+    path('restaurants/', views.restaurants),
 )
