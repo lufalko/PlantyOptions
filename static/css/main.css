@@ -12,6 +12,8 @@ body {
     overflow-x: hidden;
 }
 
+//navbar
+
 #icon{
     width:50px;
     float:left;
@@ -42,6 +44,10 @@ footer{
     height: 100vh;
     width: 100vw;
     position: relative;
+
+
+//dashboard page
+
 .background{
     width:100%;
     background-image: url('static/assets/dashboard-BG.jpg');
