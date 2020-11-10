@@ -12,6 +12,8 @@ body {
     overflow-x: hidden;
 }
 
+//navbar
+
 #icon{
     width:50px;
     float:left;
@@ -32,6 +34,10 @@ nav li{
     margin-left: 5%;
     text-decoration: none;
 }
+
+
+
+//dashboard page
 
 .background{
     width:100%;
