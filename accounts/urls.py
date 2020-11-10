@@ -6,4 +6,5 @@ urlpatterns = (
     path('restaurants/', views.restaurants),
     path('user/', views.user),
     path('restaurants/', views.restaurants),
+    path('map/', views.map),
 )
