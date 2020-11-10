@@ -190,29 +190,130 @@ main{
 
 /*restaurant page*/
 
-#restaurant_background {
+/* #restaurants_background {
     height: 100vh;
     width: 100vw;
     position: fixed;
-    top: 60;
+
     background-color: aquamarine;
+} */
+
+
+#restaurants_wrapper {
+
+  display: grid;
+
+    justify-content: center;
+
+  grid-column-gap: 25px;
+  grid-row-gap: 25px;
+  grid-template-columns: 7.4% 17.6% 50% 21.2% 3.8%;
+
+  min-width: 600px;
+    width: 1800px;
+    margin-left: calc(50vw - 900px );
+
+
+}
+
+
+#restaurants_header{
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    background-color: orange;
+
+    height: 85px;
+}
+
+#restaurants_body{
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    background-color: orange;
+
+    height: 85vh;
+    min-height: 600px;
+}
+
+#restaurants_aside_left{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: orange;
+
+    height: 250px;
+}
+
+#restaurants_aside_right{
+
+    grid-column-start: 4;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: orange;
+
+    height: 400px;
 }
 
 #restaurants_searchbar{
-    height: 60px;
-    width:500px;
-    position: relative;
-    border-radius: 20px 20px 20px 20px;
-    left: 50%;
-    transform: translate(-50%);
-
-    top: 40px;
 
 
-    background-color: white;
+}
+
+#restaurants_mainspace{
+
+
+
 }
 
 
+
+
+#restaurants_map{
+
+
+}
+
+@media only screen and (max-width: 1700px) {
+
+  #restaurants_wrapper {
+      width: 100vw;
+      margin-left: 0px;
+      grid-template-columns:  0% 17.6% 50% 21.2% ;
+  }
+
+  #restaurants_aside_right{
+      height: 20.2vw;
+  }
+
+  #restaurants_aside_left{
+      height: 13.28vw;
+  }
+
+}
+
+@media only screen and (max-width: 1000px) {
+
+  #restaurants_wrapper {
+      width: 100vw;
+      margin-left: 0px;
+      grid-template-columns: 0px 200px 1Fr 0px;
+
+  }
+
+  #restaurants_aside_right{
+      display: none;
+  }
+
+  #restaurants_aside_left{
+      height: 180px;
+  }
+
+}
 
 /*footer*/
 
