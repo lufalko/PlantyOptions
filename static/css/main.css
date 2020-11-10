@@ -83,7 +83,7 @@ main{
     height: 400px;
     display: inline-block;
     border-radius: 20px;
-    margin:30px;
+    margin:2%;
 }
 
 .suggestion_img{
@@ -103,8 +103,8 @@ main{
 }
 
 #best_restaurants{
-    width:80%;
-    height:300px;
+    width:83%;
+    height:500px;
     display: inline-block;
     border-radius: 20px;
     margin: 30px;
@@ -118,12 +118,74 @@ main{
 #best_restaurants_button{
     position: relative;
     background: rgb(196,242,192);
+    color: white;
+    font-size:18px;
+    font-weight:bold;
     width: 50%;
     padding: 20px;
     top:-200px;
     border-radius:20px;
     left: 25%;
 }
+
+.dashboard_comment_h1{
+    font-size:24px;
+    margin-bottom:30px;
+}
+
+.dashboard_comment{
+    width:25%;
+    height:200px;
+    margin:1%;
+    display: inline-block;
+    border-radius: 20px;
+    background:white;
+    border-style: solid;
+}
+
+.comment_profilepic{
+    width:40px;
+    height:40px;
+    margin:10px;
+    display: inline-block;
+    float: left;
+}
+
+.profilepic{
+    width:100%;
+    border-radius:50%;
+}
+
+.comment_username{
+    display: inline-block;
+    float:left;
+    margin-top:10px;
+    padding: 10px 0px;
+    text-align:left;
+    color: rgb(200,200,200);
+}
+
+.comment_time{
+    margin-top:10px;
+    margin-right: 10px;
+    padding: 10px 0px;
+    text-align:right;
+    color: rgb(200,200,200);
+}
+
+.comment_title{
+    text-align: left;
+    margin:15px 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.comment_text{
+    text-align: left;
+    margin:10px;
+}
+
+
 
 
 /*restaurant page*/
