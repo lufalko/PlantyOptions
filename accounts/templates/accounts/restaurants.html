@@ -24,7 +24,18 @@
 
     </div>
 
-    <img src="PO_Icon_Green.png" alt="logo">
+<script>
+    let searchbarMinusWidth=30;
+   function adaptSize(ele1, ele2, minusWidth) {
+       if(typeof(minusWidth)==='undefined'){minusWidth = 0;}
+       document.getElementById(ele1).style.width = document.getElementById(ele2).clientWidth - minusWidth + "px";
+   }
+
+   window.addEventListener('resize', function() { adaptSize('restaurants_searchbar', 'restaurants_header',searchbarMinusWidth); });
+
+   adaptSize('restaurants_searchbar', 'restaurants_header', searchbarMinusWidth);
+</script>
+
 
 
 {% endblock %}

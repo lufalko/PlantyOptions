@@ -277,7 +277,11 @@ main{
 }
 
 #restaurants_searchbar{
-
+background-color: black;
+border-radius: 20px ;
+    display: inline-block;
+    height: 85px;
+    width: 20px;
 
 }
 
@@ -332,8 +336,24 @@ main{
 
 }
 
+@media only screen and (max-width: 700px) {
+
+  #restaurants_wrapper {
+
+      grid-template-columns: 0px 0px 1Fr 0px;
+      grid-column-gap: 0px;
+  }
+
+
+  #restaurants_aside_left{
+   display: none;
+  }
+
+}
+
 /*footer*/
 
 footer{
 
 }
+
