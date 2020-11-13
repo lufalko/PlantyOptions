@@ -27,7 +27,6 @@ class Tag(models.Model):
 class Restaurant(models.Model):
     name = models.CharField(max_length=200, null=True)
     location = models.CharField(max_length=200, null=True)
-    image = models.ImageField(null=True, blank=True)
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(null=True)

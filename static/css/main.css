@@ -320,7 +320,40 @@ main{
 
     background-color: white;
 }
+#restaurants_img{
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: orange;
+    border-radius: 20px;
+    float: left;
+    margin-right: 10px;
 
+}
+
+.restaurants_block{
+
+    background-color: #7abecc;
+    height: 150px;
+    text-align: left;
+    margin-bottom: 25px;
+    padding: 0px;
+}
+
+.restaurants_name p{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+
+}
+
+.restaurants_body_content{
+    text-align: left;
+}
+
+#hallo{
+     font-size: 30px;
+}
 
 
 #restaurants_aside_left{
