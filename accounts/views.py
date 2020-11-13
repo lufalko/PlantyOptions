@@ -6,42 +6,50 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 from .models import *
 from .forms import CreateUserForm
 
 
 def register(request):
-    form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        form = CreateUserForm()
 
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            usr = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + usr)
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                usr = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + usr)
 
-            return redirect('/login')
+                return redirect('/login')
 
-    context = {'form': form}
-    return render(request, 'accounts/register.html', context)
+        context = {'form': form}
+        return render(request, 'accounts/register.html', context)
 
 
 def loginPage(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-        usr = authenticate(request, username=username, password=password)
+            usr = authenticate(request, username=username, password=password)
 
-        if usr is not None:
-            login(request, usr)
-            return redirect('home')
-        else:
-            messages.info(request, 'Username or password is incorrect')
+            if usr is not None:
+                login(request, usr)
+                return redirect('home')
+            else:
+                messages.info(request, 'Username or password is incorrect')
 
-    context = {}
-    return render(request, 'accounts/login.html', context)
+        context = {}
+        return render(request, 'accounts/login.html', context)
 
 
 def logoutPage(request):
@@ -60,8 +68,9 @@ def userMap(request):
 def restaurants(request):
     restaurants = Restaurant.objects.all()
 
-    return render(request, 'accounts/restaurants.html', {'restaurants':restaurants})
+    return render(request, 'accounts/restaurants.html', {'restaurants': restaurants})
 
 
+@login_required(login_url='login')
 def user(request):
     return render(request, 'accounts/user.html')
