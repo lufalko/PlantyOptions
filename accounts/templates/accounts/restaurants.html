@@ -44,7 +44,13 @@
         </div>
 
         <div id="restaurants_aside_left">
-            <div id="restaurants_filter"></div>
+            <div id="restaurants_filter">
+                <form method="get">
+                    {{myFilter.form}}
+
+                    <button class="btn btn-primary" type="submit">search</button>
+                </form>
+            </div>
         </div>
 
         <div id="restaurants_aside_right">

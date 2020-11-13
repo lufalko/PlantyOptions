@@ -9,6 +9,7 @@ from django.contrib import messages
 # Create your views here.
 from .models import *
 from .forms import CreateUserForm
+from .filters import RestaurantFilter
 
 
 def register(request):
@@ -22,6 +23,8 @@ def register(request):
             messages.success(request, 'Account was created for ' + usr)
 
             return redirect('/login')
+
+    myFilter = RestaurantFilter()
 
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
@@ -60,7 +63,11 @@ def userMap(request):
 def restaurants(request):
     restaurants = Restaurant.objects.all()
 
-    return render(request, 'accounts/restaurants.html', {'restaurants':restaurants})
+    myFilter = RestaurantFilter(request.GET, queryset=restaurants)
+    restaurants = myFilter.qs
+
+    context = {'restaurants': restaurants, 'myFilter': myFilter}
+    return render(request, 'accounts/restaurants.html', context)
 
 
 def user(request):
