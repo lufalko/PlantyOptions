@@ -190,8 +190,9 @@ nav{
 }
 
 #best_restaurants_button{
+    position:relative;
     margin:auto;
-    margin-top:-175px;
+    margin-top:-200px;
     background-color: rgb(196,242,192);
     color: white;
     font-size:18px;
