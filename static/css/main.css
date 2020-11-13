@@ -429,6 +429,12 @@ main{
 
 #restaurants_map{
 
+    background-color: rgb(196,242,192);
+    height: 85px;
+    width: 85px;
+    margin-right: -85px;
+    float: right;
+    border-radius: 0px 20px 20px 0px ;
 
 }
 
@@ -486,9 +492,25 @@ main{
 
 }
 
+@media only screen and (max-width: 700px) {
+
+  #restaurants_wrapper {
+
+      grid-template-columns: 0px 0px 1Fr 0px;
+      grid-column-gap: 0px;
+  }
+
+
+  #restaurants_aside_left{
+   display: none;
+  }
+
+}
+
 /*footer*/
 
 footer{
 
 }
+
 
