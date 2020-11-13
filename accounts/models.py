@@ -27,6 +27,7 @@ class Tag(models.Model):
 class Restaurant(models.Model):
     name = models.CharField(max_length=200, null=True)
     location = models.CharField(max_length=200, null=True)
+    image = models.ImageField(null=True, blank=True)
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(null=True)
@@ -44,6 +45,7 @@ class Food(models.Model):
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=200, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
+    image = models.ImageField(null=True, blank=True)
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     price = models.FloatField(null=True)

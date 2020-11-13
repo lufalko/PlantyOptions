@@ -9,15 +9,15 @@
         <li class="nav-reiter"><a href="{% url 'restaurants' %}">restaurants</a></li>
         <li class="nav-reiter"><a href="#">about</a></li>
 
-            <li id="nav-account_img"><a href="#">
+          <li id="nav-account_img"><a href="#">
 
-            </a></li>
-            {% if user.is_authenticated %}
-                <li class="nav-account"><a href="{% url 'logout' %}">logout</a></li>
-            {% else %}
-                <li class="nav-account"><a href="{% url 'login' %}">login</a></li>
-            {% endif %}
-            <li class="nav-account"><a href="{% url 'register' %}">Sign in</a></li>
+          </a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-account"><a href="{% url 'login' %}">login</a></li>
+          {% else %}
+          <li class="nav-account"><a href="{% url 'logout' %}}">logout</a></li>
+          {% endif %}
+          <li class="nav-account"><a href="{% url 'register' %}}">Sign in</a></li>
 
 
       </ul>
