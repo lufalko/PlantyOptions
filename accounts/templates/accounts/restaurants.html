@@ -32,6 +32,16 @@
 
   <div id="restaurants_background"> </div>
 
+{% for i in restaurants %}
+    <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.location}}</td>
+        <td>{{i.rating}}</td>
+        <td>{{i.affordability}}</td>
+
+    </tr>
+{% endfor %}
+
 <script>
 
     let searchbarMinusWidth=30;
