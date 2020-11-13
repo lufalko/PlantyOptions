@@ -1,3 +1,5 @@
+{% load static %}
+
 html, body {
       margin: 0;
       padding: 0;
@@ -9,7 +11,7 @@ body {
     font-size: 14px;
     text-align: center;
     overflow-x: hidden;
-    background-color: rgb(225,225,225);
+    background-color: white;
 }
 
 ::-webkit-scrollbar {
@@ -18,7 +20,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: lightgrey;
+  background-color: white;
   -webkit-box-shadow: 0 0 1px rgba(200, 255, 255, .5);
 }
 
@@ -68,20 +70,63 @@ nav{
 }
 
 
-/*dashboard page*/
+/*main page*/
 
-.background{
-    width: 100%;
-    height: 50vh;
+#home_wrapper {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 20px;
+  grid-template-columns: 100%;
+  min-width: 600px;
+  width:100%;
 }
 
-.dashboard_searchbar{
+/*grid classes*/
+
+#main_row1{
+    margin-top:-50px;
+    grid-column:1/1;
+    grid-row:1/1;
+    height: 60vh;
+
+    background-image: url('../assets/dashboard-BG.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+#main_row2{
+    background-color:white;
+    grid-column:1/1;
+    grid-row:2/2;
+    height:500px;
+    border-radius:20px;
+}
+
+#main_row3{
+    background-color:white;
+    grid-column:1/1;
+    grid-row:3/3;
+    height:400px;
+    border-radius:20px;
+}
+
+#main_row4{
+    background-color:white;
+    grid-column:1/1;
+    grid-row:4/4;
+    height:400px;
+    border-radius:20px;
+}
+
+/*main_row1*/
+
+.main_searchbar{
     position:relative;
     width:40%;
     height:60px;
     left:30%;
-    top:-25vh;
-    background:white;
+    top:30vh;
+    background-color:white;
     border-radius: 20px;
 }
 
@@ -103,9 +148,9 @@ nav{
     height:30px;
 }
 
-main{
-    background: white;
-}
+
+
+/*main_row2*/
 
 .food_suggestion{
     width:25%;
@@ -117,6 +162,8 @@ main{
 
 .suggestion_img{
     width:100%;
+    max-height:300px;
+    object-fit:cover;
     border-radius: 20px;
 }
 .suggestion_title{
@@ -131,30 +178,32 @@ main{
     margin:5px;
 }
 
-#best_restaurants{
-    width:83%;
-    height:450px;
-    display: inline-block;
-    border-radius: 20px;
-    margin: 30px;
-}
+
+
+/*main_row3*/
 
 #best_restaurants_img{
-    width: 100%;
+    width: 83%;
+    max-height:350px;
+    object-fit: cover;
     border-radius: 20px;
 }
 
 #best_restaurants_button{
-    position: relative;
-    background: rgb(196,242,192);
+    margin:auto;
+    margin-top:-175px;
+    background-color: rgb(196,242,192);
     color: white;
     font-size:18px;
     font-weight:bold;
     width: 50%;
     padding: 20px;
-    top:-200px;
     border-radius:20px;
-    left: 25%;
+}
+
+.home_comments_box{
+    height:300px;
+    margin-top:10px;
 }
 
 .dashboard_comment_h1{
