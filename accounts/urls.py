@@ -1,13 +1,13 @@
-from django.urls import path, include
+from django.urls import path
 from accounts import views
 
 
 urlpatterns = (
-    path('', views.home),
-    path('restaurants/', views.restaurants),
-    path('user/', views.user),
-    path('restaurants/', views.restaurants),
-    path('map/', views.map),
-    path('register/', views.register),
-    path('login/', views.loginPage, ),
+    path('', views.home, name='home'),
+    path('user/', views.user, name='user'),
+    path('restaurants/', views.restaurants, name='restaurants'),
+    path('map/', views.userMap, name='map'),
+    path('register/', views.register, name='register'),
+    path('login/', views.loginPage, name='login'),
+    path('logout/', views.logoutPage, name='logout')
 )

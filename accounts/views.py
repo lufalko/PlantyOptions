@@ -11,21 +11,6 @@ from .models import *
 from .forms import CreateUserForm
 
 
-def loginPage(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        usr = authenticate(request, username=username, password=password)
-
-        if usr is not None:
-            login(request, usr)
-            return redirect('home')
-
-    context = {}
-    return render(request, 'accounts/login.html', context)
-
-
 def register(request):
     form = CreateUserForm()
 
@@ -42,11 +27,33 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
+def loginPage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        usr = authenticate(request, username=username, password=password)
+
+        if usr is not None:
+            login(request, usr)
+            return redirect('home')
+        else:
+            messages.info(request, 'Username or password is incorrect')
+
+    context = {}
+    return render(request, 'accounts/login.html', context)
+
+
+def logoutPage(request):
+    logout(request)
+    return redirect('login')
+
+
 def home(request):
     return render(request, 'accounts/home.html')
 
 
-def map(request):
+def userMap(request):
     return render(request, 'accounts/map.html')
 
 
