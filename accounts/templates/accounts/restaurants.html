@@ -4,14 +4,43 @@
 
     <div id="restaurants_wrapper">
 
-        <div id="restaurants_background"></div>
+
 
         <div id="restaurants_header">
+            <div id="restaurants_searchbarIcon"></div>
             <div id="restaurants_searchbar"></div>
          </div>
 
         <div id="restaurants_body">
-            <div id="restaurants_mainspace"></div>
+
+            <p id="restaurants_Adresseingabe_Headline">Restaurants in deiner Nähe:</p>
+            <div id="restaurants_Adresseingabe_Headline_underline"></div>
+            <div id="restaurants_body_content">
+                {% for i in restaurants %}
+
+    <div class="restaurants_block">
+    <div id="restaurants_img"></div>
+    <div class="restaurants_name">
+        <p>{{i.name}}</p>
+    </div>
+    <div class="restaurants_rating">
+        <img src="">
+        <p>{{i.rating}}</p>
+    </div>
+    <div class="restaurants_anzahl_vegetarisch">
+        <p>noch nicht fertig</p>
+    </div>
+    <div class="restaurants_anzahl_vegan">
+        <p>noch nicht fertig</p>
+    </div>
+    <div class="restaurants_adresse">
+        <p>{{i.location}}</p>
+    </div>
+    </div>
+
+
+{% endfor %}
+        </div>
         </div>
 
         <div id="restaurants_aside_left">
@@ -24,7 +53,31 @@
 
     </div>
 
-    <img src="PO_Icon_Green.png" alt="logo">
+  <div id="restaurants_background"> </div>
+
+
+
+<script>
+
+    let searchbarMinusWidth=30;
+
+   function adaptSize(ele1, ele2, minusWidth , minusHeight) {
+       if(typeof(minusWidth)==='undefined'){minusWidth = 0;}
+        if(typeof(minusHeight)==='undefined'){minusHeight = minusWidth;}
+       document.getElementById(ele1).style.width = document.getElementById(ele2).clientWidth - minusWidth + "px";
+       document.getElementById(ele1).style.height = document.getElementById(ele2).clientHeight - minusHeight + "px";
+   }
+
+   window.addEventListener('resize', function() {
+       adaptSize('restaurants_searchbar', 'restaurants_header',searchbarMinusWidth, 0);
+
+   });
+
+   adaptSize('restaurants_searchbar', 'restaurants_header', searchbarMinusWidth, 0);
+
+
+</script>
+
 
 
 {% endblock %}

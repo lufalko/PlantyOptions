@@ -9,14 +9,26 @@ body {
     font-size: 14px;
     text-align: center;
     overflow-x: hidden;
+    background-color: rgb(225,225,225);
 }
 
-
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: lightgrey;
+  -webkit-box-shadow: 0 0 1px rgba(200, 255, 255, .5);
+}
 
 #icon{
+    position: relative;
     width:60px;
     float:left;
     margin-left: 10px;
+
+    z-index: 3;
 }
 
 nav{
@@ -218,51 +230,142 @@ main{
 
 #restaurants_wrapper {
 
-  display: grid;
-
+    display: grid;
     justify-content: center;
+    position: fixed;
+    z-index: 1;
 
-  grid-column-gap: 25px;
-  grid-row-gap: 25px;
-  grid-template-columns: 7.4% 17.6% 50% 21.2% 3.8%;
 
-  min-width: 600px;
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+    grid-template-columns: 7.4% 17.6% 50% 21.2% 3.8%;
+
+    min-width: 600px;
     width: 1800px;
     margin-left: calc(50vw - 900px );
+    top: 91px;
 
 
 }
 
-
 #restaurants_header{
+
     grid-column-start: 3;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 1;
-    background-color: orange;
+    background-color: white;
 
     height: 85px;
+     margin-left: 20px;
+     margin-right: 105px;
+    border-radius: 20px 0px 0px 20px ;
 }
 
 #restaurants_body{
+
     grid-column-start: 3;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 2;
-    background-color: orange;
+    background-color: white;
 
-    height: 85vh;
+    height: calc(100vh - 225px);
     min-height: 600px;
+    border-radius: 20px ;
+
+
 }
 
+#restaurants_Adresseingabe_Headline{
+
+    font-size: 25px;
+    float: left;
+    margin-left: 25px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+
+}
+
+#restaurants_Adresseingabe_Headline_underline{
+
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 2;
+
+    background-color: lightgrey;
+    height: 2px;
+
+    margin-top: 60px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+}
+
+#restaurants_body_content{
+
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 2;
+
+    overflow: hidden;
+    overflow-y: scroll;
+
+    height: calc(100vh - 337px);
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+    background-color: white;
+}
+#restaurants_img{
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: orange;
+    border-radius: 20px;
+    float: left;
+    margin-right: 10px;
+
+}
+
+.restaurants_block{
+
+    background-color: #7abecc;
+    height: 150px;
+    text-align: left;
+    margin-bottom: 25px;
+    padding: 0px;
+}
+
+.restaurants_name p{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+
+}
+
+.restaurants_body_content{
+    text-align: left;
+}
+
+#hallo{
+     font-size: 30px;
+}
+
+
 #restaurants_aside_left{
+
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: orange;
+    background-color: white;
 
     height: 250px;
+    border-radius: 20px ;
 }
 
 #restaurants_aside_right{
@@ -271,24 +374,51 @@ main{
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: orange;
+     background-color: white;
 
     height: 400px;
+    border-radius: 20px ;
+}
+
+#restaurants_background{
+
+    position: fixed;
+    z-index: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: lightgrey;
+
+    background-image: url("http://127.0.0.1:8000/static/assets/dashboard-BG.jpg");
+
+    -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-height: 120vw;
+    opacity: 0.9;
 }
 
 #restaurants_searchbar{
 
+    /* background-color: white;
+    border-radius: 20px ;
+    display: inline-block;
+    height: 85px;
+    width: 20px; */
 
 }
 
-#restaurants_mainspace{
+#restaurants_searchbarIcon{
 
-
+    background-color: rgb(196,242,192);
+    height: 85px;
+    width: 85px;
+    margin-right: -85px;
+    float: right;
+    border-radius: 0px 20px 20px 0px ;
 
 }
-
-
-
 
 #restaurants_map{
 
@@ -298,9 +428,11 @@ main{
 @media only screen and (max-width: 1700px) {
 
   #restaurants_wrapper {
+
       width: 100vw;
       margin-left: 0px;
       grid-template-columns:  0% 17.6% 50% 21.2% ;
+
   }
 
   #restaurants_aside_right{
@@ -319,7 +451,7 @@ main{
       width: 100vw;
       margin-left: 0px;
       grid-template-columns: 0px 200px 1Fr 0px;
-
+      grid-column-gap: 25px;
   }
 
   #restaurants_aside_right{
@@ -332,8 +464,24 @@ main{
 
 }
 
+@media only screen and (max-width: 700px) {
+
+  #restaurants_wrapper {
+
+      grid-template-columns: 0px 0px 1Fr 0px;
+      grid-column-gap: 0px;
+  }
+
+
+  #restaurants_aside_left{
+   display: none;
+  }
+
+}
+
 /*footer*/
 
 footer{
 
 }
+
