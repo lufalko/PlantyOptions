@@ -1,5 +1,5 @@
 {% extends 'accounts/main.html' %}
-
+{% load static %}
 {% block content %}
 
     <div id="restaurants_wrapper">
@@ -19,12 +19,12 @@
                 {% for i in restaurants %}
 
     <div class="restaurants_block">
-    <div id="restaurants_img"></div>
+    <div class="restaurants_img"></div>
     <div class="restaurants_name">
         <p>{{i.name}}</p>
     </div>
-    <div class="restaurants_rating">
-        <img src="">
+    <div class="restaurants_rating" >
+
         <p>{{i.rating}}</p>
     </div>
     <div class="restaurants_anzahl_vegetarisch">
@@ -44,7 +44,13 @@
         </div>
 
         <div id="restaurants_aside_left">
-            <div id="restaurants_filter"></div>
+            <div id="restaurants_filter">
+                <form method="get">
+                    {{myFilter.form}}
+
+                    <button class="btn btn-primary" type="submit">search</button>
+                </form>
+            </div>
         </div>
 
         <div id="restaurants_aside_right">
@@ -74,6 +80,64 @@
    });
 
    adaptSize('restaurants_searchbar', 'restaurants_header', searchbarMinusWidth, 0);
+
+   let classesNodeList = document.querySelectorAll(".restaurants_rating");
+    let classes = Array.prototype.slice.call(classesNodeList).map(function(element) {
+    return element.value;
+});
+    console.log(classesNodeList);
+
+   function stars() {
+        console.log("hallo");
+    for(let j = 0; j < classesNodeList.length; j++) {
+
+
+        let SternArray = new Array(5);
+
+        let TextInsideP = classesNodeList.item(j).getElementsByTagName('p')[0].innerHTML;
+        console.log(TextInsideP);
+
+        if (TextInsideP == 0.0) {
+            SternArray = [0, 0, 0, 0, 0];
+        }
+        if (TextInsideP == 1.0) {
+            SternArray = [1, 0, 0, 0, 0];
+        }
+        if (TextInsideP == 2.0) {
+            SternArray = [1, 1, 0, 0, 0];
+        }
+        if (TextInsideP == 3.0) {
+            SternArray = [1, 1, 1, 0, 0];
+        }
+        if (TextInsideP == 4.0) {
+            SternArray = [1, 1, 1, 1, 0];
+        }
+        if (TextInsideP == 5.0) {
+            SternArray = [1, 1, 1, 1, 1];
+        }
+        console.log(SternArray);
+        for (let i = 0; i < SternArray.length; i++) {
+
+            let element = document.createElement("img");
+
+            if (SternArray[i] == 1) {
+                element.setAttribute('src', "{% static 'assets/stern.png' %}");
+            }
+
+            if (SternArray[i] == 0) {
+                element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+            }
+
+            element.id = 'i';
+            element.className = "stars_class";
+
+            classesNodeList.item(j).appendChild(element);
+        }
+    }
+}
+
+stars();
+
 
 
 </script>

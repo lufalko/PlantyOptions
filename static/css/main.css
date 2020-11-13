@@ -369,10 +369,10 @@ nav{
 
     background-color: white;
 }
-#restaurants_img{
+.restaurants_img{
     display: inline-block;
-    width: 150px;
-    height: 150px;
+    width: 178px;
+    height: 178px;
     background-color: orange;
     border-radius: 20px;
     float: left;
@@ -382,8 +382,8 @@ nav{
 
 .restaurants_block{
 
-    background-color: #7abecc;
-    height: 150px;
+    background-color: white;
+    height: 178px;
     text-align: left;
     margin-bottom: 25px;
     padding: 0px;
@@ -393,6 +393,7 @@ nav{
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 18px;
+    margin: 0;
 
 }
 
@@ -400,8 +401,14 @@ nav{
     text-align: left;
 }
 
-#hallo{
-     font-size: 30px;
+.restaurants_rating img{
+    height: 24px;
+    margin: 5px;
+    margin-left: 0px;
+}
+
+.restaurants_rating p{
+   display: none;
 }
 
 
