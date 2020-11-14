@@ -4,8 +4,6 @@
 
     <div id="restaurants_wrapper">
 
-
-
         <div id="restaurants_header">
             <div id="restaurants_searchbarIcon"></div>
             <div id="restaurants_searchbar"></div>
@@ -28,13 +26,24 @@
         <p>{{i.rating}}</p>
     </div>
     <div class="restaurants_anzahl_vegetarisch">
-        <p>noch nicht fertig</p>
+         <img src="{% static 'assets/v_symbol.png' %}">
+        <p>? vegetarische Gerichte</p>
+        <div id="restaurants_anzahl_vegetarisch_underline"></div>
     </div>
     <div class="restaurants_anzahl_vegan">
-        <p>noch nicht fertig</p>
+
+        <img src="{% static 'assets/v_symbol.png' %}">
+        <img src="{% static 'assets/v_symbol.png' %}">
+
+        <p>? vegane Gerichte</p>
+
+        <div id="restaurants_anzahl_vegan_underline"></div>
+
     </div>
     <div class="restaurants_adresse">
+        <img src="{% static 'assets/PO_Icon_Green.png' %}">
         <p>{{i.location}}</p>
+        <p>?km entfernt</p>
     </div>
     </div>
 
@@ -54,7 +63,7 @@
         </div>
 
         <div id="restaurants_aside_right">
-            <div id="restaurants_map"></div>
+
         </div>
 
     </div>
