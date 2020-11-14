@@ -510,7 +510,6 @@ nav{
     grid-row-end: 3;
     background-color: white;
 
-    height: 250px;
     border-radius: 20px ;
 }
 
@@ -592,7 +591,7 @@ nav{
   }
 
   #restaurants_aside_left{
-      height: 13.28vw;
+
   }
 
 }
@@ -611,7 +610,7 @@ nav{
   }
 
   #restaurants_aside_left{
-      height: 180px;
+
   }
 
 }
@@ -646,6 +645,152 @@ nav{
 
 }
 
+#id_name{
+    background-color: white;
+    margin: 5px;
+    margin-top: 20px;
+    width: calc(100% - 40px);
+    height: 20px;
+    border-radius: 20px;
+    border: 2px solid lightgrey;
+    font-family: Montserrat;
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+#id_rating{
+    background-color: white;
+    margin: 5px;
+    margin-top: 20px;
+     width: calc(100% - 40px);
+    height: 20px;
+    border-radius: 20px;
+    border: 2px solid lightgrey;
+    font-family: Montserrat;
+    font-size: 16px;
+
+    margin-right: 20px;
+}
+
+
+#restaurants_filter input[type=text] {
+    width: calc(100% - 40px);
+    padding: 15px 10px;
+
+    box-sizing: border-box;
+     float: right;
+}
+
+#restaurants_filter input[type=text]:focus  {
+
+}
+
+
+#restaurants_filter input[type="number" i] {
+     width: calc(100% - 40px);
+    padding: 15px 10px;
+
+    box-sizing: border-box;
+    float: right;
+}
+
+#restaurants_filter textarea:focus, input:focus ,select:focus{
+    outline: none;
+}
+
+#id_tags{
+    background-color: white;
+    margin: 5px;
+    margin-top: 20px;
+
+
+    border-style: none;
+    font-family: Montserrat;
+    font-size: 16px;
+    margin-right: 30px;
+}
+
+#id_tags option{
+
+
+    border-radius: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    border: 2px solid lightgrey;
+    margin-bottom: 5px;
+
+}
+
+#id_tags option:hover{
+
+    background-color: rgb(196,242,192);
+     border: 2px solid rgb(196,242,192);
+}
+
+#id_affordability{
+    background-color: white;
+
+
+    width: calc(100% - 40px);
+    height: 20px;
+    border-radius: 20px;
+    border: 2px solid lightgrey;
+    font-family: Montserrat;
+   font-size: 16px;
+    margin-right: 20px;
+
+}
+
+#restaurants_filter ::placeholder{
+    font-size: 16px;
+
+}
+
+
+#restaurants_filter select {
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+    float: right;
+     width: calc(100% - 60px);
+
+}
+
+#restaurants_filter button{
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid lightgrey;
+    font-family: Montserrat;
+    font-size: 16px;
+    margin: 5px;
+    margin-top: 20px;
+     width: calc(100% - 40px);
+    height: 40px;
+    padding: 0px;
+    float: right;
+    margin-right: 20px;
+
+}
+
+#restaurants_filter button:hover{
+    background-color: rgb(196,242,192);
+    border-radius: 20px;
+    border: 2px solid rgb(196,242,192);
+    font-family: Montserrat;
+    font-size: 16px;
+    margin: 5px;
+    margin-top: 20px;
+     width: calc(100% - 40px);
+    height: 40px;
+    padding: 0px;
+    float: right;
+    margin-right: 20px;
+
+}
+
+#restaurants_filter label{
+    display: none;
+}
 /*footer*/
 
 footer{
