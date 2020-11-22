@@ -73,3 +73,6 @@ def restaurants(request):
 
 def user(request):
     return render(request, 'accounts/user.html')
+
+def profile(request):
+    return render(request, 'accounts/profile.html')
