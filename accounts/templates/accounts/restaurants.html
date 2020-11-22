@@ -56,10 +56,20 @@
             <div id="restaurants_filter">
                 <form method="get">
                     {{myFilter.form}}
+                    <div id="restaurants_stars">
+                    </div>
+                    <p id="restaurants_rating_reset" onclick="document.getElementById('id_rating').value = ' '; changeStars()" >reset</p>
 
                     <button class="btn btn-primary" type="submit">search</button>
                 </form>
             </div>
+
+            <div class="chrome">
+
+              <input class='range_slider' id="myinput" type="range" min="1" max="3" />
+              <input class='range_slider' id="myinput2" type="range" min="1" max="3" />
+            </div>
+
         </div>
 
         <div id="restaurants_aside_right">
@@ -94,17 +104,16 @@
     let classes = Array.prototype.slice.call(classesNodeList).map(function(element) {
     return element.value;
 });
-    console.log(classesNodeList);
+
 
    function stars() {
-        console.log("hallo");
+
     for(let j = 0; j < classesNodeList.length; j++) {
 
 
         let SternArray = new Array(5);
 
         let TextInsideP = classesNodeList.item(j).getElementsByTagName('p')[0].innerHTML;
-        console.log(TextInsideP);
 
         if (TextInsideP == 0.0) {
             SternArray = [0, 0, 0, 0, 0];
@@ -124,7 +133,7 @@
         if (TextInsideP == 5.0) {
             SternArray = [1, 1, 1, 1, 1];
         }
-        console.log(SternArray);
+
         for (let i = 0; i < SternArray.length; i++) {
 
             let element = document.createElement("img");
@@ -145,11 +154,150 @@
     }
 }
 
-stars();
+    stars();
 
     document.getElementById("id_name").setAttribute("placeholder", "Name");
     document.getElementById("id_rating").setAttribute("placeholder", "Bewertung");
     document.getElementById("id_affordability").setAttribute("placeholder", "Preisklasse");
+
+
+    var option = document.getElementById('id_tags').options;
+ ;
+    for(let i = 0; i < option.length; i++) {
+        option[i].onclick = function () {
+            if (this.myselected) {
+                this.selected = false;
+                this.myselected = false;
+
+            } else {
+                this.myselected = true;
+
+            }
+            ;
+        };
+    }
+
+    window.onmousedown = function (e) {
+    var el = e.target;
+    if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
+        e.preventDefault();
+
+        // toggle selection
+        if (el.hasAttribute('selected')) el.removeAttribute('selected');
+        else el.setAttribute('selected', '');
+
+        // hack to correct buggy behavior
+        var select = el.parentNode.cloneNode(true);
+        el.parentNode.parentNode.replaceChild(select, el.parentNode);
+    }
+}
+
+
+       function starrating() {
+
+        let SternRatingArray = new Array(5);
+
+        let rating = 0;
+      ;
+
+        if (rating == 0.0) {
+            SternRatingArray = [0, 0, 0, 0, 0];
+
+        for (let i = 0; i < SternRatingArray.length; i++) {
+
+            let element = document.createElement("img");
+
+            if (SternRatingArray[i] == 1) {
+                element.setAttribute('src', "{% static 'assets/stern.png' %}");
+            }
+
+            if (SternRatingArray[i] == 0) {
+                element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+            }
+
+            element.id = 'rating_i';
+            element.className = "stars_rating_class";
+
+            document.getElementById('restaurants_stars').appendChild(element);
+        }
+    }}
+
+
+
+    function changeStars() {
+
+        let stars = document.getElementsByClassName('stars_rating_class');
+        let star_amount = document.getElementById("id_rating").value;
+
+        if (document.getElementById("id_rating").value == '') {
+            document.getElementById("id_rating").value = 0;
+        }
+
+        for (let k = 0; k <= document.getElementById("id_rating").value - 1; k++) {
+            stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
+
+        }
+        for (let k = document.getElementById("id_rating").value; k < 5; k++) {
+            stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+        }
+
+        console.log(stars);
+        for (let a = 0; a < stars.length; a++) {
+            stars[a].addEventListener('click', function () {
+                document.getElementById("id_rating").value = a + 1;
+                for (let k = 0; k <= a; k++) {
+                    stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
+                    star_amount = a;
+                }
+                for (let k = a + 1; k < 5; k++) {
+                    stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                }
+            })
+            stars[a].addEventListener('mouseover', function () {
+
+                for (let k = 0; k <= a; k++) {
+                    stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
+                }
+                for (let k = a + 1; k < 5; k++) {
+                    stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                }
+            })
+            document.getElementById('restaurants_stars').addEventListener('mouseleave', function () {
+                if (document.getElementById("id_rating").value == 0) {
+                    for (let k = 0; k < 5; k++) {
+                        stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                    }
+                } else {
+                    for (let k = 0; k <= star_amount; k++) {
+                        stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
+
+                    }
+                    for (let k = star_amount + 1; k < 5; k++) {
+                        stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                    }
+                }
+            })
+
+        }
+        if (document.getElementById("id_rating").value == 0) {
+            document.getElementById("id_rating").value = ' ';
+        }
+    }
+
+        document.getElementById("myinput2").oninput = function() {
+            console.log(this.value);
+            let value = this.value - 1;
+            document.getElementById("myinput").value = document.getElementById("myinput2").value;
+            document.getElementById("myinput").style.background = 'linear-gradient(to right, #b3b3b3 0%, #b3b3b3 ' + value * 50 + '%, #535353 ' + value + '%, #535353 100%)';
+            document.getElementById("myinput2").style.background = 'linear-gradient(to right, #1DB954 0%, #1DB954 ' + value * 50 + '%, #535353 ' + value + '%, #535353 100%)';
+        }
+
+
+    starrating();
+    changeStars();
+
+
+
 
 </script>
 
