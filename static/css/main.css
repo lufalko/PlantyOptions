@@ -598,7 +598,7 @@ nav a:hover{
 
     height: 500px !important;
 
-
+    font-size: 16px;
 
 }
 
@@ -622,7 +622,7 @@ nav a:hover{
     z-index: 0;
     height: 100vh;
     width: 100vw;
-    background-color: #A6628C;
+    background-color: #85697A;
 
     /*background-image: url("http://127.0.0.1:8000/static/assets/dashboard-BG.jpg"); */
 
@@ -632,7 +632,7 @@ nav a:hover{
     background-position: center;
     background-repeat: no-repeat;
     background-height: 120vw;
-    opacity: 1;
+    opacity: 0.2;
 }
 
 #restaurants_searchbar{
@@ -677,8 +677,10 @@ nav a:hover{
     border: none;
     border-bottom: 2px solid lightgrey;
     font-family: Montserrat;
-    font-size: 16px;
+
     margin-right: 25px;
+
+    font-size: 16px;
 }
 
 /*** Works on common browsers ***/
@@ -793,7 +795,7 @@ nav a:hover{
 }
 
 #restaurants_filter ::placeholder{
-    font-size: 16px;
+
     color: darkgrey;
 }
 
@@ -1015,6 +1017,98 @@ nav a:hover{
    display: none;
   }
 
+}
+
+@media only screen and (max-height: 1100px) {
+   #restaurants_body_content{
+       font-size: 14px;
+   }
+    #restaurants_aside_left{
+        font-size: 14px !important;
+    }
+    #id_name{
+        font-size: 14px ;
+    }
+    #id_tags option{
+         font-size: 14px ;
+    }
+    #restaurants_filter button{
+        font-size: 14px;
+    }
+
+    .restaurants_img{
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    background-color: rgb(196,242,192);
+    border-radius: 20px;
+    float: left;
+    margin-right: 25px;
+     background-image:  url("http://127.0.0.1:8000/static/assets/food_example1.jpg");
+    background-size: cover;
+    }
+
+    .restaurants_block{
+
+        background-color: white;
+        height: 140px;
+        text-align: left;
+        margin-bottom: 25px;
+        padding: 0px;
+        overflow: hidden;
+
+    }
+
+    .restaurants_name p{
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        margin: 0;
+
+    }
+
+    .restaurants_name{
+        margin-bottom: 10px;
+        display: inline-block;
+        float: left;
+
+    }
+
+
+    .restaurants_anzahl_vegetarisch{
+
+    }
+
+    .restaurants_anzahl_vegan img{
+        height: 15px;
+        float: left;
+        margin: 0px;
+        margin-right: 2px;
+    }
+
+    .restaurants_anzahl_vegetarisch img{
+        height: 15px;
+        float: left;
+        margin-right: 22px;
+    }
+
+    .restaurants_anzahl_vegetarisch p{
+         margin: 0px;
+         padding-left: 15px;
+    }
+
+    .restaurants_rating img{
+        height: 20px;
+        margin: 4px;
+        margin-right: 5px;
+        margin-left: 0px;
+    }
+    .restaurants_rating{
+        display: inline-block;
+        margin-top: -5px;
+        margin-left: 20px;
+
+}
 }
 /*footer*/
 
