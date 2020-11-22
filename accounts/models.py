@@ -1,4 +1,6 @@
+import self as self
 from django.db import models
+from django.db.models import Count
 
 
 # Create your models here.
@@ -31,6 +33,7 @@ class Restaurant(models.Model):
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(null=True)
+
 
     def __str__(self):
         return self.name

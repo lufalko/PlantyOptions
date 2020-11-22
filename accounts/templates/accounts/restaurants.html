@@ -45,6 +45,14 @@
         <p>{{i.location}}</p>
         <p>?km entfernt</p>
     </div>
+        <div class="restaurant_dishes">
+            {% for j in food %}
+            {% if j.restaurant == i %}
+            <p>Gericht: </p>
+            {{j.name}}
+            {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
 
