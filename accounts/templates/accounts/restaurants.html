@@ -10,14 +10,16 @@
          </div>
 
         <div id="restaurants_body">
-
-            <p id="restaurants_Adresseingabe_Headline">Restaurants in deiner Nähe:</p>
-            <div id="restaurants_Adresseingabe_Headline_underline"></div>
+            <div id="restaurants_Adresseingabe_Headline_underline">
+                <p id="restaurants_Adresseingabe_Headline">Restaurants in deiner Nähe:</p>
+            </div>
             <div id="restaurants_body_content">
                 {% for i in restaurants %}
 
     <div class="restaurants_block">
-    <div class="restaurants_img"></div>
+    <div class="restaurants_img">
+        <img src="{{i.restaurant_picture}}">
+    </div>
     <div class="restaurants_name">
         <p>{{i.name}}</p>
     </div>
@@ -46,7 +48,7 @@
         <p>?km entfernt</p>
     </div>
         <div class="restaurant_dishes">
-            {% for j in food %}
+            {% for j in foods %}
             {% if j.restaurant == i %}
             <p>Gericht: </p>
             {{j.name}}
