@@ -9,4 +9,4 @@ class RestaurantFilter(django_filters.FilterSet):
     class Meta:
         model = Restaurant
         fields = '__all__'
-        exclude = ['location']
+        exclude = ['location', 'restaurant_picture']

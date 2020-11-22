@@ -4,12 +4,12 @@ from django.db import models
 # Create your models here.
 
 class User(models.Model):
-    firstName = models.CharField(max_length=200, null=False)
-    lastName = models.CharField(max_length=200, null=False)
+    firstName = models.CharField(max_length=200, blank=False, null=True)
+    lastName = models.CharField(max_length=200, blank=False, null=True)
     initials = models.CharField(max_length=2, null=True)
-    email = models.CharField(max_length=200, null=False)
-    password = models.CharField(max_length=200, null=False)
-    username = models.CharField(max_length=200, null=False)
+    email = models.CharField(max_length=200, blank=False, null=True)
+    password = models.CharField(max_length=200, blank=False, null=True)
+    username = models.CharField(max_length=200, blank=False, null=True)
     profile_picture = models.ImageField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -25,6 +25,7 @@ class Tag(models.Model):
 
 
 class Restaurant(models.Model):
+    restaurant_picture = models.ImageField(null=True, blank=True)
     name = models.CharField(max_length=200, null=True)
     location = models.CharField(max_length=200, null=True)
     rating = models.FloatField(null=True)
