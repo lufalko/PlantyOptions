@@ -62,11 +62,9 @@ def userMap(request):
 
 def restaurants(request):
     restaurants = Restaurant.objects.all()
-    foods = Food.objects.all();
 
     myFilter = RestaurantFilter(request.GET, queryset=restaurants)
     restaurants = myFilter.qs
-
 
     context = {'restaurants': restaurants, 'myFilter': myFilter}
     return render(request, 'accounts/restaurants.html', context)
