@@ -15,6 +15,9 @@ from .forms import CreateUserForm
 from .filters import RestaurantFilter
 from .decorators import unauthenticated_user, allowed_users
 
+from django.shortcuts import render
+
+
 
 @unauthenticated_user
 def register(request):
@@ -85,3 +88,8 @@ def restaurants(request):
 @login_required(login_url='login')
 def user(request):
     return render(request, 'accounts/user.html')
+
+
+
+def map(request):
+    return render(request, 'accounts/map.html', {})

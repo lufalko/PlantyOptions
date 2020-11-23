@@ -81,13 +81,15 @@
 
         </div>
 
-        <div id="restaurants_aside_right">
-
-        </div>
+        <a id="restaurants_aside_right" href="{% url 'map' %}">
+        </a>
 
     </div>
 
   <div id="restaurants_background"> </div>
+
+
+
 
 
 
@@ -161,6 +163,9 @@
             classesNodeList.item(j).appendChild(element);
         }
     }
+
+
+
 }
 
     stars();
@@ -300,6 +305,14 @@
     changeStars();
 
 
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5uZWZsIiwiYSI6ImNraGdwNW4zdDA5M3cycnA2N2ZrZzlvaWsifQ.2Ax1R3zR3hTyr3CHwW73hQ';
+         var map = new mapboxgl.Map({
+            container: 'restaurants_aside_right',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [10.89779, 48.3705449],
+            zoom: 12,
+            bearing: 0
+    });
 
 
 </script>
