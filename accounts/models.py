@@ -1,6 +1,6 @@
 
 from django.db import models
-from django.db.models import Count
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -27,7 +27,7 @@ class Tag(models.Model):
 
 
 class Restaurant(models.Model):
-    restaurant_picture = models.ImageField(null=True, blank=True)
+    restaurant_picture = models.ImageField(null=True, default='dashboard-BG.jpg')
     name = models.CharField(max_length=200, null=True)
     location = models.CharField(max_length=200, null=True)
     rating = models.FloatField(null=True)

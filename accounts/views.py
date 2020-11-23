@@ -6,21 +6,30 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+
 # Create your views here.
 from .models import *
 from .forms import CreateUserForm
 from .filters import RestaurantFilter
+from .decorators import unauthenticated_user, allowed_users
 
 
+@unauthenticated_user
 def register(request):
     form = CreateUserForm()
 
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            usr = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + usr)
+            usr = form.save()
+            username = form.cleaned_data.get('username')
+
+            group = Group.objects.get(name='users')
+            usr.groups.add(group)
+
+            messages.success(request, 'Account was created for ' + username)
 
             return redirect('/login')
 
@@ -31,6 +40,8 @@ def register(request):
 
 
 def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -71,8 +82,6 @@ def restaurants(request):
     return render(request, 'accounts/restaurants.html', context)
 
 
+@login_required(login_url='login')
 def user(request):
     return render(request, 'accounts/user.html')
-
-def profile(request):
-    return render(request, 'accounts/profile.html')
