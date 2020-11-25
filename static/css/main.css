@@ -51,7 +51,7 @@ nav{
     position: fixed;
     z-index: 6;
     width: 100%;
-    height: 72px;
+    height: 52px;
     background-color: white;
     position: relative;
     margin-bottom: 25px;
@@ -476,8 +476,17 @@ nav a:hover{
     border-radius: 20px;
     float: left;
     margin-right: 25px;
-    background-image:  url("http://127.0.0.1:8000/static/assets/food_example1.jpg");
+
     background-size: cover;
+}
+
+.restaurants_img>img{
+
+    width: 135px;
+    height: 135px;
+    border-radius: 20px;
+      object-fit: cover;
+
 }
 
 .restaurants_block{
@@ -542,7 +551,7 @@ nav a:hover{
 
 
 .restaurants_rating img{
-        height: 20px;
+        height: 16px;
         margin: 4px;
         margin-right: 5px;
         margin-left: 0px;
@@ -657,7 +666,7 @@ nav a:hover{
     background-position: center;
     background-repeat: no-repeat;
     background-height: 120vw;
-    opacity: 0.05;
+    opacity: 0.2;
 }
 
 #restaurants_searchbar{
@@ -694,13 +703,14 @@ nav a:hover{
 #id_name{
     background-color: white;
     margin: 5px;
-    margin-top: 28px;
+    margin-top: 11px;
     margin-bottom: 35px;
-    height: 20px;
+
 
     border: none;
-    border-bottom: 2px solid lightgrey;
+    border: 2px solid lightgrey;
     font-family: Montserrat;
+    border-radius: 20px;
 
     margin-right: 25px;
 
@@ -739,7 +749,7 @@ nav a:hover{
 
 #restaurants_filter input[type=text] {
     width: calc(100% - 50px);
-    padding: 15px 10px;
+    padding: 7px 10px;
 
     box-sizing: border-box;
      float: right;
