@@ -66,7 +66,7 @@ def logoutPage(request):
 
 
 def home(request):
-    articles = Article.objects.order_by('date_created').all()
+    articles = Article.objects.all()
 
     context = {'articles': articles}
 
@@ -88,6 +88,13 @@ def restaurants(request):
     return render(request, 'accounts/restaurants.html', context)
 
 
+def articlePage(request):
+    articles = Article.objects.all()
+
+    context = {'articles': articles}
+    return render(request, 'accounts/articles.html', context)
+
+
 @login_required(login_url='login')
 def user(request):
     return render(request, 'accounts/user.html')
@@ -99,6 +106,14 @@ def map(request):
 
 def restaurant_detail(request, pk):
     queryset = Restaurant.objects.get(pk=pk)
+    context = {
+        'queryset': queryset
+    }
+    return render(request, 'restaurant_detail.html', context)
+
+
+def article_detail(request, pk):
+    queryset = Article.objects.get(pk=pk)
     context = {
         'queryset': queryset
     }

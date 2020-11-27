@@ -1041,6 +1041,40 @@ display: none;
     display: none;
 }
 
+/* articles Page */
+
+.articles img{
+    display: inline-block;
+    width: 135px;
+    height: 135px;
+    background-color: rgb(196,242,192);
+
+    float: left;
+    margin-right: 25px;
+
+    background-size: cover;
+}
+
+.articles_img>img{
+
+    width: 135px;
+    height: 135px;
+    border-radius: 10px;
+      object-fit: cover;
+
+}
+
+.articles_block{
+
+    background-color: white;
+
+    text-align: left;
+    margin-bottom: 25px;
+
+
+    overflow: hidden;
+
+}
 
 
 

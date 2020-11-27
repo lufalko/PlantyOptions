@@ -1,0 +1,26 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% for i in articles %}
+
+    <div class="articles_block">
+        <div class="articles_img">
+            <img src="{{i.banner.url}}">
+
+        </div>
+        <div class="articles_headline">
+            <p>{{i.headline}}</p>
+        </div>
+        <div class="articles_subtitle" >
+            <p>{{i.subtitle}}</p>
+        </div>
+        <div class="articles_bode">
+            <p>{{i.article_body}}</p>
+        </div>
+        <div><p>{{i.date_created}}</p></div>
+    </div>
+
+{% endfor %}
+
+{% endblock %}

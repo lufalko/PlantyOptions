@@ -66,7 +66,7 @@ class Article(models.Model):
     banner = models.ImageField(null=True, default='dashboard-BG.jpg')
     headline = models.CharField(max_length=200, null=False, default='Unnamed')
     subtitle = models.CharField(max_length=300, null=False, default='Unnamed')
-    articleBody = models.CharField(max_length=4000, null=False, default='Lorem Ipsum')
+    article_body = models.CharField(max_length=4000, null=False, default='Lorem Ipsum')
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
