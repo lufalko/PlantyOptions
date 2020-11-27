@@ -39,10 +39,10 @@ body {
 }
 
 #icon{
-    position: absolute;
-    width:20px;
-    left: 10px;
-    top: 10px;
+    position: relative;
+    width:30px;
+    float:left;
+    margin-left: 10px;
 
     z-index: 3;
 }
@@ -578,16 +578,15 @@ nav a:hover{
 
 }
 
-.restaurants_name a{
+.restaurants_name p{
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 16px;
-    text-decoration: none;
-    color: #104d4f;
+
 }
 
 .restaurants_name{
-        margin-top: -2px;
+        margin-top: -3px;
         margin-bottom: 0px;
         display: inline-block;
     }
@@ -599,7 +598,6 @@ nav a:hover{
     border: 1px solid lightgrey;
     width: calc((100% - 137px - 50px)/2);
     text-align: center;
-    cursor: pointer;
 }
 
 .restaurants_anzahl_vegetarisch , .restaurants_anzahl_vegan {
@@ -621,7 +619,6 @@ nav a:hover{
     border-left: none;
     width: calc((100% - 137px - 50px)/2);
     text-align: center;
-    cursor: pointer;
 }
 
 
@@ -731,8 +728,6 @@ nav a:hover{
 
     font-size: 14px;
 
-    margin-right: -25px;
-
 }
 
 #restaurants_aside_right {
@@ -766,7 +761,6 @@ nav a:hover{
     text-align: left;
     margin-top: 410px;
     display: none;
-
 }
 
 #restaurants_aside_right_bottom_text p{
@@ -779,8 +773,7 @@ nav a:hover{
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    margin-bottom: 3px !important;
-     color: #104d4f
+    margin-bottom: 5px !important;
 }
 
 #restaurants_aside_right_bottom_text img{
@@ -1048,6 +1041,41 @@ display: none;
     display: none;
 }
 
+/* articles Page */
+
+.articles img{
+    display: inline-block;
+    width: 135px;
+    height: 135px;
+    background-color: rgb(196,242,192);
+
+    float: left;
+    margin-right: 25px;
+
+    background-size: cover;
+}
+
+.articles_img>img{
+
+    width: 135px;
+    height: 135px;
+    border-radius: 10px;
+      object-fit: cover;
+
+}
+
+.articles_block{
+
+    background-color: white;
+
+    text-align: left;
+    margin-bottom: 25px;
+
+
+    overflow: hidden;
+
+}
+
 #restaurants_bottom{
     background-color: white;
     border-top: 1px solid lightgrey;
@@ -1130,23 +1158,16 @@ display: none;
 
 @media only screen and (max-width: 820px) {
 
-    #restaurants_wrapper {
-        grid-template-columns: 0px 0px 1Fr 0px;
-        grid-column-gap: 0px;
-    }
+  #restaurants_wrapper {
 
-    #navbar_reiter{
-        display: none;
-    }
+      grid-template-columns: 0px 0px 1Fr 0px;
+      grid-column-gap: 0px;
+  }
 
-    #restaurants_bottom {
-        display: block;
-    }
 
-    #restaurants_aside_left{
-        display: none;
-    }
-}
+  #restaurants_aside_left{
+   display: none;
+  }
 
 }
 
