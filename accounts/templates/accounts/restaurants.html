@@ -27,7 +27,7 @@
 
     </div>
     <div class="restaurants_name">
-        <p>{{i.name}}</p>
+        <p><a href="{% url 'restaurant_detail' pk=i.pk %}">{{i.name}}</a></p>
     </div>
     <div class="restaurants_rating" >
 

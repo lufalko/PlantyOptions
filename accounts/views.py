@@ -18,7 +18,6 @@ from .decorators import unauthenticated_user, allowed_users
 from django.shortcuts import render
 
 
-
 @unauthenticated_user
 def register(request):
     form = CreateUserForm()
@@ -90,6 +89,13 @@ def user(request):
     return render(request, 'accounts/user.html')
 
 
-
 def map(request):
     return render(request, 'accounts/map.html', {})
+
+
+def restaurant_detail(request, pk):
+    queryset = Restaurant.objects.get(pk=pk)
+    context = {
+        'queryset': queryset
+    }
+    return render(request, 'restaurant_detail.html', context)

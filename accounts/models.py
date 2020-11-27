@@ -34,7 +34,6 @@ class Restaurant(models.Model):
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(null=True)
 
-
     def __str__(self):
         return self.name
 
