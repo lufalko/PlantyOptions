@@ -55,6 +55,7 @@ nav{
     background-color: white;
     position: relative;
     margin-bottom: 25px;
+    box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
 
 }
 
@@ -422,11 +423,22 @@ nav a:hover{
 
 }
 
+.restaurants_food_category{
+    display: none;
+}
+
 .restaurants_adresse img{
-    height: 31px;
+    height: 29px;
+    margin-top: 3px;
     float: left;
-    margin-right: 15px;
-    margin-left: 5px;
+    margin-right: 7px;
+    margin-left: 0px;
+}
+
+.restaurants_adresse{
+    margin-bottom: 24px;
+    margin-top: 21px;
+
 }
 
 #restaurants_anzahl_vegetarisch_underline, #restaurants_anzahl_vegan_underline{
@@ -446,6 +458,7 @@ nav a:hover{
     margin-bottom: 9px;
 
     }
+
 
 
 #restaurants_body_content{
@@ -473,7 +486,7 @@ nav a:hover{
     width: 135px;
     height: 135px;
     background-color: rgb(196,242,192);
-    border-radius: 20px;
+
     float: left;
     margin-right: 25px;
 
@@ -484,7 +497,7 @@ nav a:hover{
 
     width: 135px;
     height: 135px;
-    border-radius: 20px;
+    border-radius: 10px;
       object-fit: cover;
 
 }
@@ -492,18 +505,76 @@ nav a:hover{
 .restaurants_block{
 
     background-color: white;
-    height: 135px;
+
     text-align: left;
     margin-bottom: 25px;
-    padding: 0px;
+
+
     overflow: hidden;
 
+}
+
+.restaurants_dishes{
+    display: none;
+    margin-top: 5px;
+    margin-right: 25px;
+
+}
+
+.restaurants_food{
+    padding: 5px;
+
+    padding-left: 10px;
+
+    background-color: white;
+    border: 1px solid lightgrey;
+    margin-top: 5px;
+}
+
+.restaurants_food_name{
+    display: inline-block;
+    width: calc(50% - 24px);
+
+}
+
+.restaurants_food_name p{
+    line-height: 100%;
+}
+
+.restaurants_food_price{
+    width: 10%;
+    display: inline-block;
+    text-align: right;
+}
+
+.restaurants_category_mark{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #f7ba5b;
+}
+
+.restaurants_food_rating{
+    opacity: 0;
+    width: 40%;
+    display: inline-block;
+
+}
+
+
+.restaurants_food_rating img{
+    margin-bottom: -2px;
+   height: 16px;
+    margin-left: 2px;
+}
+.restaurants_food_rating p{
+ display: none;
 }
 
 .restaurants_block:hover{
 
     background-color: #fbfbff;
-    border-radius: 20px;
+    border-radius: 10px 0 0 0;
 
 }
 
@@ -516,12 +587,43 @@ nav a:hover{
 
 .restaurants_name{
         margin-top: -3px;
-        margin-bottom: 10px;
+        margin-bottom: 0px;
         display: inline-block;
     }
 
 .restaurants_anzahl_vegetarisch{
+    margin: 0px;
+    display: inline-block;
+    border-radius: 20px 0 0 20px ;
+    border: 1px solid lightgrey;
+    width: calc((100% - 137px - 50px)/2);
+    text-align: center;
+}
 
+.restaurants_anzahl_vegetarisch , .restaurants_anzahl_vegan {
+
+     -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+
+.restaurants_anzahl_vegan{
+
+    margin-left: -4px;
+    display: inline-block;
+    border-radius: 0 20px 20px 0;
+    border: 1px solid lightgrey;
+    border-left: none;
+    width: calc((100% - 137px - 50px)/2);
+    text-align: center;
+}
+
+
+.restaurants_tags{
+    margin-bottom: 5px;
 }
 
 .restaurants_anzahl_vegan img{
@@ -537,10 +639,6 @@ nav a:hover{
     margin-right: 22px;
 }
 
-.restaurants_anzahl_vegetarisch p{
-     margin: 0px;
-    padding-left: 15px;
-}
 
 .restaurants_body_content{
     text-align: left;
@@ -582,10 +680,6 @@ nav a:hover{
         margin-right: 22px;
     }
 
-    .restaurants_anzahl_vegetarisch p{
-         margin: 0px;
-         padding-left: 15px;
-    }
 
 #restaurants_stars{
 
@@ -630,13 +724,13 @@ nav a:hover{
 
     border-radius: 20px ;
 
-    height: 500px !important;
+    height: 482px !important;
 
     font-size: 14px;
 
 }
 
-#restaurants_aside_right{
+#restaurants_aside_right {
 
     grid-column-start: 4;
     grid-column-end: 4;
@@ -644,9 +738,51 @@ nav a:hover{
     grid-row-end: 3;
 
     height: 400px;
-    border-radius: 20px ;
+
+    margin-top: 25px;
+}
+
+#restaurants_aside_right_bottom {
+
+    grid-column-start: 4;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
 
 
+    border-radius: 20px;
+    margin-top: 25px;
+
+
+}
+
+#restaurants_aside_right_bottom_text{
+    font-size: 14px;
+    text-align: left;
+    margin-top: 410px;
+    display: none;
+}
+
+#restaurants_aside_right_bottom_text p{
+    margin: 0px;
+
+
+}
+
+#restaurants_map_name{
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin-bottom: 5px !important;
+}
+
+#restaurants_aside_right_bottom_text img{
+    height: 29px;
+
+    margin-right: 10px;
+    margin-top: 3px;
+    display: inline-block;
+    float: left;
 }
 
 #restaurants_background{
@@ -656,7 +792,10 @@ nav a:hover{
     top: 0px;
     height: 100vh;
     width: 100vw;
-    background-color: #85697A;
+
+    background-color: white;
+
+    /*background-color: #85697A;*/
 
     /*background-image: url("http://127.0.0.1:8000/static/assets/dashboard-BG.jpg"); */
 
@@ -703,7 +842,7 @@ nav a:hover{
 #id_name{
     background-color: white;
     margin: 5px;
-    margin-top: 11px;
+    margin-top: 25px;
     margin-bottom: 35px;
 
 
@@ -786,7 +925,7 @@ nav a:hover{
 
     border-style: none;
     font-family: Montserrat;
-    font-size: 16px;
+    font-size: 14px;
     margin-right: 25px;
     background-color: white;
 
@@ -811,28 +950,57 @@ nav a:hover{
 
 #id_tags option:hover{
 
-     border-bottom: 1px solid  rgb(196,242,192);
+     border-bottom: 1px solid rgb(196,242,192);
 
 }
 
 #id_affordability{
-    background-color: white;
-    width: calc(100% - 50px);
-    height: 20px;
-    border-radius: 20px;
+
+display: none;
+
+}
+
+#restaurants_set_affordability{
+    display: inline-block;
+    width: calc(100% - 42px);
+    height: 44px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+    cursor: pointer;
+}
+
+.restaurants_set_affordability_elements{
+    display: inline-block;
+    width: calc((100% - 46px)/3);
+    margin: 4px;
+    height: 40px;
     border: 2px solid lightgrey;
-    font-family: Montserrat;
-   font-size: 16px;
-    margin-right: 25px;
+    color: darkgrey;
 
-    display: none;
 
+}
+
+.restaurants_set_affordability_elements p{
+    position: relative;
+    height: 20px;
+    top: 20%;
+    transform: translate(0,-50%);
+}
+
+.restaurants_set_affordability_elements:hover{
+
+    border: 2px solid rgb(196,242,192);
 }
 
 #restaurants_filter ::placeholder{
 
     color: darkgrey;
 }
+
 
 
 
@@ -843,7 +1011,7 @@ nav a:hover{
     font-family: Montserrat;
     font-size: 14px;
     margin: 5px;
-    margin-top: 70px;
+    margin-top: 28px;
      width: calc(100% - 50px);
     height: 40px;
     padding: 0px;
@@ -878,26 +1046,27 @@ nav a:hover{
 
 @media only screen and (max-width: 1758px) {
 
-  #restaurants_wrapper {
+    #restaurants_wrapper {
+        width: calc(100vw - 50px);
+        margin-left: 25px;
+        margin-right: 25px;
+        column-gap: 25px;
+        grid-template-columns:  calc(4.5% - 29px) calc(18.75% ) 1fr calc(22.75% ) ;
+    }
 
-      width: calc(100vw - 50px);
-      margin-left: 25px;
-      margin-right: 25px;
-      column-gap: 25px;
-      grid-template-columns:  calc(4.5% - 29px) calc(18.75% ) 1fr calc(22.75% ) ;
+    #restaurants_aside_right{
+        height: 21.2vw;
+    }
 
-  }
+    #restaurants_aside_right_bottom_text{
+        margin-top: calc(21.2vw + 10px);
+    }
 
-  #restaurants_aside_right{
-      height: 21.2vw;
-  }
-
-  #restaurants_aside_left{
-      display: inline-block;
-      float: right;
-    margin-left: calc(-25px);
-
-  }
+    #restaurants_aside_left{
+        display: inline-block;
+        float: right;
+        margin-left: calc(-25px);
+    }
 
 }
 

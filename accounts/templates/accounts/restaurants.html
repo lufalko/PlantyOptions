@@ -33,34 +33,59 @@
 
         <p>{{i.rating}}</p>
     </div>
+    <div class="restaurants_tags">
+        <p>
+            {% for k in i.tags.all%}
+                {% if forloop.counter <= 2 and forloop.last is not True%}
+                    {{k}},
+                {% else %}
+                    {% if forloop.counter <= 3%}
+                        {{k}}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        <p>
+
+    </div>
+
+    <div class="restaurants_adresse">
+    <img src="{% static 'assets/PO_Icon_Green.png' %}">
+    <p>{{i.location}}</p>
+    <p>?km entfernt</p>
+    </div>
+
     <div class="restaurants_anzahl_vegetarisch">
-         <img src="{% static 'assets/v_symbol.png' %}">
-        <p>? vegetarische Gerichte</p>
-        <div id="restaurants_anzahl_vegetarisch_underline"></div>
+
+        <p>? Vegetarisch</p>
+
     </div>
     <div class="restaurants_anzahl_vegan">
 
-        <img src="{% static 'assets/v_symbol.png' %}">
-        <img src="{% static 'assets/v_symbol.png' %}">
-
-        <p>? vegane Gerichte</p>
-
-        <div id="restaurants_anzahl_vegan_underline"></div>
+        <p>? Vegan</p>
 
     </div>
-    <div class="restaurants_adresse">
-        <img src="{% static 'assets/PO_Icon_Green.png' %}">
-        <p>{{i.location}}</p>
-        <p>?km entfernt</p>
-    </div>
-        <div class="restaurant_dishes">
+
+        <div class="restaurants_dishes">
             {% for j in foods %}
             {% if j.restaurant == i %}
-            <p>Gericht: </p>
-            {{j.name}}
+            <p class="restaurants_food_category">{{j.category}}</p>
+            <div class="restaurants_food">
+                <div class="restaurants_category_mark"></div>
+                <div class="restaurants_food_name">
+                    <p>{{j.name}}</p>
+                </div>
+                 <div class="restaurants_food_rating">
+                    <p>{{j.rating}}</p>
+                </div>
+                <div class="restaurants_food_price">
+                    <p>{{j.price}}€</p>
+                </div>
+
+            </div>
             {% endif %}
             {% endfor %}
         </div>
+        <div class="restaurants_vegetarische_Optionen"></div>
     </div>
 
 
@@ -75,12 +100,19 @@
                     <div id="restaurants_stars">
                     </div>
                     <p id="restaurants_rating_reset" onclick="document.getElementById('id_rating').value = ' '; changeStars()" >reset</p>
-
+                    <div id="restaurants_set_affordability">
+                    <div class="restaurants_set_affordability_elements">
+                        <p>€</p>
+                    </div>
+                    <div class="restaurants_set_affordability_elements">
+                        <p>€€</p>
+                    </div>
+                    <div class="restaurants_set_affordability_elements">
+                        <p>€€€</p>
+                    </div>
+                </div>
                     <button class="btn btn-primary" type="submit">search</button>
                 </form>
-            </div>
-
-            <div class="chrome">
 
 
             </div>
@@ -89,6 +121,14 @@
 
         <a id="restaurants_aside_right" href="{% url 'map' %}">
         </a>
+        <div id="restaurants_aside_right_bottom" >
+            <div id="restaurants_aside_right_bottom_text">
+            <p id="restaurants_map_name">Restaurant Name</p>
+                 <img src="{% static 'assets/PO_Icon_Green.png' %}">
+            <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
+            <p id="restaurants_map_entfernung">? km Entfernt</p>
+            </div>
+        </div>
 
     </div>
 
@@ -101,6 +141,165 @@
 
 <script>
 
+    let vegetarisch = false;
+    let vegan = false;
+
+
+     function render_map_text() {
+         let restaurant_blocks = document.getElementsByClassName("restaurants_block");
+         for (let i = 0; i < restaurant_blocks.length; i++) {
+            restaurant_blocks[i].addEventListener('mouseover', function (){
+
+            })
+        }
+    }
+
+    function render_affordability_tags() {
+        let affordability_tags = document.getElementsByClassName("restaurants_set_affordability_elements");
+        for (let i = 0; i < affordability_tags.length; i++) {
+
+            if (document.getElementById("id_affordability").value == i + 1) {
+                document.getElementsByClassName("restaurants_set_affordability_elements")[i].style.borderColor = "rgb(196,242,192)";
+                document.getElementsByClassName("restaurants_set_affordability_elements")[i].style.color = "rgb(196,242,192)";
+            }
+
+            affordability_tags[i].addEventListener('mouseover', function () {
+                this.style.borderColor = "rgb(196,242,192)";
+            })
+            affordability_tags[i].addEventListener('mouseleave', function () {
+                if (this.style.color != "rgb(196, 242, 192)") {
+                    this.style.borderColor = "lightgrey";
+                }
+            })
+            affordability_tags[i].addEventListener('click', function () {
+                if (this.style.color != "rgb(196, 242, 192)") {
+                    document.getElementById("id_affordability").value = i + 1;
+                    this.style.borderColor = "rgb(196,242,192)";
+                    this.style.color = "rgb(196,242,192)";
+                    for (let j = 0; j < affordability_tags.length; j++) {
+                        if (j != i) {
+                            document.getElementsByClassName("restaurants_set_affordability_elements")[j].style.borderColor = "lightgrey";
+                            document.getElementsByClassName("restaurants_set_affordability_elements")[j].style.color = "darkgrey";
+                        }
+                    }
+                } else {
+                    this.style.borderColor = "lightgrey";
+                    this.style.color = "darkgrey";
+                    document.getElementById("id_affordability").value = " ";
+                }
+            })
+        }
+    }
+
+    function render_food(number){
+        let elements = document.getElementsByClassName('restaurants_dishes');
+        let category = elements[number].getElementsByClassName('restaurants_food_category');
+        for (let i = 0; i < category.length; i++){
+            if(category[i].innerHTML == 'Vegan') {
+                if (!vegan) {
+                    elements[number].getElementsByClassName('restaurants_food')[i].style.display = "none";
+                } else {
+                    elements[number].getElementsByClassName('restaurants_food')[i].style.display = "block";
+                    elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "#378C61";
+                }
+            }
+            else {
+                if (!vegetarisch) {
+                    elements[number].getElementsByClassName('restaurants_food')[i].style.display = "none";
+                } else {
+                    elements[number].getElementsByClassName('restaurants_food')[i].style.display = "block";
+                    elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "rgb(196,242,192)";
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < document.getElementsByClassName('restaurants_dishes').length; i++){
+        let elements = document.getElementsByClassName('restaurants_dishes');
+        let category = elements[i].getElementsByClassName('restaurants_food_category');
+        let vegetarian_counter = 0;
+        let vegan_counter = 0;
+        for (let j = 0; j < category.length; j++){
+            if(category[j].innerHTML == 'Vegan') {
+               vegan_counter++;
+            }
+            else {
+               vegetarian_counter++;
+                }
+            }
+        document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].innerHTML= vegetarian_counter + ' Vegetarisch';
+        document.getElementsByClassName('restaurants_anzahl_vegan')[i].innerHTML= vegan_counter + ' Vegan';
+        //document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].style.padding = "2px";
+        //document.getElementsByClassName('restaurants_anzahl_vegan')[i].style.padding = "2px";
+        document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].style.userSelect = "none";
+        document.getElementsByClassName('restaurants_anzahl_vegan')[i].style.userSelect = "none";
+    }
+
+    function vegetarischDropdown() {
+        var elements = document.getElementsByClassName("restaurants_anzahl_vegetarisch");
+        for (let i = 0; i < elements.length; i++) {
+
+        elements[i].addEventListener("mouseover",  function(){ if(!vegetarisch){this.style.backgroundColor = "rgb(196,242,192)"}});
+        elements[i].addEventListener("mouseover",  function(){ if(!vegetarisch){this.style.borderColor = "rgb(196,242,192)"}});
+        elements[i].addEventListener("mouseleave",  function(){ if(!vegetarisch){this.style.backgroundColor = "transparent";}});
+        elements[i].addEventListener("mouseleave",  function(){ if(!vegetarisch){this.style.borderColor = "lightgrey"}});
+
+        elements[i].addEventListener('click', function (){
+            if(!vegetarisch) {
+                document.getElementsByClassName("restaurants_dishes")[i].style.display = "block";
+                this.style.backgroundColor = "rgb(196,242,192)";
+                this.style.borderColor = "rgb(196,242,192)";
+                vegetarisch = true;
+            }
+            else{
+                if(!vegan) {
+                    document.getElementsByClassName("restaurants_dishes")[i].style.display = "none";
+                }
+                vegetarisch = false;
+                this.style.backgroundColor = "transparent";
+                this.style.borderColor = "lightgrey";
+            }
+              render_food(i);
+        })
+        }
+    }
+
+    function veganDropdown() {
+        var elements = document.getElementsByClassName("restaurants_anzahl_vegan");
+        for (let i = 0; i < elements.length; i++) {
+
+        elements[i].addEventListener("mouseover",  function(){ if(!vegan){this.style.backgroundColor = "#378C61"}});
+        elements[i].addEventListener("mouseover",  function(){ if(!vegan){this.style.borderColor = "#378C61"}});
+        elements[i].addEventListener("mouseleave",  function(){ if(!vegan){this.style.backgroundColor = "transparent";}});
+        elements[i].addEventListener("mouseleave",  function(){ if(!vegan){this.style.borderColor = "lightgrey"}});
+
+        elements[i].addEventListener('click', function (){
+            if(!vegan) {
+                document.getElementsByClassName("restaurants_dishes")[i].style.display = "block";
+                this.style.backgroundColor = "#378C61";
+                this.style.borderColor = "#378C61";
+                vegan = true;
+
+            }
+            else{
+                if(!vegetarisch) {
+                    document.getElementsByClassName("restaurants_dishes")[i].style.display = "none";
+                }
+                vegan = false;
+                this.style.backgroundColor = "transparent";
+                this.style.borderColor = "lightgrey";
+            }
+              render_food(i);
+        })
+        }
+    }
+
+
+
+    vegetarischDropdown();
+    veganDropdown()
+    render_affordability_tags()
+
     let searchbarMinusWidth=30;
 
    function adaptSize(ele1, ele2, minusWidth , minusHeight) {
@@ -110,10 +309,7 @@
        document.getElementById(ele1).style.height = document.getElementById(ele2).clientHeight - minusHeight + "px";
    }
 
-   window.addEventListener('resize', function() {
-       adaptSize('restaurants_searchbar', 'restaurants_header',searchbarMinusWidth, 0);
 
-   });
 
    adaptSize('restaurants_searchbar', 'restaurants_header', searchbarMinusWidth, 0);
 
@@ -123,14 +319,14 @@
 });
 
 
-   function stars() {
+   function stars(elements) {
 
-    for(let j = 0; j < classesNodeList.length; j++) {
+    for(let j = 0; j < elements.length; j++) {
 
 
         let SternArray = new Array(5);
 
-        let TextInsideP = classesNodeList.item(j).getElementsByTagName('p')[0].innerHTML;
+        let TextInsideP = elements.item(j).getElementsByTagName('p')[0].innerHTML;
 
         if (TextInsideP == 0.0) {
             SternArray = [0, 0, 0, 0, 0];
@@ -166,7 +362,7 @@
             element.id = 'i';
             element.className = "stars_class";
 
-            classesNodeList.item(j).appendChild(element);
+            elements.item(j).appendChild(element);
         }
     }
 
@@ -174,7 +370,8 @@
 
 }
 
-    stars();
+    stars(classesNodeList);
+    stars(document.getElementsByClassName('restaurants_food_rating'));
 
     document.getElementById("id_name").setAttribute("placeholder", "Name");
     document.getElementById("id_rating").setAttribute("placeholder", "Bewertung");
