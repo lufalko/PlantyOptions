@@ -27,7 +27,7 @@
 
     </div>
     <div class="restaurants_name">
-        <p><a href="{% url 'restaurant_detail' pk=i.pk %}">{{i.name}}</a></p>
+        <a class="restaurants_name_link" href="{% url 'restaurant_detail' pk=i.pk %}">{{i.name}}</a>
     </div>
     <div class="restaurants_rating" >
 
@@ -50,8 +50,8 @@
 
     <div class="restaurants_adresse">
     <img src="{% static 'assets/PO_Icon_Green.png' %}">
-    <p>{{i.location}}</p>
-    <p>?km entfernt</p>
+    <p class="restaurants_adresse_adresse">{{i.location}}</p>
+    <p class="restaurants_adresse_entfernung">?km entfernt</p>
     </div>
 
     <div class="restaurants_anzahl_vegetarisch">
@@ -132,6 +132,9 @@
 
     </div>
 
+    <div id="restaurants_bottom">
+
+    </div>
   <div id="restaurants_background"> </div>
 
 
@@ -149,7 +152,10 @@
          let restaurant_blocks = document.getElementsByClassName("restaurants_block");
          for (let i = 0; i < restaurant_blocks.length; i++) {
             restaurant_blocks[i].addEventListener('mouseover', function (){
-
+                document.getElementById("restaurants_aside_right_bottom_text").style.display = "block";
+                document.getElementById("restaurants_map_name").innerHTML =  document.getElementsByClassName("restaurants_name_link")[i].innerHTML;
+                document.getElementById("restaurants_map_adresse").innerHTML =  document.getElementsByClassName("restaurants_adresse_adresse")[i].innerHTML;
+                document.getElementById("restaurants_map_entfernung").innerHTML =  document.getElementsByClassName("restaurants_adresse_entfernung")[i].innerHTML;
             })
         }
     }
@@ -298,7 +304,8 @@
 
     vegetarischDropdown();
     veganDropdown()
-    render_affordability_tags()
+    render_affordability_tags();
+    render_map_text();
 
     let searchbarMinusWidth=30;
 
