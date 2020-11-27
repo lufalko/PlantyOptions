@@ -16,23 +16,13 @@
 
 
         <div id="main_row2">
+            {% for i in articles %}
             <div class="food_suggestion">
-                <img class="suggestion_img" src="{% static 'assets/food_example1.jpg' %}" alt="food 1">
-                <div class="suggestion_title">Food Suggestion 1</div>
-                <div class="suggestion_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
+                <img class="suggestion_img" src="{{i.banner.url}}" alt="food 1">
+                <div class="suggestion_title">{{i.headline}}</div>
+                <div class="suggestion_text">{{i.subtitle}}</div>
             </div>
-
-            <div class="food_suggestion">
-                <img class="suggestion_img" src="{% static 'assets/food_example2.jpg' %}" alt="food 1">
-                <div class="suggestion_title">Food Suggestion 2</div>
-                <div class="suggestion_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
-            </div>
-
-            <div class="food_suggestion">
-                <img class="suggestion_img" src="{% static 'assets/food_example1.jpg' %}" alt="food 1">
-                <div class="suggestion_title">Food Suggestion 3</div>
-                <div class="suggestion_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
-            </div>
+            {% endfor %}
         </div>
 
 

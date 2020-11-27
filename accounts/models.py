@@ -60,3 +60,14 @@ class Comment(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     content = models.FloatField(null=True)
+
+
+class Article(models.Model):
+    banner = models.ImageField(null=True, default='dashboard-BG.jpg')
+    headline = models.CharField(max_length=200, null=False, default='Unnamed')
+    subtitle = models.CharField(max_length=300, null=False, default='Unnamed')
+    articleBody = models.CharField(max_length=4000, null=False, default='Lorem Ipsum')
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.headline

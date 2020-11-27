@@ -66,7 +66,11 @@ def logoutPage(request):
 
 
 def home(request):
-    return render(request, 'accounts/home.html')
+    articles = Article.objects.order_by('date_created').all()
+
+    context = {'articles': articles}
+
+    return render(request, 'accounts/home.html', context)
 
 
 def userMap(request):
