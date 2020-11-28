@@ -58,6 +58,7 @@ class Food(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     content = models.FloatField(null=True)
 

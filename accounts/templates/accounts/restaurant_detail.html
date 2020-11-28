@@ -1,5 +1,13 @@
 {% extends 'accounts/main.html' %}
+{% load static %}
 
 {% block content %}
+
+{% ifequal i.restaurant_picture None %}
+    <img src="{% static 'assets/dashboard-BG.jpg' %}" class="restaurants_img">
+{% else %}
+    <img src="{{queryset.restaurant_picture.url}}">
+{% endifequal %}
+<p>{{queryset.name}}</p>
 
 {% endblock %}
