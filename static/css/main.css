@@ -43,7 +43,7 @@ body {
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: -66px;
-    width:100px;
+    width:20px;
     float:left;
     z-index: 3;
 
@@ -833,7 +833,7 @@ nav a:hover{
 }
 /*#restaurants_searchbarIcon{
 
-    background-color: rgb(196,242,192);
+    background-color: rgb(112,175,107);
     height: 65px;
     width: 65px;
     margin-right: -65px;
@@ -844,7 +844,7 @@ nav a:hover{
 
 #restaurants_map{
 
-    background-color: rgb(196,242,192);
+    background-color: rgb(112,175,107);
     height: 85px;
     width: 85px;
     margin-right: -85px;
@@ -963,14 +963,14 @@ nav a:hover{
 
 }
  #id_tags option:checked{
-     background: rgb(196,242,192) -webkit-linear-gradient(bottom, rgb(196,242,192) 0%, rgb(196,242,192) 100%);
-     border: 1px solid rgb(196,242,192);
+     background: rgb(112,175,107) -webkit-linear-gradient(bottom, rgb(112,175,107) 0%, rgb(112,175,107) 100%);
+     border: 1px solid rgb(112,175,107);
      border-radius: 20px;
 }
 
 #id_tags option:hover{
 
-     border-bottom: 1px solid rgb(196,242,192);
+     border-bottom: 1px solid rgb(112,175,107);
 
 }
 
@@ -1013,7 +1013,7 @@ display: none;
 
 .restaurants_set_affordability_elements:hover{
 
-    border: 2px solid rgb(196,242,192);
+    border: 2px solid rgb(112,175,107);
 }
 
 #restaurants_filter ::placeholder{
@@ -1044,9 +1044,9 @@ display: none;
 }
 
 #restaurants_filter button:hover{
-    background-color: rgb(196,242,192);
+    background-color: rgb(112,175,107);
     border-radius: 20px;
-    border: 2px solid rgb(196,242,192);
+    border: 2px solid rgb(112,175,107);
 
 
 
@@ -1110,11 +1110,14 @@ display: none;
 }
 
 #restaurants_open_filter{
-    margin-top: 15px;
-    margin-left: 15px;
-    width: 20px;
+    display: inline-block;
+    margin-top: 15px ;
+    padding: 2px;
+
+}
+
+#restaurants_open_filter img{
     height: 20px;
-    background-color: black;
 }
 
 #myBtn {
