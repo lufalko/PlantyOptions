@@ -43,7 +43,7 @@ body {
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: -66px;
-    width:20px;
+    width:80px;
     float:left;
     z-index: 3;
 
@@ -1170,6 +1170,11 @@ display: none;
 
 @media only screen and (max-width: 1220px) {
 
+    /*nav*/
+    #icon{
+    width:25px;
+    }
+
     .stars_rating_class{
 
         width: calc(18%);
@@ -1192,6 +1197,8 @@ display: none;
 
 @media only screen and (max-width: 1050px) {
 
+
+
   #restaurants_wrapper {
       width: 100vw;
       margin-left: 0px;
@@ -1211,9 +1218,12 @@ display: none;
 
 @media only screen and (max-width: 820px) {
 
+
+
     /*home*/
     .main_searchbar{
         width: 70%;
+        left:15%;
     }
 
   #restaurants_wrapper {
@@ -1271,6 +1281,7 @@ display: none;
     /*home*/
     .main_searchbar{
         width: 80%;
+        left: 10%
     }
 
   nav{

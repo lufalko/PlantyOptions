@@ -7,10 +7,15 @@
 
         <div id="main_row1">
             <div class="main_searchbar">
-            <div class="searchbar_textfeld">suche Restaurant...</div>
+            <div class="searchbar_textfeld">suche Restaurants...</div>
             <div class="search_button">
                 <img id="lupe" src="{% static 'assets/Lupe.png' %}" alt="search">
             </div>
+
+                <form method="get">
+                    {{myFilter.form}}
+                    <button class="btn btn-primary" type="submit">search</button>
+                </form>
         </div>
         </div>
 
@@ -69,6 +74,11 @@
 
 
 </div>
+
+<script>
+    document.getElementById("id_name").setAttribute("placeholder", "Name");
+</script>
+
 
 {% endblock %}
 
