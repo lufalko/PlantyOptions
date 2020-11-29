@@ -160,7 +160,7 @@ nav a:hover{
 
     background-image: url('../assets/dashboard-BG.jpg');
     background-repeat: no-repeat;
-    background-size: 100%; /*small margin on the right!!!*/
+    background-size: cover;
 }
 
 #main_row2{
@@ -1211,6 +1211,11 @@ display: none;
 
 @media only screen and (max-width: 820px) {
 
+    /*home*/
+    .main_searchbar{
+        width: 70%;
+    }
+
   #restaurants_wrapper {
 
       grid-template-columns: 0px 0px 1Fr 0px;
@@ -1262,6 +1267,11 @@ display: none;
 }
 
 @media only screen and (max-width: 700px) {
+
+    /*home*/
+    .main_searchbar{
+        width: 80%;
+    }
 
   nav{
         font-size: 14px;
