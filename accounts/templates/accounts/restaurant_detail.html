@@ -10,4 +10,23 @@
 {% endifequal %}
 <p>{{queryset.name}}</p>
 
+<h2>Comments</h2>
+
+{% for comments in comment.all %}
+    {% if comments.restaurant == i %}
+
+    <div>
+        <h3>{{comments.content}}</h3>
+    </div>
+
+    {% endif %}
+{% endfor %}
+
+{% for comment in comments.all %}
+    {% if comment.restaurant.name == queryset.name %}
+        {{ comment.content }}
+        {{ comment.date_created }}
+    {% endif %}
+{% endfor %}
+
 {% endblock %}

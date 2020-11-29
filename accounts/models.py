@@ -1,22 +1,75 @@
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
 
 
 # Create your models here.
 
-class User(models.Model):
-    firstName = models.CharField(max_length=200, blank=False, null=True)
-    lastName = models.CharField(max_length=200, blank=False, null=True)
+class AccountManager(BaseUserManager):
+    def create_user(self, email, username, first_name, last_name, password=None):
+        if not email:
+            raise ValueError("You must enter an email adress")
+        if not username:
+            raise ValueError("You must enter an username")
+        if not first_name:
+            raise ValueError("You must enter your first Name")
+        if not last_name:
+            raise ValueError("You must enter your last Name")
+
+        user = self.model(
+            email=self.normalize_email(email),
+            username=username,
+            first_name=first_name,
+            last_name=last_name
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, username, first_name, last_name, password):
+        user = self.create_user(
+            email=self.normalize_email(email),
+            password=password,
+            username=username,
+            first_name=first_name,
+            last_name=last_name
+        )
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+
+class Account(AbstractBaseUser):
+    email = models.EmailField(verbose_name='email', max_length=200, unique=True)
+    username = models.CharField(max_length=40, blank=False, null=True)
+    date_joined = models.DateTimeField(verbose_name='date_joined', auto_now_add=True)
+    last_login = models.DateTimeField(verbose_name='last_login', auto_now=True)
+    is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+
+    first_name = models.CharField(max_length=200, blank=False, null=True)
+    last_name = models.CharField(max_length=200, blank=False, null=True)
     initials = models.CharField(max_length=2, null=True)
-    email = models.CharField(max_length=200, blank=False, null=True)
-    password = models.CharField(max_length=200, blank=False, null=True)
-    username = models.CharField(max_length=200, blank=False, null=True)
     profile_picture = models.ImageField(null=True, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+
+    objects = AccountManager()
 
     def __str__(self):
-        return self.name
+        return self.username
+
+    def has_perm(self, perm, opj=None):
+        return self.is_admin
+
+    def has_module_perms(self, app_label):
+        return self.is_admin
 
 
 class Tag(models.Model):
@@ -57,10 +110,13 @@ class Food(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL)
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
-    content = models.FloatField(null=True)
+    content = models.TextField(default='enter text')
+
+    def __str__(self):
+        return self.account.username
 
 
 class Article(models.Model):
