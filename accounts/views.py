@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group
 # Create your views here.
 from .models import *
 from .forms import CreateUserForm
-from .filters import RestaurantFilter
+from .filters import RestaurantFilter, HomepageFilter
 from .decorators import unauthenticated_user, allowed_users
 
 from django.shortcuts import render
@@ -71,10 +71,10 @@ def home(request):
     restaurants = Restaurant.objects.all()
     foods = Food.objects.all();
 
-    myFilter = RestaurantFilter(request.GET, queryset=restaurants)
-    restaurants = myFilter.qs
+    homeFilter = HomepageFilter(request.GET, queryset=restaurants)
+    restaurants = homeFilter.qs
 
-    context = {'articles': articles, 'restaurants': restaurants, 'myFilter': myFilter, 'foods': foods}
+    context = {'articles': articles, 'restaurants': restaurants, 'homeFilter': homeFilter, 'foods': foods}
 
 
     return render(request, 'accounts/home.html', context)

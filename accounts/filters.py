@@ -19,3 +19,4 @@ class HomepageFilter(django_filters.FilterSet):
         model = Restaurant
         fields = '__all__'
         exclude = ['location', 'restaurant_picture', 'rating', 'rating', 'tags', 'affordability']
+
