@@ -68,7 +68,14 @@ def logoutPage(request):
 def home(request):
     articles = Article.objects.all()
 
-    context = {'articles': articles}
+    restaurants = Restaurant.objects.all()
+    foods = Food.objects.all();
+
+    myFilter = RestaurantFilter(request.GET, queryset=restaurants)
+    restaurants = myFilter.qs
+
+    context = {'articles': articles, 'restaurants': restaurants, 'myFilter': myFilter, 'foods': foods}
+
 
     return render(request, 'accounts/home.html', context)
 
