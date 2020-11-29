@@ -13,7 +13,7 @@
 <h2>Comments</h2>
 
 {% for comments in comment.all %}
-    {% if comments.restaurant == i %}
+    {% if comments.restaurant == queryset %}
 
     <div>
         <h3>{{comments.content}}</h3>

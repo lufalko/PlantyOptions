@@ -106,8 +106,9 @@ def map(request):
 
 def restaurant_detail(request, pk):
     queryset = Restaurant.objects.get(pk=pk)
+    comments = Comment.objects.all()
     context = {
-        'queryset': queryset
+        'queryset': queryset, 'comments': comments
     }
     return render(request, 'restaurant_detail.html', context)
 
