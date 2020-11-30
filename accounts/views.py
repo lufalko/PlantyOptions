@@ -11,7 +11,7 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
-from .forms import CreateUserForm
+from .forms import *
 from .filters import RestaurantFilter, HomepageFilter
 from .decorators import unauthenticated_user, allowed_users
 
@@ -114,8 +114,13 @@ def map(request):
 def restaurant_detail(request, pk):
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
+    model = Comment
+    model.restaurant = queryset
+    form_class = AddComment()
+    template_name = 'restaurant_detail.html'
+    fields = '__all__'
     context = {
-        'queryset': queryset, 'comments': comments
+        'queryset': queryset, 'comments': comments, 'form_class': form_class
     }
     return render(request, 'restaurant_detail.html', context)
 
