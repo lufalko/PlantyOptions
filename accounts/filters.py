@@ -15,10 +15,8 @@ class RestaurantFilter(django_filters.FilterSet):
 
 
 class HomepageFilter(django_filters.FilterSet):
-    restaurant_name = django_filters.CharFilter(field_name='name')
-
     class Meta:
         model = Restaurant
-        fields = ['restaurant_name']
-        # exclude = ['location', 'restaurant_picture', 'rating', 'tags', 'affordability']
+        fields = '__all__'
+        exclude = ['location', 'restaurant_picture', 'rating', 'rating', 'tags', 'affordability']
 

@@ -12,14 +12,6 @@
 
 <h2>Comments</h2>
 
-<div>
-    {% if user.is_authenticated %}
-        {{form_class.content.label}}
-        {{form_class.content}}
-        <button class="btn btn-secondary" type="submit">Add Comment</button>
-    {% endif %}
-</div>
-
 {% for comments in comment.all %}
     {% if comments.restaurant == queryset %}
 
