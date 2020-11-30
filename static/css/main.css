@@ -195,7 +195,7 @@ nav a:hover{
     height:60px;
     left:30%;
     top:30vh;
-    background-color:white;
+    background-color: white;
     border-radius: 20px;
 }
 
@@ -209,12 +209,21 @@ nav a:hover{
 .search_button{
     float: right;
     background: rgb(108,183,90);
+    border: none;
     border-radius: 20px;
     padding: 15px;
 }
 #lupe{
     width:30px;
     height:30px;
+}
+
+input{
+    width:90%;
+    height: 60px;
+    border: none;
+    background:white;
+    font-size:20px;
 }
 
 
