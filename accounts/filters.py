@@ -1,6 +1,5 @@
 import django_filters
 from django_filters import NumberFilter
-from django.forms.widgets import TextInput
 
 from .models import *
 
@@ -16,7 +15,7 @@ class RestaurantFilter(django_filters.FilterSet):
 
 
 class HomepageFilter(django_filters.FilterSet):
-    restaurant_name = django_filters.CharFilter(field_name='name', label='', widget=TextInput(attrs={'placeholder': 'Suche Restaurant'}))
+    restaurant_name = django_filters.CharFilter(field_name='name')
 
     class Meta:
         model = Restaurant

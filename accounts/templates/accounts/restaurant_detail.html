@@ -24,9 +24,28 @@
 
 {% for comment in comments.all %}
     {% if comment.restaurant.name == queryset.name %}
+        {{ comment.account.username }}
         {{ comment.content }}
         {{ comment.date_created }}
     {% endif %}
 {% endfor %}
+
+<h2>Add Comment</h2>
+
+{% if user.is_authenticated %}
+
+<div class="post-comment-section">
+    <form method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" value="Submit" class="btn btn-outline-success">
+    </form>
+</div>
+
+{% else %}
+
+<p>you must be loged in to add a comment</p>
+
+{% endif %}
 
 {% endblock %}
