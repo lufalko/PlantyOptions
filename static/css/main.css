@@ -252,6 +252,12 @@ input{
     margin:5px;
 }
 
+#all_articles{
+    background: red;
+    font-size:18px;
+    text-decoration:none;
+}
+
 
 
 /*main_row3*/
