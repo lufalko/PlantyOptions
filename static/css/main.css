@@ -292,6 +292,8 @@ input{
     height:200px;
     margin:1%;
     display: inline-block;
+    border: lightgrey;
+    border-width: 1px;
     border-radius: 20px;
     background:white;
     border-style: solid;
