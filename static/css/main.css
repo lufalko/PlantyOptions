@@ -199,13 +199,6 @@ nav a:hover{
     border-radius: 20px;
 }
 
-.searchbar_textfeld{
-    font-size: 18px;
-    padding: 18px;
-    color: rgb(200,200,200);
-    float: left;
-}
-
 .search_button{
     float: right;
     background: rgb(108,183,90);
@@ -222,10 +215,11 @@ input{
     width:90%;
     height: 60px;
     float:left;
+    margin-left:10px;
     border: none;
     border-radius:20px;
-    background:red;
     font-size:20px;
+    background:white;
 }
 
 
@@ -1188,7 +1182,12 @@ display: none;
 
     /*nav*/
     #icon{
-    width:25px;
+        width:25px;
+    }
+
+    /*home*/
+    input{
+        width:80%;
     }
 
     .stars_rating_class{
@@ -1215,7 +1214,7 @@ display: none;
 
     /*home*/
     input{
-        width:80%;
+        width:78%;
     }
 
 
@@ -1244,6 +1243,10 @@ display: none;
     .main_searchbar{
         width: 70%;
         left:15%;
+    }
+
+    input{
+        width:80%;
     }
 
   #restaurants_wrapper {
