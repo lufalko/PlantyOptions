@@ -1715,22 +1715,18 @@ display: none;
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
+    transition: background-color 0.5s;
 
-}
-
-#rd_food_drinks{
-    background-color: #70af6b !important;
 }
 
 
 #rd_body_header p:hover{
-    background-color: #70af6b;
-    transition: background-color 0.5s;
+
 }
 
 
 
-#rd_foods{
+.rd_options{
     display: inline-block;
     height: 90%;
     width: 100%;

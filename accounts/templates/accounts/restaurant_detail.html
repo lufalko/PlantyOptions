@@ -26,11 +26,11 @@
 <div id="rd_body">
     <div id="rd_body_header">
         <p id="rd_food_drinks">Food/Drinks</p>
-        <p>Opening Hours</p>
-        <p>Location</p>
+        <p id="rd_opening_hours">Opening Hours</p>
+        <p id="rd_food_location">Location</p>
         <p id="rd_contact">Contact</p>
     </div>
-    <div id="rd_foods">
+    <div class="rd_options">
        <div id="rd_foods_head">
            <p id="rd_vegetarisch">?vegetarisch</p>
            <p id="rd_vegan">?vegan</p>
@@ -75,6 +75,10 @@
         </div>
 
     </div>
+    <div class="rd_options"><div>
+        <div class="rd_options"><div>
+            <div class="rd_options"><div>
+                <div class="rd_options"><div>
 </div>
 
 <div id="rd_comments">
@@ -121,6 +125,53 @@
 
     let vegan = false;
     let vegetarisch = false;
+    let active= [0,0,0,0];
+
+    document.getElementById("rd_food_drinks").style.backgroundColor= "#70af6b";
+
+    /*<p id="rd_food_drinks">Food/Drinks</p>
+    <p id="rd_opening_hours">Opening Hours</p>
+    <p id="rd_food_location">Location</p>
+    <p id="rd_contact">Contact</p>*/
+
+    function render_options(){
+        let over_elements = document.getElementById("rd_body_header");
+
+        let element = over_elements.getElementsByTagName("p");
+
+        for (let i = 0; i < element.length; i++){
+            element[i].addEventListener("click",  function(){
+            for (let j = 0; j < element.length; j++){
+                element[j].style.backgroundColor = "#3F3C54";
+                active[j]=0;
+            }
+            if (this.style.backgroundColor != "rgb(112, 175, 107)") {
+                this.style.backgroundColor = "#70af6b";
+                active[i]=1;
+            }
+
+            else {
+                this.style.backgroundColor = "#3F3C54";
+                active[i]=0;
+                }
+            render_body();
+            })
+        }
+    }
+
+    function render_body(){
+        console.log(active);
+        for(let i = 0; i < active.length; i++){
+            if(active[i]==1){
+                document.getElementsByClassName("rd_options")[i].style.display = "inline-block";
+            }
+            else{
+                document.getElementsByClassName("rd_options")[i].style.display = "none";
+            }
+        }
+    }
+
+    render_options();
 
     for (let i = 0; i < document.getElementsByClassName('rd_dishes').length; i++){
         let elements = document.getElementsByClassName('rd_dishes');
