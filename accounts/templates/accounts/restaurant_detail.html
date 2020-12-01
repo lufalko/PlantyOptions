@@ -16,7 +16,9 @@
     <img src="{{queryset.restaurant_picture.url}}">
 {% endifequal %}
 <p id="rd_name">{{queryset.name}}</p>
-    <div id="rd_rating"></div>
+    <div id="rd_rating">
+        <p>{{queryset.rating}}</p>
+    </div>
 </div>
 
 
@@ -76,3 +78,53 @@
 {% endif %}
 
 {% endblock %}
+
+<script>
+
+    function stars(elements) {
+
+        let SternArray = new Array(5);
+
+        let TextInsideP = elements.getElementsByTagName('p')[0].innerHTML;
+        console.log(TextInsideP);
+        if (TextInsideP == 0.0) {
+            SternArray = [0, 0, 0, 0, 0];
+        }
+        if (TextInsideP == 1.0) {
+            SternArray = [1, 0, 0, 0, 0];
+        }
+        if (TextInsideP == 2.0) {
+            SternArray = [1, 1, 0, 0, 0];
+        }
+        if (TextInsideP == 3.0) {
+            SternArray = [1, 1, 1, 0, 0];
+        }
+        if (TextInsideP == 4.0) {
+            SternArray = [1, 1, 1, 1, 0];
+        }
+        if (TextInsideP == 5.0) {
+            SternArray = [1, 1, 1, 1, 1];
+        }
+
+        for (let i = 0; i < SternArray.length; i++) {
+
+            let element = document.createElement("img");
+
+            if (SternArray[i] == 1) {
+                element.setAttribute('src', "{% static 'assets/stern.png' %}");
+            }
+
+            if (SternArray[i] == 0) {
+                element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+            }
+
+            element.id = 'i';
+            element.className = "stars_class";
+
+            elements.appendChild(element);
+        }
+    }
+
+    stars(document.getElementById("rd_rating"));
+
+</script>
