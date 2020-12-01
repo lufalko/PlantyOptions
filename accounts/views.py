@@ -94,6 +94,10 @@ def restaurants(request):
     return render(request, 'accounts/restaurants.html', context)
 
 
+def about(request):
+    return render(request, 'accounts/about.html')
+
+
 def articlePage(request):
     articles = Article.objects.all()
 
@@ -103,6 +107,7 @@ def articlePage(request):
 
 @login_required(login_url='login')
 def user(request):
+    currentUser = request.user
     return render(request, 'accounts/user.html')
 
 
