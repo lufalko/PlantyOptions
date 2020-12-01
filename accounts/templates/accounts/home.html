@@ -40,35 +40,18 @@
         <div id="main_row4">
                         <h1 class="dashboard_comment_h1">Kommentare</h1>
 
+            {% for comment in comments %}
             <div class="dashboard_comment">
                 <div class="comment_profilepic">
                     <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
                 </div>
-                <div class="comment_username">username</div>
-                <div class="comment_time">vor 1 min</div>
-                <div class="comment_title">Überschrift</div>
-                <div class="comment_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
+                <div class="comment_username">{{ comment.account.username }}</div>
+                <div class="comment_time">{{ comment.date_created }}</div>
+                <div class="comment_title">{{ comment.headline }}</div>
+                <div class="comment_text">{{ comment.content }}</div>
             </div>
+            {% endfor %}
 
-            <div class="dashboard_comment">
-                <div class="comment_profilepic">
-                    <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
-                </div>
-                <div class="comment_username">username</div>
-                <div class="comment_time">vor 1 min</div>
-                <div class="comment_title">Überschrift</div>
-                <div class="comment_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
-            </div>
-
-            <div class="dashboard_comment">
-                <div class="comment_profilepic">
-                    <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
-                </div>
-                <div class="comment_username">username</div>
-                <div class="comment_time">vor 1 min</div>
-                <div class="comment_title">Überschrift</div>
-                <div class="comment_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
-            </div>
         </div>
 
 
