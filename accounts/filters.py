@@ -15,7 +15,7 @@ class RestaurantFilter(django_filters.FilterSet):
 
 
 class HomepageFilter(django_filters.FilterSet):
-    restaurant_name = django_filters.CharFilter(field_name='name')
+    restaurant_name = django_filters.CharFilter(field_name='name', label='')
 
     class Meta:
         model = Restaurant
