@@ -1158,6 +1158,31 @@ display: none;
   background-color: #555; /* Add a dark-grey background on hover */
 }
 
+
+
+
+/*------About Page--------*/
+
+#about_wrapper {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 20px;
+  grid-template-columns: 100%;
+  min-width: 600px;
+  width:100%;
+}
+
+#about_row1{
+    background:red;
+    height:100px;
+}
+
+#about_row2{
+    background:blue;
+    height:500px;
+}
+
+
 @media only screen and (max-width: 1758px) {
 
     /*home*/
