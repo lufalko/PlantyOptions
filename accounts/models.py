@@ -113,6 +113,7 @@ class Comment(models.Model):
     account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL)
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
+    headline = models.TextField(default='enter headline')
     content = models.TextField(default='enter text')
     fields = '__all__'
 
