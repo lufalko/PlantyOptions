@@ -180,7 +180,7 @@ nav a:hover{
 }
 
 #main_row4{
-    background-color:white;
+    background-color:lightgrey;
     grid-column:1/1;
     grid-row:4/4;
     height:400px;
@@ -229,7 +229,7 @@ input{
 .food_suggestion{
     width:25%;
     height: 400px;
-    display: inline-block;
+    display: inline-table;
     border-radius: 20px;
     margin:2%;
 }
@@ -287,21 +287,20 @@ input{
     border-radius:20px;
 }
 
-.home_comments_box{
-    height:300px;
-    margin-top:10px;
-}
+/*main_row4*/
 
 .dashboard_comment_h1{
     font-size:24px;
-    margin-bottom:30px;
+    margin-bottom:50px;
+    background:red;
 }
 
 .dashboard_comment{
     width:25%;
+    max-width:400px;
     height:200px;
-    margin:1%;
-    display: inline-block;
+    margin:0px 1%;
+    display: inline-table;
     border: lightgrey;
     border-width: 1px;
     border-radius: 20px;
