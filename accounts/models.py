@@ -131,7 +131,7 @@ class Article(models.Model):
         return self.headline
 
 
-class Teammember(models.Model):
+class Coworker(models.Model):
     name = models.CharField(max_length=50, null=False, default='Unnamed')
     picture = models.ImageField(null=False, default='dashboard-BG.jpg')
     email = models.CharField(max_length=150, null=False)

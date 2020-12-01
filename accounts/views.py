@@ -95,7 +95,7 @@ def restaurants(request):
 
 
 def about(request):
-    team = Teammember.objects.all()
+    team = Coworker.objects.all()
 
     context = {'team': team}
     return render(request, 'accounts/about.html', context)
