@@ -32,11 +32,36 @@
     </div>
     <div id="rd_foods">
        <div id="rd_foods_head">
-           <p>?vegan</p>
-           <p>?vegetarisch</p>
-            <div id="rd_foods_tags"></div>
+           <p id="rd_vegetarisch">?vegetarisch</p>
+           <p id="rd_vegan">?vegan</p>
+
+           <input type="text" placeholder="suche Gericht" id="rd_food_searchbar">
+
+           <div id="rd_foods_tags">
+                {% for j in foods %}
+                    {% if j.restaurant == queryset %}
+                        {% for l in j.tags.all %}
+                            <p class="rd_food_tag">{{l}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+           </div>
+
        </div>
-        <div id="rd_foods_body"></div>
+
+        <div id="rd_foods_body">
+
+        <div class="rd_dishes">
+                {% for j in foods %}
+                {% if j.restaurant == queryset %}
+
+                 <p class="rd_food_category">{{j.category}}</p>
+
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -78,6 +103,106 @@
 {% endif %}
 
 <script>
+
+    let vegan = false;
+    let vegetarisch = false;
+
+    for (let i = 0; i < document.getElementsByClassName('rd_dishes').length; i++){
+        let elements = document.getElementsByClassName('rd_dishes');
+        let category = elements[i].getElementsByClassName('rd_food_category');
+        let vegetarian_counter = 0;
+        let vegan_counter = 0;
+        for (let j = 0; j < category.length; j++){
+            if(category[j].innerHTML == 'Vegan') {
+               vegan_counter++;
+            }
+            else {
+               vegetarian_counter++;
+                }
+            }
+        document.getElementById('rd_vegetarisch').innerHTML= vegetarian_counter + ' Vegetarisch';
+        document.getElementById('rd_vegan').innerHTML= vegan_counter + ' Vegan';
+        document.getElementById('rd_vegan').style.userSelect = "none";
+        document.getElementById('rd_vegetarisch').style.userSelect = "none";
+    }
+
+    function render_vegan(){
+        var element = document.getElementById("rd_vegan");
+
+        element.addEventListener("mouseover",  function(){ if(!vegan){this.style.backgroundColor = "#378C61"}});
+        element.addEventListener("mouseover",  function(){ if(!vegan){this.style.borderColor = "#378C61"}});
+        element.addEventListener("mouseleave",  function(){ if(!vegan){this.style.backgroundColor = "transparent";}});
+        element.addEventListener("mouseleave",  function(){ if(!vegan){this.style.borderColor = "lightgrey"}});
+
+         element.addEventListener('click', function (){
+
+            if(!vegan) {
+                this.style.backgroundColor = "#378C61";
+                this.style.borderColor = "#378C61";
+                vegan = true;
+
+            }
+            else{
+                vegan = false;
+                this.style.backgroundColor = "transparent";
+                this.style.borderColor = "lightgrey";
+            }
+         })
+    }
+
+    function render_vegetarisch(){
+        var element = document.getElementById("rd_vegetarisch");
+
+        element.addEventListener("mouseover",  function(){ if(!vegetarisch){this.style.backgroundColor = "#70af6b"}});
+        element.addEventListener("mouseover",  function(){ if(!vegetarisch){this.style.borderColor = "#70af6b"}});
+        element.addEventListener("mouseleave",  function(){ if(!vegetarisch){this.style.backgroundColor = "transparent";}});
+        element.addEventListener("mouseleave",  function(){ if(!vegetarisch){this.style.borderColor = "lightgrey"}});
+
+        element.addEventListener('click', function (){
+
+            if(!vegetarisch) {
+                this.style.backgroundColor = "rgb(112,175,107)";
+                this.style.borderColor = "rgb(112,175,107)";
+                vegetarisch = true;
+
+            }
+            else{
+                vegetarisch = false;
+                this.style.backgroundColor = "transparent";
+                this.style.borderColor = "lightgrey";
+            }
+        })
+    }
+
+    function render_food_tags(){
+        let elements = document.getElementsByClassName("rd_food_tag");
+        for (let i=0; i < elements.length; i++){
+            for (let j=0; j < elements.length; j++){
+                if(elements[i].innerHTML == elements[j].innerHTML && i != j){
+                    elements[j].style.display = "none";
+                    elements[j].innerHTML = " "
+                }
+            }
+        }
+    }
+
+    for (let i=0; i<document.getElementsByClassName("rd_food_tag").length ; i++) {
+        document.getElementsByClassName("rd_food_tag")[i].addEventListener('click', function () {
+
+            console.log(this.style.backgroundColor);
+
+            if (this.style.backgroundColor != "rgb(112, 175, 107)") {
+                this.style.backgroundColor = "#70af6b";
+                this.style.color = "white";
+            }
+
+            else {
+                this.style.backgroundColor = "transparent";
+                this.style.color = "darkgrey";
+            }
+        })
+    }
+
 
     function stars(elements) {
 
@@ -124,6 +249,9 @@
     }
 
     stars(document.getElementById("rd_rating"));
+    render_vegan();
+    render_vegetarisch();
+    render_food_tags();
 
 </script>
 

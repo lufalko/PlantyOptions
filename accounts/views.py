@@ -110,6 +110,7 @@ def map(request):
 
 
 def restaurant_detail(request, pk):
+    foods = Food.objects.all();
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
     # form_class = CreateCommentForm
@@ -128,7 +129,7 @@ def restaurant_detail(request, pk):
         comment_form = CreateCommentForm()
 
     context = {
-        'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
+        'queryset': queryset, 'comments': comments, 'comment_form': comment_form,'foods': foods
     }
     return render(request, 'restaurant_detail.html', context)
 
