@@ -4,6 +4,7 @@ html, body {
       margin: 0;
       padding: 0;
       width: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -210,8 +211,7 @@ nav a:hover{
     width:30px;
     height:30px;
 }
-
-input{
+#id_restaurant_name{
     width:90%;
     height: 60px;
     float:left;
@@ -1605,8 +1605,12 @@ display: none;
     display: inline-block;
 
     width: calc(100vw - 50px);
+
+    margin-left: 25px;
+    margin-right: 25px;
+
     margin-top: 25px;
-    margin-bottom: 75px;
+    margin-bottom: 50px;
 
 }
 
@@ -1639,7 +1643,6 @@ display: none;
     height: 25px;
     width: 200px;
 
-    background-color: green;
     margin-bottom: 5px;
 }
 
@@ -1651,6 +1654,13 @@ display: none;
     float: left;
     height: 25px;
     margin-right: 5px;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
 }
 
 #rd_description{
@@ -1671,14 +1681,17 @@ display: none;
     background-color:lightgrey ;
     display: inline-block;
     width: calc(100vw - 50px);
+    margin-left: 25px;
+    margin-right: 25px;
     height: 500px;
 }
 
 #rd_body_header{
-     width: calc(100vw - 50px);
-    display: inline-block;
 
+    display: inline-block;
+     width: calc(100vw - 50px);
     background-color: white;
+
 }
 
 
@@ -1686,18 +1699,32 @@ display: none;
     display: inline-block;
     float: left;
     margin:0px;
+    margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
 
     color: white;
     width: calc(25%);
     background-color: #3F3C54;
+
+    cursor: pointer;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+
 }
+
 
 #rd_body_header p:hover{
     background-color: #70af6b;
     transition: background-color 0.5s;
 }
+
+
 
 #rd_foods{
     display: inline-block;
@@ -1712,19 +1739,93 @@ display: none;
 
 }
 
-#rd_foods_head p{
+#rd_vegan{
+
     display: inline-block;
     float: left;
-    margin-left: 25px;
+
+    border-top: 2px solid lightgrey;
+    border-bottom: 2px solid lightgrey;
+
+    padding: 2px;
+    width: 150px;
+
+    transition: 0.5s;
+    border-radius: 0 20px 20px 0;
+    border-left: 1px solid lightgrey;
+    border-right: 2px solid lightgrey;
+}
+
+#rd_vegetarisch{
+
+    display: inline-block;
+    float: left;
+
+    border-top: 2px solid lightgrey;
+    border-bottom: 2px solid lightgrey;
+
+    padding: 2px;
+    width: 150px;
+
+    transition: 0.5s;
+    border-radius: 20px 0 0 20px ;
+    border-right: 1px solid lightgrey;
+    border-left: 2px solid lightgrey;
 }
 
 #rd_foods_tags{
+
     display: inline-block;
-    height: 20px;
+    height: 38px;
+
     width: 100%;
-    background-color: lightgrey;
+    overflow-y: hidden;
+
 }
 
+.rd_food_category{
+    display: none;
+}
+
+.rd_food_tag{
+    float: left;
+    margin: 0px;
+    border: none;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    color: darkgrey;
+}
+
+.rd_food_tag:hover{
+    background-color: #70af6b;
+    cursor: pointer;
+    color: white;
+    transition: 0.5s;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+#rd_food_searchbar{
+    font-family: Montserrat;
+    appearance: none;
+
+    display: inline-block;
+    float: right;
+    border: 2px solid lightgrey;
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 2px;
+    padding-left: 10px;
+    margin-top: 14px;
+    width: 200px;
+}
 
 /*footer*/
 
