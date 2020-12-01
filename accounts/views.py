@@ -95,7 +95,10 @@ def restaurants(request):
 
 
 def about(request):
-    return render(request, 'accounts/about.html')
+    team = Teammember.objects.all()
+
+    context = {'team': team}
+    return render(request, 'accounts/about.html', context)
 
 
 def articlePage(request):
