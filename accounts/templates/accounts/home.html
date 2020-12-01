@@ -43,7 +43,12 @@
             {% for comment in comments %}
             <div class="dashboard_comment">
                 <div class="comment_profilepic">
-                    <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
+                    {% ifequal comment.account.profile_picture None %}
+                        <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
+                    {% else %}
+                        <img class="profilepic" src="{{ comment.account.profile_picture }}" alt="Profilbild">
+                    {% endifequal %}
+
                 </div>
                 <div class="comment_username">{{ comment.account.username }}</div>
                 <div class="comment_time">{{ comment.date_created }}</div>
