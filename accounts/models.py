@@ -129,3 +129,12 @@ class Article(models.Model):
 
     def __str__(self):
         return self.headline
+
+
+class Coworker(models.Model):
+    name = models.CharField(max_length=50, null=False, default='Unnamed')
+    picture = models.ImageField(null=False, default='dashboard-BG.jpg')
+    email = models.CharField(max_length=150, null=False)
+    social = models.CharField(max_length=250, null=False)
+    title = models.CharField(max_length=50)
+    bio = models.CharField(max_length=250)

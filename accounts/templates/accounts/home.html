@@ -11,11 +11,12 @@
                 <form method="get">
                     {{homeFilter.form}}
                     <!--<button class="btn btn-primary" type="submit">search</button>-->
-                    <button class="search_button" type=""submit">
-                <img id="lupe" src="{% static 'assets/Lupe.png' %}" alt="search">
-            </button>
+                    <button class="search_button" type=submit">
+                        <img id="lupe" src="{% static 'assets/Lupe.png' %}" alt="search">
+                    </button>
                 </form>
-        </div>
+
+            </div>
         </div>
 
 
@@ -27,48 +28,37 @@
                 <div class="suggestion_text">{{i.subtitle}}</div>
             </div>
             {% endfor %}
-            <div id="all_articles"><a href="{% url 'articles' %}"><p>view all articles</p></a></div>
+            <button id="all_articles">
+                <a href="{% url 'articles' %}" style="text-decoration:none; color:black">view all articles</a>
+            </button>
         </div>
 
 
         <div id="main_row3">
             <img id="best_restaurants_img" src="{% static 'assets/best_restaurants.jpg' %}" alt="best restaurants">
-            <div id="best_restaurants_button">beste restaurants</div>
+            <button id="best_restaurants_button" type="submit">beste restaurants</button>
         </div>
 
 
         <div id="main_row4">
                         <h1 class="dashboard_comment_h1">Kommentare</h1>
 
+            {% for comment in comments %}
             <div class="dashboard_comment">
                 <div class="comment_profilepic">
-                    <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
-                </div>
-                <div class="comment_username">username</div>
-                <div class="comment_time">vor 1 min</div>
-                <div class="comment_title">Überschrift</div>
-                <div class="comment_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
-            </div>
+                    {% ifequal comment.account.profile_picture None %}
+                        <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
+                    {% else %}
+                        <img class="profilepic" src="{{ comment.account.profile_picture }}" alt="Profilbild">
+                    {% endifequal %}
 
-            <div class="dashboard_comment">
-                <div class="comment_profilepic">
-                    <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
                 </div>
-                <div class="comment_username">username</div>
-                <div class="comment_time">vor 1 min</div>
-                <div class="comment_title">Überschrift</div>
-                <div class="comment_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
+                <div class="comment_username">{{ comment.account.username }}</div>
+                <div class="comment_time">{{ comment.date_created }}</div>
+                <div class="comment_text">{{ comment.content }}</div>
             </div>
+            {% endfor %}
 
-            <div class="dashboard_comment">
-                <div class="comment_profilepic">
-                    <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
-                </div>
-                <div class="comment_username">username</div>
-                <div class="comment_time">vor 1 min</div>
-                <div class="comment_title">Überschrift</div>
-                <div class="comment_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</div>
-            </div>
         </div>
 
 

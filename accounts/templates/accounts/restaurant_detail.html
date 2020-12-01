@@ -79,6 +79,7 @@
 
 {% for comment in comments.all %}
     {% if comment.restaurant.name == queryset.name %}
+        {{ comment.account.username }}
         {{ comment.content }}
         {{ comment.date_created }}
     {% endif %}

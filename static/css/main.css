@@ -140,7 +140,7 @@ nav a:hover{
 
 
 
-/*main page*/
+/*---------main page---------*/
 
 #home_wrapper {
   display: grid;
@@ -228,8 +228,8 @@ nav a:hover{
 
 .food_suggestion{
     width:25%;
-    height: 400px;
-    display: inline-block;
+    height: 350px;
+    display: inline-table;
     border-radius: 20px;
     margin:2%;
 }
@@ -254,10 +254,11 @@ nav a:hover{
 
 #all_articles{
     background: white;
-    margin:0px;
-    width:50%;
-    left:25%;
     position: relative;
+    height:30px;
+    width:25%;
+    border: 1px solid lightgrey;
+    border-radius:20px;
     font-size:18px;
     text-decoration:none;
 }
@@ -284,24 +285,23 @@ nav a:hover{
     font-weight:bold;
     width: 50%;
     padding: 20px;
+    border:none;
     border-radius:20px;
 }
 
-.home_comments_box{
-    height:300px;
-    margin-top:10px;
-}
+/*main_row4*/
 
 .dashboard_comment_h1{
     font-size:24px;
-    margin-bottom:30px;
+    margin-bottom:50px;
 }
 
 .dashboard_comment{
     width:25%;
+    max-width:400px;
     height:200px;
-    margin:1%;
-    display: inline-block;
+    margin:0px 1%;
+    display: inline-table;
     border: lightgrey;
     border-width: 1px;
     border-radius: 20px;
@@ -339,16 +339,10 @@ nav a:hover{
     color: rgb(200,200,200);
 }
 
-.comment_title{
-    text-align: left;
-    margin:15px 10px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
 .comment_text{
     text-align: left;
     margin:10px;
+    margin-top:20px;
 }
 
 
@@ -1163,6 +1157,31 @@ display: none;
 #myBtn:hover {
   background-color: #555; /* Add a dark-grey background on hover */
 }
+
+
+
+
+/*------About Page--------*/
+
+#about_wrapper {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 20px;
+  grid-template-columns: 100%;
+  min-width: 600px;
+  width:100%;
+}
+
+#about_row1{
+    background:red;
+    height:100px;
+}
+
+#about_row2{
+    background:blue;
+    height:500px;
+}
+
 
 @media only screen and (max-width: 1758px) {
 

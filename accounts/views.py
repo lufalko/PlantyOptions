@@ -65,6 +65,7 @@ def logoutPage(request):
 
 def home(request):
     articles = Article.objects.all()
+    comments = Comment.objects.all()
 
     restaurants = Restaurant.objects.all()
     foods = Food.objects.all();
@@ -72,8 +73,8 @@ def home(request):
     homeFilter = HomepageFilter(request.GET, queryset=restaurants)
     restaurants = homeFilter.qs
 
-    context = {'articles': articles, 'restaurants': restaurants, 'homeFilter': homeFilter, 'foods': foods}
-
+    context = {'articles': articles, 'comments': comments, 'restaurants': restaurants, 'homeFilter': homeFilter,
+               'foods': foods}
 
     return render(request, 'accounts/home.html', context)
 
@@ -93,6 +94,13 @@ def restaurants(request):
     return render(request, 'accounts/restaurants.html', context)
 
 
+def about(request):
+    team = Coworker.objects.all()
+
+    context = {'team': team}
+    return render(request, 'accounts/about.html', context)
+
+
 def articlePage(request):
     articles = Article.objects.all()
 
@@ -102,6 +110,7 @@ def articlePage(request):
 
 @login_required(login_url='login')
 def user(request):
+    currentUser = request.user
     return render(request, 'accounts/user.html')
 
 
