@@ -180,7 +180,7 @@ nav a:hover{
 }
 
 #main_row4{
-    background-color:lightgrey;
+    background-color:white;
     grid-column:1/1;
     grid-row:4/4;
     height:400px;
@@ -292,7 +292,6 @@ input{
 .dashboard_comment_h1{
     font-size:24px;
     margin-bottom:50px;
-    background:red;
 }
 
 .dashboard_comment{
