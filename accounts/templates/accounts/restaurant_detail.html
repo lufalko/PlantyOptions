@@ -3,12 +3,23 @@
 
 {% block content %}
 
+<div id="rd_banner"></div>
+<div id="rd_tags">
+    {% for k in queryset.tags.all %}
+    <p >{{k}}</p>
+    {% endfor %}
+</div>
+<div id="rd_header">
 {% ifequal i.restaurant_picture None %}
-    <img src="{% static 'assets/dashboard-BG.jpg' %}" class="restaurants_img">
+    <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
 {% else %}
     <img src="{{queryset.restaurant_picture.url}}">
 {% endifequal %}
-<p>{{queryset.name}}</p>
+<p id="rd_name">{{queryset.name}}</p>
+    <div id="rd_rating"></div>
+</div>
+
+
 
 <div id="rd_body">
     <div id="rd_body_header">
@@ -27,7 +38,6 @@
     </div>
 </div>
 
-<!--
 <h2>Comments</h2>
 
 {% for comments in comment.all %}
@@ -63,6 +73,6 @@
 
 <p>you must be loged in to add a comment</p>
 
-{% endif %}-->
+{% endif %}
 
 {% endblock %}
