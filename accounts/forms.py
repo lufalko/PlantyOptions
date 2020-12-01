@@ -1,9 +1,10 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django import forms
 from accounts.models import Comment
 from accounts.models import Restaurant
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class CreateUserForm(UserCreationForm):
@@ -12,10 +13,9 @@ class CreateUserForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
 
-class AddComment(forms.ModelForm):
+class CreateCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('content',)
-        widgets = {
-            'Content': forms.TextInput(attrs={'class': 'form-control'})
-        }
+        fields = ['content']
+
+        widgets = {'content': forms.Textarea(attrs={'class': 'form-control'})}

@@ -3,32 +3,12 @@
 
 {% block content %}
 
-<div id="rd_banner">
-</div>
-
-<div id="rd_tags">
-    {% for k in queryset.tags.all%}
-
-        <p> {{k}} </p>
-
-    {% endfor %}
-</div>
-
-<div id="rd_header">
 {% ifequal i.restaurant_picture None %}
-    <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
+    <img src="{% static 'assets/dashboard-BG.jpg' %}" class="restaurants_img">
 {% else %}
     <img src="{{queryset.restaurant_picture.url}}">
 {% endifequal %}
-    <p id="rd_name">{{queryset.name}}</p>
-    <div id="rd_rating">
-        <p>{{queryset.rating}}</p>
-    </div>
-
-    <div id="rd_description">
-        <p>Veganer Grill nahe Augsburg. Hervoragendes Ambiente mit Pool und Garten.</p>
-    </div>
-</div>
+<p>{{queryset.name}}</p>
 
 <div id="rd_body">
     <div id="rd_body_header">
@@ -50,14 +30,6 @@
 <!--
 <h2>Comments</h2>
 
-<div>
-    {% if user.is_authenticated %}
-        {{form_class.content.label}}
-        {{form_class.content}}
-        <button class="btn btn-secondary" type="submit">Add Comment</button>
-    {% endif %}
-</div>
-
 {% for comments in comment.all %}
     {% if comments.restaurant == queryset %}
 
@@ -73,61 +45,24 @@
         {{ comment.content }}
         {{ comment.date_created }}
     {% endif %}
-{% endfor %} -->
-<script>
+{% endfor %}
 
-function stars(elements) {
+<h2>Add Comment</h2>
 
+{% if user.is_authenticated %}
 
+<div class="post-comment-section">
+    <form method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" value="Submit" class="btn btn-outline-success">
+    </form>
+</div>
 
-    let SternArray = new Array(5);
+{% else %}
 
-    let TextInsideP = elements.getElementsByTagName('p')[0].innerHTML;
+<p>you must be loged in to add a comment</p>
 
-    if (TextInsideP == 0.0) {
-        SternArray = [0, 0, 0, 0, 0];
-    }
-    if (TextInsideP == 1.0) {
-        SternArray = [1, 0, 0, 0, 0];
-    }
-    if (TextInsideP == 2.0) {
-        SternArray = [1, 1, 0, 0, 0];
-    }
-    if (TextInsideP == 3.0) {
-        SternArray = [1, 1, 1, 0, 0];
-    }
-    if (TextInsideP == 4.0) {
-        SternArray = [1, 1, 1, 1, 0];
-    }
-    if (TextInsideP == 5.0) {
-        SternArray = [1, 1, 1, 1, 1];
-    }
-
-    for (let i = 0; i < SternArray.length; i++) {
-
-        let element = document.createElement("img");
-
-        if (SternArray[i] == 1) {
-            element.setAttribute('src', "{% static 'assets/stern.png' %}");
-        }
-
-        if (SternArray[i] == 0) {
-            element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
-        }
-
-        element.id = 'i';
-        element.className = "stars_class";
-
-        elements.appendChild(element);
-        }
-
-}
-
-/*render_zone*/
-
-stars(document.getElementById("rd_rating"));
-
-</script>
+{% endif %}-->
 
 {% endblock %}
-

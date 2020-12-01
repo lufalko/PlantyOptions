@@ -114,6 +114,7 @@ class Comment(models.Model):
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     content = models.TextField(default='enter text')
+    fields = '__all__'
 
     def __str__(self):
         return self.account.username

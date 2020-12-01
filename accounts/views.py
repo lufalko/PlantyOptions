@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth import authenticate, login, logout
@@ -11,7 +11,7 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
-from .forms import *
+from .forms import CreateUserForm, CreateCommentForm
 from .filters import RestaurantFilter, HomepageFilter
 from .decorators import unauthenticated_user, allowed_users
 
@@ -34,8 +34,6 @@ def register(request):
             messages.success(request, 'Account was created for ' + username)
 
             return redirect('/login')
-
-    myFilter = RestaurantFilter()
 
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
@@ -114,13 +112,23 @@ def map(request):
 def restaurant_detail(request, pk):
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
-    model = Comment
-    model.restaurant = queryset
-    form_class = AddComment()
-    template_name = 'restaurant_detail.html'
-    fields = '__all__'
+    # form_class = CreateCommentForm
+
+    if request.method == 'POST':
+        comment_form = CreateCommentForm(request.POST or None)
+        if request.method == 'POST':
+
+            if comment_form.is_valid():
+                content = request.POST.get('content')
+                comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
+                comment.save()
+                return HttpResponseRedirect(request.path_info)
+
+    else:
+        comment_form = CreateCommentForm()
+
     context = {
-        'queryset': queryset, 'comments': comments, 'form_class': form_class
+        'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
     }
     return render(request, 'restaurant_detail.html', context)
 
