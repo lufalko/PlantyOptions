@@ -25,7 +25,7 @@
 
 <div id="rd_body">
     <div id="rd_body_header">
-        <p>Food/Drinks</p>
+        <p id="rd_food_drinks">Food/Drinks</p>
         <p>Opening Hours</p>
         <p>Location</p>
         <p id="rd_contact">Contact</p>
@@ -51,7 +51,7 @@
 
         <div id="rd_foods_body">
 
-        <div class="rd_dishes">
+            <div class="rd_dishes">
                 {% for j in foods %}
                 {% if j.restaurant == queryset %}
 
@@ -60,11 +60,24 @@
                 {% endif %}
                 {% endfor %}
             </div>
+
+
+                {% for j in foods %}
+                    {% if j.restaurant == queryset %}
+            <div class="rd_food_block">
+                <p class="rd_block_name">{{j.name}}</p>
+                <p class="rd_block_description">{{j.description}}</p>
+                <p class="rd_block_price">{{j.price}}€</p>
+             </div>
+                    {% endif %}
+                {% endfor %}
+
         </div>
 
     </div>
 </div>
 
+<div id="rd_comments">
 <h2>Comments</h2>
 
 {% for comments in comment.all %}
@@ -102,6 +115,7 @@
 <p>you must be loged in to add a comment</p>
 
 {% endif %}
+    </div>
 
 <script>
 
@@ -188,6 +202,9 @@
     }
 
     for (let i=0; i<document.getElementsByClassName("rd_food_tag").length ; i++) {
+
+
+
         document.getElementsByClassName("rd_food_tag")[i].addEventListener('click', function () {
 
             console.log(this.style.backgroundColor);

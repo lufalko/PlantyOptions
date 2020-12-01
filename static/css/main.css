@@ -1535,7 +1535,7 @@ display: none;
     margin-right: 25px;
 
     margin-top: 25px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 
 }
 
@@ -1608,13 +1608,13 @@ display: none;
     width: calc(100vw - 50px);
     margin-left: 25px;
     margin-right: 25px;
-    height: 500px;
+
 }
 
 #rd_body_header{
 
     display: inline-block;
-     width: calc(100vw - 50px);
+    width: calc(100vw - 50px);
     background-color: white;
 
 }
@@ -1641,6 +1641,10 @@ display: none;
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
 
+}
+
+#rd_food_drinks{
+    background-color: #70af6b !important;
 }
 
 
@@ -1702,7 +1706,7 @@ display: none;
 
     display: inline-block;
     height: 38px;
-
+    margin-bottom: 13px;
     width: 100%;
     overflow-y: hidden;
 
@@ -1750,6 +1754,66 @@ display: none;
     padding-left: 10px;
     margin-top: 14px;
     width: 200px;
+}
+
+#rd_foods_body{
+    display: inline-block;
+    width: calc(100%);
+    height: 400px;
+
+}
+
+.rd_food_block{
+    display: inline-block;
+    background-color: white;
+    width:  calc(100% - 22px);
+    margin-bottom: 12px;
+    border: 1px solid lightgrey;
+    padding: 10px;
+}
+
+.rd_block_name{
+    float: left;
+    width: calc(100% - 10px);
+    text-align: left;
+    background-color: white;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #3F3C54;
+    margin: 0px;
+    padding-right: 10px;
+    margin-bottom: 3px;
+}
+
+.rd_block_description{
+    float: left;
+    width: calc(100% - 10px);
+    height: 40px;
+    text-align: left;
+    background-color: white;
+    font-size: 14px;
+
+    margin: 0px;
+    padding-right: 10px;
+    margin-bottom: 3px;
+}
+
+.rd_block_price{
+    float: left;
+
+    text-align: left;
+    background-color: white;
+    font-size: 14px;
+
+    margin: 0px;
+    padding-right: 10px;
+    margin-bottom: 3px;
+}
+
+#rd_comments{
+    display: inline-block;
+    background-color: #f7ba5b;
 }
 
 /*footer*/
