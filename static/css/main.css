@@ -1173,14 +1173,89 @@ display: none;
 }
 
 #about_row1{
-    background:red;
+    background:white;
+    grid-column:1/1;
+    grid-row:1/1;
     height:100px;
+    margin-top:50px;
 }
 
 #about_row2{
-    background:blue;
+    background:white;
+    grid-column:1/1;
+    grid-row:2/2;
     height:500px;
 }
+
+
+.about_teammember{
+    background: lightgrey;
+    display: inline-table;
+    width:20vw;
+    height:20vw;
+}
+
+.about_teammember_img{
+    width:100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+.about_overlay {
+  position: relative;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: #7aaf6b;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+}
+
+.about_teammember:hover .about_overlay {
+  bottom: 100%;
+  height: 100%;
+}
+
+.about_text {
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  color:white;
+}
+
+.about_teammember_name{
+    font-size:24px;
+    margin:20px;
+}
+.about_teammember_title{
+    font-size:16px;
+    margin:5px;
+    color:lightgrey;
+}
+.about_teammember_email{
+    font-size:16px;
+}
+.about_teammember_bio{
+    font-size:16px;
+    margin-top:30px;
+    color:lightgrey;
+}
+
+.about_teammember_social{
+    width:10%;
+    margin-top:20px;
+}
+
+
+
 
 
 @media only screen and (max-width: 1758px) {

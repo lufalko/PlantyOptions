@@ -10,6 +10,24 @@
 
         <div id="about_row2">
 
+            {% for teammember in team %}
+            <div class="about_teammember">
+                <img class="about_teammember_img" src="{{ teammember.picture.url }}" alt="{{ teammember.name }}">
+                <div class="about_overlay">
+                    <div class="about_text">
+                        <div class="about_teammember_name">{{ teammember.name }}</div>
+                        <div class="about_teammember_title">{{ teammember.title }}</div>
+                        <div class="about_teammember_email">{{ teammember.email }}</div>
+                        <div class="about_teammember_bio">{{ teammember.bio }}</div>
+                        <a href="{{ teammember.social }}" target="_blank">
+                            <img class="about_teammember_social" src="{% static 'assets/instagram.png' %}" alt="instagram: {{ teammember.name }}">
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
 
