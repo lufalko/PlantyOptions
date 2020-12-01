@@ -3,13 +3,51 @@
 
 {% block content %}
 
+<div id="rd_banner">
+</div>
+
+<div id="rd_tags">
+    {% for k in queryset.tags.all%}
+
+        <p> {{k}} </p>
+
+    {% endfor %}
+</div>
+
+<div id="rd_header">
 {% ifequal i.restaurant_picture None %}
-    <img src="{% static 'assets/dashboard-BG.jpg' %}" class="restaurants_img">
+    <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
 {% else %}
     <img src="{{queryset.restaurant_picture.url}}">
 {% endifequal %}
-<p>{{queryset.name}}</p>
+    <p id="rd_name">{{queryset.name}}</p>
+    <div id="rd_rating">
+        <p>{{queryset.rating}}</p>
+    </div>
 
+    <div id="rd_description">
+        <p>Veganer Grill nahe Augsburg. Hervoragendes Ambiente mit Pool und Garten.</p>
+    </div>
+</div>
+
+<div id="rd_body">
+    <div id="rd_body_header">
+        <p>Food/Drinks</p>
+        <p>Opening Hours</p>
+        <p>Location</p>
+        <p id="rd_contact">Contact</p>
+    </div>
+    <div id="rd_foods">
+       <div id="rd_foods_head">
+           <p>?vegan</p>
+           <p>?vegetarisch</p>
+            <div id="rd_foods_tags"></div>
+       </div>
+        <div id="rd_foods_body"></div>
+    </div>
+</div>
+
+<!--
 <h2>Comments</h2>
 
 <div>
@@ -35,6 +73,61 @@
         {{ comment.content }}
         {{ comment.date_created }}
     {% endif %}
-{% endfor %}
+{% endfor %} -->
+<script>
+
+function stars(elements) {
+
+
+
+    let SternArray = new Array(5);
+
+    let TextInsideP = elements.getElementsByTagName('p')[0].innerHTML;
+
+    if (TextInsideP == 0.0) {
+        SternArray = [0, 0, 0, 0, 0];
+    }
+    if (TextInsideP == 1.0) {
+        SternArray = [1, 0, 0, 0, 0];
+    }
+    if (TextInsideP == 2.0) {
+        SternArray = [1, 1, 0, 0, 0];
+    }
+    if (TextInsideP == 3.0) {
+        SternArray = [1, 1, 1, 0, 0];
+    }
+    if (TextInsideP == 4.0) {
+        SternArray = [1, 1, 1, 1, 0];
+    }
+    if (TextInsideP == 5.0) {
+        SternArray = [1, 1, 1, 1, 1];
+    }
+
+    for (let i = 0; i < SternArray.length; i++) {
+
+        let element = document.createElement("img");
+
+        if (SternArray[i] == 1) {
+            element.setAttribute('src', "{% static 'assets/stern.png' %}");
+        }
+
+        if (SternArray[i] == 0) {
+            element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+        }
+
+        element.id = 'i';
+        element.className = "stars_class";
+
+        elements.appendChild(element);
+        }
+
+}
+
+/*render_zone*/
+
+stars(document.getElementById("rd_rating"));
+
+</script>
 
 {% endblock %}
+

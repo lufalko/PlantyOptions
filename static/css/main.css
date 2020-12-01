@@ -8,7 +8,7 @@ html, body {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     text-align: center;
     overflow-x: hidden;
@@ -368,6 +368,8 @@ nav a:hover{
 
 
 
+
+
 }
 
 /*#restaurants_header{
@@ -496,10 +498,13 @@ nav a:hover{
     float: left;
     margin-right: 25px;
 
+    border-radius: 10px;
+      object-fit: cover;
+
     background-size: cover;
 }
 
-.restaurants_img>img{
+.restaurants_img img{
 
     width: 135px;
     height: 135px;
@@ -1175,23 +1180,7 @@ display: none;
     width:25px;
     }
 
-    .stars_rating_class{
 
-        width: calc(18%);
-        max-width: 23px;
-        position: relative;
-        height: auto;
-        margin: 5px;
-        margin-right: 2%;
-        margin-left: 0px;
-        top: 50%;
-        transform: translate(0,-50%);
-
-    }
-
-    #restaurants_stars{
-        width:calc((100% - 70px - 10%));
-    }
 
 }
 
@@ -1274,6 +1263,21 @@ display: none;
       display: none;
   }
 
+  body::-webkit-scrollbar {
+  display: none;
+}
+
+    #restaurants_filter::-webkit-scrollbar{
+        display: block;
+    }
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#restaurants_body_content {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 }
 
 @media only screen and (max-width: 700px) {
@@ -1288,52 +1292,11 @@ display: none;
         font-size: 14px;
   }
 
-  #restaurants_wrapper {
-
-      grid-template-columns: 0px 0px 1Fr 0px;
-      grid-column-gap: 0px;
-  }
-
-
-  #restaurants_aside_left{
-   display: none;
-
-  }
-
-  body::-webkit-scrollbar {
-  display: none;
-}
-
-    #restaurants_filter::-webkit-scrollbar{
-        display: block;
-    }
-
-
-/* Hide scrollbar for IE, Edge and Firefox */
-#restaurants_body_content {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}{
-
-  }
-
-  #restaurants_body_content::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-#restaurants_body_content {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
 
 }
 
 @media only screen and (max-width: 570px) {
 
-      #restaurants_wrapper{
-
-    }
 
     #restaurants_body_content{
         margin-right: 20px;
@@ -1460,17 +1423,176 @@ display: none;
 
     }
 
-      .restaurants_img{
-        height: 94px;
-        width: 94px;
-        margin-right: 10px;
-    }
-      .restaurants_img img{
-        height: 94px;
-        width: 94px;
-
+    .restaurants_img{
+      height: 94px;
+      width: 94px;
+      margin-right: 10px;
     }
 
+    .restaurants_img img{
+        height: 94px;
+        width: 94px;
+      }
+
+}
+
+/*restaurants_details*/
+
+#rd_banner{
+
+    display: inline-block;
+    background-color: rgb(112, 175, 107);
+    height: 200px;
+    width: 100vw;
+    margin-top: -25px;
+    background-image: url('../assets/dashboard-BG.jpg');
+    background-size: cover;
+
+}
+
+#rd_tags{
+    display: inline-block;
+    width: 100vw;
+    background-color: #70af6b;
+}
+
+#rd_tags p{
+    display: inline-block;
+    color: #f1f1f1;
+    margin:0px;
+    padding: 0px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+#rd_tags p:hover{
+    color: white;
+    cursor: pointer;
+    transition: color 0.5s;
+}
+
+#rd_header{
+
+    display: inline-block;
+
+    width: calc(100vw - 50px);
+    margin-top: 25px;
+    margin-bottom: 75px;
+
+}
+
+#rd_profile_image{
+    width: 135px;
+    height: 135px;
+    float: left;
+    margin-right: 25px;
+    border-radius: 10px;
+    object-fit:cover;
+}
+
+#rd_name{
+    float: left;
+
+    text-align: left;
+    background-color: white;
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #3F3C54;
+    margin: 0px;
+    padding-right: 10px;
+    margin-bottom: 3px;
+}
+
+#rd_rating{
+    display: inline-block;
+    float: left;
+    height: 25px;
+
+    background-color: white;
+    margin-bottom: 5px;
+}
+
+#rd_rating p{
+    display: none;
+}
+
+#rd_rating img{
+    float: left;
+    height: 25px;
+    margin-right: 5px;
+}
+
+#rd_description{
+    display: inline-block;
+    width: calc(100% - 135px - 25px);
+    height: 70px;
+    text-align: left;
+    float: left;
+    background-color: white;
+}
+
+#rd_description p{
+    margin: 0px;
+}
+
+
+#rd_body{
+    background-color:lightgrey ;
+    display: inline-block;
+    width: calc(100vw - 50px);
+    height: 500px;
+}
+
+#rd_body_header{
+     width: calc(100vw - 50px);
+    display: inline-block;
+
+    background-color: white;
+}
+
+
+#rd_body_header p{
+    display: inline-block;
+    float: left;
+    margin:0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    color: white;
+    width: calc(25%);
+    background-color: #3F3C54;
+}
+
+#rd_body_header p:hover{
+    background-color: #70af6b;
+    transition: background-color 0.5s;
+}
+
+#rd_foods{
+    display: inline-block;
+    height: 90%;
+    width: 100%;
+    background-color: white;
+}
+
+#rd_foods_head{
+    display: inline-block;
+    width: 100%;
+    background-color: #f7ba5b;
+}
+
+#rd_foods_head p{
+    display: inline-block;
+    float: left;
+    margin-left: 25px;
+}
+
+#rd_foods_tags{
+    display: inline-block;
+    height: 20px;
+    width: 100%;
+    background-color: lightgrey;
 }
 
 
