@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
 
+    'leaflet',
     'accounts',
     'django_filters',
+
+
 
 ]
 
@@ -80,8 +84,12 @@ WSGI_APPLICATION = 'PlantyOptions.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'plantymap',
+        'USER': 'postgres',
+        'HOST': 'localhost',
+        'PASSWORD': 'duisburg2015',
+        'PORT': '5432',
     }
 }
 
@@ -130,3 +138,13 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
+
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (10.89779, 48.3705449),
+    'DEFAULT-ZOOM': 5,
+    'Max-ZOOM': 20,
+    'MIN-ZOOM': 3,
+    'SCALE': 'both',
+    'ATTRIBUTION_PREFIX': 'PlantyOptions',
+}

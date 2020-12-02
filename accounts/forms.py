@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
@@ -19,3 +20,6 @@ class CreateCommentForm(forms.ModelForm):
         fields = ['content']
 
         widgets = {'content': forms.Textarea(attrs={'class': 'form-control'})}
+
+
+

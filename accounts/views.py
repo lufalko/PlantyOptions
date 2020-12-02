@@ -17,6 +17,8 @@ from .decorators import unauthenticated_user, allowed_users
 
 from django.shortcuts import render
 
+from django.views.generic import TemplateView
+
 
 @unauthenticated_user
 def register(request):
@@ -68,7 +70,7 @@ def home(request):
     comments = Comment.objects.all()
 
     restaurants = Restaurant.objects.all()
-    foods = Food.objects.all();
+    foods = Food.objects.all()
 
     homeFilter = HomepageFilter(request.GET, queryset=restaurants)
     restaurants = homeFilter.qs
@@ -119,10 +121,10 @@ def map(request):
 
 
 def restaurant_detail(request, pk):
-    foods = Food.objects.all();
+    foods = Food.objects.all()
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
-    # form_class = CreateCommentForm
+    form_class = CreateCommentForm
 
     if request.method == 'POST':
         comment_form = CreateCommentForm(request.POST or None)
@@ -149,3 +151,5 @@ def article_detail(request, pk):
         'queryset': queryset
     }
     return render(request, 'restaurant_detail.html', context)
+
+

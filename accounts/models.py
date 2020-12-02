@@ -1,10 +1,9 @@
-
-from django.db import models
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
+from django.db import models
+from django.contrib.gis.db import models
 
 
 # Create your models here.
-
 class AccountManager(BaseUserManager):
     def create_user(self, email, username, first_name, last_name, password=None):
         if not email:
@@ -82,12 +81,13 @@ class Tag(models.Model):
 class Restaurant(models.Model):
     restaurant_picture = models.ImageField(null=True, default='dashboard-BG.jpg')
     name = models.CharField(max_length=200, null=True)
-    location = models.CharField(max_length=200, null=True)
+    location = models.PointField(srid=4326, null=True)
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(null=True)
+    objects = models.Manager()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 
@@ -138,3 +138,4 @@ class Coworker(models.Model):
     social = models.CharField(max_length=250, null=False)
     title = models.CharField(max_length=50)
     bio = models.CharField(max_length=250)
+
