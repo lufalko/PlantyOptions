@@ -9,7 +9,6 @@
         </div>
 
         <div id="about_row2">
-
             {% for teammember in team %}
             <div class="about_teammember">
                 <img class="about_teammember_img" src="{{ teammember.picture.url }}" alt="{{ teammember.name }}">
@@ -22,15 +21,10 @@
                         <a href="{{ teammember.social }}" target="_blank">
                             <img class="about_teammember_social" src="{% static 'assets/instagram.png' %}" alt="instagram: {{ teammember.name }}">
                         </a>
-
                     </div>
-
                 </div>
             </div>
             {% endfor %}
         </div>
-
-
-
     </div>
 {% endblock %}

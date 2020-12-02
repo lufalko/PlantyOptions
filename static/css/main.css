@@ -202,7 +202,7 @@ nav a:hover{
 
 .search_button{
     float: right;
-    background: rgb(108,183,90);
+    background: #7aaf6b;
     border: none;
     border-radius: 0px 20px 20px 0px;
     padding: 15px;
@@ -279,7 +279,7 @@ nav a:hover{
     position:relative;
     margin:auto;
     margin-top:-200px;
-    background-color: rgb(108,183,90);
+    background-color: #7aaf6b;
     color: white;
     font-size:18px;
     font-weight:bold;
@@ -1177,7 +1177,7 @@ display: none;
     grid-column:1/1;
     grid-row:1/1;
     height:100px;
-    margin-top:50px;
+    margin-top:10vh;
 }
 
 #about_row2{
@@ -1187,7 +1187,8 @@ display: none;
     background:white;
     grid-column:1/1;
     grid-row:2/2;
-    height:500px;
+    height:20vw;
+    margin-top:10vh;
 }
 
 
@@ -1236,11 +1237,11 @@ display: none;
 
 .about_teammember_name{
     font-size:24px;
-    margin:20px;
 }
 .about_teammember_title{
     font-size:16px;
-    margin:5px;
+    margin-top:5px;
+    margin-bottom:30px;
     color:lightgrey;
 }
 .about_teammember_email{
@@ -1254,7 +1255,7 @@ display: none;
 
 .about_teammember_social{
     width:10%;
-    margin-top:20px;
+    margin-top:30px;
 }
 
 
