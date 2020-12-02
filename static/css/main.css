@@ -173,7 +173,7 @@ nav a:hover{
 }
 
 #main_row3{
-    background-color:white;
+    background-color:grey;
     grid-column:1/1;
     grid-row:3/3;
     height:400px;
@@ -261,6 +261,11 @@ nav a:hover{
     border-radius:20px;
     font-size:18px;
     text-decoration:none;
+}
+
+#all_articles:hover{
+    background-color: #7aaf6b;
+    border:none;
 }
 
 
