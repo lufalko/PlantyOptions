@@ -7,11 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db.sqlite3</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="plantymap" uuid="7e8bf29d-bf71-4341-ae6c-c672f42edb95">
+    <data-source source="LOCAL" name="plantyoptions" uuid="95a0412f-c404-4f88-89cc-6de9b7916396">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/plantyoptions</jdbc-url>
     </data-source>
   </component>
 </project>

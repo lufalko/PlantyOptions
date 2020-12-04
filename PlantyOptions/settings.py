@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'PlantyOptions.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'plantymap',
+        'NAME': 'plantyoptions',
         'USER': 'postgres',
         'HOST': 'localhost',
-        'PASSWORD': 'duisburg2015',
+        'PASSWORD': 'plantygang',
         'PORT': '5432',
     }
 }

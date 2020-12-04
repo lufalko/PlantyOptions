@@ -117,7 +117,7 @@ class Comment(models.Model):
     fields = '__all__'
 
     def __str__(self):
-        return self.account.username
+        return self.account
 
 
 class Article(models.Model):
