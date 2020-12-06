@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
 
-    'leaflet',
     'accounts',
     'django_filters',
 
@@ -140,11 +139,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
 
 
-LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (10.89779, 48.3705449),
-    'DEFAULT-ZOOM': 5,
-    'Max-ZOOM': 20,
-    'MIN-ZOOM': 3,
-    'SCALE': 'both',
-    'ATTRIBUTION_PREFIX': 'PlantyOptions',
-}
+

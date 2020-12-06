@@ -6,14 +6,12 @@ decorator==4.4.2
 decorators==2.0.7
 Django==3.1.4
 django-filter==2.4.0
-django-leaflet==0.27.1
 Flask==1.1.2
 GDAL @ file:///C:/Daten/Studium/3_Semester/Python/plantyoptions/static/GDAL/GDAL-3.1.4-cp39-cp39-win_amd64.whl
 geos==0.2.2
 ipython-genutils==0.2.0
 itsdangerous==1.1.0
 Jinja2==2.11.2
-leaflet==0.0.3
 lxml==4.6.2
 MarkupSafe==1.1.1
 numpy==1.19.4

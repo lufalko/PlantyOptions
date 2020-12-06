@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Restaurant
-from leaflet.admin import LeafletGeoAdmin
+
 
 # Register your models here.
 
@@ -13,9 +13,5 @@ admin.site.register(Tag)
 admin.site.register(Comment)
 admin.site.register(Article)
 admin.site.register(Coworker)
+admin.site.register(Restaurant)
 
-
-class RestaurantAdmin(LeafletGeoAdmin):
-    list_display = ('name', 'location')
-
-admin.site.register(Restaurant, RestaurantAdmin)

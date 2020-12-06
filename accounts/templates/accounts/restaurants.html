@@ -124,6 +124,7 @@
         <a id="restaurants_aside_right" href="{% url 'map' %}">
         </a>
         <div id="restaurants_aside_right_bottom" >
+
             <div id="restaurants_aside_right_bottom_text">
             <p id="restaurants_map_name">Restaurant Name</p>
                  <img src="{% static 'assets/PO_Icon_Green_Fill.png' %}">
@@ -566,14 +567,27 @@ window.onresize = reportWindowSize;
     changeStars();
 
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5uZWZsIiwiYSI6ImNraGdwNW4zdDA5M3cycnA2N2ZrZzlvaWsifQ.2Ax1R3zR3hTyr3CHwW73hQ';
-         var map = new mapboxgl.Map({
-            container: 'restaurants_aside_right',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [10.89779, 48.3705449],
-            zoom: 12,
-            bearing: 0
-    });
+//    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5uZWZsIiwiYSI6ImNraGdwNW4zdDA5M3cycnA2N2ZrZzlvaWsifQ.2Ax1R3zR3hTyr3CHwW73hQ';
+//         var map = new mapboxgl.Map({
+//            container: 'restaurants_aside_right',
+  //          style: 'mapbox://styles/mapbox/streets-v11',
+    //         center: [10.89779, 48.3705449],
+      //      zoom: 12,
+ //           bearing: 0
+  //  });
+
+    var mymap = L.map('restaurants_aside_right').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'your.mapbox.access.token'
+    }).addTo(mymap);
+
 
          mybutton = document.getElementById("myBtn");
 
