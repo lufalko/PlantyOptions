@@ -1,0 +1,88 @@
+2020-12-08 16:46:15.037 CET [69436] LOG:  starting PostgreSQL 13.1 on x86_64-apple-darwin19.6.0, compiled by Apple clang version 12.0.0 (clang-1200.0.32.27), 64-bit
+2020-12-08 16:46:15.038 CET [69436] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2020-12-08 16:46:15.038 CET [69436] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2020-12-08 16:46:15.039 CET [69436] LOG:  could not bind IPv6 address "::1": Address already in use
+2020-12-08 16:46:15.039 CET [69436] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2020-12-08 16:46:15.039 CET [69436] WARNING:  could not create listen socket for "localhost"
+2020-12-08 16:46:15.039 CET [69436] FATAL:  could not create any TCP/IP sockets
+2020-12-08 16:46:15.039 CET [69436] LOG:  database system is shut down
+2020-12-08 16:50:14.057 CET [69470] LOG:  starting PostgreSQL 13.1 on x86_64-apple-darwin19.6.0, compiled by Apple clang version 12.0.0 (clang-1200.0.32.27), 64-bit
+2020-12-08 16:50:14.058 CET [69470] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-12-08 16:50:14.058 CET [69470] LOG:  listening on IPv6 address "::1", port 5432
+2020-12-08 16:50:14.059 CET [69470] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2020-12-08 16:50:14.063 CET [69471] LOG:  database system was shut down at 2020-12-08 16:44:17 CET
+2020-12-08 16:50:14.065 CET [69470] LOG:  database system is ready to accept connections
+2020-12-08 16:50:49.804 CET [69482] FATAL:  role "postgres" does not exist
+2020-12-08 16:51:40.110 CET [69518] FATAL:  role "postgres" does not exist
+2020-12-08 16:53:16.396 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.396 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.389065+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
+2020-12-08 16:53:16.418 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.418 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.417900+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
+2020-12-08 16:53:16.420 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.420 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.419580+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
+2020-12-08 16:53:16.421 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.421 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.421033+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
+2020-12-08 16:53:16.428 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.428 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.429 CET [69577] ERROR:  relation "accounts_comment" does not exist at character 171
+2020-12-08 16:53:16.429 CET [69577] STATEMENT:  SELECT "accounts_comment"."id", "accounts_comment"."account_id", "accounts_comment"."restaurant_id", "accounts_comment"."date_created", "accounts_comment"."content" FROM "accounts_comment" LIMIT 21
+2020-12-08 16:53:16.429 CET [69577] ERROR:  relation "accounts_restaurant" does not exist at character 226
+2020-12-08 16:53:16.429 CET [69577] STATEMENT:  SELECT "accounts_restaurant"."id", "accounts_restaurant"."restaurant_picture", "accounts_restaurant"."name", "accounts_restaurant"."location"::bytea, "accounts_restaurant"."rating", "accounts_restaurant"."affordability" FROM "accounts_restaurant" LIMIT 21
+2020-12-08 16:53:16.430 CET [69577] ERROR:  relation "accounts_food" does not exist at character 201
+2020-12-08 16:53:16.430 CET [69577] STATEMENT:  SELECT "accounts_food"."id", "accounts_food"."restaurant_id", "accounts_food"."name", "accounts_food"."category", "accounts_food"."rating", "accounts_food"."price", "accounts_food"."description" FROM "accounts_food" LIMIT 21
+2020-12-08 16:53:16.431 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.431 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.432 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.432 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.432 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.432 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.433 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.433 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.433 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.433 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.434 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.434 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.434 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.434 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.434 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.434 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.435 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.435 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.435 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.435 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.436 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.436 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.437 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.437 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.437 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.437 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.438 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.438 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.439 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.439 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.440 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.440 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.441 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.441 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.442 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.442 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.442 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.442 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.443 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.443 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.443 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.443 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.444 CET [69577] ERROR:  relation "accounts_article" does not exist at character 198
+2020-12-08 16:53:16.444 CET [69577] STATEMENT:  SELECT "accounts_article"."id", "accounts_article"."banner", "accounts_article"."headline", "accounts_article"."subtitle", "accounts_article"."article_body", "accounts_article"."date_created" FROM "accounts_article" LIMIT 21
+2020-12-08 16:53:16.445 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.445 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" LIMIT 21
+2020-12-08 16:53:16.445 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.445 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.389065+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
+2020-12-08 16:53:16.446 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.446 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.389065+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
+2020-12-08 16:53:16.446 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.446 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.389065+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
+2020-12-08 16:53:16.447 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.447 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.389065+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
+2020-12-08 16:53:16.449 CET [69577] ERROR:  relation "django_session" does not exist at character 109
+2020-12-08 16:53:16.449 CET [69577] STATEMENT:  SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-12-08T15:53:16.448746+00:00'::timestamptz AND "django_session"."session_key" = '0fhhdd6vxdb6mmscn3spydmpyvfm5poy') LIMIT 21
