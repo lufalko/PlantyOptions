@@ -2,3 +2,4 @@
 /accounts/queryDemos.py
 /.idea
 /database/logfile
+/database/pg_stat_tmp
