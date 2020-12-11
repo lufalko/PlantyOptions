@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.gis.db import models
 
@@ -82,9 +83,9 @@ class Restaurant(models.Model):
     restaurant_picture = models.ImageField(null=True, default='dashboard-BG.jpg')
     name = models.CharField(max_length=200, null=True)
     location = models.PointField(srid=4326, null=True)
-    rating = models.FloatField(null=True)
+    rating = models.FloatField(validators=[MaxValueValidator(5), MinValueValidator(1)], null=True)
     tags = models.ManyToManyField(Tag)
-    affordability = models.FloatField(null=True)
+    affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
     objects = models.Manager()
 
     def __unicode__(self):

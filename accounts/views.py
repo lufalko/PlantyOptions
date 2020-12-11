@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth import authenticate, login, logout
@@ -14,6 +14,10 @@ from .models import *
 from .forms import CreateUserForm, CreateCommentForm
 from .filters import RestaurantFilter, HomepageFilter
 from .decorators import unauthenticated_user, allowed_users
+from .serializers import *
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from django.shortcuts import render
 
@@ -153,3 +157,17 @@ def article_detail(request, pk):
     return render(request, 'restaurant_detail.html', context)
 
 
+class DataApi(APIView):
+    @staticmethod
+    def get(self, *args, **kwargs):
+        qs = Restaurant.objects.all()
+        serializer = RestaurantSerializer(qs, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(self, request, *args, **kwargs):
+        serializer = RestaurantSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)

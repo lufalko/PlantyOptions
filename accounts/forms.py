@@ -4,8 +4,8 @@ from django import forms
 from accounts.models import Comment
 from accounts.models import Restaurant
 from django.contrib.auth import get_user_model
-User = get_user_model()
 
+User = get_user_model()
 
 
 class CreateUserForm(UserCreationForm):
@@ -20,6 +20,3 @@ class CreateCommentForm(forms.ModelForm):
         fields = ['content']
 
         widgets = {'content': forms.Textarea(attrs={'class': 'form-control'})}
-
-
-

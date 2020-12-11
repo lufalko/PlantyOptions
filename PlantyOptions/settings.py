@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'django_filters',
-
+    'rest_framework',
 
 
 ]
@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'PlantyOptions.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'PlantyOptions',
-        'USER': '',
-        'HOST': 'localhost',
-        'PASSWORD': '',
+        'NAME': 'hsa_2020ws_pyweb_plantyoptions',
+        'USER': 'hsa_2020ws_pyweb_plantyoptions',
+        'HOST': 'eseifert.de',
+        'PASSWORD': 'LYGQ_5P5fYPnjw',
         'PORT': '5432',
     }
 }
