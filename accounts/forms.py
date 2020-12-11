@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
@@ -25,4 +26,4 @@ class CreateCommentForm(forms.ModelForm):
 class CreateRatingForm(forms.ModelForm):
     class Meta:
         model = Rating
-        fields = ['rating']
+        fields = ['ratings']

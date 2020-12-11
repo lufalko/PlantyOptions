@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
-from .forms import CreateUserForm, CreateCommentForm
+from .forms import CreateUserForm, CreateCommentForm, CreateRatingForm
 from .filters import RestaurantFilter, HomepageFilter
 from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
@@ -126,29 +126,39 @@ def map(request):
 
 
 def restaurant_detail(request, pk):
+
     foods = Food.objects.all()
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
     ratings = Rating.objects.filter(Restaurant=pk)
-
-    average = ratings.aggregate(Avg("rating"))
-    form_class = CreateCommentForm
+    average = ratings.aggregate(Avg("ratings"))["ratings__avg"]
+    ratingCount = len(ratings)
 
     if request.method == 'POST':
+        rating_form = CreateRatingForm()
         comment_form = CreateCommentForm(request.POST or None)
+
         if request.method == 'POST':
+            ratings = request.POST.get('rating')
+            content = request.POST.get('content')
+
+            if rating_form.is_valid():
+                voting = Rating.objects.create(restaurants=queryset, ratings=ratings)
+                voting.save()
+                return HttpResponseRedirect(request.path_info)
 
             if comment_form.is_valid():
-                content = request.POST.get('content')
                 comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
                 comment.save()
                 return HttpResponseRedirect(request.path_info)
 
     else:
         comment_form = CreateCommentForm()
+        rating_form = CreateRatingForm()
 
     context = {
-        'queryset': queryset, 'comments': comments, 'comment_form': comment_form, 'foods': foods, 'average': average
+        'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
+        'foods': foods, 'average': average, 'ratingCount': ratingCount, 'rating_form': rating_form
     }
     return render(request, 'restaurant_detail.html', context)
 

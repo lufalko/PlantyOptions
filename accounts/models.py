@@ -119,7 +119,10 @@ class Food(models.Model):
 
 class Rating(models.Model):
     Restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
-    rating = models.IntegerField(validators=[MaxValueValidator(5)], null=True)
+    ratings = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
+
+    def __str__(self):
+        return self.Restaurant.name
 
 
 class Comment(models.Model):
