@@ -82,13 +82,20 @@ class Tag(models.Model):
 class Restaurant(models.Model):
     restaurant_picture = models.ImageField(null=True, default='dashboard-BG.jpg')
     name = models.CharField(max_length=200, null=True)
-    location = models.PointField(srid=4326, null=True)
-    rating = models.FloatField(validators=[MaxValueValidator(5), MinValueValidator(1)], null=True)
+
+    address = models.CharField(max_length=128, blank=True)
+    houseNumber = models.IntegerField(default=1)
+
+    city = models.CharField(max_length=64, default="")
+    state = models.CharField(max_length=64, default="")
+    zip_code = models.CharField(max_length=5, default="86444")
+
+    averageRating = models.FloatField(validators=[MaxValueValidator(5), MinValueValidator(1)], null=True)
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
     objects = models.Manager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -108,6 +115,11 @@ class Food(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Rating(models.Model):
+    Restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
+    rating = models.IntegerField(validators=[MaxValueValidator(5)], null=True)
 
 
 class Comment(models.Model):

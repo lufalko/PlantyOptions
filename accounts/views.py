@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
@@ -91,7 +92,7 @@ def userMap(request):
 
 def restaurants(request):
     restaurants = Restaurant.objects.all()
-    foods = Food.objects.all();
+    foods = Food.objects.all()
 
     myFilter = RestaurantFilter(request.GET, queryset=restaurants)
     restaurants = myFilter.qs
@@ -128,6 +129,9 @@ def restaurant_detail(request, pk):
     foods = Food.objects.all()
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
+    ratings = Rating.objects.filter(Restaurant=pk)
+
+    average = ratings.aggregate(Avg("rating"))
     form_class = CreateCommentForm
 
     if request.method == 'POST':
@@ -144,7 +148,7 @@ def restaurant_detail(request, pk):
         comment_form = CreateCommentForm()
 
     context = {
-        'queryset': queryset, 'comments': comments, 'comment_form': comment_form,'foods': foods
+        'queryset': queryset, 'comments': comments, 'comment_form': comment_form, 'foods': foods, 'average': average
     }
     return render(request, 'restaurant_detail.html', context)
 
