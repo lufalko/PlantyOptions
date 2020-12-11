@@ -26,5 +26,3 @@ class CreateRatingForm(forms.ModelForm):
     class Meta:
         model = Rating
         fields = ['rating']
-
-        widgets = {'rating': forms.IntegerField(attrs={'class': 'form-control'})}
