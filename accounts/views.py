@@ -118,7 +118,7 @@ def articlePage(request):
 @login_required(login_url='login')
 def user(request):
     currentUser = request.user
-    return render(request, 'accounts/user.html')
+    return render(request, 'accounts/user.html', currentUser)
 
 
 def map(request):
@@ -130,30 +130,32 @@ def restaurant_detail(request, pk):
     foods = Food.objects.all()
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
-    ratings = Rating.objects.filter(Restaurant=pk)
+    ratings = Rating.objects.filter(restaurant=pk)
     average = ratings.aggregate(Avg("ratings"))["ratings__avg"]
     ratingCount = len(ratings)
 
     if request.method == 'POST':
-        rating_form = CreateRatingForm()
         comment_form = CreateCommentForm(request.POST or None)
 
-        if request.method == 'POST':
-            ratings = request.POST.get('rating')
+        if comment_form.is_valid():
             content = request.POST.get('content')
-
-            if rating_form.is_valid():
-                voting = Rating.objects.create(restaurants=queryset, ratings=ratings)
-                voting.save()
-                return HttpResponseRedirect(request.path_info)
-
-            if comment_form.is_valid():
-                comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
-                comment.save()
-                return HttpResponseRedirect(request.path_info)
+            comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
+            comment.save()
+            return HttpResponseRedirect(request.path_info)
 
     else:
         comment_form = CreateCommentForm()
+
+    if request.method == 'POST':
+        rating_form = CreateRatingForm()
+
+        if rating_form.is_valid():
+            thisRating = request.POST.get('ratings')
+            voting = Rating.objects.create(restaurant=queryset, ratings=thisRating)
+            voting.save()
+            return HttpResponseRedirect(request.path_info)
+
+    else:
         rating_form = CreateRatingForm()
 
     context = {
