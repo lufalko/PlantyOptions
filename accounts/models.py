@@ -90,10 +90,34 @@ class Restaurant(models.Model):
     state = models.CharField(max_length=64, default="")
     zip_code = models.CharField(max_length=5, default="86444")
 
-    averageRating = models.FloatField(validators=[MaxValueValidator(5), MinValueValidator(1)], null=True)
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
     objects = models.Manager()
+
+    def getAverageRating(self):
+        comments = Comment.objects.all()
+        avg = 0
+        count = 0
+        for i in comments:
+            if i.restaurant == self:
+                avg += i.ratings
+                if count is 0:
+                    count += 1
+                else:
+                    avg = avg / 2
+        return avg
+
+    def getAmountRating(self):
+        comments = Comment.objects.all()
+        count = 0
+        for i in comments:
+            if i.restaurant == self:
+                count += 1
+
+        if count is not None:
+            return count
+        else:
+            return 0
 
     def __str__(self):
         return self.name

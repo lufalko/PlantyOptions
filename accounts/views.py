@@ -93,11 +93,12 @@ def userMap(request):
 def restaurants(request):
     restaurants = Restaurant.objects.all()
     foods = Food.objects.all()
+    comments = Comment.objects.all()
 
     myFilter = RestaurantFilter(request.GET, queryset=restaurants)
     restaurants = myFilter.qs
 
-    context = {'restaurants': restaurants, 'myFilter': myFilter, 'foods': foods}
+    context = {'restaurants': restaurants, 'myFilter': myFilter, 'foods': foods, 'comments': comments}
     return render(request, 'accounts/restaurants.html', context)
 
 
@@ -131,7 +132,6 @@ def restaurant_detail(request, pk):
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
     ratings = comments.filter(restaurant=pk)
-    average = round(ratings.aggregate(Avg("ratings"))["ratings__avg"])
     ratingCount = len(ratings)
 
     if request.method == 'POST':
@@ -148,7 +148,7 @@ def restaurant_detail(request, pk):
 
     context = {
         'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
-        'foods': foods, 'average': average, 'ratingCount': ratingCount
+        'foods': foods, 'ratingCount': ratingCount
     }
     return render(request, 'restaurant_detail.html', context)
 

@@ -17,9 +17,9 @@
 {% endifequal %}
 <p id="rd_name">{{queryset.name}}</p>
     <div id="rd_rating">
-        <p>{{average}}</p>
+        <p>{{queryset.getAverageRating}}</p>
     </div>
-        <p>({{ratingCount}})</p>
+        <p>({{queryset.getAmountRating}})</p>
 </div>
 
 

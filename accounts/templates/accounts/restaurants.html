@@ -32,8 +32,7 @@
         <p><a class="restaurants_name_link" href="{% url 'restaurant_detail' pk=i.pk %}">{{i.name}}</a></p>
     </div>
     <div class="restaurants_rating" >
-
-        <p>{{i.rating}}</p>
+            <p>{{i.getAverageRating}}</p>
     </div>
     <div class="restaurants_tags">
         <p>
