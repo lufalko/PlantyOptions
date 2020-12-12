@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
-from .forms import CreateUserForm, CreateCommentForm, CreateRatingForm
+from .forms import CreateUserForm, CreateCommentForm
 from .filters import RestaurantFilter, HomepageFilter
 from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
@@ -130,8 +130,8 @@ def restaurant_detail(request, pk):
     foods = Food.objects.all()
     queryset = Restaurant.objects.get(pk=pk)
     comments = Comment.objects.all()
-    ratings = Rating.objects.filter(restaurant=pk)
-    average = ratings.aggregate(Avg("ratings"))["ratings__avg"]
+    ratings = comments.filter(restaurant=pk)
+    average = round(ratings.aggregate(Avg("ratings"))["ratings__avg"])
     ratingCount = len(ratings)
 
     if request.method == 'POST':
@@ -146,21 +146,9 @@ def restaurant_detail(request, pk):
     else:
         comment_form = CreateCommentForm()
 
-    if request.method == 'POST':
-        rating_form = CreateRatingForm()
-
-        if rating_form.is_valid():
-            thisRating = request.POST.get('ratings')
-            voting = Rating.objects.create(restaurant=queryset, ratings=thisRating)
-            voting.save()
-            return HttpResponseRedirect(request.path_info)
-
-    else:
-        rating_form = CreateRatingForm()
-
     context = {
         'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
-        'foods': foods, 'average': average, 'ratingCount': ratingCount, 'rating_form': rating_form
+        'foods': foods, 'average': average, 'ratingCount': ratingCount
     }
     return render(request, 'restaurant_detail.html', context)
 

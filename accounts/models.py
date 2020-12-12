@@ -117,23 +117,16 @@ class Food(models.Model):
         return self.name
 
 
-class Rating(models.Model):
-    restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
-    ratings = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
-
-    def __str__(self):
-        return self.restaurant.name
-
-
 class Comment(models.Model):
     account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL)
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     content = models.TextField(default='enter text')
+    ratings = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
     fields = '__all__'
 
     def __str__(self):
-        return self.account.username
+        return self.account.username + ' | Rating: ' + str(self.ratings)
 
 
 class Article(models.Model):

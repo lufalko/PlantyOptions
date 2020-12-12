@@ -8,7 +8,6 @@ from .models import *
 
 admin.site.register(Account)
 admin.site.register(Food)
-admin.site.register(Rating)
 admin.site.register(Tag)
 admin.site.register(Comment)
 admin.site.register(Article)

@@ -20,21 +20,6 @@
         <p>{{average}}</p>
     </div>
         <p>({{ratingCount}})</p>
-
-{% if user.is_authenticated %}
-<div class="post-rating-section">
-    <form method="POST">
-        {% csrf_token %}
-        {{ rating_form.as_p }}
-        <input type="submit" value="submit" class="btn btn-outline-success">
-    </form>
-</div>
-
-{% else %}
-
-<p>you must be logged in to add a rating</p>
-
-{% endif %}
 </div>
 
 
