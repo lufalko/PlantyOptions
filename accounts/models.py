@@ -94,11 +94,11 @@ class Restaurant(models.Model):
     affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
     objects = models.Manager()
 
-#anne    point = PointField()
+# anne    point = PointField()
 
-#anne    @property
-#anne    def lat_lng(self):
-#anne        return list(getattr(self.point, 'coords', [])[::-1])
+# anne    @property
+# anne    def lat_lng(self):
+# anne        return list(getattr(self.point, 'coords', [])[::-1])
 
     def getAverageRating(self):
         comments = Comment.objects.all()
@@ -111,6 +111,8 @@ class Restaurant(models.Model):
                     count += 1
                 else:
                     avg = avg / 2
+        if avg is not 0:
+            avg = round(avg)
         return avg
 
     def getAmountRating(self):

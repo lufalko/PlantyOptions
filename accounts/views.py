@@ -100,6 +100,7 @@ def userMap(request):
 
 def restaurants(request):
     restaurants = Restaurant.objects.all()
+
     foods = Food.objects.all()
     comments = Comment.objects.all()
 
