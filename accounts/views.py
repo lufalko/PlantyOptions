@@ -25,6 +25,14 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 
+#anne from django.urls import path
+#anne from django.views.generic import ListView
+
+
+#anne class RestaurantList(ListView):
+#anne     queryset = Restaurant.objects.filter(point__isnull=False)
+
+
 @unauthenticated_user
 def register(request):
     form = CreateUserForm()

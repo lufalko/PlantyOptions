@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.contrib.gis.db import models
+from django.contrib.gis.db.models import PointField
 
 
 # Create your models here.
@@ -93,6 +93,12 @@ class Restaurant(models.Model):
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
     objects = models.Manager()
+
+#anne    point = PointField()
+
+#anne    @property
+#anne    def lat_lng(self):
+#anne        return list(getattr(self.point, 'coords', [])[::-1])
 
     def getAverageRating(self):
         comments = Comment.objects.all()

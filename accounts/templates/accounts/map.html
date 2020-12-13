@@ -4,7 +4,7 @@
 {% block content %}
 
 <body>
- <div id="mapid" style="width:100%; height:500px"></div>
+ <div id="mapid" style="width:100%; height:800px"></div>
 
 
 <script>
@@ -20,18 +20,21 @@
 	var marker = L.marker([48.3820324, 10.872883]).addTo(mymap);
 	marker.bindPopup("<b>Anne's Gourmetküche</b><br>Sallingerstraße 6").openPopup()
 
+/*anne
+    {% for r in object_list %}
+        L.marker({{r.lat_lng}}).addTo(mymap).bindPopup('{{r}}');
+    {% endfor %}
+*/
 
-/*	var myIcon = L.icon({
+/* anne:plantyIcon
+	var myIcon = L.icon({
         iconUrl: "PO_Icon_Green_Fill.png",
         iconSize: [38, 95],
         iconAnchor: [22, 94],
         popupAnchor: [-3, -76]
 	});
 
-
-
     L.marker([48.35, 10.89779], {icon: myIcon}).addTo(mymap);
-
  */
 
 </script>

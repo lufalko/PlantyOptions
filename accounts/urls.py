@@ -13,6 +13,8 @@ urlpatterns = [
     path('login/', views.loginPage, name='login'),
     path('logout/', views.logoutPage, name='logout'),
     path('map/', views.map, name='map'),
+
+#anne    path('map/', views.RestaurantList.as_view()),
     path('articles/', views.articlePage, name='articles'),
     path('restaurant_detail/<str:pk>/', views.restaurant_detail, name='restaurant_detail'),
     path('article_detail/<str:pk>/', views.article_detail, name='article_detail'),
