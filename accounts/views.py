@@ -99,7 +99,7 @@ def userMap(request):
 
 
 def restaurants(request):
-    restaurants = Restaurant.objects.all()
+    restaurants = Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
 
     foods = Food.objects.all()
     comments = Comment.objects.all()

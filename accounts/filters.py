@@ -1,12 +1,14 @@
 import django_filters
 from django_filters import NumberFilter
+from django.db.models import Avg
 
 from .models import *
 
 
 class RestaurantFilter(django_filters.FilterSet):
 
-    rating = NumberFilter(field_name="averageRating", lookup_expr="gte")
+    Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
+    rating = NumberFilter(field_name="avg_rating", lookup_expr="gte")
 
     class Meta:
         model = Restaurant
