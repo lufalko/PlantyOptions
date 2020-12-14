@@ -25,12 +25,12 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 
-#anne from django.urls import path
-#anne from django.views.generic import ListView
+from django.urls import path
+from django.views.generic import ListView
 
 
-#anne class RestaurantList(ListView):
-#anne     queryset = Restaurant.objects.filter(point__isnull=False)
+class RestaurantLocationList(ListView):
+    queryset = RestaurantLocation.objects.filter(point__isnull=False)
 
 
 @unauthenticated_user
@@ -96,7 +96,11 @@ def home(request):
 
 
 def userMap(request):
-    return render(request, 'accounts/map.html')
+    object_list = RestaurantLocationList
+
+    context = {'object_list': object_list}
+
+    return render(request, 'accounts/map.html', context)
 
 
 def restaurants(request):

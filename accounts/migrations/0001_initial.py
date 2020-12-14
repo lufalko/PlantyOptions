@@ -4,15 +4,15 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 
-#anne from django.contrib.postgres import operations
+from django.contrib.postgres import operations
 
 
 class Migration(migrations.Migration):
 
     initial = True
 
-#anne    dependencies = [('blog', '0001_initial')]
-#anne    operations = [operations.CreateExtension('postgis')]
+   # dependencies = [('blog', '0001_initial')]
+   # operations = [operations.CreateExtension('postgis')]
 
     operations = [
         migrations.CreateModel(
