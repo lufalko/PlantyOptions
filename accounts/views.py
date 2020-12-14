@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
-from .forms import CreateUserForm, CreateCommentForm
+from .forms import *
 from .filters import RestaurantFilter, HomepageFilter
 from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
@@ -35,22 +35,22 @@ from django.views.generic import TemplateView
 
 @unauthenticated_user
 def register(request):
-    form = CreateUserForm()
+    context = {}
 
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            usr = form.save()
-            username = form.cleaned_data.get('username')
-
-            group = Group.objects.get(name='users')
-            usr.groups.add(group)
-
-            messages.success(request, 'Account was created for ' + username)
-
-            return redirect('/login')
-
-    context = {'form': form}
+            form.save()
+            email = form.cleaned_data.get('email')
+            raw_password = form.cleaned_data.get('password1')
+            account = authenticate(email=email, password=raw_password)
+            login(request, account)
+            return redirect('home')
+        else:
+            context['registration_form'] = form
+    else:
+        form = CreateUserForm()
+        context['registration_form'] = form
     return render(request, 'accounts/register.html', context)
 
 
@@ -88,7 +88,8 @@ def home(request):
     homeFilter = HomepageFilter(request.GET, queryset=restaurants)
     restaurants = homeFilter.qs
 
-    context = {'articles': articles, 'comments': comments, 'restaurants': restaurants, 'homeFilter': homeFilter,
+    context = {'articles': articles, 'comments': comments,
+               'restaurants': restaurants, 'homeFilter': homeFilter,
                'foods': foods}
 
     return render(request, 'accounts/home.html', context)
@@ -113,7 +114,6 @@ def restaurants(request):
 
 def about(request):
     team = Coworker.objects.all()
-
     context = {'team': team}
     return render(request, 'accounts/about.html', context)
 
@@ -128,7 +128,23 @@ def articlePage(request):
 @login_required(login_url='login')
 def user(request):
     currentUser = request.user
-    return render(request, 'accounts/user.html', currentUser)
+    if request.method == 'POST':
+        userForm = UserUpdateForm(request.POST, instance=currentUser)
+        pictureForm = PictureUpdateForm(request.POST,
+                                        request.FILES,
+                                        instance=currentUser)
+        if userForm.is_valid():
+            userForm.save()
+            pictureForm.save()
+            messages.success(request, f'Your account hast been updated')
+            return redirect('user')
+
+    else:
+        userForm = UserUpdateForm(instance=currentUser)
+        pictureForm = PictureUpdateForm(instance=currentUser)
+
+    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm}
+    return render(request, 'accounts/user.html', context)
 
 
 def map(request):

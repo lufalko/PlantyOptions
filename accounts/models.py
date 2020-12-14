@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from PIL import Image
 from django.contrib.gis.db.models import PointField
 
 
@@ -57,6 +58,9 @@ class Account(AbstractBaseUser):
     initials = models.CharField(max_length=2, null=True)
     profile_picture = models.ImageField(null=True, blank=True)
 
+    # FOLLOWING ARE CUSTOM USER INFORMATIONS
+    biography = models.CharField(max_length=200, null=True)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
@@ -64,6 +68,16 @@ class Account(AbstractBaseUser):
 
     def __str__(self):
         return self.username
+
+    def save(self):
+        super().save()
+
+        img = Image.open(self.profile_picture.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.profile_picture.path)
 
     def has_perm(self, perm, opj=None):
         return self.is_admin
