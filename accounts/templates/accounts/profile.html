@@ -1,0 +1,30 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="user_banner"></div>
+<div id="user_header">
+{% if user.profile_picture %}
+    <img src="{{user.profile_picture.url}}">
+{% else %}
+    <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
+{% endif %}
+    <p id="rd_name">{{user.username}}</p>
+</div>
+
+
+
+<div id="user_body">
+    <div id="user_body_header">
+        <p>{{user.email}}</p>
+        <p>{{user.first_name}}s</p>
+        <p>{{user.last_name}}</p>
+        {% if user.biography is not None %}
+            <p>{{user.biography}}</p>
+        {% endif %}
+    </div>
+</div>
+
+ {% endblock %}
+

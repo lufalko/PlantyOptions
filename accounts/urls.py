@@ -7,8 +7,10 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('user/', views.user, name='user'),
+    path('profile/<str:pk>/', views.profile, name='profile'),
     path('restaurants/', views.restaurants, name='restaurants'),
     path('about/', views.about, name='about'),
+    path('social/', views.social, name='social'),
     path('register/', views.register, name='register'),
     path('login/', views.loginPage, name='login'),
     path('logout/', views.logoutPage, name='logout'),

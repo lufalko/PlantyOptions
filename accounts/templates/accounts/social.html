@@ -1,0 +1,36 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div id="restaurants_wrapper">
+
+        <div id="restaurants_header">
+            <div id="restaurants_searchbarIcon"></div>
+            <div id="restaurants_searchbar"></div>
+         </div>
+
+        <div id="restaurants_body">
+            <div id="rd_body_header">
+                <p id="rd_food_drinks">All Profiles</p>
+                <p id="rd_opening_hours">Suggested Profiles</p>
+                <p id="rd_food_location">Friends</p>
+            </div>
+        </div>
+    </div>
+
+    {% for i in profiles %}
+    <div class="restaurants_block">
+        <div class="restaurants_img">
+        {% if i.profile_picture %}
+            <img class="profilepic" src="{{i.profile_picture.url}}" alt="Profilbild">
+        {% else %}
+            <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
+        {% endif %}
+        </div>
+        <div class="restaurants_name">
+            <p><a class="restaurants_name_link" href="{% url 'profile' pk=i.pk %}">{{i.username}}</a></p>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
