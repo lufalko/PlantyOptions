@@ -171,8 +171,8 @@
         for(let j=0; j < tag_list.length; j++){
 
             for (let k=0; k < tag_list[j].length; k++){
-                console.log("lol");
-                tag_list[j][k] = tag_list[j][k];
+                tag_list[j][k] = JSON.stringify(tag_list[j][k]);
+                tag_list[j][k] = tag_list[j][k].substr(8,14);
                   console.log(tag_list[j][k]);
 
             }
