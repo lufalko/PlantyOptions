@@ -88,7 +88,7 @@ class Account(AbstractBaseUser):
 
 
 class Friend(models.Model):
-    users = models.ManyToManyField(Account)
+    users = models.ManyToManyField(Account, related_name='friend_set')
     current_user = models.ForeignKey(Account, related_name='owner', on_delete=models.CASCADE)
 
     @classmethod
@@ -182,6 +182,9 @@ class Food(models.Model):
     tags = models.ManyToManyField(Tag)
     price = models.FloatField(null=True)
     description = models.CharField(max_length=400, null=True)
+
+    def getRestaurantName(self, obj):
+        return obj.restaurant.nem
 
     def __str__(self):
         return self.name

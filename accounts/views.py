@@ -176,7 +176,10 @@ def profile(request, operation, pk=None):
 
 def social(request):
     profiles = Account.objects.exclude(id=request.user.id)
-    context = {'profiles': profiles}
+    friend = Friend.objects.get(current_user=request.user)
+    friends = friend.users.all()
+
+    context = {'profiles': profiles, 'friends': friends}
     return render(request, 'accounts/social.html', context)
 
 

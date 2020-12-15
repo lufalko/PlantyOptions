@@ -33,4 +33,19 @@
     </div>
     {% endfor %}
 
+    {% for i in friends %}
+    <div class="restaurants_block">
+        <div class="restaurants_img">
+        {% if i.profile_picture %}
+            <img class="profilepic" src="{{i.profile_picture.url}}" alt="Profilbild">
+        {% else %}
+            <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
+        {% endif %}
+        </div>
+        <div class="restaurants_name">
+            <p><a class="restaurants_name_link" href="{% url 'profile' pk=i.pk %}">{{i.username}}</a></p>
+        </div>
+    </div>
+    {% endfor %}
+
 {% endblock %}
