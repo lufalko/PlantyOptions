@@ -72,18 +72,38 @@ class Account(AbstractBaseUser):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        img = Image.open(self.profile_picture.path)
+        if self.profile_picture:
+            img = Image.open(self.profile_picture.path)
 
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.profile_picture.path)
+            if img.height > 300 or img.width > 300:
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.profile_picture.path)
 
     def has_perm(self, perm, opj=None):
         return self.is_admin
 
     def has_module_perms(self, app_label):
         return self.is_admin
+
+
+class Friend(models.Model):
+    users = models.ManyToManyField(Account)
+    current_user = models.ForeignKey(Account, related_name='owner', on_delete=models.CASCADE)
+
+    @classmethod
+    def make_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.add(new_friend)
+
+    @classmethod
+    def lose_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.remove(new_friend)
 
 
 class Tag(models.Model):

@@ -8,6 +8,7 @@ from django.contrib.gis.admin import OSMGeoAdmin
 from .models import *
 
 admin.site.register(Account)
+admin.site.register(Friend)
 admin.site.register(Food)
 admin.site.register(Tag)
 admin.site.register(Comment)

@@ -157,19 +157,25 @@ def user(request):
     return render(request, 'accounts/user.html', context)
 
 
-def profile(request, pk=None):
+def profile(request, operation, pk=None):
     if pk:
         user = Account.objects.get(pk=pk)
     else:
         user = request.user
+
+    if operation == 'add':
+        Friend.make_friend(request.user, user)
+        return redirect('profile')
+    elif operation == 'remove':
+        Friend.lose_friend(request.user, user)
+        return redirect('profile')
 
     context = {'user': user}
     return render(request, 'accounts/profile.html', context)
 
 
 def social(request):
-    profiles = Account.objects.all()
-
+    profiles = Account.objects.exclude(id=request.user.id)
     context = {'profiles': profiles}
     return render(request, 'accounts/social.html', context)
 
@@ -227,3 +233,11 @@ class DataApi(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
+
+class FoodsApi(APIView):
+    @staticmethod
+    def get(self, *args, **kwargs):
+        qs = Food.objects.all()
+        serializer = FoodSerializer(qs, many=True)
+        return Response(serializer.data)
