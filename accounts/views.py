@@ -13,7 +13,7 @@ from django.contrib.auth.models import Group
 # Create your views here.
 from .models import *
 from .forms import *
-from .filters import RestaurantFilter, HomepageFilter
+from .filters import RestaurantFilter, HomepageFilter, GetAddressFilter
 from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
 
@@ -21,6 +21,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from django.shortcuts import render
+
+from itertools import chain
 
 from django.views.generic import TemplateView
 
@@ -110,9 +112,13 @@ def restaurants(request):
     comments = Comment.objects.all()
 
     myFilter = RestaurantFilter(request.GET, queryset=restaurants)
+    addressFilter = GetAddressFilter(request.GET, queryset=restaurants)
+
+
     restaurants = myFilter.qs
 
-    context = {'restaurants': restaurants, 'myFilter': myFilter, 'foods': foods, 'comments': comments}
+
+    context = {'restaurants': restaurants, 'myFilter': myFilter,'addressFilter': addressFilter, 'foods': foods, 'comments': comments}
     return render(request, 'accounts/restaurants.html', context)
 
 

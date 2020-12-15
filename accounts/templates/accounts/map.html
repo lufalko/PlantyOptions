@@ -8,11 +8,11 @@
  <div id="mapid" style="width:100%; height:800px"></div>
 
  {% for r in object_list %}
- <div class="marker">
-        <p> {{r.lat_lang}}</p>
+ <div id="marker">
+        <p class="elements"> {{r.lat_lang}}</p>
+       <p class="elements">hallo</p>
  </div>
  {% endfor %}
-
 
 
 <script>
@@ -34,8 +34,8 @@
     {% endfor %}
     */
 
-    let myList = document.getElementsByClassName('marker');
-    let myList2 = myList[0].getElementsByTagName('p');
+    let myList = document.getElementById('marker');
+    let myList2 = document.getElementsByClassName('elements');
 
     console.log(myList2);
 
