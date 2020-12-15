@@ -69,8 +69,8 @@ class Account(AbstractBaseUser):
     def __str__(self):
         return self.username
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         img = Image.open(self.profile_picture.path)
 
