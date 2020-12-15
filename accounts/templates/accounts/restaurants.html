@@ -13,8 +13,9 @@
 
         <div id="restaurants_body">
             <div id="restaurants_Adresseingabe_Headline_underline">
-              <!--  <input type="text" placeholder="Adresse, i.e. Bahnhofsstraße 1"> -->
-                <p id="restaurants_Adresseingabe_Headline">Adresse, i.e. Bahnhofsstraße 1</p>
+              <!--  <input type="text" placeholder="Adresse, i.e. Bahnhofsstraße 1">-->
+
+                 <input type="text" placeholder="City or Zip Code" id="restaurants_Adresseingabe_Headline" oninput="address_input()">
             </div>
             <div id="restaurants_body_content">
                 {% for i in restaurants %}
@@ -50,7 +51,7 @@
 
     <div class="restaurants_adresse">
    <!-- <img src="{% static 'assets/PO_Icon_Green_Fill.png' %}"> -->
-    <p class="restaurants_adresse_adresse">{{i.location}}</p>
+    <p class="restaurants_adresse_adresse">{{i.address}} {{i.houseNumber}}, {{i.city}} </p>
     <p class="restaurants_adresse_entfernung">?km entfernt</p>
     </div>
 
@@ -98,7 +99,7 @@
                     {{myFilter.form}}
                     <div id="restaurants_stars">
                     </div>
-                    <p id="restaurants_rating_reset" onclick="document.getElementById('id_AverageRating').value = ' '; changeStars()" >reset</p>
+                    <p id="restaurants_rating_reset" onclick="document.getElementById('id_rating').value = ' '; changeStars()" >reset</p>
                     <div id="restaurants_set_affordability">
                     <div class="restaurants_set_affordability_elements">
                         <p>€</p>
@@ -110,7 +111,7 @@
                         <p>€€€</p>
                     </div>
                 </div>
-                    <button class="btn btn-primary" type="submit">search</button>
+                    <button id="restaurants_search_button" class="btn btn-primary" type="submit">search</button>
                 </form>
                     <a id="restaurants_filter_reset" href="http://127.0.0.1:8000/restaurants/">Filter zurücksetzen</a>
 
@@ -155,6 +156,22 @@
     let vegetarisch = false;
     let vegan = false;
     let filteropen = false;
+    let eins = 1;
+    let zwei = 0;
+
+    const node = document.getElementById("restaurants_Adresseingabe_Headline");
+    node.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            document.getElementById("restaurants_search_button").click()
+        }
+    });
+
+    if(document.getElementById("id_zip_code").value != "") {
+        document.getElementById("restaurants_Adresseingabe_Headline").value = document.getElementById("id_zip_code").value;
+    }
+    if(document.getElementById("id_city").value != "") {
+        document.getElementById("restaurants_Adresseingabe_Headline").value = document.getElementById("id_city").value;
+    }
 
     function reportWindowSize() {
         if(window.innerWidth > 819){
@@ -173,6 +190,39 @@
     }
 
 window.onresize = reportWindowSize;
+
+    function address_input(){
+
+        input = document.getElementById("restaurants_Adresseingabe_Headline");
+
+        let c = input.value.substr(zwei,eins);
+
+        while (c == " "){
+            eins++;
+            zwei++;
+            c = input.value.substr(zwei,eins);
+        }
+
+        if (c >= '0' && c <= '9' && c!=" ") {
+
+            document.getElementById("id_zip_code").value = input.value;
+             document.getElementById("id_city").value = null;
+            // document.getElementById("restaurants_search_button").click()
+        } else {
+        // it isn't
+            if(c !=" ") {
+
+                document.getElementById("id_city").value = input.value;
+                document.getElementById("id_zip_code").value = null;
+              //  document.getElementById("restaurants_search_button").click()
+            }
+        }
+        if (c == ''){
+            document.getElementById("id_city").value = input.value;
+            document.getElementById("id_zip_code").value = input.value;
+        }
+
+    }
 
     document.getElementById("restaurants_open_filter").addEventListener('click',function (){
 
@@ -515,7 +565,6 @@ window.onresize = reportWindowSize;
             stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
         }
 
-        console.log(stars);
         for (let a = 0; a < stars.length; a++) {
             stars[a].addEventListener('click', function () {
                 document.getElementById("id_rating").value = a + 1;

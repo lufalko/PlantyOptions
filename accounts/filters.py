@@ -15,6 +15,16 @@ class RestaurantFilter(django_filters.FilterSet):
         fields = '__all__'
         exclude = ['location', 'restaurant_picture', 'address', 'houseNumber', 'state', 'point']
 
+class GetAddressFilter(django_filters.FilterSet):
+
+    Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
+
+    class Meta:
+        model = Restaurant
+        fields = ['zip_code', 'city']
+
+
+
 
 class HomepageFilter(django_filters.FilterSet):
     restaurant_name = django_filters.CharFilter(field_name='name', label='')

@@ -409,7 +409,7 @@ nav a:hover{
     grid-row-start: 1;
     grid-row-end: 1;
     background-color: white;
-
+    height: auto;
 
 
     border-radius: 20px ;
@@ -423,10 +423,22 @@ nav a:hover{
 
 #restaurants_Adresseingabe_Headline{
 
+    font-family: Montserrat;
+    appearance: none;
+
+    border: none;
+    margin-left: 10px;
     font-size: 14px;
+    width: calc(100% - 20px);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 
-    padding: 7px;
+}
 
+#restaurants_Adresseingabe_Headline::placeholder {
+    color: darkgrey;
 }
 
 #restaurants_Adresseingabe_Headline_underline{
@@ -440,6 +452,7 @@ nav a:hover{
     border-radius: 20px;
     text-align: left;
     color: darkgrey;
+    overflow: hidden;
 
     margin-top: 25px;
     margin-left: 25px;
@@ -1137,6 +1150,10 @@ display: none;
 
 }
 
+#id_city, #id_zip_code{
+    display: none !important;
+}
+
 #restaurants_open_filter img{
     height: 20px;
 }
@@ -1360,7 +1377,8 @@ display: none;
   }
 
     #restaurants_body_content{
-        height: auto;
+        height: auto !important;
+        overflow-y: paged-y !important;
     }
 
 
