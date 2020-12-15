@@ -14,8 +14,10 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
 
 class FoodSerializer(serializers.ModelSerializer):
+    restaurantName = serializers.CharField(source="restaurant.name")
+
     class Meta:
         model = Food
         fields = (
-            'restaurant', 'category'
+            'restaurantName', 'category'
         )
