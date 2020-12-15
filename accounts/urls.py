@@ -22,5 +22,6 @@ urlpatterns = [
     path('article_detail/<str:pk>/', views.article_detail, name='article_detail'),
 
     path('api-auth/', include('rest_framework.urls')),
-    path('data_api/', views.DataApi.as_view(), name='data_api')
+    path('data_api/', views.DataApi.as_view(), name='data_api'),
+    path('food_api/', views.FoodsApi.as_view(), name='food_api')
 ]

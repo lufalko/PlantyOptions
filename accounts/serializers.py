@@ -11,3 +11,11 @@ class RestaurantSerializer(serializers.ModelSerializer):
         fields = (
             'name', 'address', 'houseNumber', 'city', 'zip_code'
         )
+
+
+class FoodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Food
+        fields = (
+            'restaurant', 'category'
+        )
