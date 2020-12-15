@@ -6,14 +6,15 @@
 <body>
 
  <div id="mapid" style="width:100%; height:800px"></div>
-
- {% for r in object_list %}
  <div id="marker">
+ {% for r in object_list %}
+
         <p class="elements"> {{r.lat_lang}}</p>
        <p class="elements">hallo</p>
- </div>
+
  {% endfor %}
 
+ </div>
 
 <script>
   var mymap = L.map('mapid').setView([48.35, 10.89779], 13);

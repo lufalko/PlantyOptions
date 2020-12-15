@@ -29,7 +29,7 @@
         <p id="rd_food_drinks">Food/Drinks</p>
         <p id="rd_opening_hours">Opening Hours</p>
         <p id="rd_food_location">Location</p>
-        <p id="rd_contact">Contact</p>
+        <p id="rd_contact">Comments</p>
     </div>
     <div class="rd_options">
        <div id="rd_foods_head">
@@ -39,6 +39,7 @@
            <input type="text" placeholder="suche Gericht" id="rd_food_searchbar">
 
            <div id="rd_foods_tags">
+               <p class="rd_food_tag">Alles</p>
                 {% for j in foods %}
                     {% if j.restaurant == queryset %}
                         {% for l in j.tags.all %}
@@ -77,57 +78,112 @@
 
     </div>
     <div class="rd_options"></div>
-        <div class="rd_options"></div>
-            <div class="rd_options"></div>
-                <div class="rd_options"></div>
+    <div class="rd_options"></div>
+    <div class="rd_options">
 
-</div>
 
-<div id="rd_comments">
-<h2>Comments</h2>
 
-{% for comments in comment.all %}
-    {% if comments.restaurant == queryset %}
+    <div id="rd_comments">
+        <h2>Comments</h2>
 
-    <div>
-        <h3>{{comments.content}}</h3>
+        {% for comments in comment.all %}
+            {% if comments.restaurant == queryset %}
+
+            <div>
+                <h3>{{comments.content}}</h3>
+            </div>
+
+            {% endif %}
+        {% endfor %}
+
+        {% for comment in comments.all %}
+            {% if comment.restaurant.name == queryset.name %}
+                {{ comment.account.username }}
+                {{ comment.content }}
+                {{ comment.date_created }}
+            {% endif %}
+        {% endfor %}
+
+        <h2>Add Comment</h2>
+
+        {% if user.is_authenticated %}
+
+        <div class="post-comment-section">
+            <form method="POST">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="submit" value="Submit" class="btn btn-outline-success">
+            </form>
+        </div>
+
+        {% else %}
+
+        <p>you must be loged in to add a comment</p>
+
+        {% endif %}
     </div>
 
-    {% endif %}
-{% endfor %}
+    </div>
 
-{% for comment in comments.all %}
-    {% if comment.restaurant.name == queryset.name %}
-        {{ comment.account.username }}
-        {{ comment.content }}
-        {{ comment.date_created }}
-    {% endif %}
-{% endfor %}
-
-<h2>Add Comment</h2>
-
-{% if user.is_authenticated %}
-
-<div class="post-comment-section">
-    <form method="POST">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <input type="submit" value="Submit" class="btn btn-outline-success">
-    </form>
 </div>
 
-{% else %}
+<button onclick="topFunction()" id="myBtn" title="Go to top"><img src="{% static 'assets/up.svg' %}"></button>
 
-<p>you must be loged in to add a comment</p>
-
-{% endif %}
-</div>
 
 <script>
 
     let vegan = false;
     let vegetarisch = false;
-    let active= [0,0,0,0];
+    let active= [1,0,0,0];
+    let veg_list = [];
+    let queryset = "{{queryset}}"
+    let food_tags = [];
+    let tag_list = [];
+    let request = new XMLHttpRequest()
+
+
+
+
+
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', '/food_api/', true)
+
+    request.onload = function () {
+      // Begin accessing JSON data here
+        var data = JSON.parse(this.response)
+        let i = 0;
+        let regex = /'([^']+)'/;
+        data.forEach((food) => {
+      // Log each movie's title
+
+        if(food.restaurantName == queryset) {
+            if (food.category == "Vegetarian") {
+                veg_list[i] = true;
+            } else {
+                veg_list[i] = false;
+            }
+            tag_list[i] = food.tags;
+            i++;
+        }
+        })
+
+        for(let j=0; j < tag_list.length; j++){
+
+            for (let k=0; k < tag_list[j].length; k++){
+                console.log("lol");
+                tag_list[j][k] = tag_list[j][k];
+                  console.log(tag_list[j][k]);
+
+            }
+        }
+
+    }
+
+
+
+    // Send request
+    request.send()
 
     document.getElementById("rd_food_drinks").style.backgroundColor= "#70af6b";
 
@@ -162,7 +218,7 @@
     }
 
     function render_body(){
-        console.log(active);
+
         for(let i = 0; i < active.length; i++){
             if(active[i]==1){
                 document.getElementsByClassName("rd_options")[i].style.display = "inline-block";
@@ -174,6 +230,7 @@
     }
 
     render_options();
+    render_body();
 
     for (let i = 0; i < document.getElementsByClassName('rd_dishes').length; i++){
         let elements = document.getElementsByClassName('rd_dishes');
@@ -215,6 +272,7 @@
                 this.style.backgroundColor = "transparent";
                 this.style.borderColor = "lightgrey";
             }
+            render_food();
          })
     }
 
@@ -239,7 +297,35 @@
                 this.style.backgroundColor = "transparent";
                 this.style.borderColor = "lightgrey";
             }
+            render_food();
         })
+    }
+
+     function render_food(){
+
+        let category = document.getElementsByClassName('rd_food_block');
+        for (let i = 0; i < category.length; i++) {
+            if (!(!vegan && !vegetarisch)) {
+                if (!veg_list[i]) {
+                    if (!vegan) {
+                        category[i].style.display = "none";
+                    } else {
+                        category[i].style.display = "inline-block";
+                        //elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "#378C61";
+                    }
+                } else {
+                    if (!vegetarisch) {
+                        category[i].style.display = "none";
+                    } else {
+                        category[i].style.display = "inline-block";
+                        //elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "rgb(112,175,107)";
+                    }
+                }
+            }
+            else{
+                category[i].style.display = "inline-block";
+            }
+        }
     }
 
     function render_food_tags(){
@@ -252,6 +338,15 @@
                 }
             }
         }
+        let p=0;
+         for (let o=0; o < elements.length; o++){
+
+           if(elements[o].innerHTML != " "){
+               food_tags[p] = elements[o].innerHTML;
+               p++
+           }
+        }
+        console.log(food_tags);
     }
 
     for (let i=0; i<document.getElementsByClassName("rd_food_tag").length ; i++) {
@@ -260,11 +355,12 @@
 
         document.getElementsByClassName("rd_food_tag")[i].addEventListener('click', function () {
 
-            console.log(this.style.backgroundColor);
-
             if (this.style.backgroundColor != "rgb(112, 175, 107)") {
                 this.style.backgroundColor = "#70af6b";
                 this.style.color = "white";
+
+                let text = this.innerHTML;
+                food_tags_render(text);
             }
 
             else {
@@ -274,13 +370,17 @@
         })
     }
 
+    function food_tags_render(text){
+
+    }
+
 
     function stars(elements) {
 
         let SternArray = new Array(5);
 
         let TextInsideP = elements.getElementsByTagName('p')[0].innerHTML;
-        console.log(TextInsideP);
+
         if (TextInsideP == 0.0) {
             SternArray = [0, 0, 0, 0, 0];
         }
@@ -317,6 +417,23 @@
 
             elements.appendChild(element);
         }
+    }
+    mybutton = document.getElementById("myBtn");
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 60) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
 
     stars(document.getElementById("rd_rating"));
