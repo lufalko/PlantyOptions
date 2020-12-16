@@ -1,5 +1,7 @@
 from django.db.models import Avg
 from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.urls.exceptions import NoReverseMatch
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 
@@ -10,25 +12,28 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
+from django.shortcuts import render
+
+from django.views.generic import TemplateView
+
+from django.urls import path
+from django.views.generic import ListView
+
+import json
+
 # Create your views here.
 from .models import *
 from .forms import *
 from .filters import RestaurantFilter, HomepageFilter, GetAddressFilter
 from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
+from .utils import get_friend_request_or_false
+from .friend_request_status import FriendRequestStatus
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from django.shortcuts import render
-
 from itertools import chain
-
-from django.views.generic import TemplateView
-
-
-from django.urls import path
-from django.views.generic import ListView
 
 
 class RestaurantLocationList(ListView):
@@ -157,29 +162,92 @@ def user(request):
     return render(request, 'accounts/user.html', context)
 
 
-def profile(request, operation, pk=None):
-    if pk:
-        user = Account.objects.get(pk=pk)
+def profile(request, pk):
+    user = Account.objects.get(pk=pk)
+    account = request.user
+
+    try:
+        friend_list = FriendList.objects.get(user=account)
+    except FriendList.DoesNotExist:
+        friend_list = FriendList(user=account)
+        friend_list.save()
+    friends = friend_list.friends.all()
+
+    #check if the profile we're looking at is not ours
+    is_self = True
+    is_friend = False
+    request_sent = FriendRequestStatus.NO_REQUEST_SENT.value
+    friend_request = None
+    if user.is_authenticated and user != account:
+        is_self = False
+        if friends.filter(pk=pk):
+            is_friend = True
+        else:
+            is_friend = False
+            # CASE1: Request from them sent to us
+            if get_friend_request_or_false(sender=account, receiver=user) != False:
+                request_sent = FriendRequestStatus.THEM_SENT_TO_YOU.value
+                context['pending_friend_request_id'] = get_friend_request_or_false(
+                    sender=account, receiver=user).id
+            # CASE2: Request sent from us to them
+            if get_friend_request_or_false(sender=account, receiver=user) != False:
+                request_sent = FriendRequestStatus.YOU_SENT_TO_THEM.value
+            # CASE3: No request has ben sent
+            else:
+                request_sent = FriendRequestStatus.NO_REQUEST_SENT.value
+
+    elif not user.is_authenticated:
+        is_self = False
     else:
-        user = request.user
+        try:
+            friend_request = FriendRequest.objects.filter(receiver=user, is_active=True)
+        except Exception as e:
+            pass
 
-    if operation == 'add':
-        Friend.make_friend(request.user, user)
-        return redirect('profile')
-    elif operation == 'remove':
-        Friend.lose_friend(request.user, user)
-        return redirect('profile')
-
-    context = {'user': user}
+    context = {'user': user, 'friends': friends, 'is_self': is_self, 'is_friend': is_friend, 'request_sent': request_sent, 'friend_request': friend_request}
     return render(request, 'accounts/profile.html', context)
+
+
+def send_friend_request(request,*args, **kwargs):
+    user = request.user
+    payload = {}
+    if request.method == "POST" and user.is_authenticated:
+        account_id = request.POST.get("receiver_account_id")
+        if account_id:
+            receiver = Account.objects.get(pk=account_id)
+            try:
+                # Get any friend requests
+                friend_request = FriendRequest.objects.filter(sender=user, receiver=receiver)
+                # find active requests
+                try:
+                    for request in friend_requests:
+                        if request.ist_active:
+                            raise Exception("Friend request already sent.")
+                    friend_request = FriendRequest(sender=user, receiver=receiver)
+                    friend_request.save()
+                    payload['response'] = "Friend request sent."
+                except Exception as e:
+                    payload['response'] = str(e)
+            except FriendRequest.DoesNotExist:
+                # No friend requests -> create one
+                friend_request = FriendRequest(sender=user, receiver=receiver)
+                friend_request.save()
+                payload['response'] = "Friend requeste sent."
+
+            if payload['response'] == None:
+                payload['response'] = "Something went wrong."
+        else:
+            payload['response'] = "Unsable to send a friend request."
+    else:
+        payload['response'] = "You must be authenticated to send a friend request."
+    return HttpResponse(json.dumps(payload), content_type="application/json")
 
 
 def social(request):
     profiles = Account.objects.exclude(id=request.user.id)
-    friend = Friend.objects.get(current_user=request.user)
-    friends = friend.users.all()
+    friend = FriendList.objects.filter(user=request.user)
 
-    context = {'profiles': profiles, 'friends': friends}
+    context = {'profiles': profiles, 'friend': friend}
     return render(request, 'accounts/social.html', context)
 
 
