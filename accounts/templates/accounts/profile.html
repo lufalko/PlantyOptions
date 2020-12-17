@@ -11,6 +11,52 @@
     <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
 {% endif %}
     <p id="rd_name">{{user.username}}</p>
+    <!--
+     Friends Button
+     -->
+    <a href="#">
+        <div class="friend_list_icon_container">
+            <span class="friend_text">Friends ({{friends|length}})</span>
+        </div>
+    </a>
+    <!--
+    Friend requests
+    -->
+    {% if request.user.is_authenticated %}
+    {% if friend_requests %}
+    <a href="#">
+        <div class="friend_request_icon_container">
+            <span class="friend_text">Friend Requests ({{friend_requests|length}})</span>
+        </div>
+    </a>
+    {% endif %}
+    {% if is_friend == False and is_self == False %}
+    {% if request_sent == 1%}
+    <button id="cancel_friend_request_btn">
+        Cancel
+    </button>
+    {% endif %}
+    {% if request_sent == 0 %}
+    <span>
+        <button id="decline_friend_request_btn">
+            Decline
+        </button>
+        <button id="accept_friend_request_btn">
+            Accept
+        </button>
+    </span>
+    {% endif %}
+    {% if request_sent == -1 %}
+    <button id="send_friend_request_btn">
+        Add Friend
+    </button>
+    {% endif %}
+    {% else %}
+    <button id="unfriend_friend_request_btn">
+        Unfriend
+    </button>
+    {% endif %}
+    {% endif %}
 </div>
 
 
@@ -26,5 +72,24 @@
     </div>
 </div>
 
- {% endblock %}
+<script>
+
+    function onFriendRequestSent(){
+        location.reload();
+    }
+
+    var sendFriendRequestBtn = document.getElementById("send_friend_request_btn")
+    if (sendFriendRequestBtn != null){
+        sendFriendRequestBtn.addEventListener("click", function(){
+            sendFriendRequest("{{id}}", onFriendRequestSent)
+        })
+    }
+
+</script>
+
+
+{% include 'accounts/snippets/send_friend_request.html' %}
+
+{% endblock %}
+
 
