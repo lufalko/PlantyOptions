@@ -36,7 +36,7 @@
            <p id="rd_vegetarisch">?vegetarisch</p>
            <p id="rd_vegan">?vegan</p>
 
-           <input type="text" placeholder="suche Gericht" id="rd_food_searchbar">
+           <input type="text" placeholder="suche Gericht" id="rd_food_searchbar" onkeyup="searchbar()">
 
            <div id="rd_foods_tags">
                <p class="rd_food_tag">Alles</p>
@@ -139,15 +139,38 @@
     let queryset = "{{queryset}}"
     let food_tags = [];
     let tag_list = [];
+    let tag_now = "Alles";
     let request = new XMLHttpRequest()
 
 
 
 
 
-
+    document.getElementsByClassName("rd_food_tag")[0].style.backgroundColor = "rgb(112,175,107)";
+    document.getElementsByClassName("rd_food_tag")[0].style.color = "white";
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', '/food_api/', true)
+
+
+    function searchbar(){
+        let input, filter, ul, li, a, i, txtValue;
+
+        input = document.getElementById('rd_food_searchbar');
+        filter = input.value.toUpperCase();
+        ul = document.getElementsByClassName('rd_food_block');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < ul.length; i++) {
+            a = ul[i].getElementsByClassName("rd_block_name")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              ul[i].style.display = "inline-block";
+            } else {
+              ul[i].style.display = "none";
+            }
+        }
+    }
+
 
     request.onload = function () {
       // Begin accessing JSON data here
@@ -172,16 +195,13 @@
 
             for (let k=0; k < tag_list[j].length; k++){
                 tag_list[j][k] = JSON.stringify(tag_list[j][k]);
-                tag_list[j][k] = tag_list[j][k].substr(8,14);
-                  console.log(tag_list[j][k]);
+                let length = tag_list[j][k].length ;
+                length -= 11;
+                tag_list[j][k] = tag_list[j][k].substr(9,length );
 
             }
         }
-
     }
-
-
-
     // Send request
     request.send()
 
@@ -232,23 +252,29 @@
     render_options();
     render_body();
 
-    for (let i = 0; i < document.getElementsByClassName('rd_dishes').length; i++){
+    function count_cat() {
         let elements = document.getElementsByClassName('rd_dishes');
-        let category = elements[i].getElementsByClassName('rd_food_category');
-        let vegetarian_counter = 0;
-        let vegan_counter = 0;
-        for (let j = 0; j < category.length; j++){
-            if(category[j].innerHTML == 'Vegan') {
-               vegan_counter++;
-            }
-            else {
-               vegetarian_counter++;
+        let blocks= document.getElementsByClassName('rd_food_block');
+        for (let i = 0; i < document.getElementsByClassName('rd_dishes').length; i++) {
+
+            let category = elements[i].getElementsByClassName('rd_food_category');
+            let vegetarian_counter = 0;
+            let vegan_counter = 0;
+            for (let j = 0; j < category.length; j++) {
+                if (category[j].innerHTML == 'Vegan' && blocks[j].style.display != "none") {
+                    vegan_counter++;
+                }
+                else {
+                    if (blocks[j].style.display != "none") {
+                        vegetarian_counter++;
+                    }
                 }
             }
-        document.getElementById('rd_vegetarisch').innerHTML= vegetarian_counter + ' Vegetarisch';
-        document.getElementById('rd_vegan').innerHTML= vegan_counter + ' Vegan';
-        document.getElementById('rd_vegan').style.userSelect = "none";
-        document.getElementById('rd_vegetarisch').style.userSelect = "none";
+            document.getElementById('rd_vegetarisch').innerHTML = vegetarian_counter + ' Vegetarisch';
+            document.getElementById('rd_vegan').innerHTML = vegan_counter + ' Vegan';
+            document.getElementById('rd_vegan').style.userSelect = "none";
+            document.getElementById('rd_vegetarisch').style.userSelect = "none";
+        }
     }
 
     function render_vegan(){
@@ -304,26 +330,51 @@
      function render_food(){
 
         let category = document.getElementsByClassName('rd_food_block');
+
+
         for (let i = 0; i < category.length; i++) {
-            if (!(!vegan && !vegetarisch)) {
+            if (!(!vegan && !vegetarisch) && !(vegan && vegetarisch)) {
                 if (!veg_list[i]) {
                     if (!vegan) {
                         category[i].style.display = "none";
                     } else {
-                        category[i].style.display = "inline-block";
+                        if(tag_now == "Alles") {
+                            category[i].style.display = "inline-block";
+                        }
                         //elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "#378C61";
                     }
                 } else {
                     if (!vegetarisch) {
                         category[i].style.display = "none";
                     } else {
-                        category[i].style.display = "inline-block";
-                        //elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "rgb(112,175,107)";
+                        if(tag_now == "Alles") {
+                            category[i].style.display = "inline-block";
+                        }//elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "rgb(112,175,107)";
                     }
                 }
             }
-            else{
+        else{
+            if(tag_now == "Alles") {
                 category[i].style.display = "inline-block";
+            }
+            else{
+                 let foods = document.getElementsByClassName("rd_food_block");
+                    for(let i = 0; i < foods.length; i++){
+                        let check = false;
+                        for (let j = 0; j < tag_list[i].length; j++) {
+
+                            if (tag_list[i][j] == tag_now) {
+                                check = true;
+                                foods[i].style.display = "inline-block";
+
+                            } else {
+                                if(check == false){
+                                    foods[i].style.display = "none";
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -346,7 +397,7 @@
                p++
            }
         }
-        console.log(food_tags);
+
     }
 
     for (let i=0; i<document.getElementsByClassName("rd_food_tag").length ; i++) {
@@ -360,19 +411,56 @@
                 this.style.color = "white";
 
                 let text = this.innerHTML;
+                for (let j =0; j <  document.getElementsByClassName("rd_food_tag").length; j++){
+                    if(j != i){
+                        document.getElementsByClassName("rd_food_tag")[j].style.backgroundColor = "transparent";
+                        document.getElementsByClassName("rd_food_tag")[j].style.color = "darkgrey";
+                    }
+                }
+                tag_now = text;
                 food_tags_render(text);
+
             }
 
             else {
                 this.style.backgroundColor = "transparent";
                 this.style.color = "darkgrey";
+                document.getElementsByClassName("rd_food_tag")[0].click();
             }
         })
     }
 
     function food_tags_render(text){
 
+        let foods = document.getElementsByClassName("rd_food_block");
+
+        for(let i = 0; i < foods.length; i++){
+            let check = false;
+            if(text != "Alles") {
+
+                for (let j = 0; j < tag_list[i].length; j++) {
+
+                    if (tag_list[i][j] == text) {
+                        check = true;
+                        foods[i].style.display = "inline-block";
+                    } else {
+                        if(check == false) {
+                            foods[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            else{
+                foods[i].style.display = "inline-block";
+            }
+        }
+        count_cat();
+        render_food();
+
     }
+
+
+
 
 
     function stars(elements) {
@@ -440,6 +528,7 @@
     render_vegan();
     render_vegetarisch();
     render_food_tags();
+    count_cat()
 
 </script>
 
