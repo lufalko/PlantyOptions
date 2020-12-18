@@ -1943,10 +1943,17 @@ div ::-webkit-scrollbar{
     margin-bottom: 3px;
 }
 
-#rd_comments{
+
+#rd_comments_block{
     display: inline-block;
     float: left;
-    background-color: white;
+
+}
+
+#rd_addcoment{
+    display: inline-block;
+    float: right;
+
 }
 
 .rd_comment{
@@ -2022,14 +2029,6 @@ div ::-webkit-scrollbar{
 .rd_comment_rating img{
     height: 16px;
 }
-
-#rd_comments_block{
-
-}
-
-
-
-
 
 @media only screen and (max-width: 600px) {
 
