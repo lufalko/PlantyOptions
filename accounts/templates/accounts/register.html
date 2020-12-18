@@ -8,25 +8,22 @@
 <form method="POST" action="">
     {% csrf_token %}
 
-    {{form.first_name.label}}
-    {{form.first_name}}
+    {% for field in registration_form %}
 
-    {{form.last_name.label}}
-    {{form.last_name}}
+        {{field.label_tag}}
+        {{field}}
 
-    {{form.username.label}}
-    {{form.username}}
+        {% if field.help_text %}
+            <small>{{field.help_text}}</small>
+        {% endif %}
 
-    {{form.email.label}}
-    {{form.email}}
+        {% for error in field.errors %}
 
-    {{form.password1.label}}
-    {{form.password1}}
+            <p>{{error}}</p>
 
-    {{form.password2.label}}
-    {{form.password2}}
+        {% endfor %}
 
-    {{form.errors}}
+    {% endfor %}
 
     <input type="submit" name="Create User">
 </form>

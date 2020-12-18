@@ -4,33 +4,34 @@
 {% block content %}
 
 <div id="user_banner"></div>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
 <div id="user_header">
-{% ifequal currentUser.profile_picture None %}
+{% ifequal user.profile_picture None %}
     <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
 {% else %}
-    <img src="{{queryset.restaurant_picture.url}}">
+    <img src="{{user.profile_picture.url}}">
 {% endifequal %}
-<p id="rd_name">{{currentUser.username}}</p>
+    {{pictureForm.profile_picture}}
+    <p id="rd_name">{{user.username}}</p>{{userForm.username}}
 </div>
 
 
 
 <div id="user_body">
     <div id="user_body_header">
-        <p>Food/Drinks</p>
-        <p>Opening Hours</p>
-        <p>Location</p>
-        <p id="rd_contact">Contact</p>
+        <p>{{user.email}}</p>{{userForm.email}}
+        <p>{{user.first_name}}s</p>{{userForm.first_name}}
+        <p>{{user.last_name}}</p>{{userForm.last_name}}
+        {% if user.biography is not None %}
+            <p>{{user.biography}}</p>{{userForm.biography}}
+        {% else %}
+            <p>write your own biography to show others who you are!</p>{{userForm.biography}}
+        {% endif %}
     </div>
-    <div id="rd_foods">
-       <div id="rd_foods_head">
-           <p>?vegan</p>
-           <p>?vegetarisch</p>
-            <div id="rd_foods_tags"></div>
-       </div>
-        <div id="rd_foods_body"></div>
-    </div>
+    <input type="submit" value="Submit" class="btn btn-outline-success">
 </div>
+</form>
 
  {% endblock %}
 

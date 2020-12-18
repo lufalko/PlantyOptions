@@ -1,17 +1,29 @@
 import django_filters
 from django_filters import NumberFilter
+from django.db.models import Avg
 
 from .models import *
 
 
 class RestaurantFilter(django_filters.FilterSet):
 
-    rating = NumberFilter(field_name="rating", lookup_expr="gte")
+    Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
+    rating = NumberFilter(field_name="avg_rating", lookup_expr="gte")
 
     class Meta:
         model = Restaurant
         fields = '__all__'
-        exclude = ['location', 'restaurant_picture', 'rating']
+        exclude = ['location', 'restaurant_picture', 'address', 'houseNumber', 'state', 'point']
+
+class GetAddressFilter(django_filters.FilterSet):
+
+    Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
+
+    class Meta:
+        model = Restaurant
+        fields = ['zip_code', 'city']
+
+
 
 
 class HomepageFilter(django_filters.FilterSet):

@@ -408,7 +408,7 @@ nav a:hover{
     grid-row-start: 1;
     grid-row-end: 1;
     background-color: white;
-
+    height: auto;
 
 
     border-radius: 20px ;
@@ -422,10 +422,22 @@ nav a:hover{
 
 #restaurants_Adresseingabe_Headline{
 
+    font-family: Montserrat;
+    appearance: none;
+
+    border: none;
+    margin-left: 10px;
     font-size: 14px;
+    width: calc(100% - 20px);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 
-    padding: 7px;
+}
 
+#restaurants_Adresseingabe_Headline::placeholder {
+    color: darkgrey;
 }
 
 #restaurants_Adresseingabe_Headline_underline{
@@ -439,6 +451,7 @@ nav a:hover{
     border-radius: 20px;
     text-align: left;
     color: darkgrey;
+    overflow: hidden;
 
     margin-top: 25px;
     margin-left: 25px;
@@ -1136,6 +1149,10 @@ display: none;
 
 }
 
+#id_city, #id_zip_code{
+    display: none !important;
+}
+
 #restaurants_open_filter img{
     height: 20px;
 }
@@ -1359,7 +1376,8 @@ display: none;
   }
 
     #restaurants_body_content{
-        height: auto;
+        height: auto !important;
+        overflow-y: paged-y !important;
     }
 
 
@@ -1735,10 +1753,12 @@ display: none;
 
 
 .rd_options{
-    display: inline-block;
-    height: 90%;
-    width: 100%;
+
     background-color: white;
+    width: 100%;
+    height: auto;
+    min-height: 600px;
+
 }
 
 #rd_foods_head{
@@ -1758,7 +1778,7 @@ display: none;
     padding: 2px;
     width: 150px;
 
-    transition: 0.5s;
+    transition: background-color 0.5s, border-color 0.5s;
     border-radius: 0 20px 20px 0;
     border-left: 1px solid lightgrey;
     border-right: 2px solid lightgrey;
@@ -1775,42 +1795,71 @@ display: none;
     padding: 2px;
     width: 150px;
 
-    transition: 0.5s;
+    transition: background-color 0.5s;
     border-radius: 20px 0 0 20px ;
     border-right: 1px solid lightgrey;
     border-left: 2px solid lightgrey;
 }
 
 #rd_foods_tags{
-
-    display: inline-block;
-    height: 38px;
-    margin-bottom: 13px;
     width: 100%;
-    overflow-y: hidden;
-
+    margin-bottom: 0px;
+    overflow: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none!important;  /* IE and Edge */
+    scrollbar-width: none!important;
+      -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
 }
+
+#rd_foods_tags:hover{
+    cursor: pointer;
+}
+
+#rd_foods_tags:active{
+    cursor: grab!important;
+}
+
+
+
+
 
 .rd_food_category{
     display: none;
 }
 
 .rd_food_tag{
-    float: left;
+    display: inline-block;
     margin: 0px;
     border: none;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     margin: 5px;
+    margin-bottom: 20px;
     border-radius: 20px;
     color: darkgrey;
+       -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
 }
 
+div ::-webkit-scrollbar{
+    display: none !important;
+}
+
+
+
 .rd_food_tag:hover{
-    background-color: #70af6b;
+
     cursor: pointer;
-    color: white;
     transition: 0.5s;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -1838,7 +1887,6 @@ display: none;
 #rd_foods_body{
     display: inline-block;
     width: calc(100%);
-    height: 400px;
 
 }
 
@@ -1892,7 +1940,19 @@ display: none;
 
 #rd_comments{
     display: inline-block;
-    background-color: #f7ba5b;
+    background-color: white;
+}
+
+@media only screen and (max-width: 600px) {
+
+    #rd_food_searchbar{
+        width: 130px;
+    }
+
+    #rd_vegan, #rd_vegetarisch{
+        width: calc((100% - 160px)/2);
+    }
+
 }
 
 /*footer*/
