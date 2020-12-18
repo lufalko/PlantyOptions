@@ -3,18 +3,18 @@
 
     function sendFriendRequest(id, uiUpdateFunction){
         payload = {
-            "csrfmiddlewaretoken": "{{csrf_toke}}",
+            "csrfmiddlewaretoken": "{{csrf_token}}",
             "receiver_user_id": id,
         }
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "{% url 'friend_request' %}",
+            url: "{% url 'friend_requests' %}",
             timeout: 5000,
             data: payload,
             success: function(data){
                 if(data['response'] == "Friend request sent."){
-
+                    alert("Friend request sent.")
                 }
                 else if(data['response'] != null){
                     alert(data['response'])

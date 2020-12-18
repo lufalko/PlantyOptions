@@ -19,17 +19,11 @@
             <span class="friend_text">Friends ({{friends|length}})</span>
         </div>
     </a>
+    {% csrf_token %}
     <!--
     Friend requests
     -->
     {% if request.user.is_authenticated %}
-    {% if friend_requests %}
-    <a href="#">
-        <div class="friend_request_icon_container">
-            <span class="friend_text">Friend Requests ({{friend_requests|length}})</span>
-        </div>
-    </a>
-    {% endif %}
     {% if is_friend == False and is_self == False %}
     {% if request_sent == 1%}
     <button id="cancel_friend_request_btn">
@@ -69,8 +63,11 @@
         {% if user.biography is not None %}
             <p>{{user.biography}}</p>
         {% endif %}
+        <p id="userId" style="display: none">{{user.id}}</p>
     </div>
 </div>
+
+{% include 'accounts/snippets/send_friend_request.html' %}
 
 <script>
 
@@ -78,17 +75,15 @@
         location.reload();
     }
 
+    var userId = document.getElementById("userId")
     var sendFriendRequestBtn = document.getElementById("send_friend_request_btn")
     if (sendFriendRequestBtn != null){
         sendFriendRequestBtn.addEventListener("click", function(){
-            sendFriendRequest("{{id}}", onFriendRequestSent)
+            sendFriendRequest(userId, onFriendRequestSent)
         })
     }
 
 </script>
-
-
-{% include 'accounts/snippets/send_friend_request.html' %}
 
 {% endblock %}
 

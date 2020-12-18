@@ -8,7 +8,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('user/', views.user, name='user'),
     path('profile/<str:pk>/', views.profile, name='profile'),
-    path('friend_request', views.send_friend_request, name='friend_request'),
+    path('friend_requests', views.send_friend_request, name='friend_requests'),
+    path('friend_requests/<user_id>/', views.friend_requests, name='friend_requests'),
 
     path('restaurants/', views.restaurants, name='restaurants'),
     path('about/', views.about, name='about'),

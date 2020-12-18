@@ -1,0 +1,24 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if friend_requests %}
+{% for friend_request in friend_requests %}
+<div class="restaurants_block">
+        <div class="restaurants_img">
+        {% if friend_request.user.profile_picture %}
+            <img class="profilepic" src="{{friend_request.user.profile_picture.url}}" alt="Profilbild">
+        {% else %}
+            <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
+        {% endif %}
+        </div>
+        <div class="restaurants_name">
+            <p><a class="restaurants_name_link" href="{% url 'profile' pk=friend_request.user.pk %}">{{friend_request.user.username}}</a></p>
+        </div>
+    </div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
+
