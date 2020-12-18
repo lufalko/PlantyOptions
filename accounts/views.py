@@ -85,6 +85,7 @@ def logoutPage(request):
     return redirect('login')
 
 
+
 def home(request):
     articles = Article.objects.all()
     comments = Comment.objects.all()

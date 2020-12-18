@@ -44,6 +44,7 @@
         <div id="main_row4">
                         <h1 class="dashboard_comment_h1">Kommentare</h1>
 
+            <!--
             {% for comment in comments %}
             <div class="dashboard_comment">
                 <div class="comment_profilepic">
@@ -58,8 +59,30 @@
                 <div class="comment_text">{{ comment.content }}</div>
             </div>
             {% endfor %}
+           -->
+
+            {% for comment in comments reversed %}
+            <div id="home_comments_block">
+                <div class="rd_comment">
+                    <div class="rd_comment_profilepic">
+                        {% if comment.account.profile_picture %}
+                            <img class="rd_profilepic" src="{{comment.account.profile_picture.url}}" alt="Profilbild">
+                        {% else %}
+                            <img class="rd_profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
+                        {% endif %}
+                    </div>
+                    <div class="rd_comment_username">{{ comment.account.username }}</div>
+                        <div class="rd_comment_rating">
+                            <p> {{ comment.ratings }} </p>
+                        </div>
+                    <div class="rd_comment_time">{{ comment.date_created }}</div>
+                <div class="rd_comment_text">{{ comment.content }}</div>
+            </div>
+            {% endfor %}
 
         </div>
+
+
 
 
 </div>

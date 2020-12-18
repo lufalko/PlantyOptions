@@ -307,6 +307,17 @@ nav a:hover{
     margin-bottom:50px;
 }
 
+#home_comments_block{
+    display: inline-block;
+    float: center;
+
+}
+
+
+
+
+
+
 .dashboard_comment{
     width:25%;
     max-width:400px;
