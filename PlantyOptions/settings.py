@@ -138,5 +138,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
 
-
-
+if os.getlogin()=="luisb":
+    GDAL_LIBRARY_PATH = r"D:\Documents\Studium\3.Semester\Webanwendungen\PlantyOptions\plantyoptions\venv\Lib\site-packages\osgeo\gdal301.dll"
