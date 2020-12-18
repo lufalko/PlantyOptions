@@ -15,6 +15,7 @@ class RestaurantFilter(django_filters.FilterSet):
         fields = '__all__'
         exclude = ['location', 'restaurant_picture', 'address', 'houseNumber', 'state', 'point']
 
+
 class GetAddressFilter(django_filters.FilterSet):
 
     Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))

@@ -62,6 +62,7 @@
            -->
 
             {% for comment in comments reversed %}
+            {% if forloop.counter <= 3 %}
             <div id="home_comments_block">
                 <div class="rd_comment">
                     <div class="rd_comment_profilepic">
@@ -78,6 +79,7 @@
                     <div class="rd_comment_time">{{ comment.date_created }}</div>
                 <div class="rd_comment_text">{{ comment.content }}</div>
             </div>
+            {% endif %}
             {% endfor %}
 
         </div>
