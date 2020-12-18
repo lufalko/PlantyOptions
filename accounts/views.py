@@ -166,10 +166,13 @@ def profile(request, pk):
     user = Account.objects.get(pk=pk)
     account = request.user
 
+    if account == user.is_authenticated:
+        return rediredct("user")
+
     try:
-        friend_list = FriendList.objects.get(user=account)
+        friend_list = FriendList.objects.get(user=user)
     except FriendList.DoesNotExist:
-        friend_list = FriendList(user=account)
+        friend_list = FriendList(user=user)
         friend_list.save()
     friends = friend_list.friends.all()
 
@@ -208,8 +211,9 @@ def profile(request, pk):
     return render(request, 'accounts/profile.html', context)
 
 
-def send_friend_request(request,*args, **kwargs):
+def send_friend_request(request, id,*args, **kwargs):
     user = request.user
+    receiver = None
     payload = {}
     if request.method == "POST" and user.is_authenticated:
         account_id = request.POST.get("receiver_account_id")
@@ -227,7 +231,7 @@ def send_friend_request(request,*args, **kwargs):
                     friend_request.save()
                     payload['response'] = "Friend request sent."
                 except Exception as e:
-                    payload['response'] = str(e)
+                    payload['response'] = "Wupsey! " + str(e)
             except FriendRequest.DoesNotExist:
                 # No friend requests -> create one
                 friend_request = FriendRequest(sender=user, receiver=receiver)
@@ -235,20 +239,42 @@ def send_friend_request(request,*args, **kwargs):
                 payload['response'] = "Friend requeste sent."
 
             if payload['response'] == None:
-                payload['response'] = "Something went wrong."
+                payload['response'] = "Wupsey! Something went wrong."
         else:
-            payload['response'] = "Unsable to send a friend request."
+            payload['response'] = "Unable to send a friend request."
     else:
         payload['response'] = "You must be authenticated to send a friend request."
     return HttpResponse(json.dumps(payload), content_type="application/json")
 
 
-def social(request):
-    profiles = Account.objects.exclude(id=request.user.id)
-    friend = FriendList.objects.filter(user=request.user)
+def friend_requests(request, *args, **kwargs):
+    context = {}
+    user = request.user
+    user_id = None
+    friend_requests = None
+    if user.is_authenticated:
+        user_id = user.pk
+        account = Account.objects.get(pk=user_id)
+        if account == user:
+            friend_requests = FriendRequest.objects.filter(receiver=account, is_active=True)
+            context['friend_requests'] = friend_requests
+        else:
+            return HttpResponse("You can't ciew another users fried requests.")
+    else:
+        redirect("login")
+    return render(request, "accounts/snippets/friend_requests.html", context)
 
-    context = {'profiles': profiles, 'friend': friend}
-    return render(request, 'accounts/social.html', context)
+
+def social(request):
+    user = request.user
+    if user.is_authenticated:
+        profiles = Account.objects.exclude(id=request.user.id)
+        friend = FriendList.objects.filter(user=request.user)
+
+        context = {'profiles': profiles, 'friend': friend}
+        return render(request, 'accounts/social.html', context)
+    else:
+        return redirect('login')
 
 
 def map(request):

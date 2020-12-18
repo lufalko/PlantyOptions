@@ -14,6 +14,15 @@
 {% endifequal %}
     {{pictureForm.profile_picture}}
     <p id="rd_name">{{user.username}}</p>{{userForm.username}}
+    {% if request.user.is_authenticated %}
+    {% if friend_requests %}
+    <a href="#">
+        <div class="friend_request_icon_container">
+            <span class="friend_text">Friend Requests ({{friend_request|length}})</span>
+        </div>
+    </a>
+    {% endif %}
+    {% endif %}
 </div>
 
 
@@ -32,6 +41,8 @@
     <input type="submit" value="Submit" class="btn btn-outline-success">
 </div>
 </form>
+
+{% include 'accounts/snippets/send_friend_request.html' %}
 
  {% endblock %}
 

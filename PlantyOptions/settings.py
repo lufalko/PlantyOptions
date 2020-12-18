@@ -74,6 +74,7 @@ TEMPLATES = [
     },
 ]
 
+
 AUTH_USER_MODEL = 'accounts.Account'
 
 WSGI_APPLICATION = 'PlantyOptions.wsgi.application'

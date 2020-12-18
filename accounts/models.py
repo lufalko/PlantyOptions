@@ -123,7 +123,7 @@ class FriendList(models.Model):
         friends_list = FriendList.objects.get(user=removee)
         friends_list.remove_friend(self.user)
 
-    def ist_mutual_friend(self, friend):
+    def is_friend(self, friend):
 
         if friend in self.friends.all():
             return True
