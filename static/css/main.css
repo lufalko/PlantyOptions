@@ -1802,6 +1802,10 @@ display: none;
 }
 
 #rd_foods_tags{
+
+    float: left;
+    text-align: left;
+    max-width: 100%;
     width: 100%;
     margin-bottom: 0px;
     overflow: auto;
@@ -1881,6 +1885,7 @@ div ::-webkit-scrollbar{
     padding: 2px;
     padding-left: 10px;
     margin-top: 14px;
+    margin-bottom: 14px;
     width: 200px;
 }
 
@@ -1940,8 +1945,91 @@ div ::-webkit-scrollbar{
 
 #rd_comments{
     display: inline-block;
+    float: left;
     background-color: white;
 }
+
+.rd_comment{
+    width: 400px;
+   /* background-color: #f4f8f4; */
+    border: 2px solid lightgrey;
+    overflow: hidden;
+    margin: 25px;
+    border-radius: 20px;
+    padding: 10px;
+    max-height: 300px;
+}
+
+.rd_comment_profilepic{
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    margin: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+    float: left;
+}
+.rd_comment_profilepic img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    object-fit:cover;
+}
+
+.rd_comment_username{
+    display: inline-block;
+    float: left;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #45354d;
+    margin-top: 16px;
+}
+
+.rd_comment_text{
+    width: calc(100% - 20px);
+    display: inline-block;
+    max-height: 125px;
+    overflow-y: scroll;
+    margin-bottom: 10px!important;
+    text-align: left;
+}
+
+.rd_comment_text ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+
+}
+
+.rd_comment_time{
+    width: calc(100% - 20px);
+    margin-bottom: 5px;
+    display: inline-block;
+    max-height: 400px;
+    text-align: left;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.rd_comment_rating{
+    display: inline-block;
+    float: right;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.rd_comment_rating img{
+    height: 16px;
+}
+
+#rd_comments_block{
+
+}
+
+
+
+
 
 @media only screen and (max-width: 600px) {
 
