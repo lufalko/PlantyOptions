@@ -103,6 +103,20 @@ def home(request):
     return render(request, 'accounts/home.html', context)
 
 
+
+def comment_template():
+    comments = Comment.objects.all()
+
+    restaurants = Restaurant.objects.all()
+
+    homeFilter = HomepageFilter(request.GET, queryset=restaurants)
+    restaurants = homeFilter.qs
+
+    context = {'restaurants': restaurants, 'comments': comments,}
+
+    return render(request, 'accounts/snippets/comment_template.html', context)
+
+
 def userMap(request):
     object_list = RestaurantLocationList
 
@@ -112,19 +126,8 @@ def userMap(request):
 
 
 def restaurants(request):
-    restaurants = Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
+    contextm = {}
 
-    foods = Food.objects.all()
-    comments = Comment.objects.all()
-
-    myFilter = RestaurantFilter(request.GET, queryset=restaurants)
-    addressFilter = GetAddressFilter(request.GET, queryset=restaurants)
-
-
-    restaurants = myFilter.qs
-
-
-    context = {'restaurants': restaurants, 'myFilter': myFilter,'addressFilter': addressFilter, 'foods': foods, 'comments': comments}
     return render(request, 'accounts/restaurants.html', context)
 
 
@@ -339,3 +342,4 @@ class FoodsApi(APIView):
         qs = Food.objects.all()
         serializer = FoodSerializer(qs, many=True)
         return Response(serializer.data)
+

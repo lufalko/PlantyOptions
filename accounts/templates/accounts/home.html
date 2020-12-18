@@ -63,24 +63,14 @@
 
             {% for comment in comments reversed %}
             {% if forloop.counter <= 3 %}
-            <div id="home_comments_block">
-                <div class="rd_comment">
-                    <div class="rd_comment_profilepic">
-                        {% if comment.account.profile_picture %}
-                            <img class="rd_profilepic" src="{{comment.account.profile_picture.url}}" alt="Profilbild">
-                        {% else %}
-                            <img class="rd_profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
-                        {% endif %}
-                    </div>
-                    <div class="rd_comment_username">{{ comment.account.username }}</div>
-                        <div class="rd_comment_rating">
-                            <p> {{ comment.ratings }} </p>
-                        </div>
-                    <div class="rd_comment_time">{{ comment.date_created }}</div>
-                <div class="rd_comment_text">{{ comment.content }}</div>
-            </div>
+
+            {% include 'accounts/snippets/comment_template.html' %}
+
             {% endif %}
+
             {% endfor %}
+
+
 
         </div>
 
