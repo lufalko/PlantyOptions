@@ -12,10 +12,16 @@
         </div>
 
         <div id="about_row3">
-            <h1>Teamwork makes the dream work!</h1>
+            <p>Planty Options ist eine Website, auf der Sie vegane und vegetarische Optionen in Ihrer Nähe finden können.<br>
+                Entstanden ist die Seite als studentisches Projekt im Studiengang Interaktive Medien an der Hochschule Augsburg.
+            </p>
         </div>
 
         <div id="about_row4">
+            <h1>Teamwork makes the dream work!</h1>
+        </div>
+
+        <div id="about_row5">
             {% for teammember in team %}
             <div class="about_teammember">
                 <img class="about_teammember_img" src="{{ teammember.picture.url }}" alt="{{ teammember.name }}">
