@@ -1278,12 +1278,13 @@ display: none;
     background:white;
     grid-column:1/1;
     grid-row:5/5;
-    height:20vw;
+    height:auto;
+    margin-bottom: 50px;
 }
 
 #about_logo{
     width:80%;
-    margin-top:20px;
+    margin-top:25px;
 }
 
 
