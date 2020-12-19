@@ -173,14 +173,6 @@ class Tag(models.Model):
         return self.name
 
 
-class RestaurantLocation(models.Model):
-    point = PointField()
-
-    @property
-    def lat_lng(self):
-        return list(getattr(self.point, 'coords', [])[::-1])
-
-
 class Restaurant(models.Model):
     restaurant_picture = models.ImageField(null=True, default='dashboard-BG.jpg')
     name = models.CharField(max_length=200, null=True)
@@ -194,9 +186,10 @@ class Restaurant(models.Model):
 
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
-    objects = models.Manager()
+    #objects = models.Manager()
 
-    point = models.ForeignKey(RestaurantLocation, null=True, on_delete=models.SET_NULL)
+    point = PointField(srid=4326, null=True)
+
 
     def getAverageRating(self):
         comments = Comment.objects.all()

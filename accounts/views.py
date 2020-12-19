@@ -36,9 +36,6 @@ from rest_framework.response import Response
 from itertools import chain
 
 
-class RestaurantLocationList(ListView):
-    queryset = RestaurantLocation.objects.filter(point__isnull=False)
-
 
 @unauthenticated_user
 def register(request):
