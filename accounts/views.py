@@ -126,8 +126,19 @@ def userMap(request):
 
 
 def restaurants(request):
-    contextm = {}
+    restaurants = Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
 
+    foods = Food.objects.all()
+    comments = Comment.objects.all()
+
+    myFilter = RestaurantFilter(request.GET, queryset=restaurants)
+    addressFilter = GetAddressFilter(request.GET, queryset=restaurants)
+
+
+    restaurants = myFilter.qs
+
+
+    context = {'restaurants': restaurants, 'myFilter': myFilter,'addressFilter': addressFilter, 'foods': foods, 'comments': comments}
     return render(request, 'accounts/restaurants.html', context)
 
 
