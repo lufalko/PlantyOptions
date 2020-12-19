@@ -1205,29 +1205,60 @@ display: none;
 #about_wrapper {
   display: grid;
   grid-column-gap: 0px;
-  grid-row-gap: 20px;
+  grid-row-gap: 0px;
   grid-template-columns: 100%;
   min-width: 600px;
   width:100%;
 }
 
+
 #about_row1{
-    background:white;
     grid-column:1/1;
     grid-row:1/1;
+
+    height:30vh;
+
+    background-image: url('../assets/dashboard-BG.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+#about_row2{
+    background:white;
+    grid-column:1/1;
+    grid-row:2/2;
+    width:20vw;
+    height:20vw;
+    position: relative;
+    left:40vw;
+    border-radius:50%;
+    margin-top:-10vw;
+}
+
+
+#about_row3{
+    background:white;
+    grid-column:1/1;
+    grid-row:3/3;
     height:100px;
     margin-top:10vh;
 }
 
-#about_row2{
+#about_row4{
     text-align: center;
     padding: 0 10%;
     width: 90%;
     background:white;
     grid-column:1/1;
-    grid-row:2/2;
+    grid-row:4/4;
     height:20vw;
     margin-top:10vh;
+}
+
+#about_logo{
+    width:80%;
+    margin-top:20px;
 }
 
 
@@ -1296,6 +1327,8 @@ display: none;
     width:10%;
     margin-top:30px;
 }
+
+
 
 
 

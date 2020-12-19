@@ -5,10 +5,17 @@
     <div id="about_wrapper">
 
         <div id="about_row1">
-            <h1>Teamwork makes the dream work!</h1>
         </div>
 
         <div id="about_row2">
+            <img id="about_logo" src="{% static 'assets/PO_Logo.png' %}" alt="Planty Options">
+        </div>
+
+        <div id="about_row3">
+            <h1>Teamwork makes the dream work!</h1>
+        </div>
+
+        <div id="about_row4">
             {% for teammember in team %}
             <div class="about_teammember">
                 <img class="about_teammember_img" src="{{ teammember.picture.url }}" alt="{{ teammember.name }}">
