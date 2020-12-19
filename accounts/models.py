@@ -190,6 +190,8 @@ class Restaurant(models.Model):
 
     point = PointField(srid=4326, null=True)
 
+    def lat_lng(self):
+        return list(getattr(self.point, 'coords', [])[::-1])
 
     def getAverageRating(self):
         comments = Comment.objects.all()
