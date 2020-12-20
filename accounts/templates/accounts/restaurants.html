@@ -640,13 +640,18 @@ window.onresize = reportWindowSize;
         zoomOffset: -1,
     }).addTo(mymap);
 
+    var plantyIcon = L.icon({
+        iconUrl: "{% static 'assets/PO_Icon_Green_Fill.png' %}",
+        iconSize:     [23], // size of the icon
+    });
+
 	let restaurantN = document.getElementsByClassName("restaurantName");
     let restaurantA = document.getElementsByClassName("restaurantAdresse")
     let restaurantLat = document.getElementsByClassName("restaurantLatitude");
     let restaurantLong = document.getElementsByClassName("restaurantLongitude");
 
     for (let i = 0; i <= restaurantN.length; i++) {
-        var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML]).addTo(mymap);
+        var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);
         marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
         document.getElementsByClassName("restaurantName")[i].style.display = "none";
         document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
