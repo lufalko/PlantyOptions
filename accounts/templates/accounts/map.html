@@ -4,12 +4,13 @@
 {% block content %}
 
 
-<!-- <div id="mapid" style="width:100%; height:800px"></div> -->
+ <div id="mapid" style="width:100%; height:800px"></div>
 
 {% for i in restaurants %}
-  <p>{{i.name}}</p>
-<p>{{i.address}}{{i.houseNumber}}</p>
-  <p class="punkte">{{i.lat_lng}}</p>
+  <p class="restaurantName">{{i.name}}</p>
+<p class="restaurantAdresse">{{i.address}}{{i.houseNumber}}</p>
+<p>{{i.point}}</p>
+  <p class="restaurantPunkte">{{i.lat_lng}}</p>
 {% endfor %}
 
 <script>
@@ -22,16 +23,25 @@
 		zoomOffset: -1
 	}).addTo(mymap);
 
-	p = document.getElementsByClassName("punkte");
-
-	for(let i=0; i < p.length; i++){
-     var marker = L.marker(p[i]).addTo(mymap);
-     marker.bindPopup("<b>Anne's Gourmetküche</b><br>Sallingerstraße 6").openPopup()
-    }
 
 //	var marker = L.marker([48.3820324, 10.872883]).addTo(mymap);
 //	marker.bindPopup("<b>Anne's Gourmetküche</b><br>Sallingerstraße 6").openPopup()
 
+           let restaurantN = document.getElementsByClassName("restaurantName");
+           let restaurantA = document.getElementsByClassName("restaurantAdresse")
+            let restaurantP = document.getElementsByClassName("restaurantPunkte");
+
+         for (let i = 0; i < restaurantP.length; i++) {
+                var x = restaurantP[i].innerHTML.split(",");
+                x[0] = x[0].substr(1);
+                x[1] = x[1].substring(1, x[1].length-1);
+
+                console.log(x[0]);
+                console.log(x[1]);
+
+                var marker = L.marker([x[0], x[1]]).addTo(mymap);
+                marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
+        }
 
 </script>
 

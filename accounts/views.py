@@ -115,11 +115,7 @@ def comment_template():
 
 
 def userMap(request):
-    object_list = RestaurantLocationList
-
-    context = {'object_list': object_list}
-
-    return render(request, 'accounts/map.html', context)
+    return render(request, 'accounts/map.html')
 
 
 def restaurants(request):
