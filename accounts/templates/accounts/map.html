@@ -28,27 +28,6 @@
 		zoomOffset: -1
 	}).addTo(mymap);
 
-
-//	var marker = L.marker([48.3820324, 10.872883]).addTo(mymap);
-//	marker.bindPopup("<b>Anne's Gourmetküche</b><br>Sallingerstraße 6").openPopup()
-/*
-           let restaurantN = document.getElementsByClassName("restaurantName");
-           let restaurantA = document.getElementsByClassName("restaurantAdresse")
-            let restaurantP = document.getElementsByClassName("restaurantPunkte");
-
-         for (let i = 0; i < restaurantP.length; i++) {
-                var x = restaurantP[i].innerHTML.split(",");
-                x[0] = x[0].substr(1);
-                x[1] = x[1].substring(1, x[1].length-1);
-
-                console.log(x[0]);
-                console.log(x[1]);
-
-                var marker = L.marker([x[0], x[1]]).addTo(mymap);
-                marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
-        }
-*/
-
   let restaurantN = document.getElementsByClassName("restaurantName");
   let restaurantA = document.getElementsByClassName("restaurantAdresse")
   let restaurantLat = document.getElementsByClassName("restaurantLatitude");
@@ -57,8 +36,34 @@
   for (let i = 0; i <= restaurantN.length; i++) {
       var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML]).addTo(mymap);
       marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
+      document.getElementsByClassName("restaurantName")[i].style.display = "none";
+      document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
+      document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
+      document.getElementsByClassName("restaurantLongitude")[i].style.display = "none";
   }
 
+
+
+
+
+
+  /*
+  let restaurantN = document.getElementsByClassName("restaurantName");
+  let restaurantA = document.getElementsByClassName("restaurantAdresse")
+  let restaurantP = document.getElementsByClassName("restaurantPunkte");
+
+  for (let i = 0; i < restaurantP.length; i++) {
+      var x = restaurantP[i].innerHTML.split(",");
+      x[0] = x[0].substr(1);
+      x[1] = x[1].substring(1, x[1].length-1);
+
+      console.log(x[0]);
+      console.log(x[1]);
+
+      var marker = L.marker([x[0], x[1]]).addTo(mymap);
+      marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
+  }
+*/
 </script>
 
 

@@ -186,15 +186,15 @@ class Restaurant(models.Model):
 
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
-    #objects = models.Manager()
 
-    point = PointField(srid=4326, null=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
 
+    #objects = models.Manager()
+    #point = PointField(srid=4326, null=True)
 
-    def lat_lng(self):
-        return list(getattr(self.point, 'coords', [])[::-1])
+    #def lat_lng(self):
+    #    return list(getattr(self.point, 'coords', [])[::-1])
 
     def getAverageRating(self):
         comments = Comment.objects.all()

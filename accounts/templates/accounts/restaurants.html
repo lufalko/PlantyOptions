@@ -121,19 +121,31 @@
         </div>
 
 
-        <a id="restaurants_aside_right" href="{% url 'map' %}">
-        </a>
+        <div id="restaurants_aside_right">
+        </div>
         <div id="restaurants_aside_right_bottom" >
-
             <div id="restaurants_aside_right_bottom_text">
-            <p id="restaurants_map_name">Restaurant Name</p>
+                <p id="restaurants_map_link"><a href="{% url 'map' %}">Map anzeigen</a></p>
+                <p id="restaurants_map_name">Restaurant Name</p>
                  <img src="{% static 'assets/PO_Icon_Green_Fill.png' %}">
-            <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
-            <p id="restaurants_map_entfernung">? km Entfernt</p>
+                <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
+                <p id="restaurants_map_entfernung">? km Entfernt</p>
             </div>
         </div>
 
     </div>
+
+    {% for i in restaurants %}
+        <p class="restaurantName">{{i.name}}</p>
+        <p class="restaurantAdresse">{{i.address }}  {{i.houseNumber}}</p>
+        <p class="restaurantLatitude">{{i.latitude}}</p>
+        <p class="restaurantLongitude">{{i.longitude}}</p>
+
+        <!--
+        <p>{{i.point}}</p>
+        <p class="restaurantPunkte">{{i.lat_lng}}</p>
+        -->
+    {% endfor %}
 
     <div id="restaurants_bottom">
         <div id="restaurants_open_filter">
@@ -153,6 +165,7 @@
 
 
     <script>
+
 
     let vegetarisch = false;
     let vegan = false;
@@ -249,7 +262,9 @@ window.onresize = reportWindowSize;
         filteropen = !filteropen;
     })
 
+
      function render_map_text() {
+
          let restaurant_blocks = document.getElementsByClassName("restaurants_block");
          for (let i = 0; i < restaurant_blocks.length; i++) {
             restaurant_blocks[i].addEventListener('mouseover', function (){
@@ -615,16 +630,8 @@ window.onresize = reportWindowSize;
     changeStars();
 
 
-//    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5uZWZsIiwiYSI6ImNraGdwNW4zdDA5M3cycnA2N2ZrZzlvaWsifQ.2Ax1R3zR3hTyr3CHwW73hQ';
-//         var map = new mapboxgl.Map({
-//            container: 'restaurants_aside_right',
-  //          style: 'mapbox://styles/mapbox/streets-v11',
-    //         center: [10.89779, 48.3705449],
-      //      zoom: 12,
- //           bearing: 0
-  //  });
 
-    var mymap = L.map('restaurants_aside_right').setView([48.35, 10.89779], 13);
+    var mymap = L.map('restaurants_aside_right').setView([48.35, 10.89779], 12);
 
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
         maxZoom: 18,
@@ -633,8 +640,22 @@ window.onresize = reportWindowSize;
         zoomOffset: -1,
     }).addTo(mymap);
 
+	let restaurantN = document.getElementsByClassName("restaurantName");
+    let restaurantA = document.getElementsByClassName("restaurantAdresse")
+    let restaurantLat = document.getElementsByClassName("restaurantLatitude");
+    let restaurantLong = document.getElementsByClassName("restaurantLongitude");
 
-         mybutton = document.getElementById("myBtn");
+    for (let i = 0; i <= restaurantN.length; i++) {
+        var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML]).addTo(mymap);
+        marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
+        document.getElementsByClassName("restaurantName")[i].style.display = "none";
+        document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
+        document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
+        document.getElementsByClassName("restaurantLongitude")[i].style.display = "none";
+    }
+
+
+    mybutton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
