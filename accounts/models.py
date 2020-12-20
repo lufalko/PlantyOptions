@@ -189,6 +189,9 @@ class Restaurant(models.Model):
     #objects = models.Manager()
 
     point = PointField(srid=4326, null=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
+
 
     def lat_lng(self):
         return list(getattr(self.point, 'coords', [])[::-1])

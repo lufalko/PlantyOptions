@@ -7,10 +7,15 @@
  <div id="mapid" style="width:100%; height:800px"></div>
 
 {% for i in restaurants %}
-  <p class="restaurantName">{{i.name}}</p>
-<p class="restaurantAdresse">{{i.address}}{{i.houseNumber}}</p>
+<p class="restaurantName">{{i.name}}</p>
+<p class="restaurantAdresse">{{i.address }}  {{i.houseNumber}}</p>
+<p class="restaurantLatitude">{{i.latitude}}</p>
+<p class="restaurantLongitude">{{i.longitude}}</p>
+
+<!--
 <p>{{i.point}}</p>
-  <p class="restaurantPunkte">{{i.lat_lng}}</p>
+<p class="restaurantPunkte">{{i.lat_lng}}</p>
+-->
 {% endfor %}
 
 <script>
@@ -26,7 +31,7 @@
 
 //	var marker = L.marker([48.3820324, 10.872883]).addTo(mymap);
 //	marker.bindPopup("<b>Anne's Gourmetküche</b><br>Sallingerstraße 6").openPopup()
-
+/*
            let restaurantN = document.getElementsByClassName("restaurantName");
            let restaurantA = document.getElementsByClassName("restaurantAdresse")
             let restaurantP = document.getElementsByClassName("restaurantPunkte");
@@ -42,6 +47,17 @@
                 var marker = L.marker([x[0], x[1]]).addTo(mymap);
                 marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
         }
+*/
+
+  let restaurantN = document.getElementsByClassName("restaurantName");
+  let restaurantA = document.getElementsByClassName("restaurantAdresse")
+  let restaurantLat = document.getElementsByClassName("restaurantLatitude");
+  let restaurantLong = document.getElementsByClassName("restaurantLongitude");
+
+  for (let i = 0; i <= restaurantN.length; i++) {
+      var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML]).addTo(mymap);
+      marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
+  }
 
 </script>
 
