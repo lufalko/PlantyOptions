@@ -13,9 +13,9 @@
     {% else %}
         <img class="ud_profile_image" src="{{user.profile_picture.url}}">
     {% endifequal %}
-    </div>
     {{pictureForm.profile_picture}}
-    <p id="rd_name">{{user.username}}</p>{{userForm.username}}
+    </div>
+    <p id="user_username">{{user.username}}</p>{{userForm.username}}
     {% if request.user.is_authenticated %}
     {% if friend_requests %}
     <a href="#">
@@ -27,10 +27,15 @@
     {% endif %}
 </div>
 
-
+<div id="user_body_header">
+    <p id="user_information">Nutzerinformationen</p>
+    <p id="user_interaction">Nutzerinteraktionen</p>
+    <p id="user_else">Sonstiges</p>
+</div>
 
 <div id="user_body">
-    <div id="user_body_header">
+
+    <div id="user_information_display">
         <p>{{user.email}}</p>{{userForm.email}}<br>
         <p>{{user.first_name}}</p>{{userForm.first_name}}
         <p>{{user.last_name}}</p>{{userForm.last_name}}
@@ -43,6 +48,11 @@
     <input id="user_data_button" type="submit" value="Submit">
 </div>
 </form>
+
+<script>
+    let newElement = document.getElementsByClassName('$0');
+    newElement.textContent = "Never Mind";
+</script>
 
 {% include 'accounts/snippets/send_friend_request.html' %}
 
