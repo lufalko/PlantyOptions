@@ -2323,18 +2323,18 @@ div ::-webkit-scrollbar{
 
 #rd_comments_block{
     display: inline-block;
-    float: left;
+    float: right;
 
 }
 
 #rd_addcoment{
     display: inline-block;
-    float: right;
+    float: left;
 
 }
 
 .rd_comment{
-    width: 400px;
+    width: calc(50% - 50px);
    /* background-color: #f4f8f4; */
     border: 2px solid lightgrey;
     overflow: hidden;
