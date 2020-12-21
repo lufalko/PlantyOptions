@@ -119,7 +119,7 @@ nav a:hover{
 
 .nav-account{
     list-style-type: none;
-    display:inline
+    display:inline;
     position:relative;
     margin:1%;
     padding:10px;
@@ -802,6 +802,24 @@ select:-webkit-autofill:focus {
 
     font-size: 14px;
 }
+
+#restaurants_body_content_map{
+
+    float: right;
+
+    overflow: hidden;
+    overflow-y: scroll;
+
+    height: calc(100vh - 110px);
+
+    margin-left: 25px;
+    margin-right: 25px;
+
+    background-color: white;
+
+    font-size: 14px;
+}
+
 .restaurants_img{
     display: inline-block;
     width: 135px;
@@ -835,6 +853,7 @@ select:-webkit-autofill:focus {
 
 
     overflow: hidden;
+    padding-left: 10px;
 
 }
 
@@ -906,7 +925,13 @@ select:-webkit-autofill:focus {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 16px;
+}
 
+.restaurants_name_map p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 0px;
 }
 
 .restaurants_name a{
@@ -1841,8 +1866,8 @@ display: none;
     .restaurants_adresse{
         margin-bottom: 12px;
         margin-top: 10px;
-
     }
+
     .restaurants_adresse img{
         height: 26px;
 
@@ -2379,11 +2404,20 @@ div ::-webkit-scrollbar{
 
 }
 
+
+#mapid{
+    width:75%;
+    height: 500px;
+    margin-left: 10px;
+    float: left;
+}
+
 /*footer*/
 
 footer{
     display: none;
 }
+
 
 
 

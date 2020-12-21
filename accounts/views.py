@@ -287,9 +287,12 @@ def social(request):
 
 def map(request):
     restaurants = Restaurant.objects.all()
+    foods = Food.objects.all()
+
 
     context = {
-        'restaurants': restaurants
+        'restaurants': restaurants,
+        'foods': foods
     }
     return render(request, 'accounts/map.html', context)
 
