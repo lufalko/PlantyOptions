@@ -939,6 +939,11 @@ select:-webkit-autofill:focus {
     color: #45354d;
 }
 
+.restaurants_name_link{
+    text-decoration: none;
+    color: #45354d;
+}
+
 .restaurants_name{
         margin-top: -2px;
         margin-bottom: 0px;
@@ -1124,6 +1129,16 @@ select:-webkit-autofill:focus {
 
 
 }
+
+
+/* Popup style */
+.custom .leaflet-popup-tip,
+.custom .leaflet-popup-content-wrapper {
+
+
+}
+
+
 
 #restaurants_map_name{
     font-size: 16px;

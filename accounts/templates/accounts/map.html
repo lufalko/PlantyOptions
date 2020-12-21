@@ -5,6 +5,7 @@
 
 <div id="mapid"></div>
 
+
 <div id="restaurants_body_content_map">
 
 {% for i in restaurants %}
@@ -20,14 +21,19 @@
     </div>
     -->
 
+
+
     <div class="restaurants_name_map">
         <p>{{i.name}}</p>
     </div>
 
     <div>
    <!-- <img src="{% static 'assets/PO_Icon_Green_Fill.png' %}"> -->
-    <p>{{i.address}} {{i.houseNumber}}, {{i.city}} </p>
+        <p>{{i.address}} {{i.houseNumber}}, {{i.city}} </p>
+        <p><a class="restaurants_name_link" href="{% url 'restaurant_detail' pk=i.pk %}">Zum Restaurant</a></p>
     </div>
+
+
     </div>
 
 
@@ -43,13 +49,14 @@
 <p class="restaurantPunkte">{{i.lat_lng}}</p>
 -->
 {% endfor %}
-    </div>
+</div>
 
 <script>
   var mymap = L.map('mapid').setView([48.367, 10.89779], 13);
 
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
+		attribution: 'PlantyOptions',
+	    maxZoom: 18,
 		id: 'mapbox/streets-v11',
 		tileSize: 512,
 		zoomOffset: -1
@@ -65,17 +72,28 @@
   let restaurantLat = document.getElementsByClassName("restaurantLatitude");
   let restaurantLong = document.getElementsByClassName("restaurantLongitude");
 
+  var customOptions = {
+      'maxWidth': '500',
+      'className' : 'custom'
+  }
+
   for (let i = 0; i <= restaurantN.length; i++) {
       var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);
-      marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML);
+      marker.bindPopup("<strong>" + restaurantN[i].innerHTML + "</strong>" + "<br>" + restaurantA[i].innerHTML, customOptions);
       document.getElementsByClassName("restaurantName")[i].style.display = "none";
       document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
       document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
       document.getElementsByClassName("restaurantLongitude")[i].style.display = "none";
   }
 
-
-
+<!--
+ let restaurant_blocks = document.getElementsByClassName("restaurants_block");
+         for (let i = 0; i < restaurant_blocks.length; i++) {
+            restaurant_blocks[i].addEventListener('mouseover', function (){
+                document.getElementsByClassName("restaurants_name_map")[i].style.color = "red";
+            })
+        }
+-->
 
   /*
   let restaurantN = document.getElementsByClassName("restaurantName");
