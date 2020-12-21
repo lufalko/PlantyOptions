@@ -6,7 +6,7 @@
 <div id="login-background"></div>
 	<div class="login-container">
 		<div class="login-panel-container">
-		<h3 id="form-title">LOGIN</h3>
+		<h3 id="form-title">EINLOGGEN</h3>
 			<form method="POST" action="">
 				{% csrf_token %}
 				<div class="input-group">
@@ -18,7 +18,7 @@
 				<div class="input-group">
 					<div class="input-group-append">
 						<span class="input-group-text"><i class="fas fa-key"></i></span>
-						<input class="login-data-input" type="password" name="password" placeholder="Password..." class="form-control" >
+						<input class="login-data-input" type="password" name="password" placeholder="Passwort..." class="form-control" >
 					</div>
 				</div>
 				<input class="login_btn" type="submit" value="Login">
@@ -31,7 +31,7 @@
 		{% endfor %}
 
 		<div class="missing-account-container">
-			Don't have an account? <a href="/register" class="ml-2">Sign Up</a>
+			Du hast noch keinen Account? <a href="/register" class="ml-2">Anmelden!</a>
 		</div>
 		</div>
 
