@@ -371,6 +371,16 @@ nav a:hover{
 
 /* ----------- Login ----------- */
 
+#login-background{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    margin-top: 250px;
+    background-color: rgb(112,175,107);
+    transform: skewY(-8deg);
+
+}
+
 .login-container{
 	width: 100%;
 	height: 250px;
@@ -462,8 +472,92 @@ select:-webkit-autofill:focus {
     background-color: rgb(112,175,107);
     text-align: center;
     margin-left: 10%;
+    color: white;
 }
 
+
+
+
+/* -------- User Page -------- */
+
+#user_banner{
+    width: 100%;
+    height: 20vh;
+    background-color: grey;
+}
+
+#user_header{
+    width: 100%;
+    height: 200px;
+}
+#user_header a, label, #profile_picture-clear_id, #text{
+    display: none;
+}
+#user_logo_container{
+    width: 150px;
+    height: 150px;
+    float: left;
+    background-color: darkgrey;
+    margin: 25px;
+}
+.ud_profile_image{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+#user_body{
+    width: 60%;
+    height: 40vh;
+    margin-left: 20%;
+    align-items: right;
+
+    text-align: left;
+}
+#user_body_header p{
+    float: left;
+    clear: left;
+    width: 50%;
+    height: 30px;
+    margin: 20px 0px 10px 0px;
+}
+#user_body_header input{
+    float: right;
+    clear: right;
+    margin: 15px 0px 15px 0px;
+    width: 50%;
+    height: 30px;
+
+    font-family: Montserrat;
+    appearance: none;
+
+    border-radius: 20px;
+    border: 2px solid lightgrey;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: transparent;
+}
+
+#user_data_button{
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid lightgrey;
+    font-family: Montserrat;
+    font-size: 14px;
+    margin: 5px;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    width: calc(100% - 50px);
+    height: 40px;
+    padding: 0px;
+    float: right;
+    margin-right: 25px;
+    cursor: pointer;
+    outline: none;
+}
 
 
 

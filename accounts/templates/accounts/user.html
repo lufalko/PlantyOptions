@@ -7,11 +7,13 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 <div id="user_header">
-{% ifequal user.profile_picture None %}
-    <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
-{% else %}
-    <img src="{{user.profile_picture.url}}">
-{% endifequal %}
+    <div id="user_logo_container">
+    {% ifequal user.profile_picture None %}
+        <img class="ud_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
+    {% else %}
+        <img class="ud_profile_image" src="{{user.profile_picture.url}}">
+    {% endifequal %}
+    </div>
     {{pictureForm.profile_picture}}
     <p id="rd_name">{{user.username}}</p>{{userForm.username}}
     {% if request.user.is_authenticated %}
@@ -29,7 +31,7 @@
 
 <div id="user_body">
     <div id="user_body_header">
-        <p>{{user.email}}</p>{{userForm.email}}
+        <p>{{user.email}}</p>{{userForm.email}}<br>
         <p>{{user.first_name}}</p>{{userForm.first_name}}
         <p>{{user.last_name}}</p>{{userForm.last_name}}
         {% if user.biography is not None %}
@@ -38,7 +40,7 @@
             <p>write your own biography to show others who you are!</p>{{userForm.biography}}
         {% endif %}
     </div>
-    <input type="submit" value="Submit" class="btn btn-outline-success">
+    <input id="user_data_button" type="submit" value="Submit">
 </div>
 </form>
 
