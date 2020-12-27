@@ -81,12 +81,69 @@
     <div class="rd_options"></div>
     <div class="rd_options">
 
+         <div id="rd_comments_filter">
 
+             <h2>Kundenrezensionen</h2>
 
+             <div id="rd_comments_filter_sterne">
 
+                 <p>5 Sterne</p>
+                 <p>4 Sterne</p>
+                 <p>3 Sterne</p>
+                 <p>2 Sterne</p>
+                 <p>1 Sterne</p>
 
+             </div>
+
+             <div id="rd_comments_filter_balken">
+
+                  <div class="rd_comments_filter_balken_back"><div class="rd_comments_filter_balken_in"></div></div>
+                  <div class="rd_comments_filter_balken_back"><div class="rd_comments_filter_balken_in"></div></div>
+                  <div class="rd_comments_filter_balken_back"><div class="rd_comments_filter_balken_in"></div></div>
+                  <div class="rd_comments_filter_balken_back"><div class="rd_comments_filter_balken_in"></div></div>
+                  <div class="rd_comments_filter_balken_back"><div class="rd_comments_filter_balken_in"></div></div>
+
+             </div>
+
+             <div id="rd_comments_filter_prozent">
+
+                 <p>0%</p>
+                 <p>0%</p>
+                 <p>0%</p>
+                 <p>0%</p>
+                 <p>0%</p>
+
+             </div>
+
+         </div>
 
         <div id="rd_comments_block">
+
+        <div id="rd_addcoment">
+
+        <p id="rd_add_text">Kommentar hinzufügen</p>
+
+
+        {% if user.is_authenticated %}
+
+        <div class="post-comment-section">
+        <form method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" value="Submit" class="submit_button">
+        </form>
+        </div>
+
+        {% else %}
+
+        <p>you must be loged in to add a comment</p>
+
+        {% endif %}
+
+            <div id="rd_stars"></div>
+
+        </div>
+
         {% for comment in comments.all reversed %}
             {% if comment.restaurant.name == queryset.name %}
 
@@ -96,26 +153,6 @@
         {% endfor %}
         </div>
 
-        <div id="rd_addcoment">
-
-        <h2>Add Comment</h2>
-
-        {% if user.is_authenticated %}
-
-        <div class="post-comment-section">
-            <form method="POST">
-                {% csrf_token %}
-                {{ comment_form.as_p }}
-                <input type="submit" value="Submit" class="btn btn-outline-success">
-            </form>
-        </div>
-
-        {% else %}
-
-        <p>you must be loged in to add a comment</p>
-
-        {% endif %}
-            </div>
     </div>
 
     </div>
@@ -144,28 +181,148 @@
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', '/food_api/', true)
 
-    function mouse_up(){
 
+    function comment_filter(){
+        let stars;
+        let array = [0, 0, 0, 0, 0];
+        stars = 0;
+        let p =  document.getElementById("rd_comments_filter_prozent");
+        let pp = p.getElementsByTagName("p");
+        let name = new Array();
+
+        for(let i = 0; i < document.getElementsByClassName("rd_comment_rating").length; i++){
+            let element = document.getElementsByClassName("rd_comment_rating")[i];
+            let text = element.getElementsByTagName("p");
+            let check = true;
+            for (let j = 0; j < name.length; j++){
+                console.log(document.getElementsByClassName("rd_comment_username")[i].innerHTML);
+                if(document.getElementsByClassName("rd_comment_username")[i].innerHTML == name[j]){
+                    check = false
+                }
+            }
+            if(check){
+                array[5 - text[0].innerHTML]+=1;
+                name[i] = document.getElementsByClassName("rd_comment_username")[i].innerHTML;
+                stars += 1;
+            }
+            else{
+                name[i]= "leer"
+            }
+        }
+
+        for(let i = 0; i < document.getElementsByClassName("rd_comments_filter_balken_back").length; i++){
+            let element = document.getElementsByClassName("rd_comments_filter_balken_in")[i];
+
+                let w = array[i] / stars * 100;
+                element.style.width = w + "%";
+                pp[i].innerHTML = Math.round(w) + "%";
+        }
+    }
+
+     comment_filter();
+
+    function starrating() {
+
+        let SternRatingArray = new Array(5);
+
+        let rating = 0;
+
+        if (rating == 0.0) {
+            SternRatingArray = [0, 0, 0, 0, 0];
+
+        for (let i = 0; i < SternRatingArray.length; i++) {
+
+            let element = document.createElement("img");
+
+            if (SternRatingArray[i] == 1) {
+                element.setAttribute('src', "{% static 'assets/stern.png' %}");
+            }
+
+            if (SternRatingArray[i] == 0) {
+                element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+            }
+
+            element.className = "stars_rating_class";
+
+            document.getElementById('rd_stars').appendChild(element);
+        }
+    }}
+
+
+
+    function changeStars() {
+
+        let stars = document.getElementsByClassName('stars_rating_class');
+        let star_amount = document.getElementById("id_ratings").value;
+
+        if (document.getElementById("id_ratings").value == '') {
+            document.getElementById("id_ratings").value = 0;
+        }
+
+        for (let k = 0; k <= document.getElementById("id_ratings").value - 1; k++) {
+            stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
+
+        }
+        for (let k = document.getElementById("id_ratings").value; k < 5; k++) {
+            stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+        }
+
+        for (let a = 0; a < stars.length; a++) {
+            stars[a].addEventListener('click', function () {
+                document.getElementById("id_ratings").value = a + 1;
+                for (let k = 0; k <= a; k++) {
+                    stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
+                    star_amount = a;
+                }
+                for (let k = a + 1; k < 5; k++) {
+                    stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                }
+            })
+            stars[a].addEventListener('mouseover', function () {
+
+                for (let k = 0; k <= a; k++) {
+                    stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
+                }
+                for (let k = a + 1; k < 5; k++) {
+                    stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                }
+            })
+            document.getElementById('rd_stars').addEventListener('mouseleave', function () {
+                if (document.getElementById("id_ratings").value == 0) {
+                    for (let k = 0; k < 5; k++) {
+                        stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                    }
+                } else {
+                    for (let k = 0; k <= star_amount; k++) {
+                        stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
+
+                    }
+                    for (let k = star_amount + 1; k < 5; k++) {
+                        stars[k].setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                    }
+                }
+            })
+
+        }
+        if (document.getElementById("id_ratings").value == 0) {
+            document.getElementById("id_ratings").value = ' ';
+        }
     }
 
     function mouse_down(){
          mouseup = false;
         l = document.getElementById("rd_foods_tags").scrollLeft;
-         console.log(l);
-         console.log(mouseup);
          mousex = event.clientX;
     }
 
     window.onmouseup = function (){
         mouseup = true;
-        console.log(mouseup);
     }
 
     document.getElementById("rd_foods_tags").onmousemove = function(){
         if(!mouseup){
             let x = (mousex - event.clientX)
             document.getElementById("rd_foods_tags").scrollLeft = l + x;
-            console.log(x);
         }
     };
 
@@ -575,7 +732,9 @@
     render_vegan();
     render_vegetarisch();
     render_food_tags();
-    count_cat()
+    count_cat();
+    starrating();
+    changeStars();
 
 </script>
 

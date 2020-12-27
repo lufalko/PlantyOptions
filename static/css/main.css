@@ -22,6 +22,7 @@ body {
 
 
 }
+
 ::-webkit-scrollbar-thumb {
 
   border-radius: 9px;
@@ -2205,9 +2206,9 @@ display: none;
     cursor: grab!important;
 }
 
-
-
-
+#rd_foods_tags::-webkit-scrollbar{
+    display: none;
+}
 
 .rd_food_category{
     display: none;
@@ -2230,10 +2231,6 @@ display: none;
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
-}
-
-div ::-webkit-scrollbar{
-    display: none !important;
 }
 
 
@@ -2320,25 +2317,102 @@ div ::-webkit-scrollbar{
     margin-bottom: 3px;
 }
 
+#rd_comments_filter{
+    display: inline-block;
+    float: left;
+    width:calc(261px);
+    margin-top: 15px;
+    height: 300px;
+    text-align: left;
+}
+
+#rd_comments_filter p{
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+#rd_comments_filter h2{
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+#rd_comments_filter_sterne{
+    display: inline-block;
+    float: left;
+    text-align: left;
+}
+
+#rd_comments_filter_balken{
+    display: inline-block;
+    float: left;
+    text-align: left;
+    width: calc(100% - 120px);
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.rd_comments_filter_balken_back{
+    width: calc(100% - 2px);
+    height: 16px;
+    border: 1px solid lightgrey;
+    margin-bottom:5px;
+}
+
+.rd_comments_filter_balken_in{
+    width: calc(50%);
+    height: 100%;
+    float: left;
+    background-color: gold;
+}
+
+#rd_comments_filter_prozent{
+    display: inline-block;
+    float: right;
+    text-align: right;
+}
 
 #rd_comments_block{
     display: inline-block;
     float: right;
-
+    width:calc(100% - 261px - 25px);
+    margin-top: 15px;
 }
 
 #rd_addcoment{
     display: inline-block;
     float: left;
+    width: calc(100% - 24px);
+    margin-bottom: 25px;
+    border: 2px solid lightgrey;
+    overflow: hidden;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    padding: 10px;
+    padding-bottom: 0px;
 
 }
 
+#rd_addcoment textarea{
+    border: none;
+    width: calc(100% - 20px);
+    resize: none;
+    background-color: #f1f1f1;
+    font-family: Montserrat;
+    font-size: 14px;
+    padding: 5px;
+}
+
+#rd_addcoment textarea::-webkit-scrollbar{
+ -webkit-appearance: scrollbartrack-vertical;
+}
+
 .rd_comment{
-    width: calc(50% - 50px);
+    width: calc(100% - 24px) ;
    /* background-color: #f4f8f4; */
     border: 2px solid lightgrey;
     overflow: hidden;
-    margin: 25px;
+    margin-bottom: 25px;
     border-radius: 20px;
     padding: 10px;
     max-height: 300px;
@@ -2372,18 +2446,19 @@ div ::-webkit-scrollbar{
 }
 
 .rd_comment_text{
-    width: calc(100% - 20px);
+    width: calc(100% - 30px);
     display: inline-block;
-    max-height: 125px;
+    max-height: 163px;
     overflow-y: scroll;
     margin-bottom: 10px!important;
     text-align: left;
+    padding-right: 10px;
 }
 
 .rd_comment_text ::-webkit-scrollbar {
-  -webkit-appearance: none;
+  -webkit-appearance: scrollbartrack-vertical;
   width: 6px;
-
+    margin-left: 5px;
 }
 
 .rd_comment_time{
@@ -2405,6 +2480,67 @@ div ::-webkit-scrollbar{
 
 .rd_comment_rating img{
     height: 16px;
+    margin-left: 3px;
+}
+
+#rd_add_text{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    float: left;
+}
+
+.submit_button{
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid lightgrey;
+    font-family: Montserrat;
+    font-size: 14px;
+    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 20px! important;
+    width: calc(100px);
+    height: 30px;
+    padding: 0px;
+    float: right;
+    margin-right: 10px;
+
+    cursor: pointer;
+    outline:none;
+}
+
+.submit_button:hover {
+    background-color: rgb(112, 175, 107);
+    border-radius: 20px;
+    border: 2px solid rgb(112, 175, 107);
+}
+
+#id_ratings{
+    display: none;
+}
+
+#rd_stars{
+    display: inline-block;
+    position: relative;
+    top: -248px;
+    height: 20px;
+    float: right;
+    margin-right: -110px;
+
+
+    cursor: pointer;
+}
+
+#rd_stars img{
+    height: 19px;
+    margin-right: 4px;
+}
+
+@media only screen and (max-width: 700px) {
+    #rd_comments_block {
+        width: calc(100%);
+    }
+
 }
 
 @media only screen and (max-width: 600px) {

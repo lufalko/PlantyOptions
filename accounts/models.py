@@ -252,7 +252,7 @@ class Comment(models.Model):
     account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL)
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
-    content = models.TextField(default='enter text')
+    content = models.TextField(default='')
     ratings = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
     fields = '__all__'
 
