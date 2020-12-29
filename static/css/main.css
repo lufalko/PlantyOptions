@@ -804,22 +804,7 @@ select:-webkit-autofill:focus {
     font-size: 14px;
 }
 
-#restaurants_body_content_map{
 
-    float: right;
-
-    overflow: hidden;
-    overflow-y: scroll;
-
-    height: calc(100vh - 110px);
-
-    margin-left: 25px;
-    margin-right: 25px;
-
-    background-color: white;
-
-    font-size: 14px;
-}
 
 .restaurants_img{
     display: inline-block;
@@ -944,6 +929,10 @@ select:-webkit-autofill:focus {
     text-decoration: none;
     color: #45354d;
 }
+
+
+
+
 
 .restaurants_name{
         margin-top: -2px;
@@ -1132,12 +1121,6 @@ select:-webkit-autofill:focus {
 }
 
 
-/* Popup style */
-.custom .leaflet-popup-tip,
-.custom .leaflet-popup-content-wrapper {
-
-
-}
 
 
 
@@ -1228,6 +1211,7 @@ select:-webkit-autofill:focus {
 
     font-size: 14px;
 }
+
 
 /*** Works on common browsers ***/
 
@@ -1504,6 +1488,71 @@ display: none;
 #myBtn:hover {
   background-color: #555; /* Add a dark-grey background on hover */
 }
+
+
+
+
+
+/* ----------- Map Page ----------- */
+
+#restaurants_body_content_map{
+
+    float: right;
+    overflow: hidden;
+    overflow-y: scroll;
+
+    height: calc(100vh - 110px);
+
+    margin-left: 25px;
+    margin-right: 25px;
+
+    background-color: white;
+    font-size: 14px;
+}
+
+.restaurants_block_map{
+    font-size: 12px;
+    margin-bottom: 10px;
+    background-color: white;
+
+    text-align: left;
+
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+.restaurants_block_map:hover{
+    background-color: #fbfbff;
+    border-radius: 10px 0 0 0;
+}
+
+.restaurants_name_map {
+    font-size: 14px;
+}
+
+.restaurants_link{
+    text-decoration: none;
+    font-size: 10px;
+    color: #45354d;
+}
+
+#mapid{
+    width:75%;
+    height: 500px;
+    margin-left: 10px;
+    float: left;
+}
+
+/* Popup style */
+.popup .leaflet-popup-tip,
+.popup .leaflet-popup-content-wrapper {
+
+
+}
+
+
+
+
 
 
 
@@ -1852,7 +1901,7 @@ display: none;
 
  .restaurants_block{
     font-size: 12px;
-     margin-bottom: 20px;
+    margin-bottom: 20px;
 
  }
     .restaurants_name p{
@@ -1899,6 +1948,7 @@ display: none;
     width: calc((100% - 100px - 18px)/2);
 
     }
+
 
 
 }
@@ -2556,12 +2606,6 @@ display: none;
 }
 
 
-#mapid{
-    width:75%;
-    height: 500px;
-    margin-left: 10px;
-    float: left;
-}
 
 /*footer*/
 

@@ -641,10 +641,12 @@ window.onresize = reportWindowSize;
         zoomOffset: -1,
     }).addTo(mymap);
 
+
     var plantyIcon = L.icon({
         iconUrl: "{% static 'assets/PO_Icon_Green_Fill.png' %}",
-        iconSize:     [23], // size of the icon
+        iconSize:     [25], // size of the icon
     });
+
 
 	let restaurantN = document.getElementsByClassName("restaurantName");
     let restaurantA = document.getElementsByClassName("restaurantAdresse")
@@ -655,6 +657,7 @@ window.onresize = reportWindowSize;
        'maxWidth': '500',
        'className' : 'custom'
     }
+
 
     for (let i = 0; i <= restaurantN.length; i++) {
         var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);

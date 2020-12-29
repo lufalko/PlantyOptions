@@ -9,7 +9,7 @@
 <div id="restaurants_body_content_map">
 
 {% for i in restaurants %}
-    <div class="restaurants_block">
+    <div class="restaurants_block_map">
 
         <!--
     <div class="restaurants_img">
@@ -27,10 +27,10 @@
         <p>{{i.name}}</p>
     </div>
 
-    <div>
+    <div class="restaurants_adresse_map">
    <!-- <img src="{% static 'assets/PO_Icon_Green_Fill.png' %}"> -->
         <p>{{i.address}} {{i.houseNumber}}, {{i.city}} </p>
-        <p><a class="restaurants_name_link" href="{% url 'restaurant_detail' pk=i.pk %}">Zum Restaurant</a></p>
+        <p><a class="restaurants_link" href="{% url 'restaurant_detail' pk=i.pk %}">Zum Restaurant</a></p>
     </div>
 
 
@@ -63,8 +63,9 @@
 	}).addTo(mymap);
 
 	var plantyIcon = L.icon({
-    iconUrl: "{% static 'assets/PO_Icon_Green_Fill.png' %}",
-    iconSize:     [28], // size of the icon
+        iconUrl: "{% static 'assets/PO_Icon_Green_Fill.png' %}",
+        iconSize:     [28], // size of the icon
+        iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
   });
 
   let restaurantN = document.getElementsByClassName("restaurantName");
@@ -74,12 +75,13 @@
 
   var customOptions = {
       'maxWidth': '500',
-      'className' : 'custom'
+      'className' : 'popup'
   }
 
   for (let i = 0; i <= restaurantN.length; i++) {
       var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);
-      marker.bindPopup("<strong>" + restaurantN[i].innerHTML + "</strong>" + "<br>" + restaurantA[i].innerHTML, customOptions);
+      var text = "<strong>" + restaurantN[i].innerHTML + "</strong>";
+      marker.bindPopup(text + "<br>" + restaurantA[i].innerHTML, customOptions);
       document.getElementsByClassName("restaurantName")[i].style.display = "none";
       document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
       document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
