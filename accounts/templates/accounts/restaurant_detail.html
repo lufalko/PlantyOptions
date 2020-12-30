@@ -17,9 +17,10 @@
 {% endifequal %}
 <p id="rd_name">{{queryset.name}}</p>
     <div id="rd_rating">
-        <p>{{queryset.getAverageRating}}</p>
+        <p id="rd_av_rating">{{queryset.getAverageRating}}</p>
+        <p id="rd_amount_rating">({{queryset.getAmountRating}})</p>
     </div>
-        <p>({{queryset.getAmountRating}})</p>
+
 </div>
 
 
@@ -121,11 +122,9 @@
 
         <div id="rd_addcoment">
 
-        <p id="rd_add_text">Kommentar hinzufügen</p>
-
-
         {% if user.is_authenticated %}
 
+        <p id="rd_add_text">Kommentar hinzufügen</p>
         <div class="post-comment-section">
         <form method="POST">
         {% csrf_token %}
@@ -136,7 +135,7 @@
 
         {% else %}
 
-        <p>you must be loged in to add a comment</p>
+        <p id="rd_nolog">you must be loged in to add a comment</p>
 
         {% endif %}
 

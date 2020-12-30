@@ -2038,6 +2038,7 @@ display: none;
     font-weight: 700;
     color: #3F3C54;
     margin: 5px 0px 3px 5px;
+    margin-top: -5px;
     padding-right: 10px;
 }
 
@@ -2045,18 +2046,25 @@ display: none;
     display: inline-block;
     float: left;
     height: 25px;
-    width: 200px;
 
-    margin-bottom: 5px;
+
+    margin-top: 0px;
 }
 
-#rd_rating p{
+#rd_av_rating{
     display: none;
+}
+
+#rd_amount_rating{
+    display: inline;
+    float: right;
+    margin-top: 2px;
+    margin-left: 5px;
 }
 
 #rd_rating img{
     float: left;
-    height: 25px;
+    height: 19px;
     margin-right: 5px;
 
     -webkit-touch-callout: none; /* iOS Safari */
@@ -2322,8 +2330,17 @@ display: none;
     float: left;
     width:calc(261px);
     margin-top: 15px;
-    height: 300px;
+    padding-bottom: 25px;
     text-align: left;
+}
+
+#rd_nolog{
+    display: inline-block;
+    padding: 25px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin: 0px;
+    width: calc(100% - 50px);
 }
 
 #rd_comments_filter p{
