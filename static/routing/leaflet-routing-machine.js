@@ -15652,7 +15652,6 @@ module.exports={
 			this._container = L.DomUtil.create('div', 'leaflet-routing-geocoder-result');
 			this._resultTable = L.DomUtil.create('table', '', this._container);
 
-			// TODO: looks a bit like a kludge to register same for input and keypress -
 			// browsers supporting both will get duplicate events; just registering
 			// input will not catch enter, though.
 			L.DomEvent.addListener(this._elem, 'input', this._keyPressed, this);
@@ -16495,7 +16494,6 @@ module.exports={
 			this.update();
 			// This has to be here, or geocoder's value will not be properly
 			// initialized.
-			// TODO: look into why and make _updateWaypointName fix this.
 			geocoderInput.value = wp.name;
 
 			L.DomEvent.addListener(geocoderInput, 'click', function() {
@@ -16995,7 +16993,6 @@ module.exports = L.Routing = {
 			    d;
 
 			for (i = this._route.coordinates.length - 1; i >= 0 ; i--) {
-				// TODO: maybe do this in pixel space instead?
 				d = latlng.distanceTo(this._route.coordinates[i]);
 				if (d < minDist) {
 					minIndex = i;
