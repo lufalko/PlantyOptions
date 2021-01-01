@@ -173,6 +173,8 @@
     let request = new XMLHttpRequest()
     let mouseup = true;
     let mousex;
+    let sterne_p = document.getElementById("rd_comments_filter_sterne").getElementsByTagName("p");
+    let comments = document.getElementsByClassName("rd_comment");
     let l = document.getElementById("rd_foods_tags").scrollLeft
 
     document.getElementsByClassName("rd_food_tag")[0].style.backgroundColor = "rgb(112,175,107)";
@@ -180,6 +182,44 @@
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', '/food_api/', true)
 
+    //Sternefilter
+
+    for (let i = 0; i < sterne_p.length; i++){
+        sterne_p[i].addEventListener('click',function (){
+            if(this.style.color != "gold"){
+                for (let j = 0; j < sterne_p.length; j++){
+                sterne_p[j].style.color = "#3F3C54";
+                sterne_p[j].style.fontWeight = "600";
+            }
+                this.style.color = "gold";
+                console.log(this.style.color);
+                this.style.fontWeight = "600";
+                renderbystars(i);
+            }
+            else{
+                for (let j = 0; j < sterne_p.length; j++){
+                sterne_p[j].style.color = "#3F3C54";
+                sterne_p[j].style.fontWeight = "600";
+                }
+                for(let i = 0; i < comments.length; i++){
+                    comments[i].style.display = "block";
+                }
+            }
+        })
+    };
+
+    function renderbystars(amount){
+        let rating = document.querySelectorAll(".rd_comment_rating > p");
+
+        for(let i = 0; i < comments.length; i++){
+            if(rating[i].innerHTML != 5 - amount){
+                comments[i].style.display = "none";
+            }
+            else{
+                 comments[i].style.display = "block";
+            }
+        }
+    };
 
     function comment_filter(){
         let stars;
@@ -194,7 +234,7 @@
             let text = element.getElementsByTagName("p");
             let check = true;
             for (let j = 0; j < name.length; j++){
-                console.log(document.getElementsByClassName("rd_comment_username")[i].innerHTML);
+
                 if(document.getElementsByClassName("rd_comment_username")[i].innerHTML == name[j]){
                     check = false
                 }

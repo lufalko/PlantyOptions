@@ -151,12 +151,19 @@ def articlePage(request):
 @login_required(login_url='login')
 def user(request):
     currentUser = request.user
+    comments = Comment.objects.all()
+
     if request.method == 'POST':
+        comment_form = CreateCommentForm(request.POST or None)
         userForm = UserUpdateForm(request.POST, instance=currentUser)
         pictureForm = PictureUpdateForm(request.POST,
                                         request.FILES,
                                         instance=currentUser)
         if userForm.is_valid():
+            content = request.POST.get('content')
+            comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
+            comment.save()
+
             userForm.save()
             pictureForm.save()
             messages.success(request, f'Your account hast been updated')
@@ -165,9 +172,11 @@ def user(request):
     else:
         userForm = UserUpdateForm(instance=currentUser)
         pictureForm = PictureUpdateForm(instance=currentUser)
+        comment_form = CreateCommentForm()
 
-    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm}
+    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, 'comment_form': comment_form}
     return render(request, 'accounts/user.html', context)
+
 
 
 def profile(request, pk):

@@ -23,11 +23,16 @@ class UserUpdateForm(forms.ModelForm):
         model = Account
         fields = ['username', 'email', 'first_name', 'last_name', 'biography']
 
+        widgets = {'biography': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Biographie'}),
+                   'username': forms.TextInput(attrs={'placeholder': 'Benutzername'})
+                   }
+
 
 class PictureUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['profile_picture']
+
 
 
 class CreateCommentForm(forms.ModelForm):

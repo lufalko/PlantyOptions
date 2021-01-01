@@ -59,7 +59,7 @@ class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=200, blank=False, null=True)
     last_name = models.CharField(max_length=200, blank=False, null=True)
     initials = models.CharField(max_length=2, null=True)
-    profile_picture = models.ImageField(null=True, blank=True, default='dashboard-BG.jpg')
+    profile_picture = models.ImageField(null=True, blank=True, default='dashboard-BG.jpg', help_text='')
 
     # FOLLOWING ARE CUSTOM USER INFORMATIONS
     biography = models.CharField(max_length=200, null=True)

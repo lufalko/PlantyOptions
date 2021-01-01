@@ -40,6 +40,24 @@ body {
 
 }
 
+.click_text{
+    margin: 0px;
+    font-weight: 600;
+    color: #70af6b;
+    transition: 0.5s;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+.click_text:hover{
+    cursor: pointer;
+    color: #4d7a4b;
+}
+
 #icon{
     position: relative;
     margin-left: 20px;
@@ -487,48 +505,158 @@ select:-webkit-autofill:focus {
     background-color: grey;
 }
 
-#user_header{
-    width: 100%;
-    height: 200px;
+.user_header_class{
+    width:calc(100% - 50px);
+    margin-top: 25px;
+    display: inline-block;
 }
-#user_header a, label, #profile_picture-clear_id, #text{
+
+#user_change_header{
     display: none;
 }
-#user_logo_container{
+
+
+.user_logo_container{
     width: 150px;
     height: 150px;
     float: left;
-    background-color: darkgrey;
-    margin: 25px;
+    margin-right: 25px;
 }
+
+#id_username{
+    appearance: none;
+    border: none;
+    background-color: #f1f1f1;
+    padding: 3px;
+    padding-left: 5px ;
+    float: left;
+    text-align: left;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #3F3C54;
+    margin: 0px;
+    margin-bottom: 15px;
+}
+
+.user_p_container{
+    float: right;
+    width: calc(100%);
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.user_p_container p{
+    display: inline-block;
+    width: 150px;
+    margin: 0px;
+    font-weight: 600;
+    color: #3F3C54;
+    text-align: right;
+    margin-right: 22px;
+}
+
+.user_p_container  input{
+    appearance: none;
+    border: none;
+    background-color: #f1f1f1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    width: calc(100% - 176px);
+    padding: 3px;
+    padding-left: 5px;
+}
+
+#id_biography{
+    display: inline-block;
+    width: calc(100% - 150px - 26px );
+    height: 110px;
+    border: none;
+    resize: none;
+    background-color: #f1f1f1;
+    font-family: Montserrat;
+    font-size: 14px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+#user_biographie{
+
+    display: inline-block;
+    margin: 0px;
+    width: calc(100% - 150px - 30px );
+    height: 92px;
+    text-align: left;
+
+    margin-bottom: 5px;
+}
+
+#user_start_edit{
+    margin: 0px;
+    margin-right: 2px;
+    float: right;
+    font-weight: 600;
+    color: #70af6b;
+    transition: 0.5s;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+#user_start_edit:hover{
+    cursor: pointer;
+    color: #4d7a4b;
+}
+
+#user_stop_edit{
+    float: right;
+     margin-right: 2px;
+    margin-top: 5px;
+}
+
 .ud_profile_image{
     width: 150px;
     height: 150px;
     object-fit: cover;
     overflow: hidden;
+    border-radius: 10px;
 }
 #user_username{
     float: left;
-
     text-align: left;
-    background-color: white;
     font-size: 25px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: #3F3C54;
-    margin: 25px;
-    padding-right: 10px;
-    clear: right;
+    margin: 0px;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    padding: 0px;
 }
-#user_logo_container #text {
+
+#user_data_button{
+    margin-bottom: 0px!important;
+    margin-right: 0px!important;
+    margin-top: 0px!important;
+}
+
+.user_logo_container #text {
+    display: none;
+}
+
+#user_change_display{
     display: none;
 }
 
 #user_body{
-    width: 60%;
+    width: calc(100% - 50px);
+    margin-left: 25px;
+    margin-top: 25px;
     height: 40vh;
-    margin-left: 20%;
-    align-items: right;
 
     text-align: left;
 }
@@ -536,22 +664,16 @@ select:-webkit-autofill:focus {
 
 #user_body_header{
 
-    margin-top: 30px;
     float: left;
-    width: 100%;
+    width: calc(100%);
+
     display: inline-block;
     background-color: white;
+    text-align: center;
 
 }
-#user_body_header #user_information, #user_body_header #user_interaction{
 
-    width: 33%;
 
-}#user_body_header #user_else{
-
-    width: 34%;
-
-}
 #user_body_header p{
 
     display: inline-block;
@@ -562,7 +684,7 @@ select:-webkit-autofill:focus {
     padding-bottom: 10px;
 
     color: white;
-    width: calc(25%);
+    width: calc(100%/3);
     background-color: #3F3C54;
 
     cursor: pointer;
@@ -576,8 +698,8 @@ select:-webkit-autofill:focus {
     transition: background-color 0.5s;
 
 }
-#user_body_header p:hover{
-
+#user_body_header:hover{
+    cursor: pointer;
 }
 
 #user_information_display p{
@@ -598,7 +720,7 @@ select:-webkit-autofill:focus {
     appearance: none;
 
     border-radius: 20px;
-    border: 2px solid lightgrey;
+    border: 2px solid #d3d3d3;
     font-size: 14px;
     padding-left: 10px;
     padding-top: 5px;
@@ -606,36 +728,44 @@ select:-webkit-autofill:focus {
     background: transparent;
 }
 #id_profile_picture{
-    position: relative;
-    background-color: white;
-    border-radius: 20px;
-    border: 2px solid lightgrey;
-    font-family: Montserrat;
-    font-size: 14px;
-    margin: 0px 25px;
-    width: 100%;
-    height: 30px;
-    padding: 0px;
-    float: left;
-    margin-right: 25px;
-    cursor: pointer;
-    outline: none;
-    clear: left;
+    width: 150px;
+	height: 150px;
+	opacity: 0;
+    background-color: #3F3C54;
+
+	z-index: 2;
+    margin-top: -150px;
 }
-#user_data_button{
-    background-color: white;
-    border-radius: 20px;
-    border: 2px solid lightgrey;
-    font-family: Montserrat;
-    font-size: 14px;
-    margin: 5px;
-    width: 100%;
-    height: 30px;
-    padding: 0px;
-    float: left;
+
+#id_profile_picture:hover{
     cursor: pointer;
-    outline: none;
 }
+
+
+#id_profile_picture + label{
+    appearance: none;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+
+    background: rgba(0, 0, 0, 0.7);
+    margin-top: -150px;
+    text-align: center;
+    border-radius: 10px;
+
+    transition: 0.5s;
+}
+
+#id_profile_picture + label p{
+    color: white;
+
+    font-weight: 600;
+    font-size: 16px;
+
+    margin: 0px;
+    margin-top: 56px;
+}
+
 
 
 
@@ -2088,6 +2218,8 @@ display: none;
     font-weight: 700;
     color: #3F3C54;
     margin: 5px 0px 3px 5px;
+    margin-left: 0px;
+    margin-right: 0px;
     margin-top: -5px;
     padding-right: 10px;
 }
@@ -2380,7 +2512,7 @@ display: none;
     float: left;
     width:calc(261px);
     margin-top: 15px;
-    padding-bottom: 25px;
+    padding-bottom: 5px;
     text-align: left;
 }
 
@@ -2407,6 +2539,23 @@ display: none;
     display: inline-block;
     float: left;
     text-align: left;
+}
+
+#rd_comments_filter_sterne:hover{
+    cursor: pointer;
+}
+
+
+#rd_comments_filter_sterne p{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    transition: color 0.5s;
+    font-weight: 600;
+    color: #3F3C54;
 }
 
 #rd_comments_filter_balken{
@@ -2439,11 +2588,20 @@ display: none;
     text-align: right;
 }
 
+#rd_comments_filter_prozent p{
+   font-weight: 600;
+    color: #3F3C54;
+}
+
 #rd_comments_block{
     display: inline-block;
     float: right;
-    width:calc(100% - 261px - 25px);
+    width:calc(100% - 261px - 50px);
     margin-top: 15px;
+}
+
+.post-comment-section label{
+    display: none;
 }
 
 #rd_addcoment{

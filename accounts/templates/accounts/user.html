@@ -4,18 +4,22 @@
 {% block content %}
 
 <div id="user_banner"></div>
+
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-<div id="user_header">
-    <div id="user_logo_container">
+<div id="user_header" class="user_header_class">
+    <div class="user_logo_container">
     {% ifequal user.profile_picture None %}
         <img class="ud_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
     {% else %}
         <img class="ud_profile_image" src="{{user.profile_picture.url}}">
     {% endifequal %}
-    {{pictureForm.profile_picture}}
     </div>
-    <p id="user_username">{{user.username}}</p>{{userForm.username}}
+    <p id="user_username">{{user.username}}</p>
+    <p id="user_biographie">{{user.biography}}</p>
+
+    <p id="user_start_edit" onclick="startEdit()">Profil bearbeiten</p>
+
     {% if request.user.is_authenticated %}
     {% if friend_requests %}
     <a href="#">
@@ -27,31 +31,170 @@
     {% endif %}
 </div>
 
-<div id="user_body_header">
-    <p id="user_information">Nutzerinformationen</p>
-    <p id="user_interaction">Nutzerinteraktionen</p>
-    <p id="user_else">Sonstiges</p>
+<div id="user_change_header" class="user_header_class">
+    <div class="user_logo_container">
+    {% ifequal user.profile_picture None %}
+        <img class="ud_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
+    {% else %}
+        <img class="ud_profile_image" id="user_output" src="{{user.profile_picture.url}}">
+        <img id="output"/>
+    {% endifequal %}
+
+        <div id="user_pic_change">
+            <form class="user_pic_change_form">
+                <input type="file" name="profile_picture" accept="image/*" id="id_profile_picture" onchange="loadFile(event)">
+                <label class="button" for="id_profile_picture" id="user_label"><p>Profilbild <br>ändern</p></label>
+            </form>
+        </div>
+
+        </div>
+
+    {{userForm.username}}
+    <p id="user_stop_edit" class="click_text" onclick="stopEdit()">bearbeiten beenden</p>
+    {% if user.biography is not None %}
+        {{userForm.biography}}
+    {% else %}
+        <p>Füge eine Biographie hinzu, um anderen zu zeigen wer Du bist!</p>{{userForm.biography}}
+    {% endif %}
+    <div class="user_p_container">
+        <p>E-Mail</p>
+        {{userForm.email}}
+    </div>
+    <div class="user_p_container">
+        <p>Vorname</p>
+        {{userForm.first_name}}
+    </div>
+    <div class="user_p_container">
+        <p>Nachname</p>
+        {{userForm.last_name}}
+    </div>
+
+    <input id="user_data_button" type="submit" value="Speichern" class="submit_button">
+
 </div>
+
 
 <div id="user_body">
 
-    <div id="user_information_display">
-        <p>{{user.email}}</p>{{userForm.email}}<br>
-        <p>{{user.first_name}}</p>{{userForm.first_name}}
-        <p>{{user.last_name}}</p>{{userForm.last_name}}
-        {% if user.biography is not None %}
-            <p>{{user.biography}}</p>{{userForm.biography}}
-        {% else %}
-            <p>write your own biography to show others who you are!</p>{{userForm.biography}}
-        {% endif %}
+    <div id="user_body_header">
+        <p id="user_home">Profile</p>
+        <p id="user_saved">My Restaurants</p>
+        <p id="user_friends">Freunde</p>
     </div>
-    <input id="user_data_button" type="submit" value="Submit">
+
+    <div id="user_information_display" class="user_options">
+
+         {% for comment in comments.all reversed %}
+            {% if comment.account.username == user.username %}
+
+            {% include 'accounts/snippets/comment_template.html' %}
+
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div id="user_saved_display" class="user_options"></div>
+
+    <div id="user_friends_display" class="user_options"></div>
+
+
+
 </div>
 </form>
 
 <script>
+
+    let active= [1,0,0];
     let newElement = document.getElementsByClassName('$0');
     newElement.textContent = "Never Mind";
+
+    document.getElementById("user_home").style.backgroundColor= "#70af6b";
+
+    function startEdit(){
+        let header = document.getElementById("user_header");
+        let change = document.getElementById("user_change_header");
+        header.style.display = 'none';
+        change.style.display = "inline-block";
+    }
+    function stopEdit(){
+        let header = document.getElementById("user_header");
+        let change = document.getElementById("user_change_header");
+        header.style.display = 'inline-block';
+        change.style.display = 'none';
+    }
+
+
+    let dropArea = document.getElementById('user_pic_change');
+    let label = document.getElementById('user_label');
+
+    ;['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false)
+    })
+
+    ;['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false)
+    })
+
+    function highlight(e) {
+        label.style.backgroundColor = 'rgba(211,211,211,0.8)';
+    }
+
+    function unhighlight(e) {
+        label.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    }
+
+    let loadFile = function(event) {
+        let reader = new FileReader();
+        reader.onload = function(){
+        let output = document.getElementById('user_output');
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+    };
+
+
+    function render_options(){
+        let over_elements = document.getElementById("user_body_header");
+
+        let element = over_elements.getElementsByTagName("p");
+
+        for (let i = 0; i < element.length; i++){
+            element[i].addEventListener("click",  function(){
+            for (let j = 0; j < element.length; j++){
+                element[j].style.backgroundColor = "#3F3C54";
+                active[j]=0;
+            }
+            if (this.style.backgroundColor != "rgb(112, 175, 107)") {
+                this.style.backgroundColor = "#70af6b";
+                active[i]=1;
+            }
+
+            else {
+                this.style.backgroundColor = "#3F3C54";
+                active[i]=0;
+                }
+            render_body();
+            })
+        }
+    }
+
+    function render_body(){
+
+        for(let i = 0; i < active.length; i++){
+            if(active[i]==1){
+                document.getElementsByClassName("user_options")[i].style.display = "inline-block";
+            }
+            else{
+                if(active[i]==0){
+                    document.getElementsByClassName("user_options")[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    render_options();
+    render_body();
+
 </script>
 
 {% include 'accounts/snippets/send_friend_request.html' %}
