@@ -2,14 +2,15 @@
 {% load static %}
 
 {% block content %}
-
+<main class="mapcontainer">
 <div id="mapid"></div>
 
 
 <div id="restaurants_body_content_map">
 
 {% for i in restaurants %}
-    <div class="restaurants_block_map">
+
+    <div class='restaurants_block_map restaurant{{ forloop.counter0 }}'>
 
         <!--
     <div class="restaurants_img">
@@ -50,7 +51,7 @@
 -->
 {% endfor %}
 </div>
-
+</main>
 <script>
   var mymap = L.map('mapid').setView([48.367, 10.89779], 13);
 
@@ -62,11 +63,7 @@
 		zoomOffset: -1
 	}).addTo(mymap);
 
-	var plantyIcon = L.icon({
-        iconUrl: "{% static 'assets/PO_Icon_Green_Fill.png' %}",
-        iconSize:     [28], // size of the icon
-        iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
-  });
+
 
   let restaurantN = document.getElementsByClassName("restaurantName");
   let restaurantA = document.getElementsByClassName("restaurantAdresse")
@@ -78,15 +75,31 @@
       'className' : 'popup'
   }
 
-  for (let i = 0; i <= restaurantN.length; i++) {
+  for (let i = 0; i <= restaurantN.length - 1; i++) {
+      var className = "restaurant" +i
+      	var plantyIcon = L.icon({
+        iconUrl: "{% static 'assets/PO_Icon_Green_Fill.svg' %}",
+        iconSize:     [28], // size of the icon
+        iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
+        className: className
+  });
       var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);
+
       var text = "<strong>" + restaurantN[i].innerHTML + "</strong>";
+
       marker.bindPopup(text + "<br>" + restaurantA[i].innerHTML, customOptions);
       document.getElementsByClassName("restaurantName")[i].style.display = "none";
       document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
       document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
       document.getElementsByClassName("restaurantLongitude")[i].style.display = "none";
   }
+
+  L.Routing.control({
+  waypoints: [
+    L.latLng(48.367, 10.89779),
+    L.latLng(48.37, 10.89779)
+  ]
+}).addTo(mymap);
 
 <!--
  let restaurant_blocks = document.getElementsByClassName("restaurants_block");
@@ -113,6 +126,12 @@
       var marker = L.marker([x[0], x[1]]).addTo(mymap);
       marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
   }
+
+
+  let r = document.getElementsByClassName('restaurants_block_map');
+for(let i = 0; i < r.length; i++){
+    console.log(r[i]);
+}
 */
 </script>
 

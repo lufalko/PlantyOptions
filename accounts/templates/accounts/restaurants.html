@@ -127,7 +127,7 @@
             <div id="restaurants_aside_right_bottom_text">
                 <p id="restaurants_map_link"><a href="{% url 'map' %}">Map anzeigen</a></p>
                 <p id="restaurants_map_name">Restaurant Name</p>
-                 <img src="{% static 'assets/PO_Icon_Green_Fill.png' %}">
+                 <img src="{% static 'assets/PO_Icon_Green_Fill.svg' %}">
                 <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
                 <p id="restaurants_map_entfernung">? km Entfernt</p>
             </div>
@@ -643,7 +643,7 @@ window.onresize = reportWindowSize;
 
 
     var plantyIcon = L.icon({
-        iconUrl: "{% static 'assets/PO_Icon_Green_Fill.png' %}",
+        iconUrl: "{% static 'assets/PO_Icon_Green_Fill.svg' %}",
         iconSize:     [25], // size of the icon
     });
 
