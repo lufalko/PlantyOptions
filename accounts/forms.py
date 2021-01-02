@@ -34,10 +34,10 @@ class PictureUpdateForm(forms.ModelForm):
         fields = ['profile_picture']
 
 
-
 class CreateCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content', 'ratings']
 
-        widgets = {'content': forms.Textarea(attrs={'class': 'form-control'})}
+        widgets = {'content': forms.Textarea(attrs={'class': 'form-control'}),
+                   'ratings': forms.NumberInput}

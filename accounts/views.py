@@ -319,7 +319,8 @@ def restaurant_detail(request, pk):
 
         if comment_form.is_valid():
             content = request.POST.get('content')
-            comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
+            ratings = request.POST.get('ratings')
+            comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content, ratings=ratings)
             comment.save()
             return HttpResponseRedirect(request.path_info)
 
