@@ -84,13 +84,24 @@
 
     <div id="user_information_display" class="user_options">
 
-         {% for comment in comments.all reversed %}
-            {% if comment.account.username == user.username %}
-
-            {% include 'accounts/snippets/comment_template.html' %}
-
-            {% endif %}
-        {% endfor %}
+        <div id="user_comments">
+             {% for comment in comments.all reversed %}
+                {% if comment.account.username == user.username %}
+                    <div class="user_comment">
+                        <div class="user_comment_rname">
+                            {{ comment.restaurant.name}}
+                        </div>
+                        <div class="user_comment_rating">
+                            <p> {{ comment.ratings }} </p>
+                        </div>
+                         <div class="rd_comment_time">{{ comment.date_created }}</div>
+                         <div class="user_comment_content">
+                            {{ comment.content }}
+                         </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
     <div id="user_saved_display" class="user_options"></div>
@@ -152,6 +163,53 @@
     reader.readAsDataURL(event.target.files[0]);
     };
 
+    function stars(elements) {
+
+        let SternArray = new Array(5);
+
+        let TextInsideP = elements.getElementsByTagName('p')[0].innerHTML;
+
+        elements.getElementsByTagName('p')[0].style.display = "none";
+
+        if (TextInsideP == 0.0) {
+            SternArray = [0, 0, 0, 0, 0];
+        }
+        if (TextInsideP == 1.0) {
+            SternArray = [1, 0, 0, 0, 0];
+        }
+        if (TextInsideP == 2.0) {
+            SternArray = [1, 1, 0, 0, 0];
+        }
+        if (TextInsideP == 3.0) {
+            SternArray = [1, 1, 1, 0, 0];
+        }
+        if (TextInsideP == 4.0) {
+            SternArray = [1, 1, 1, 1, 0];
+        }
+        if (TextInsideP == 5.0) {
+            SternArray = [1, 1, 1, 1, 1];
+        }
+
+        for (let i = 0; i < SternArray.length; i++) {
+
+            let element = document.createElement("img");
+
+            if (SternArray[i] == 1) {
+                element.setAttribute('src', "{% static 'assets/stern.png' %}");
+            }
+
+            if (SternArray[i] == 0) {
+                element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+            }
+
+            element.id = 'i';
+            element.className = "stars_class";
+
+            elements.appendChild(element);
+        }
+    }
+
+
 
     function render_options(){
         let over_elements = document.getElementById("user_body_header");
@@ -192,8 +250,14 @@
         }
     }
 
+
+    for(let i = 0; i < document.getElementsByClassName("user_comment_rating").length; i++){
+       stars(document.getElementsByClassName("user_comment_rating")[i]);
+    }
     render_options();
     render_body();
+    starrating();
+    changeStars();
 
 </script>
 
