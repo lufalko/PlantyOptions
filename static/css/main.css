@@ -1735,6 +1735,11 @@ display: none;
     float: left;
 }
 
+#locationMap{
+    width: 100%;
+    height: 500px;
+}
+
 /* Popup style */
 .popup .leaflet-popup-tip,
 .popup .leaflet-popup-content-wrapper {

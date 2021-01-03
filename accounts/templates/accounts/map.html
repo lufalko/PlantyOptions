@@ -5,12 +5,11 @@
 <main class="mapcontainer">
 <div id="mapid"></div>
 
-
 <div id="restaurants_body_content_map">
 
 {% for i in restaurants %}
 
-    <div class='restaurants_block_map restaurant{{ forloop.counter0 }}'>
+    <div class='restaurants_block_map ' data-name="restaurant{{ forloop.counter0 }}">
 
         <!--
     <div class="restaurants_img">
@@ -80,14 +79,18 @@
       	var plantyIcon = L.icon({
         iconUrl: "{% static 'assets/PO_Icon_Green_Fill.svg' %}",
         iconSize:     [28], // size of the icon
-        iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
-        className: className
+        iconAnchor:   [10, 47], // point of the icon which will correspond to marker's location
+        popupAnchor:  [2, -47], // point from which the popup should open relative to the iconAnchor
+      //  className: className
   });
       var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);
 
       var text = "<strong>" + restaurantN[i].innerHTML + "</strong>";
 
-      marker.bindPopup(text + "<br>" + restaurantA[i].innerHTML, customOptions);
+
+      marker.bindPopup(text + "<br>" + restaurantA[i].innerHTML + "<br>", customOptions);
+
+
       document.getElementsByClassName("restaurantName")[i].style.display = "none";
       document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
       document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
@@ -127,12 +130,31 @@
       marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
   }
 
-
   let r = document.getElementsByClassName('restaurants_block_map');
-for(let i = 0; i < r.length; i++){
+  for(let i = 0; i < r.length; i++){
     console.log(r[i]);
 }
 */
+var slides = document.getElementsByClassName("restaurants_block_map");
+for (var i = 0; i < slides.length; i++) {
+   var attr = slides.item(i).getAttribute("data-name")
+    slides.item(i).onmouseover = function(){
+          var dataname = this.getAttribute("data-name");
+          var mappoint = document.getElementsByClassName(dataname);
+        console.log(mappoint)
+          mappoint[0].style.cssText = "transform-origin:60px 60px 60px";
+
+
+    };
+   /*
+       slides.item(i).onmouseleave = function(){
+          var dataname = this.getAttribute("data-name");
+          var mappoint = document.getElementsByClassName(dataname);
+          mappoint[0].style.width = "28px";
+
+    };*/
+
+}
 </script>
 
 
