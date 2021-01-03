@@ -113,7 +113,24 @@
           var mappoint = document.getElementsByClassName(dataname);
           mappoint[0].src = "{% static 'assets/PO_Icon_Green_Fill.svg' %}"
       };
+
+      //routing --noch nicht fertig
+      slides.item(i).onclick = function (){
+          var dataname = this.getAttribute("data-name");
+          var mappoint = document.getElementsByClassName(dataname);
+          console.log(mappoint[0]);
+          L.Routing.control({
+                waypoints: [
+                    L.latLng(restaurantLat[0].innerHTML, restaurantLong[0].innerHTML),
+                    L.latLng(restaurantLat[1].innerHTML, restaurantLong[1].innerHTML),
+                ],
+                lineOptions: {
+                    styles: [{ color: 'green', opacity: 1, weight: 5 }]
+                },
+          }).addTo(mymap);
+      }
   }
+
 
 </script>
 
