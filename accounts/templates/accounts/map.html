@@ -81,7 +81,7 @@
         iconSize:     [28], // size of the icon
         iconAnchor:   [10, 47], // point of the icon which will correspond to marker's location
         popupAnchor:  [2, -47], // point from which the popup should open relative to the iconAnchor
-      //  className: className
+        className: className
   });
       var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);
 
@@ -95,14 +95,20 @@
       document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
       document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
       document.getElementsByClassName("restaurantLongitude")[i].style.display = "none";
-  }
+
 
   L.Routing.control({
   waypoints: [
-    L.latLng(48.367, 10.89779),
-    L.latLng(48.37, 10.89779)
-  ]
-}).addTo(mymap);
+    L.latLng(restaurantLat[0].innerHTML, restaurantLong[0].innerHTML),
+    L.latLng(restaurantLat[1].innerHTML, restaurantLong[1].innerHTML),
+  ],
+      lineOptions: {
+          styles: [{ color: 'green', opacity: 1, weight: 5 }]
+      },
+
+    }).addTo(mymap);
+  }
+
 
 <!--
  let restaurant_blocks = document.getElementsByClassName("restaurants_block");
@@ -137,22 +143,18 @@
 */
 var slides = document.getElementsByClassName("restaurants_block_map");
 for (var i = 0; i < slides.length; i++) {
-   var attr = slides.item(i).getAttribute("data-name")
     slides.item(i).onmouseover = function(){
           var dataname = this.getAttribute("data-name");
           var mappoint = document.getElementsByClassName(dataname);
-        console.log(mappoint)
-          mappoint[0].style.cssText = "transform-origin:60px 60px 60px";
-
-
+            mappoint[0].src = "{% static 'assets/PO_Icon_Green.png' %}"
     };
-   /*
+
        slides.item(i).onmouseleave = function(){
           var dataname = this.getAttribute("data-name");
           var mappoint = document.getElementsByClassName(dataname);
-          mappoint[0].style.width = "28px";
+            mappoint[0].src = "{% static 'assets/PO_Icon_Green_Fill.svg' %}"
 
-    };*/
+    };
 
 }
 </script>

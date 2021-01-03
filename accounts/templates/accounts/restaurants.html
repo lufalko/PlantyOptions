@@ -20,7 +20,7 @@
             <div id="restaurants_body_content">
                 {% for i in restaurants %}
 
-    <div class="restaurants_block">
+    <div class='restaurants_block' data-name="restaurant{{ forloop.counter0 }}">
     <div class="restaurants_img">
         {% ifequal i.restaurant_picture None %}
         <img src="{% static 'assets/dashboard-BG.jpg' %}">
@@ -668,6 +668,23 @@ window.onresize = reportWindowSize;
         document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
         document.getElementsByClassName("restaurantLongitude")[i].style.display = "none";
     }
+
+    var slides = document.getElementsByClassName("restaurants_block");
+for (var i = 0; i < slides.length; i++) {
+    slides.item(i).onmouseover = function(){
+          var dataname = this.getAttribute("data-name");
+          var mappoint = document.getElementsByClassName(dataname);
+            mappoint[0].src = "{% static 'assets/PO_Icon_Green.png' %}"
+    };
+
+       slides.item(i).onmouseleave = function(){
+          var dataname = this.getAttribute("data-name");
+          var mappoint = document.getElementsByClassName(dataname);
+            mappoint[0].src = "{% static 'assets/PO_Icon_Green_Fill.svg' %}"
+
+    };
+
+}
 
 
     mybutton = document.getElementById("myBtn");
