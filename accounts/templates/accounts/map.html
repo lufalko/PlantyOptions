@@ -5,135 +5,133 @@
 <main class="mapcontainer">
 <div id="mapid"></div>
 
+    <div id="restaurants_body_content_map">
 
-<div id="restaurants_body_content_map">
+        {% for i in restaurants %}
 
-{% for i in restaurants %}
+            <div class='restaurants_block_map ' data-name="restaurant{{ forloop.counter0 }}">
 
-    <div class='restaurants_block_map restaurant{{ forloop.counter0 }}'>
+                <div class="restaurants_name_map">
+                    <p>{{i.name}}</p>
+                </div>
 
-        <!--
-    <div class="restaurants_img">
-        {% ifequal i.restaurant_picture None %}
-        <img src="{% static 'assets/dashboard-BG.jpg' %}">
-        {% else %}
-             <img src="{{i.restaurant_picture.url}}">
-        {% endifequal %}
-    </div>
-    -->
-
+                <div class="restaurants_adresse_map">
+                    <p>{{i.address}} {{i.houseNumber}}, {{i.city}} </p>
+                    <p><a class="restaurants_link" href="{% url 'restaurant_detail' pk=i.pk %}">Zum Restaurant</a></p>
+                </div>
+            </div>
 
 
-    <div class="restaurants_name_map">
-        <p>{{i.name}}</p>
-    </div>
+            <p class="restaurantName">{{i.name}}</p>
+            <p class="restaurantAdresse">{{i.address }}  {{i.houseNumber}}</p>
+            <p class="restaurantLatitude">{{i.latitude}}</p>
+            <p class="restaurantLongitude">{{i.longitude}}</p>
 
-    <div class="restaurants_adresse_map">
-   <!-- <img src="{% static 'assets/PO_Icon_Green_Fill.png' %}"> -->
-        <p>{{i.address}} {{i.houseNumber}}, {{i.city}} </p>
-        <p><a class="restaurants_link" href="{% url 'restaurant_detail' pk=i.pk %}">Zum Restaurant</a></p>
-    </div>
-
+        {% endfor %}
 
     </div>
-
-
-
-
-<p class="restaurantName">{{i.name}}</p>
-<p class="restaurantAdresse">{{i.address }}  {{i.houseNumber}}</p>
-<p class="restaurantLatitude">{{i.latitude}}</p>
-<p class="restaurantLongitude">{{i.longitude}}</p>
-
-<!--
-<p>{{i.point}}</p>
-<p class="restaurantPunkte">{{i.lat_lng}}</p>
--->
-{% endfor %}
-</div>
 </main>
+
+
 <script>
+
+  //map erstellen
   var mymap = L.map('mapid').setView([48.367, 10.89779], 13);
 
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		attribution: 'PlantyOptions',
-	    maxZoom: 18,
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1
-	}).addTo(mymap);
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      attribution: 'PlantyOptions',
+	  maxZoom: 18,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1
+  }).addTo(mymap);
 
 
-
+  //daten
   let restaurantN = document.getElementsByClassName("restaurantName");
   let restaurantA = document.getElementsByClassName("restaurantAdresse")
   let restaurantLat = document.getElementsByClassName("restaurantLatitude");
   let restaurantLong = document.getElementsByClassName("restaurantLongitude");
 
+  //popup optionen
   var customOptions = {
       'maxWidth': '500',
       'className' : 'popup'
   }
 
+  //icon optionen
   for (let i = 0; i <= restaurantN.length - 1; i++) {
-      var className = "restaurant" +i
-      	var plantyIcon = L.icon({
-        iconUrl: "{% static 'assets/PO_Icon_Green_Fill.svg' %}",
-        iconSize:     [28], // size of the icon
-        iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
-        className: className
-  });
+      var className = "restaurant" +i;
+      var plantyIcon = L.icon({
+          iconUrl: "{% static 'assets/PO_Icon_Green_Fill.svg' %}",
+          iconSize:     [28], // size of the icon
+          iconAnchor:   [10, 47], // point of the icon which will correspond to marker's location
+          popupAnchor:  [2, -47], // point from which the popup should open relative to the iconAnchor
+          className: className
+      });
+
+      //marker erstellen
       var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);
 
+      //popup erstellen
       var text = "<strong>" + restaurantN[i].innerHTML + "</strong>";
+      marker.bindPopup(text + "<br>" + restaurantA[i].innerHTML + "<br>", customOptions);
 
-      marker.bindPopup(text + "<br>" + restaurantA[i].innerHTML, customOptions);
+      //restaurant daten nicht anzeigen
       document.getElementsByClassName("restaurantName")[i].style.display = "none";
       document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
       document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
       document.getElementsByClassName("restaurantLongitude")[i].style.display = "none";
-  }
 
-  L.Routing.control({
-  waypoints: [
-    L.latLng(48.367, 10.89779),
-    L.latLng(48.37, 10.89779)
-  ]
-}).addTo(mymap);
+      /*
+      //routing
+      L.Routing.control({
+          waypoints: [
+                L.latLng(restaurantLat[0].innerHTML, restaurantLong[0].innerHTML),
+                L.latLng(restaurantLat[1].innerHTML, restaurantLong[1].innerHTML),
+          ],
+          lineOptions: {
+                styles: [{ color: 'green', opacity: 1, weight: 5 }]
+          },
+      }).addTo(mymap);
+      */
 
-<!--
- let restaurant_blocks = document.getElementsByClassName("restaurants_block");
-         for (let i = 0; i < restaurant_blocks.length; i++) {
-            restaurant_blocks[i].addEventListener('mouseover', function (){
-                document.getElementsByClassName("restaurants_name_map")[i].style.color = "red";
-            })
-        }
--->
-
-  /*
-  let restaurantN = document.getElementsByClassName("restaurantName");
-  let restaurantA = document.getElementsByClassName("restaurantAdresse")
-  let restaurantP = document.getElementsByClassName("restaurantPunkte");
-
-  for (let i = 0; i < restaurantP.length; i++) {
-      var x = restaurantP[i].innerHTML.split(",");
-      x[0] = x[0].substr(1);
-      x[1] = x[1].substring(1, x[1].length-1);
-
-      console.log(x[0]);
-      console.log(x[1]);
-
-      var marker = L.marker([x[0], x[1]]).addTo(mymap);
-      marker.bindPopup(restaurantN[i].innerHTML + "<br>" + restaurantA[i].innerHTML).openPopup();
   }
 
 
-  let r = document.getElementsByClassName('restaurants_block_map');
-for(let i = 0; i < r.length; i++){
-    console.log(r[i]);
-}
-*/
+  //ausgewähltes retaurant in anderer icon farbe
+  var slides = document.getElementsByClassName("restaurants_block_map");
+  for (var i = 0; i < slides.length; i++) {
+      slides.item(i).onmouseover = function(){
+          var dataname = this.getAttribute("data-name");
+          var mappoint = document.getElementsByClassName(dataname);
+          mappoint[0].src = "{% static 'assets/PO_Icon_Green.png' %}"
+      };
+
+      slides.item(i).onmouseleave = function(){
+          var dataname = this.getAttribute("data-name");
+          var mappoint = document.getElementsByClassName(dataname);
+          mappoint[0].src = "{% static 'assets/PO_Icon_Green_Fill.svg' %}"
+      };
+
+      //routing --noch nicht fertig
+      slides.item(i).onclick = function (){
+          var dataname = this.getAttribute("data-name");
+          var mappoint = document.getElementsByClassName(dataname);
+          console.log(mappoint[0]);
+          L.Routing.control({
+                waypoints: [
+                    L.latLng(restaurantLat[0].innerHTML, restaurantLong[0].innerHTML),
+                    L.latLng(restaurantLat[1].innerHTML, restaurantLong[1].innerHTML),
+                ],
+                lineOptions: {
+                    styles: [{ color: 'green', opacity: 1, weight: 5 }]
+                },
+          }).addTo(mymap);
+      }
+  }
+
+
 </script>
-
 
 {% endblock %}
