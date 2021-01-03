@@ -1,5 +1,5 @@
 from django.db.models import Avg
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls.exceptions import NoReverseMatch
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
 from django.shortcuts import render
+
+from django.views.decorators.csrf import csrf_exempt
 
 from django.views.generic import TemplateView
 
@@ -29,6 +31,7 @@ from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
 from .utils import get_friend_request_or_false
 from .friend_request_status import FriendRequestStatus
+from accounts.models import rd_update
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -56,7 +59,6 @@ def register(request):
         form = CreateUserForm()
         context['registration_form'] = form
     return render(request, 'accounts/register.html', context)
-
 
 def loginPage(request):
     if request.user.is_authenticated:
@@ -126,7 +128,6 @@ def restaurants(request):
 
     myFilter = RestaurantFilter(request.GET, queryset=restaurants)
     addressFilter = GetAddressFilter(request.GET, queryset=restaurants)
-
 
     restaurants = myFilter.qs
 
@@ -340,6 +341,16 @@ def article_detail(request, pk):
         'queryset': queryset
     }
     return render(request, 'restaurant_detail.html', context)
+
+
+@csrf_exempt
+def rd_update_counter(request):
+    if request.method == 'POST':
+        player = rd_update.objects.get()
+        player.rd_opened = request.POST['counter']
+        player.save()
+        message = 'update successful'
+    return HttpResponse(message)
 
 
 class DataApi(APIView):

@@ -183,7 +183,6 @@ class Restaurant(models.Model):
     city = models.CharField(max_length=64, default="")
     state = models.CharField(max_length=64, default="")
     zip_code = models.CharField(max_length=5, default="86444")
-
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
 
@@ -223,8 +222,15 @@ class Restaurant(models.Model):
         else:
             return 0
 
+    def getPK(self):
+        return self.kwargs['pk']
+
     def __str__(self):
         return self.name
+
+class rd_update(models.Model):
+    #track the number of times the user has lost window focus
+    rd_opened = models.IntegerField(default=0)
 
 
 class Food(models.Model):
@@ -242,7 +248,7 @@ class Food(models.Model):
     description = models.CharField(max_length=400, null=True)
 
     def getRestaurantName(self, obj):
-        return obj.restaurant.nem
+        return obj.restaurant.name
 
     def __str__(self):
         return self.name

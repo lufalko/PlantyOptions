@@ -87,18 +87,20 @@
         <div id="user_comments">
              {% for comment in comments.all reversed %}
                 {% if comment.account.username == user.username %}
-                    <div class="user_comment">
-                        <div class="user_comment_rname">
-                            {{ comment.restaurant.name}}
-                        </div>
-                        <div class="user_comment_rating">
-                            <p> {{ comment.ratings }} </p>
-                        </div>
-                         <div class="rd_comment_time">{{ comment.date_created }}</div>
-                         <div class="user_comment_content">
-                            {{ comment.content }}
-                         </div>
-                    </div>
+
+                        <a class="user_comment" href="{% url 'restaurant_detail' pk=comment.restaurant.pk %}">
+                            <div class="user_comment_rname">
+                                {{ comment.restaurant.name}}
+                            </div>
+                            <div class="user_comment_rating">
+                                <p> {{ comment.ratings }} </p>
+                            </div>
+                             <div class="rd_comment_time">{{ comment.date_created }}</div>
+                             <div class="user_comment_content">
+                                {{ comment.content }}
+                            </div>
+
+                        </a>
                 {% endif %}
             {% endfor %}
         </div>

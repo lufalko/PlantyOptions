@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-
+{% csrf_token %}
 <div id="rd_banner"></div>
 <div id="rd_tags">
     {% for k in queryset.tags.all %}
@@ -159,6 +159,7 @@
 
 <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="{% static 'assets/up.svg' %}"></button>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
 
@@ -175,7 +176,8 @@
     let mousex;
     let sterne_p = document.getElementById("rd_comments_filter_sterne").getElementsByTagName("p");
     let comments = document.getElementsByClassName("rd_comment");
-    let l = document.getElementById("rd_foods_tags").scrollLeft
+    let l = document.getElementById("rd_foods_tags").scrollLeft;
+    let counter = 0;
 
     document.getElementsByClassName("rd_food_tag")[0].style.backgroundColor = "rgb(112,175,107)";
     document.getElementsByClassName("rd_food_tag")[0].style.color = "white";
@@ -309,6 +311,7 @@
         for (let a = 0; a < stars.length; a++) {
             stars[a].addEventListener('click', function () {
                 document.getElementById("id_ratings").value = a + 1;
+                console.log(document.getElementById("id_ratings").value);
                 for (let k = 0; k <= a; k++) {
                     stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
                     star_amount = a;
@@ -425,355 +428,390 @@
     <p id="rd_food_location">Location</p>
     <p id="rd_contact">Contact</p>*/
 
-    function render_options(){
-        let over_elements = document.getElementById("rd_body_header");
-
-        let element = over_elements.getElementsByTagName("p");
-
-        for (let i = 0; i < element.length; i++){
-            element[i].addEventListener("click",  function(){
-            for (let j = 0; j < element.length; j++){
-                element[j].style.backgroundColor = "#3F3C54";
-                active[j]=0;
-            }
-            if (this.style.backgroundColor != "rgb(112, 175, 107)") {
-                this.style.backgroundColor = "#70af6b";
-                active[i]=1;
-            }
-
-            else {
-                this.style.backgroundColor = "#3F3C54";
-                active[i]=0;
-                }
-            render_body();
-            })
-        }
-    }
-
-    function render_body(){
-
-        for(let i = 0; i < active.length; i++){
-            if(active[i]==1){
-                document.getElementsByClassName("rd_options")[i].style.display = "inline-block";
-            }
-            else{
-                document.getElementsByClassName("rd_options")[i].style.display = "none";
-            }
-        }
-    }
-
-    render_options();
-    render_body();
-
-    function count_cat() {
-        let elements = document.getElementsByClassName('rd_dishes');
-        let blocks= document.getElementsByClassName('rd_food_block');
-        for (let i = 0; i < document.getElementsByClassName('rd_dishes').length; i++) {
-
-            let category = elements[i].getElementsByClassName('rd_food_category');
-            let vegetarian_counter = 0;
-            let vegan_counter = 0;
-            for (let j = 0; j < category.length; j++) {
-                if (category[j].innerHTML == 'Vegan' && blocks[j].style.display != "none") {
-                    vegan_counter++;
-                }
-                else {
-                    if (blocks[j].style.display != "none") {
-                        vegetarian_counter++;
-                    }
-                }
-            }
-            document.getElementById('rd_vegetarisch').innerHTML = vegetarian_counter + ' Vegetarisch';
-            document.getElementById('rd_vegan').innerHTML = vegan_counter + ' Vegan';
-            document.getElementById('rd_vegan').style.userSelect = "none";
-            document.getElementById('rd_vegetarisch').style.userSelect = "none";
-        }
-    }
-
-    function render_vegan(){
-        let element = document.getElementById("rd_vegan");
-
-        element.addEventListener("mouseover",  function(){ if(!vegan){this.style.backgroundColor = "#378C61"}});
-        element.addEventListener("mouseover",  function(){ if(!vegan){this.style.borderColor = "#378C61"}});
-        element.addEventListener("mouseleave",  function(){ if(!vegan){this.style.backgroundColor = "transparent";}});
-        element.addEventListener("mouseleave",  function(){ if(!vegan){this.style.borderColor = "lightgrey"}});
-
-         element.addEventListener('click', function (){
-
-            if(!vegan) {
-                this.style.backgroundColor = "#378C61";
-                this.style.borderColor = "#378C61";
-                vegan = true;
-                vegetarisch = false;
-                document.getElementById("rd_vegetarisch").style.backgroundColor = "transparent";
-                document.getElementById("rd_vegetarisch").style.borderColor = "lightgrey";
-            }
-            else{
-                vegan = false;
-                this.style.backgroundColor = "transparent";
-                this.style.borderColor = "lightgrey";
-            }
-            render_food();
-
-         })
-    }
-
-    function render_vegetarisch(){
-        let element = document.getElementById("rd_vegetarisch");
-
-        element.addEventListener("mouseover",  function(){ if(!vegetarisch){this.style.backgroundColor = "#70af6b"}});
-        element.addEventListener("mouseover",  function(){ if(!vegetarisch){this.style.borderColor = "#70af6b"}});
-        element.addEventListener("mouseleave",  function(){ if(!vegetarisch){this.style.backgroundColor = "transparent";}});
-        element.addEventListener("mouseleave",  function(){ if(!vegetarisch){this.style.borderColor = "lightgrey"}});
-
-        element.addEventListener('click', function (){
-
-            if(!vegetarisch) {
-                this.style.backgroundColor = "rgb(112,175,107)";
-                this.style.borderColor = "rgb(112,175,107)";
-                vegetarisch = true;
-                vegan = false;
-
-                document.getElementById("rd_vegan").style.backgroundColor = "transparent";
-                document.getElementById("rd_vegan").style.borderColor = "lightgrey";
-            }
-            else{
-                vegetarisch = false;
-                this.style.backgroundColor = "transparent";
-                this.style.borderColor = "lightgrey";
-            }
-            render_food();
-
-        })
-    }
-
-     function render_food(){
-
-        let category = document.getElementsByClassName('rd_food_block');
-
-        let foods = document.getElementsByClassName("rd_food_block");
-                    for(let i = 0; i < foods.length; i++){
-                        let check = false;
-                        for (let j = 0; j < tag_list[i].length; j++) {
-
-                            if (tag_list[i][j] == tag_now) {
-                                check = true;
-                                foods[i].style.display = "inline-block";
-
-                            } else {
-                                if(check == false){
-                                    foods[i].style.display = "none";
-                                }
-                            }
-                        }
-                    }
-
-        for (let i = 0; i < category.length; i++) {
-            if (!(!vegan && !vegetarisch) && !(vegan && vegetarisch)) {
-
-                if (!veg_list[i]) {
-
-                    if (!vegan) {
-                        category[i].style.display = "none";
-                    } else {
-                        if(tag_now == "Alles") {
-                            category[i].style.display = "inline-block";
-                        }
-                        //elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "#378C61";
-                    }
-                } else {
-                    if (!vegetarisch) {
-                        category[i].style.display = "none";
-                    } else {
-                        if(tag_now == "Alles") {
-                            category[i].style.display = "inline-block";
-                        }//elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "rgb(112,175,107)";
-                    }
-                }
-            }
-        else{
-            if(tag_now == "Alles") {
-                category[i].style.display = "inline-block";
-            }
-            else{
-                 foods = document.getElementsByClassName("rd_food_block");
-                    for(let i = 0; i < foods.length; i++){
-                        let check = false;
-                        for (let j = 0; j < tag_list[i].length; j++) {
-
-                            if (tag_list[i][j] == tag_now) {
-                                check = true;
-                                foods[i].style.display = "inline-block";
-
-                            } else {
-                                if(check == false){
-                                    foods[i].style.display = "none";
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    function render_food_tags(){
-        let elements = document.getElementsByClassName("rd_food_tag");
-        for (let i=0; i < elements.length; i++){
-            for (let j=0; j < elements.length; j++){
-                if(elements[i].innerHTML == elements[j].innerHTML && i != j){
-                    elements[j].style.display = "none";
-                    elements[j].innerHTML = " "
-                }
-            }
-        }
-        let p=0;
-         for (let o=0; o < elements.length; o++){
-
-           if(elements[o].innerHTML != " "){
-               food_tags[p] = elements[o].innerHTML;
-               p++
-           }
-        }
-
-    }
-
-    for (let i=0; i<document.getElementsByClassName("rd_food_tag").length ; i++) {
-
-
-
-        document.getElementsByClassName("rd_food_tag")[i].addEventListener('click', function () {
-
-            if (this.style.backgroundColor != "rgb(112, 175, 107)") {
-                this.style.backgroundColor = "#70af6b";
-                this.style.color = "white";
-
-                let text = this.innerHTML;
-                for (let j =0; j <  document.getElementsByClassName("rd_food_tag").length; j++){
-                    if(j != i){
-                        document.getElementsByClassName("rd_food_tag")[j].style.backgroundColor = "transparent";
-                        document.getElementsByClassName("rd_food_tag")[j].style.color = "darkgrey";
-                        document.getElementsByClassName("rd_food_tag")[j].style.userSelect = "none";
-                    }
-                }
-                tag_now = text;
-                food_tags_render(text);
-
-            }
-
-            else {
-                this.style.backgroundColor = "transparent";
-                this.style.color = "darkgrey";
-                document.getElementsByClassName("rd_food_tag")[0].click();
-            }
-        })
-    }
-
-    function food_tags_render(text){
-
-        let foods = document.getElementsByClassName("rd_food_block");
-
-        for(let i = 0; i < foods.length; i++){
-            let check = false;
-            if(text != "Alles") {
-
-                for (let j = 0; j < tag_list[i].length; j++) {
-
-                    if (tag_list[i][j] == text) {
-                        check = true;
-                        foods[i].style.display = "inline-block";
-                    } else {
-                        if(check == false) {
-                            foods[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-            else{
-                foods[i].style.display = "inline-block";
-            }
-        }
-        count_cat();
-        render_food();
-
-    }
-
-
-    function stars(elements) {
-
-        let SternArray = new Array(5);
-
-        let TextInsideP = elements.getElementsByTagName('p')[0].innerHTML;
-
-        elements.getElementsByTagName('p')[0].style.display = "none";
-
-        if (TextInsideP == 0.0) {
-            SternArray = [0, 0, 0, 0, 0];
-        }
-        if (TextInsideP == 1.0) {
-            SternArray = [1, 0, 0, 0, 0];
-        }
-        if (TextInsideP == 2.0) {
-            SternArray = [1, 1, 0, 0, 0];
-        }
-        if (TextInsideP == 3.0) {
-            SternArray = [1, 1, 1, 0, 0];
-        }
-        if (TextInsideP == 4.0) {
-            SternArray = [1, 1, 1, 1, 0];
-        }
-        if (TextInsideP == 5.0) {
-            SternArray = [1, 1, 1, 1, 1];
-        }
-
-        for (let i = 0; i < SternArray.length; i++) {
-
-            let element = document.createElement("img");
-
-            if (SternArray[i] == 1) {
-                element.setAttribute('src', "{% static 'assets/stern.png' %}");
-            }
-
-            if (SternArray[i] == 0) {
-                element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
-            }
-
-            element.id = 'i';
-            element.className = "stars_class";
-
-            elements.appendChild(element);
-        }
-    }
-    mybutton = document.getElementById("myBtn");
-
-    window.onscroll = function() {scrollFunction()};
-
-    function scrollFunction() {
-      if (document.body.scrollTop > 600) {
-        mybutton.style.display = "block";
-
-      } else {
-        mybutton.style.display = "none";
-      }
-    }
-
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-      document.body.scrollTop = 262; // For Safari
-      document.documentElement.scrollTop = 262; // For Chrome, Firefox, IE and Opera
-    }
-
-    stars(document.getElementById("rd_rating"));
-    for(let i = 0; i < document.getElementsByClassName("rd_comment_rating").length; i++){
-       stars(document.getElementsByClassName("rd_comment_rating")[i]);
-    }
-
-    render_vegan();
-    render_vegetarisch();
-    render_food_tags();
-    count_cat();
-    starrating();
-    changeStars();
+         function render_options() {
+
+             let over_elements = document.getElementById("rd_body_header");
+
+             let element = over_elements.getElementsByTagName("p");
+
+             for (let i = 0; i < element.length; i++) {
+                 element[i].addEventListener("click", function () {
+                         counter=i;
+                         $.ajax({
+                             url: '/rd_update_counter/',
+                             data: {'counter': counter},
+                             type: 'POST',
+                         }).done(function (response) {
+                             console.log(response);
+                         });
+
+
+                     console.log(counter)
+                     for (let j = 0; j < element.length; j++) {
+                         element[j].style.backgroundColor = "#3F3C54";
+                         active[j] = 0;
+                     }
+                     if (this.style.backgroundColor != "rgb(112, 175, 107)") {
+                         this.style.backgroundColor = "#70af6b";
+                         active[i] = 1;
+                     } else {
+                         this.style.backgroundColor = "#3F3C54";
+                         active[i] = 0;
+                     }
+                     render_body();
+                 })
+             }
+         }
+
+         function render_body() {
+
+             for (let i = 0; i < active.length; i++) {
+                 if (active[i] == 1) {
+                     document.getElementsByClassName("rd_options")[i].style.display = "inline-block";
+                 } else {
+                     document.getElementsByClassName("rd_options")[i].style.display = "none";
+                 }
+             }
+         }
+
+         render_options();
+         render_body();
+
+         function count_cat() {
+             let elements = document.getElementsByClassName('rd_dishes');
+             let blocks = document.getElementsByClassName('rd_food_block');
+             for (let i = 0; i < document.getElementsByClassName('rd_dishes').length; i++) {
+
+                 let category = elements[i].getElementsByClassName('rd_food_category');
+                 let vegetarian_counter = 0;
+                 let vegan_counter = 0;
+                 for (let j = 0; j < category.length; j++) {
+                     if (category[j].innerHTML == 'Vegan' && blocks[j].style.display != "none") {
+                         vegan_counter++;
+                     } else {
+                         if (blocks[j].style.display != "none") {
+                             vegetarian_counter++;
+                         }
+                     }
+                 }
+                 document.getElementById('rd_vegetarisch').innerHTML = vegetarian_counter + ' Vegetarisch';
+                 document.getElementById('rd_vegan').innerHTML = vegan_counter + ' Vegan';
+                 document.getElementById('rd_vegan').style.userSelect = "none";
+                 document.getElementById('rd_vegetarisch').style.userSelect = "none";
+             }
+         }
+
+         function render_vegan() {
+             let element = document.getElementById("rd_vegan");
+
+             element.addEventListener("mouseover", function () {
+                 if (!vegan) {
+                     this.style.backgroundColor = "#378C61"
+                 }
+             });
+             element.addEventListener("mouseover", function () {
+                 if (!vegan) {
+                     this.style.borderColor = "#378C61"
+                 }
+             });
+             element.addEventListener("mouseleave", function () {
+                 if (!vegan) {
+                     this.style.backgroundColor = "transparent";
+                 }
+             });
+             element.addEventListener("mouseleave", function () {
+                 if (!vegan) {
+                     this.style.borderColor = "lightgrey"
+                 }
+             });
+
+             element.addEventListener('click', function () {
+
+                 if (!vegan) {
+                     this.style.backgroundColor = "#378C61";
+                     this.style.borderColor = "#378C61";
+                     vegan = true;
+                     vegetarisch = false;
+                     document.getElementById("rd_vegetarisch").style.backgroundColor = "transparent";
+                     document.getElementById("rd_vegetarisch").style.borderColor = "lightgrey";
+                 } else {
+                     vegan = false;
+                     this.style.backgroundColor = "transparent";
+                     this.style.borderColor = "lightgrey";
+                 }
+                 render_food();
+
+             })
+         }
+
+         function render_vegetarisch() {
+             let element = document.getElementById("rd_vegetarisch");
+
+             element.addEventListener("mouseover", function () {
+                 if (!vegetarisch) {
+                     this.style.backgroundColor = "#70af6b"
+                 }
+             });
+             element.addEventListener("mouseover", function () {
+                 if (!vegetarisch) {
+                     this.style.borderColor = "#70af6b"
+                 }
+             });
+             element.addEventListener("mouseleave", function () {
+                 if (!vegetarisch) {
+                     this.style.backgroundColor = "transparent";
+                 }
+             });
+             element.addEventListener("mouseleave", function () {
+                 if (!vegetarisch) {
+                     this.style.borderColor = "lightgrey"
+                 }
+             });
+
+             element.addEventListener('click', function () {
+
+                 if (!vegetarisch) {
+                     this.style.backgroundColor = "rgb(112,175,107)";
+                     this.style.borderColor = "rgb(112,175,107)";
+                     vegetarisch = true;
+                     vegan = false;
+
+                     document.getElementById("rd_vegan").style.backgroundColor = "transparent";
+                     document.getElementById("rd_vegan").style.borderColor = "lightgrey";
+                 } else {
+                     vegetarisch = false;
+                     this.style.backgroundColor = "transparent";
+                     this.style.borderColor = "lightgrey";
+                 }
+                 render_food();
+
+             })
+         }
+
+         function render_food() {
+
+             let category = document.getElementsByClassName('rd_food_block');
+
+             let foods = document.getElementsByClassName("rd_food_block");
+             for (let i = 0; i < foods.length; i++) {
+                 let check = false;
+                 for (let j = 0; j < tag_list[i].length; j++) {
+
+                     if (tag_list[i][j] == tag_now) {
+                         check = true;
+                         foods[i].style.display = "inline-block";
+
+                     } else {
+                         if (check == false) {
+                             foods[i].style.display = "none";
+                         }
+                     }
+                 }
+             }
+
+             for (let i = 0; i < category.length; i++) {
+                 if (!(!vegan && !vegetarisch) && !(vegan && vegetarisch)) {
+
+                     if (!veg_list[i]) {
+
+                         if (!vegan) {
+                             category[i].style.display = "none";
+                         } else {
+                             if (tag_now == "Alles") {
+                                 category[i].style.display = "inline-block";
+                             }
+                             //elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "#378C61";
+                         }
+                     } else {
+                         if (!vegetarisch) {
+                             category[i].style.display = "none";
+                         } else {
+                             if (tag_now == "Alles") {
+                                 category[i].style.display = "inline-block";
+                             }//elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "rgb(112,175,107)";
+                         }
+                     }
+                 } else {
+                     if (tag_now == "Alles") {
+                         category[i].style.display = "inline-block";
+                     } else {
+                         foods = document.getElementsByClassName("rd_food_block");
+                         for (let i = 0; i < foods.length; i++) {
+                             let check = false;
+                             for (let j = 0; j < tag_list[i].length; j++) {
+
+                                 if (tag_list[i][j] == tag_now) {
+                                     check = true;
+                                     foods[i].style.display = "inline-block";
+
+                                 } else {
+                                     if (check == false) {
+                                         foods[i].style.display = "none";
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+         }
+
+         function render_food_tags() {
+             let elements = document.getElementsByClassName("rd_food_tag");
+             for (let i = 0; i < elements.length; i++) {
+                 for (let j = 0; j < elements.length; j++) {
+                     if (elements[i].innerHTML == elements[j].innerHTML && i != j) {
+                         elements[j].style.display = "none";
+                         elements[j].innerHTML = " "
+                     }
+                 }
+             }
+             let p = 0;
+             for (let o = 0; o < elements.length; o++) {
+
+                 if (elements[o].innerHTML != " ") {
+                     food_tags[p] = elements[o].innerHTML;
+                     p++
+                 }
+             }
+
+         }
+
+         for (let i = 0; i < document.getElementsByClassName("rd_food_tag").length; i++) {
+
+
+             document.getElementsByClassName("rd_food_tag")[i].addEventListener('click', function () {
+
+                 if (this.style.backgroundColor != "rgb(112, 175, 107)") {
+                     this.style.backgroundColor = "#70af6b";
+                     this.style.color = "white";
+
+                     let text = this.innerHTML;
+                     for (let j = 0; j < document.getElementsByClassName("rd_food_tag").length; j++) {
+                         if (j != i) {
+                             document.getElementsByClassName("rd_food_tag")[j].style.backgroundColor = "transparent";
+                             document.getElementsByClassName("rd_food_tag")[j].style.color = "darkgrey";
+                             document.getElementsByClassName("rd_food_tag")[j].style.userSelect = "none";
+                         }
+                     }
+                     tag_now = text;
+                     food_tags_render(text);
+
+                 } else {
+                     this.style.backgroundColor = "transparent";
+                     this.style.color = "darkgrey";
+                     document.getElementsByClassName("rd_food_tag")[0].click();
+                 }
+             })
+         }
+
+         function food_tags_render(text) {
+
+             let foods = document.getElementsByClassName("rd_food_block");
+
+             for (let i = 0; i < foods.length; i++) {
+                 let check = false;
+                 if (text != "Alles") {
+
+                     for (let j = 0; j < tag_list[i].length; j++) {
+
+                         if (tag_list[i][j] == text) {
+                             check = true;
+                             foods[i].style.display = "inline-block";
+                         } else {
+                             if (check == false) {
+                                 foods[i].style.display = "none";
+                             }
+                         }
+                     }
+                 } else {
+                     foods[i].style.display = "inline-block";
+                 }
+             }
+             count_cat();
+             render_food();
+
+         }
+
+
+         function stars(elements) {
+
+             let SternArray = new Array(5);
+
+             let TextInsideP = elements.getElementsByTagName('p')[0].innerHTML;
+
+             elements.getElementsByTagName('p')[0].style.display = "none";
+
+             if (TextInsideP == 0.0) {
+                 SternArray = [0, 0, 0, 0, 0];
+             }
+             if (TextInsideP == 1.0) {
+                 SternArray = [1, 0, 0, 0, 0];
+             }
+             if (TextInsideP == 2.0) {
+                 SternArray = [1, 1, 0, 0, 0];
+             }
+             if (TextInsideP == 3.0) {
+                 SternArray = [1, 1, 1, 0, 0];
+             }
+             if (TextInsideP == 4.0) {
+                 SternArray = [1, 1, 1, 1, 0];
+             }
+             if (TextInsideP == 5.0) {
+                 SternArray = [1, 1, 1, 1, 1];
+             }
+
+             for (let i = 0; i < SternArray.length; i++) {
+
+                 let element = document.createElement("img");
+
+                 if (SternArray[i] == 1) {
+                     element.setAttribute('src', "{% static 'assets/stern.png' %}");
+                 }
+
+                 if (SternArray[i] == 0) {
+                     element.setAttribute('src', "{% static 'assets/stern_leer.png' %}");
+                 }
+
+                 element.id = 'i';
+                 element.className = "stars_class";
+
+                 elements.appendChild(element);
+             }
+         }
+
+         mybutton = document.getElementById("myBtn");
+
+         window.onscroll = function () {
+             scrollFunction()
+         };
+
+         function scrollFunction() {
+             if (document.body.scrollTop > 600) {
+                 mybutton.style.display = "block";
+
+             } else {
+                 mybutton.style.display = "none";
+             }
+         }
+
+         // When the user clicks on the button, scroll to the top of the document
+         function topFunction() {
+             document.body.scrollTop = 262; // For Safari
+             document.documentElement.scrollTop = 262; // For Chrome, Firefox, IE and Opera
+         }
+
+         stars(document.getElementById("rd_rating"));
+         for (let i = 0; i < document.getElementsByClassName("rd_comment_rating").length; i++) {
+             stars(document.getElementsByClassName("rd_comment_rating")[i]);
+         }
+
+         render_vegan();
+         render_vegetarisch();
+         render_food_tags();
+         count_cat();
+         starrating();
+         changeStars();
 
 </script>
 

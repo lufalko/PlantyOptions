@@ -10,10 +10,11 @@ class TagSerializer(serializers.ModelSerializer):
           return { "tags": value.name }
 
 class RestaurantSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Restaurant
         fields = (
-            'name', 'address', 'houseNumber', 'city', 'zip_code'
+            'id', 'name', 'address', 'houseNumber', 'city', 'zip_code'
         )
 
 
