@@ -126,10 +126,13 @@
         <div id="restaurants_aside_right_bottom" >
             <div id="restaurants_aside_right_bottom_text">
                 <p id="restaurants_map_link"><a href="{% url 'map' %}">Map anzeigen</a></p>
+
+            <div id="restaurants_aside_right_bottom_text_restaurant">
                 <p id="restaurants_map_name">Restaurant Name</p>
                  <img src="{% static 'assets/PO_Icon_Green_Fill.svg' %}">
                 <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
                 <p id="restaurants_map_entfernung">? km Entfernt</p>
+            </div>
             </div>
         </div>
 
@@ -268,7 +271,8 @@ window.onresize = reportWindowSize;
          let restaurant_blocks = document.getElementsByClassName("restaurants_block");
          for (let i = 0; i < restaurant_blocks.length; i++) {
             restaurant_blocks[i].addEventListener('mouseover', function (){
-                document.getElementById("restaurants_aside_right_bottom_text").style.display = "block";
+                document.getElementById("restaurants_aside_right_bottom_text_restaurant").style.display = "block";
+
                 document.getElementById("restaurants_map_name").innerHTML =  document.getElementsByClassName("restaurants_name_link")[i].innerHTML;
                 document.getElementById("restaurants_map_adresse").innerHTML =  document.getElementsByClassName("restaurants_adresse_adresse")[i].innerHTML;
                 document.getElementById("restaurants_map_entfernung").innerHTML =  document.getElementsByClassName("restaurants_adresse_entfernung")[i].innerHTML;
@@ -631,6 +635,9 @@ window.onresize = reportWindowSize;
 
 
 
+
+
+    //map erstellen
     var mymap = L.map('restaurants_aside_right').setView([48.37, 10.89779], 12);
 
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -642,49 +649,60 @@ window.onresize = reportWindowSize;
     }).addTo(mymap);
 
 
-    var plantyIcon = L.icon({
-        iconUrl: "{% static 'assets/PO_Icon_Green_Fill.svg' %}",
-        iconSize:     [25], // size of the icon
-        popupAnchor:  [2, -47], // point from which the popup should open relative to the iconAnchor
-    });
-
-
+	//daten
 	let restaurantN = document.getElementsByClassName("restaurantName");
     let restaurantA = document.getElementsByClassName("restaurantAdresse")
     let restaurantLat = document.getElementsByClassName("restaurantLatitude");
     let restaurantLong = document.getElementsByClassName("restaurantLongitude");
 
+    //popup optionen
     var customOptions = {
        'maxWidth': '500',
        'className' : 'custom'
     }
 
+    //icon optionen
+    for (let i = 0; i <= restaurantN.length -1; i++) {
+        var className = "restaurant" +i;
+        var plantyIcon = L.icon({
+            iconUrl: "{% static 'assets/PO_Icon_Green_Fill.svg' %}",
+            iconSize:     [22], // size of the icon
+            iconAnchor:   [10, 47], // point of the icon which will correspond to marker's location
+            popupAnchor:  [2, -47], // point from which the popup should open relative to the iconAnchor
+            className: className
+        });
 
-    for (let i = 0; i <= restaurantN.length; i++) {
+        //marker erstellen
         var marker = L.marker([restaurantLat[i].innerHTML, restaurantLong[i].innerHTML], {icon: plantyIcon}).addTo(mymap);
-        marker.bindPopup("<strong>" + restaurantN[i].innerHTML + "</strong>" + "<br>" + restaurantA[i].innerHTML, customOptions);
+
+        //popup erstellen
+        var text = "<strong>" + restaurantN[i].innerHTML + "</strong>";
+        marker.bindPopup(text + "<br>" + restaurantA[i].innerHTML, customOptions);
+
+        //restaurant daten nicht anzeigen
         document.getElementsByClassName("restaurantName")[i].style.display = "none";
         document.getElementsByClassName("restaurantAdresse")[i].style.display = "none";
         document.getElementsByClassName("restaurantLatitude")[i].style.display = "none";
         document.getElementsByClassName("restaurantLongitude")[i].style.display = "none";
     }
 
+
+    //ausgewähltes retaurant in anderer icon farbe
     var slides = document.getElementsByClassName("restaurants_block");
-for (var i = 0; i < slides.length; i++) {
-    slides.item(i).onmouseover = function(){
-          var dataname = this.getAttribute("data-name");
-          var mappoint = document.getElementsByClassName(dataname);
+    for (var i = 0; i < slides.length; i++) {
+        slides.item(i).onmouseover = function(){
+            var dataname = this.getAttribute("data-name");
+            var mappoint = document.getElementsByClassName(dataname);
             mappoint[0].src = "{% static 'assets/PO_Icon_Green.png' %}"
-    };
+        };
 
        slides.item(i).onmouseleave = function(){
           var dataname = this.getAttribute("data-name");
           var mappoint = document.getElementsByClassName(dataname);
-            mappoint[0].src = "{% static 'assets/PO_Icon_Green_Fill.svg' %}"
+          mappoint[0].src = "{% static 'assets/PO_Icon_Green_Fill.svg' %}"
+       };
+    }
 
-    };
-
-}
 
 
     mybutton = document.getElementById("myBtn");

@@ -1299,17 +1299,25 @@ select:-webkit-autofill:focus {
 
 }
 
-#restaurants_aside_right_bottom_text{
+#restaurants_aside_right_bottom_text_restaurant{
     font-size: 14px;
     text-align: left;
-    margin-top: 410px;
     display: none;
 }
+#restaurants_aside_right_bottom_text{
+    text-decoration: none;
+    font-size: 10px;
+    text-align: left;
+    display: block;
+}
 
-#restaurants_aside_right_bottom_text p{
+#restaurants_aside_right_bottom_text a{
+    text-decoration: none;
+    color: black;
+}
+
+#restaurants_aside_right_bottom_text_restaurant p{
     margin: 0px;
-
-
 }
 
 
@@ -1324,7 +1332,7 @@ select:-webkit-autofill:focus {
     color: #45354d;
 }
 
-#restaurants_aside_right_bottom_text img{
+#restaurants_aside_right_bottom_text_restaurant img{
     height: 29px;
 
     margin-right: 10px;
@@ -1928,6 +1936,7 @@ display: none;
     #restaurants_aside_right{
         height: 21.2vw;
     }
+
 
     #restaurants_aside_right_bottom_text{
         margin-top: calc(21.2vw + 10px);
