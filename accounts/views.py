@@ -31,7 +31,7 @@ from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
 from .utils import get_friend_request_or_false
 from .friend_request_status import FriendRequestStatus
-from accounts.models import rd_update
+#from accounts.models import rd_update
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -111,7 +111,7 @@ def comment_template():
     homeFilter = HomepageFilter(request.GET, queryset=restaurants)
     restaurants = homeFilter.qs
 
-    context = {'restaurants': restaurants, 'comments': comments,}
+    context = {'restaurants': restaurants, 'comments': comments}
 
     return render(request, 'accounts/snippets/comment_template.html', context)
 
@@ -352,13 +352,13 @@ def article_detail(request, pk):
 
 
 @csrf_exempt
-def rd_update_counter(request):
-    if request.method == 'POST':
-        player = rd_update.objects.get()
-        player.rd_opened = request.POST['counter']
-        player.save()
-        message = 'update successful'
-    return HttpResponse(message)
+#def rd_update_counter(request):
+ #   if request.method == 'POST':
+  #      player = rd_update.objects.get()
+   #     player.rd_opened = request.POST['counter']
+    #    player.save()
+     #   message = 'update successful'
+    #return HttpResponse(message)
 
 
 class DataApi(APIView):

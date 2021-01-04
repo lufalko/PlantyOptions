@@ -23,13 +23,13 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import url
 
-from accounts.views import rd_update_counter
+#from accounts.views import rd_update_counter
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls')),
-    url(r'^rd_update_counter/', rd_update_counter)
+    path('', include('accounts.urls'))
+    #url(r'^rd_update_counter/', rd_update_counter)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
