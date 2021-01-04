@@ -15,6 +15,14 @@ class CreateUserForm(UserCreationForm):
         model = Account
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
 
+        widgets = {'first_name': forms.TextInput(attrs={'placeholder': 'Vorname...'}),
+                   'last_name': forms.TextInput(attrs={'placeholder': 'Nachname...'}),
+                   'email': forms.TextInput(attrs={'placeholder': 'Email Adresse...'}),
+                   'username': forms.TextInput(attrs={'placeholder': 'Nutzername...'}),
+                   'password1': forms.TextInput(attrs={'placeholder': 'Passwort...'}),
+                   'password2': forms.TextInput(attrs={'placeholder': 'Passwort bestätigen'})
+                   }
+
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
