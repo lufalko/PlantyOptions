@@ -189,6 +189,8 @@ class Restaurant(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
 
+    likes = models.ManyToManyField(Account, related_name='liked_restaurant')
+
     # objects = models.Manager()
     # point = PointField(srid=4326, null=True)
 
@@ -224,6 +226,9 @@ class Restaurant(models.Model):
 
     def getPK(self):
         return self.kwargs['pk']
+
+    def getTotalLikes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.name

@@ -6,7 +6,7 @@
     </div>
 
         <div id="navbar_reiter">
-            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'home' %}">Start</a>
 
             <a href="{% url 'restaurants' %}">Restaurants</a>
 
@@ -20,16 +20,16 @@
           </a></li>  -->
     <div id="navbar_login">
         {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Logout</a></p>
+        <a href="{% url 'logout' %}">Ausloggen</a></p>
         {% else %}
-        <a href="{% url 'login' %}">Login</a></p>
+        <a href="{% url 'login' %}">Einloggen</a></p>
         {% endif %}
     </div>
     <div id="navbar_register">
         {% if user.is_authenticated %}
         <a href="{% url 'user' %}">Profil</a></p>
         {% else %}
-        <a href="{% url 'register' %}">Sign in</a></p>
+        <a href="{% url 'register' %}">Registrieren</a></p>
         {% endif %}
     </div>
 

@@ -18,7 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.views.generic import TemplateView
 
-from django.urls import path
+from django.urls import path, reverse_lazy, reverse
 from django.views.generic import ListView
 
 import json
@@ -314,6 +314,7 @@ def restaurant_detail(request, pk):
     comments = Comment.objects.all()
     ratings = comments.filter(restaurant=pk)
     ratingCount = len(ratings)
+    totalLikes = queryset.getTotalLikes()
 
     if request.method == 'POST':
         comment_form = CreateCommentForm(request.POST or None)
@@ -330,9 +331,16 @@ def restaurant_detail(request, pk):
 
     context = {
         'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
-        'foods': foods, 'ratingCount': ratingCount
+        'foods': foods, 'ratingCount': ratingCount, 'totalLikes': totalLikes
     }
     return render(request, 'restaurant_detail.html', context)
+
+
+def likeView(request, pk):
+    restaurant = get_object_or_404(Restaurant, id=request.POST.get('restaurant_id'))
+    restaurant.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse('restaurant_detail', args=[str(pk)]))
 
 
 def article_detail(request, pk):
