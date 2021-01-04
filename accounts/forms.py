@@ -9,18 +9,17 @@ User = get_user_model()
 
 
 class CreateUserForm(UserCreationForm):
-    email = forms.EmailField(max_length=200, help_text='Required Field. Add your email address.')
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email Adresse ...'}), required=True)
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Passwort ...'}), required=True)
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Passwort bestätigen ...'}), required=True)
 
     class Meta:
         model = Account
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
 
-        widgets = {'first_name': forms.TextInput(attrs={'placeholder': 'Vorname...'}),
-                   'last_name': forms.TextInput(attrs={'placeholder': 'Nachname...'}),
-                   'email': forms.TextInput(attrs={'placeholder': 'Email Adresse...'}),
-                   'username': forms.TextInput(attrs={'placeholder': 'Nutzername...'}),
-                   'password1': forms.TextInput(attrs={'placeholder': 'Passwort...'}),
-                   'password2': forms.TextInput(attrs={'placeholder': 'Passwort bestätigen'})
+        widgets = {'first_name': forms.TextInput(attrs={'placeholder': 'Vorname ...'}),
+                   'last_name': forms.TextInput(attrs={'placeholder': 'Nachname ...'}),
+                   'username': forms.TextInput(attrs={'placeholder': 'Nutzername ...'}),
                    }
 
 
