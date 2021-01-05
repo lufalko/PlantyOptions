@@ -107,8 +107,11 @@ def loginPage(request):
         if usr is not None and usr.is_active == True:
             login(request, usr)
             return redirect('home')
-        else:
-            messages.info(request, 'Username or password is incorrect')
+        elif usr is None:
+            messages.info(request, 'Nutzername oder Passwort inkorrekt')
+        elif usr.ist_active == False:
+            messages.info(request, 'Account muss verifiziert werden')
+
 
     context = {}
     return render(request, 'accounts/login.html', context)
