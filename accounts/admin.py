@@ -1,5 +1,5 @@
 from django.contrib import admin
-#from django.contrib.gis.admin import OSMGeoAdmin
+# from django.contrib.gis.admin import OSMGeoAdmin
 
 # Register your models here.
 
@@ -30,6 +30,7 @@ class FriendRequestAdmin(admin.ModelAdmin):
     class Meta:
         model = FriendRequest
 
+
 admin.site.register(FriendRequest, FriendRequestAdmin)
 admin.site.register(Food)
 admin.site.register(Tag)
@@ -37,4 +38,3 @@ admin.site.register(Comment)
 admin.site.register(Article)
 admin.site.register(Coworker)
 admin.site.register(Restaurant)
-

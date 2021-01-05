@@ -132,7 +132,6 @@ def restaurants(request):
 
     restaurants = myFilter.qs
 
-
     context = {'restaurants': restaurants, 'myFilter': myFilter,'addressFilter': addressFilter, 'foods': foods, 'comments': comments}
     return render(request, 'accounts/restaurants.html', context)
 
