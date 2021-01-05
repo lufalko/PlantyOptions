@@ -87,7 +87,7 @@
              {% for comment in comments.all reversed %}
                 {% if comment.account.username == user.username %}
 
-                        <a class="user_comment" href="{% url 'restaurant_detail' pk=comment.restaurant.pk %}">
+                        <a class="user_comment" href="{% url 'restaurant_detail' pk=comment.restaurant.pk underpage=3 %}">
                             <div class="user_comment_rname">
                                 {{ comment.restaurant.name}}
                             </div>

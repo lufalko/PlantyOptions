@@ -235,8 +235,11 @@ class Restaurant(models.Model):
 
 
 class rd_update(models.Model):
-    #track the number of times the user has lost window focus
     rd_opened = models.IntegerField(default=0)
+
+
+    def __str__(self):
+        return self.rd_opened
 
 
 class Food(models.Model):

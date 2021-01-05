@@ -30,7 +30,7 @@
 
     </div>
     <div class="restaurants_name">
-        <p><a class="restaurants_name_link" href="{% url 'restaurant_detail' pk=i.pk %}">{{i.name}}</a></p>
+        <p><a class="restaurants_name_link" href="{% url 'restaurant_detail' pk=i.pk underpage=0 %}">{{i.name}}</a></p>
     </div>
     <div class="restaurants_rating" >
             <p>{{i.getAverageRating}}</p>
