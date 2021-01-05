@@ -184,12 +184,19 @@ class Restaurant(models.Model):
     state = models.CharField(max_length=64, default="")
     zip_code = models.CharField(max_length=5, default="86444")
     tags = models.ManyToManyField(Tag)
-    affordability = models.FloatField(validators=[MaxValueValidator(3), MinValueValidator(1)], null=True)
+
+    mon = models.CharField(max_length=50, null=True)
+    tue = models.CharField(max_length=50, null=True)
+    wed = models.CharField(max_length=50, null=True)
+    thu = models.CharField(max_length=50, null=True)
+    fri = models.CharField(max_length=50, null=True)
+    sat = models.CharField(max_length=50, null=True)
+    sun = models.CharField(max_length=50, null=True)
 
     latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
 
-    likes = models.ManyToManyField(Account, related_name='liked_restaurant')
+    likes = models.ManyToManyField(Account, related_name='liked_restaurant', blank=True)
 
     # objects = models.Manager()
     # point = PointField(srid=4326, null=True)
@@ -223,6 +230,32 @@ class Restaurant(models.Model):
             return count
         else:
             return 0
+
+    def getAveragePrice(self):
+        food = Food.objects.all()
+        totalPrice = 0.0
+        count = 0
+        for i in food:
+            if i.restaurant == self:
+                totalPrice += i.price
+                count += 1
+
+        if count is not None:
+            return totalPrice / count
+        else:
+            return 0
+
+    def getAffordability(self):
+        price = self.getAveragePrice()
+        affordability = 0
+
+        if price < 8.5:
+            affordability = 1
+        if 8.5 <= price < 10.5:
+            affordability = 2
+        else:
+            affordability = 3
+        return affordability
 
     def getPK(self):
         return self.kwargs['pk']
