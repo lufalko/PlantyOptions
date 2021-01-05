@@ -84,7 +84,22 @@
         </div>
 
     </div>
-    <div class="rd_options"></div>
+    <div class="rd_options">
+        <div id="openingHours">
+            {% if queryset.mon is not None %}
+            <p>Montag: {{queryset.mon}}</p>
+            <p>Dienstag: {{queryset.tue}}</p>
+            <p>Mittwoch: {{queryset.wed}}</p>
+            <p>Donnerstag: {{queryset.thu}}</p>
+            <p>Freitag: {{queryset.fri}}</p>
+            <p>Samstag: {{queryset.sat}}</p>
+            <p>Sonntag: {{queryset.sun}}</p>
+
+            {% else %}
+            <p>Es gibt keine Einträge zu den Öffnungszeiten dieses Restaurants</p>
+            {% endif %}
+        </div>
+    </div>
     <div class="rd_options">
         <div id="locationMap"></div>
         <p id="restaurantName">{{queryset.name}}</p>

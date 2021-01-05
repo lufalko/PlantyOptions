@@ -7,13 +7,13 @@ from .models import *
 
 class RestaurantFilter(django_filters.FilterSet):
 
-    Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
+    Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'), price=Avg('food__price'))
     rating = NumberFilter(field_name="avg_rating", lookup_expr="gte")
 
     class Meta:
         model = Restaurant
         fields = '__all__'
-        exclude = ['location', 'restaurant_picture', 'address', 'houseNumber', 'state', 'latitude', 'longitude']
+        exclude = ['location', 'restaurant_picture', 'address', 'houseNumber', 'state', 'latitude', 'longitude', 'likes', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 
 class GetAddressFilter(django_filters.FilterSet):
@@ -23,8 +23,6 @@ class GetAddressFilter(django_filters.FilterSet):
     class Meta:
         model = Restaurant
         fields = ['zip_code', 'city']
-
-
 
 
 class HomepageFilter(django_filters.FilterSet):
