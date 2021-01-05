@@ -1,6 +1,7 @@
 from django.db.models import Avg
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import EmailMessage
 from django.urls.exceptions import NoReverseMatch
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
@@ -11,6 +12,9 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+
+from django.conf import settings
+from django.template.loader import render_to_string
 
 from django.shortcuts import render
 
@@ -37,6 +41,8 @@ from accounts.models import rd_update
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from verify_email.email_handler import send_verification_email
+
 from itertools import chain
 
 
@@ -52,14 +58,42 @@ def register(request):
             email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
             account = authenticate(email=email, password=raw_password)
-            login(request, account)
-            return redirect('home')
+
+            name = request.POST.get('first_name')
+            account = Account.objects.get(first_name=name)
+            key = str(account.pk)
+            href = "http://127.0.0.1:8000/verification/" + key
+
+            # email verification
+            template = render_to_string('snippets/email_template.html', {'name': name, 'hyperrefference': href})
+
+            emailMessage = EmailMessage(
+                'Danke, dass du dich auf plantyoptions.de angemeldet hast!',
+                template,
+                settings.EMAIL_HOST_USER,
+                [email]
+            )
+            emailMessage.fail_silently = False
+            emailMessage.send()
+            # endemail verification
+
+            return redirect('login')
+
         else:
             context['registration_form'] = form
     else:
         form = CreateUserForm()
         context['registration_form'] = form
     return render(request, 'accounts/register.html', context)
+
+
+def VerifivationView(request, pk):
+    account = Account.objects.get(pk=pk)
+    account.is_active = True
+    account.save()
+
+    return redirect('login')
+
 
 def loginPage(request):
     if request.user.is_authenticated:
@@ -70,7 +104,7 @@ def loginPage(request):
 
         usr = authenticate(request, username=username, password=password)
 
-        if usr is not None:
+        if usr is not None and usr.is_active == True:
             login(request, usr)
             return redirect('home')
         else:
@@ -367,7 +401,6 @@ def rd_update_counter(request):
     return HttpResponseRedirect(reverse('search', kwargs={'query': ticker}))
 
 
-
 class DataApi(APIView):
     @staticmethod
     def get(self, *args, **kwargs):
@@ -390,4 +423,5 @@ class FoodsApi(APIView):
         qs = Food.objects.all()
         serializer = FoodSerializer(qs, many=True)
         return Response(serializer.data)
+
 

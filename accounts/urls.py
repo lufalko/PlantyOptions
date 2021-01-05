@@ -30,5 +30,7 @@ urlpatterns = [
     path('data_api/', views.DataApi.as_view(), name='data_api'),
     path('food_api/', views.FoodsApi.as_view(), name='food_api'),
     re_path(r'^rd_update_counter/$', views.rd_update_counter, name="rd_update_counter"),
-    re_path(r'^rd_update_counter/(?P<query>.+)/$', views.rd_update_counter, name="rd_update_counter")
+    re_path(r'^rd_update_counter/(?P<query>.+)/$', views.rd_update_counter, name="rd_update_counter"),
+
+    path('verification/<str:pk>/', views.VerifivationView, name='verification')
 ]
