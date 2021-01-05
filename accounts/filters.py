@@ -7,7 +7,7 @@ from .models import *
 
 class RestaurantFilter(django_filters.FilterSet):
 
-    Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'), price=Avg('food__price'))
+    Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
     rating = NumberFilter(field_name="avg_rating", lookup_expr="gte")
 
     class Meta:

@@ -184,7 +184,7 @@ class Restaurant(models.Model):
     state = models.CharField(max_length=64, default="")
     zip_code = models.CharField(max_length=5, default="86444")
     tags = models.ManyToManyField(Tag)
-    affordability = models.FloatField()
+    affordability = models.FloatField(blank=True)
 
     mon = models.CharField(max_length=50, null=True)
     tue = models.CharField(max_length=50, null=True)
@@ -246,17 +246,18 @@ class Restaurant(models.Model):
         else:
             return 0
 
-    def getAffordability(self):
+    def save(self, *args, **kwargs):
         price = self.getAveragePrice()
-        affordability = 0
+        afford = 0
 
         if price < 8.5:
-            affordability = 1
+            afford = 1
         if 8.5 <= price < 10.5:
-            affordability = 2
+            afford = 2
         else:
-            affordability = 3
-        return affordability
+            afford = 3
+        self.affordability = afford
+        super().save(*args, **kwargs)
 
     def getPK(self):
         return self.kwargs['pk']
@@ -288,6 +289,11 @@ class Food(models.Model):
 
     def getRestaurantName(self, obj):
         return obj.restaurant.name
+
+    def save(self, *args, **kwargs):
+        instance = super(Food, self).save(*args, **kwargs)
+        self.restaurant.save()
+        return instance
 
     def __str__(self):
         return self.name
