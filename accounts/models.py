@@ -238,10 +238,6 @@ class rd_update(models.Model):
     rd_opened = models.IntegerField(default=0)
 
 
-    def __str__(self):
-        return self.rd_opened
-
-
 class Food(models.Model):
     CATEGORY = (
         ('Vegan', 'Vegan'),
