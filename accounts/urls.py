@@ -1,8 +1,9 @@
-from django.urls import path, include
+from django.urls import path, re_path, include
 from accounts import views
 
 from django.conf.urls import url
 from . import views
+from accounts.views import rd_update_counter
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -22,9 +23,12 @@ urlpatterns = [
 
     path('articles/', views.articlePage, name='articles'),
     path('restaurant_detail/<str:pk>/', views.restaurant_detail, name='restaurant_detail'),
+    path('restaurant_detail/<str:pk>/<int:underpage>', views.restaurant_detail, name='restaurant_detail'),
     path('article_detail/<str:pk>/', views.article_detail, name='article_detail'),
 
     path('api-auth/', include('rest_framework.urls')),
     path('data_api/', views.DataApi.as_view(), name='data_api'),
-    path('food_api/', views.FoodsApi.as_view(), name='food_api')
+    path('food_api/', views.FoodsApi.as_view(), name='food_api'),
+    re_path(r'^rd_update_counter/$', views.rd_update_counter, name="rd_update_counter"),
+    re_path(r'^rd_update_counter/(?P<query>.+)/$', views.rd_update_counter, name="rd_update_counter")
 ]
