@@ -33,6 +33,7 @@ from .utils import get_friend_request_or_false
 from .friend_request_status import FriendRequestStatus
 from accounts.models import rd_update
 
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -307,7 +308,7 @@ def map(request):
     return render(request, 'accounts/map.html', context)
 
 
-def restaurant_detail(request, pk):
+def restaurant_detail(request, pk, underpage=1):
 
     foods = Food.objects.all()
     queryset = Restaurant.objects.get(pk=pk)
@@ -315,6 +316,9 @@ def restaurant_detail(request, pk):
     ratings = comments.filter(restaurant=pk)
     ratingCount = len(ratings)
     totalLikes = queryset.getTotalLikes()
+    session = rd_update.objects.get(id=1)
+    underpage = underpage
+    pk_value = pk
 
     if request.method == 'POST':
         comment_form = CreateCommentForm(request.POST or None)
@@ -331,7 +335,7 @@ def restaurant_detail(request, pk):
 
     context = {
         'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
-        'foods': foods, 'ratingCount': ratingCount, 'totalLikes': totalLikes
+        'foods': foods, 'ratingCount': ratingCount, 'totalLikes': totalLikes, 'session': session, 'underpage': underpage, 'pk_value': pk_value
     }
     return render(request, 'restaurant_detail.html', context)
 
@@ -353,12 +357,16 @@ def article_detail(request, pk):
 
 @csrf_exempt
 def rd_update_counter(request):
+
     if request.method == 'POST':
-        player = rd_update.objects.get()
-        player.rd_opened = request.POST['counter']
-        player.save()
+        session = rd_update.objects.get(id=1)
+        session.rd_opened = request.POST['counter']
+        session.save()
         message = 'update successful'
-    return HttpResponse(message)
+    context = {'session': session, "message": message}
+    return HttpResponse(session)
+    return HttpResponseRedirect(reverse('search', kwargs={'query': ticker}))
+
 
 
 class DataApi(APIView):

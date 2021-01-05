@@ -240,7 +240,7 @@
 
     let vegan = false;
     let vegetarisch = false;
-    let active= [1,0,0,0];
+    let active= [0,0,0,0];
     let veg_list = [];
     let queryset = "{{queryset}}"
     let food_tags = [];
@@ -253,6 +253,12 @@
     let comments = document.getElementsByClassName("rd_comment");
     let l = document.getElementById("rd_foods_tags").scrollLeft;
     let counter = 0;
+    let rd_head = document.getElementById("rd_body_header");
+    let header_p = rd_head.getElementsByTagName("p");
+
+    var newURL = window.location.href;
+
+    active["{{ underpage }}"] = 1;
 
     document.getElementsByClassName("rd_food_tag")[0].style.backgroundColor = "rgb(112,175,107)";
     document.getElementsByClassName("rd_food_tag")[0].style.color = "white";
@@ -269,7 +275,6 @@
                 sterne_p[j].style.fontWeight = "600";
             }
                 this.style.color = "gold";
-                console.log(this.style.color);
                 this.style.fontWeight = "600";
                 renderbystars(i);
             }
@@ -386,7 +391,6 @@
         for (let a = 0; a < stars.length; a++) {
             stars[a].addEventListener('click', function () {
                 document.getElementById("id_ratings").value = a + 1;
-                console.log(document.getElementById("id_ratings").value);
                 for (let k = 0; k <= a; k++) {
                     stars[k].setAttribute('src', "{% static 'assets/stern.png' %}");
                     star_amount = a;
@@ -496,13 +500,14 @@
     // Send request
     request.send()
 
-    document.getElementById("rd_food_drinks").style.backgroundColor= "#70af6b";
+    header_p["{{ underpage }}"].style.backgroundColor= "#70af6b";
 
     /*<p id="rd_food_drinks">Food/Drinks</p>
     <p id="rd_opening_hours">Opening Hours</p>
     <p id="rd_food_location">Location</p>
     <p id="rd_contact">Contact</p>*/
 
+      let session = "{{ session.rd_opened }}";
          function render_options() {
 
              let over_elements = document.getElementById("rd_body_header");
@@ -517,11 +522,8 @@
                              data: {'counter': counter},
                              type: 'POST',
                          }).done(function (response) {
-                             console.log(response);
                          });
 
-
-                     console.log(counter)
                      for (let j = 0; j < element.length; j++) {
                          element[j].style.backgroundColor = "#3F3C54";
                          active[j] = 0;
@@ -543,6 +545,8 @@
              for (let i = 0; i < active.length; i++) {
                  if (active[i] == 1) {
                      document.getElementsByClassName("rd_options")[i].style.display = "inline-block";
+                       newURL = "{% url 'restaurant_detail' pk=pk_value %}" + i;
+                        window.history.replaceState('','',newURL);
                  } else {
                      document.getElementsByClassName("rd_options")[i].style.display = "none";
                  }
