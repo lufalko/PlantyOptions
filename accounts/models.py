@@ -184,6 +184,7 @@ class Restaurant(models.Model):
     state = models.CharField(max_length=64, default="")
     zip_code = models.CharField(max_length=5, default="86444")
     tags = models.ManyToManyField(Tag)
+    affordability = models.FloatField()
 
     mon = models.CharField(max_length=50, null=True)
     tue = models.CharField(max_length=50, null=True)
