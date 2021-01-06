@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
 
-
 ]
 
 MIDDLEWARE = [
@@ -137,7 +136,15 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets')
+# SMTP Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'send.one.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'info@plantyoptions.de'
+EMAIL_HOST_PASSWORD = '86154#Options'
+
 
 if os.getlogin()=="luisb":
     GDAL_LIBRARY_PATH = r"D:\Documents\Studium\3.Semester\Webanwendungen\PlantyOptions\plantyoptions\venv\Lib\site-packages\osgeo\gdal301.dll"

@@ -52,7 +52,7 @@ class Account(AbstractBaseUser):
     date_joined = models.DateTimeField(verbose_name='date_joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last_login', auto_now=True)
     is_admin = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
@@ -249,13 +249,13 @@ class Restaurant(models.Model):
     def save(self, *args, **kwargs):
         price = self.getAveragePrice()
         afford = 0
-
         if price < 8.5:
             afford = 1
-        if 8.5 <= price < 10.5:
+        elif 8.5 <= price < 10.5:
             afford = 2
-        else:
+        elif price >= 10.5:
             afford = 3
+
         self.affordability = afford
         super().save(*args, **kwargs)
 
