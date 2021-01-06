@@ -41,7 +41,6 @@ from accounts.models import rd_update
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from verify_email.email_handler import send_verification_email
 
 from itertools import chain
 
