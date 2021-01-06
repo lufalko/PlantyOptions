@@ -1217,13 +1217,6 @@ select:-webkit-autofill:focus {
     font-size: 16px;
 }
 
-.restaurants_name_map p {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    padding: 0px;
-}
-
 .restaurants_name a{
     text-decoration: none;
     color: #45354d;
@@ -1819,11 +1812,11 @@ display: none;
     margin-right: 25px;
 
     background-color: white;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .restaurants_block_map{
-    font-size: 12px;
+    font-size: 16px;
     margin-bottom: 10px;
     background-color: white;
 
@@ -1839,18 +1832,21 @@ display: none;
 }
 
 .restaurants_name_map {
-    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0px;
 }
 
 .restaurants_link{
     text-decoration: none;
-    font-size: 10px;
+    font-size: 13px;
     color: #45354d;
 }
 
 #mapid{
     width:75%;
-    height: 500px;
+    height: 800px;
     margin-left: 30px;
     float: left;
 }
@@ -2062,6 +2058,72 @@ display: none;
 
 }
 
+@media only screen and (max-width: 1500px) {
+    /* ----------- Map Page ----------- */
+
+    #restaurants_body_content_map{
+
+    float: right;
+    overflow: hidden;
+    overflow-y: scroll;
+
+    height: calc(100vh - 110px);
+
+    margin-left: 25px;
+    margin-right: 25px;
+
+    background-color: white;
+    font-size: 15px;
+}
+
+    .restaurants_block_map{
+    font-size: 13px;
+    margin-bottom: 10px;
+    background-color: white;
+
+    text-align: left;
+
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+    .restaurants_block_map:hover{
+    background-color: #fbfbff;
+    border-radius: 10px 0 0 0;
+}
+
+    .restaurants_name_map {
+    font-size: 15px;
+
+}
+
+    .restaurants_link{
+    text-decoration: none;
+    font-size: 10px;
+    color: #45354d;
+}
+
+    #mapid{
+    width:70%;
+    height: 700px;
+    margin-left: 30px;
+    float: left;
+}
+
+
+}
+
+@media only screen and (max-width: 1300px) {
+    /* ----------- Map Page ----------- */
+
+    #mapid{
+    height: 500px;
+}
+
+
+}
+
+
 @media only screen and (max-width: 1220px) {
 
     /*nav*/
@@ -2071,7 +2133,27 @@ display: none;
 
 
 
+
+
 }
+
+@media only screen and (max-width: 1070px) {
+
+    /* ----------- Map Page ----------- */
+
+    #restaurants_body_content_map{
+        display: none;
+    }
+
+
+    #mapid{
+    width:95%;
+    height: 450px;
+    margin-left: 3%;
+    float: left;
+    }
+}
+
 
 @media only screen and (max-width: 1050px) {
 
