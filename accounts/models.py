@@ -185,6 +185,7 @@ class Restaurant(models.Model):
     zip_code = models.CharField(max_length=5, default="86444")
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(blank=True)
+    averageRating = models.FloatField(default=0)
 
     mon = models.CharField(max_length=50, null=True)
     tue = models.CharField(max_length=50, null=True)
@@ -204,21 +205,6 @@ class Restaurant(models.Model):
 
     # def lat_lng(self):
     #    return list(getattr(self.point, 'coords', [])[::-1])
-
-    def getAverageRating(self):
-        comments = Comment.objects.all()
-        avg = 0
-        count = 0
-        for i in comments:
-            if i.restaurant == self:
-                avg += i.ratings
-                if count is 0:
-                    count += 1
-                else:
-                    avg = avg / 2
-        if avg is not 0:
-            avg = round(avg)
-        return avg
 
     def getAmountRating(self):
         comments = Comment.objects.all()
@@ -255,8 +241,22 @@ class Restaurant(models.Model):
             afford = 2
         elif price >= 10.5:
             afford = 3
-
         self.affordability = afford
+
+        comments = Comment.objects.all()
+        avg = 0
+        count = 0
+        for i in comments:
+            if i.restaurant == self:
+                avg += i.ratings
+                if count is 0:
+                    count += 1
+                else:
+                    avg = avg / 2
+        if avg is not 0:
+            avg = round(avg)
+        self.averageRating = avg
+
         super().save(*args, **kwargs)
 
     def getPK(self):
@@ -306,6 +306,11 @@ class Comment(models.Model):
     content = models.TextField(default='')
     ratings = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
     fields = '__all__'
+
+    def save(self, *args, **kwargs):
+        instance = super(Comment, self).save(*args, **kwargs)
+        self.restaurant.save()
+        return instance
 
     def __str__(self):
         return self.account.username + ' | Rating: ' + str(self.ratings)
