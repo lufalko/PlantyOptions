@@ -122,7 +122,7 @@ def logoutPage(request):
 
 
 def home(request):
-    articles = Article.objects.all()
+    articles = Article.objects.all()[::-1][:3]
     comments = Comment.objects.all()
 
     restaurants = Restaurant.objects.all()
@@ -386,7 +386,7 @@ def article_detail(request, pk):
     context = {
         'queryset': queryset
     }
-    return render(request, 'restaurant_detail.html', context)
+    return render(request, 'article_detail.html', context)
 
 
 @csrf_exempt

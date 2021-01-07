@@ -22,13 +22,21 @@
 
 
         <div id="main_row2">
+            <div class="article_flex">
             {% for i in articles %}
             <div class="food_suggestion">
-                <img class="suggestion_img" src="{{i.banner.url}}" alt="food suggestion">
-                <div class="suggestion_title">{{i.headline}}</div>
-                <div class="suggestion_text">{{i.subtitle}}</div>
+                <div class="effect-1"></div>
+                <div class="effect-2"></div>
+                <div class="suggestion_background">
+                    <a href="{% url 'article_detail' pk=i.pk %}">
+                        <img class="suggestion_img" src="{{i.banner.url}}" alt="food suggestion">
+                        <div class="suggestion_title">{{i.headline}}</div>
+                        <div class="suggestion_text">{{i.subtitle}}</div>
+                    </a>
+                </div>
             </div>
             {% endfor %}
+        </div>
             <button id="all_articles">
                 <a href="{% url 'articles' %}" style="text-decoration:none; color:black">alle Artikel ansehen</a>
             </button>
