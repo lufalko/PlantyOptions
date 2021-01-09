@@ -15,22 +15,50 @@
             <!--<a href="{% url 'social' %}">social</a>
             -->
         </div>
-       <!--   <li id="nav-account_img"><a href="#">
 
-          </a></li>  -->
-    <div id="navbar_login">
-        {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Ausloggen</a></p>
-        {% else %}
-        <a href="{% url 'login' %}">Einloggen</a></p>
-        {% endif %}
+    <div class="dropdown">
+
+        <input type="image" src="{{user.profile_picture.url}}" onclick='myFunction()' class="dropbtn">
+
+      <div id="myDropdown" class="dropdown-content">
+            <div id="navbar_login">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Ausloggen</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Einloggen</a>
+                {% endif %}
+            </div>
+            <div id="navbar_register">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'user' %}">Profil</a>
+                {% else %}
+                    <a href="{% url 'register' %}">Registrieren</a>
+                {% endif %}
+            </div>
+      </div>
     </div>
-    <div id="navbar_register">
-        {% if user.is_authenticated %}
-        <a href="{% url 'user' %}">Profil</a></p>
-        {% else %}
-        <a href="{% url 'register' %}">Registrieren</a></p>
-        {% endif %}
-    </div>
+
+
+    <script>
+
+       function myFunction() {
+           document.getElementById("myDropdown").classList.toggle("show");
+       }
+
+
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+    </script>
 
 </nav>
+

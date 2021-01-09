@@ -45,29 +45,16 @@
 
         <div id="main_row3">
             <img id="best_restaurants_img" src="{% static 'assets/best_restaurants.jpg' %}" alt="best restaurants">
-            <button id="best_restaurants_button" type="submit">Beste Restaurants</button>
+            <form action= "restaurants/?name=&city=&zip_code=&affordability=&rating=5">
+                <button id="best_restaurants_button" type="submit">Beste Restaurants</button>
+            </form>
+
         </div>
 
 
         <div id="main_row4">
-                        <h1 class="dashboard_comment_h1">Kommentare</h1>
 
-            <!--
-            {% for comment in comments %}
-            <div class="dashboard_comment">
-                <div class="comment_profilepic">
-                    {% if comment.account.profile_picture %}
-                        <img class="profilepic" src="{{comment.account.profile_picture.url}}" alt="Profilbild">
-                    {% else %}
-                        <img class="profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
-                    {% endif %}
-                </div>
-                <div class="comment_username">{{ comment.account.username }}</div>
-                <div class="comment_time">{{ comment.date_created }}</div>
-                <div class="comment_text">{{ comment.content }}</div>
-            </div>
-            {% endfor %}
-           -->
+            <h1 class="dashboard_comment_h1">Kommentare</h1>
 
             {% for comment in comments reversed %}
             {% if forloop.counter <= 3 %}
