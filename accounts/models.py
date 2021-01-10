@@ -187,13 +187,13 @@ class Restaurant(models.Model):
     affordability = models.FloatField(blank=True)
     averageRating = models.FloatField(default=0)
 
-    mon = models.CharField(max_length=50, null=True)
-    tue = models.CharField(max_length=50, null=True)
-    wed = models.CharField(max_length=50, null=True)
-    thu = models.CharField(max_length=50, null=True)
-    fri = models.CharField(max_length=50, null=True)
-    sat = models.CharField(max_length=50, null=True)
-    sun = models.CharField(max_length=50, null=True)
+    mon = models.CharField(max_length=50, blank=True, null=True)
+    tue = models.CharField(max_length=50, blank=True, null=True)
+    wed = models.CharField(max_length=50, blank=True, null=True)
+    thu = models.CharField(max_length=50, blank=True, null=True)
+    fri = models.CharField(max_length=50, blank=True, null=True)
+    sat = models.CharField(max_length=50, blank=True, null=True)
+    sun = models.CharField(max_length=50, blank=True, null=True)
 
     latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
@@ -301,11 +301,11 @@ class Food(models.Model):
 
 class Comment(models.Model):
     account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL)
+    # parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='subcomment')
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     content = models.TextField(default='')
     ratings = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
-    fields = '__all__'
 
     def save(self, *args, **kwargs):
         instance = super(Comment, self).save(*args, **kwargs)
@@ -316,12 +316,64 @@ class Comment(models.Model):
         return self.account.username + ' | Rating: ' + str(self.ratings)
 
 
+class Ingredient(models.Model):
+    name = models.CharField(max_length=200, null=False)
+    kcal = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(1000)], blank=True, default=0)
+    carbs = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(99)], blank=True, default=0)
+    protein = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(99)], blank=True, default=0)
+    fat = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(99)], blank=True, default=0)
+
+    def __str__(self):
+        return self.name
+
+
+class Recipe(models.Model):
+    name = models.CharField(max_length=200, null=False)
+    duration = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(12)], blank=True, default=0)
+    portions = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(12)], null=False)
+    instructions = models.TextField(max_length=6000, null=False)
+
+    def __str__(self):
+        return self.name
+
+
 class Article(models.Model):
     banner = models.ImageField(null=True, default='dashboard-BG.jpg')
     headline = models.CharField(max_length=200, null=False, default='Unnamed')
     subtitle = models.CharField(max_length=300, null=False, default='Unnamed')
-    article_body = models.CharField(max_length=4000, null=False, default='Lorem Ipsum')
+    article_body = models.TextField(max_length=4000, null=False, default='Lorem Ipsum')
     date_created = models.DateTimeField(auto_now_add=True)
+
+    ingredientList = models.BooleanField(null=True, default=False)
+    ingredients = models.ManyToManyField(Ingredient, blank=True)
+    recipe = models.ForeignKey(Recipe, blank=True, null=True, on_delete=models.CASCADE)
+
+    kcal = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+    carbs = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+    protein = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+    fat = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+
+    # def save(self, *args, **kwargs):
+    #    super().save(*args, **kwargs)
+    #    ingredients = self.ingredients.all()
+    #    totalCalories = 0
+    #    totalCarbs = 0
+    #    totalProtein = 0
+    #    totalFat = 0
+
+    #    for i in ingredients:
+    #        totalCalories += i.kcal
+    #        totalCarbs += i.carbs
+    #        totalProtein += i.protein
+    #        totalFat += i.fat
+     #       if i == 0:
+     #           return
+
+    #    self.kcal = totalCalories
+     #   self.carbs = totalCarbs
+     #   self.protein = totalProtein
+     #   self.fat = totalFat
+     #   self.save()
 
     def __str__(self):
         return self.headline

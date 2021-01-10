@@ -33,3 +33,11 @@ class HomepageFilter(django_filters.FilterSet):
         fields = ['restaurant_name']
         # exclude = ['location', 'restaurant_picture', 'rating', 'tags', 'affordability']
 
+
+class CommentFilter(django_filters.FilterSet):
+    restaurant_rating = NumberFilter(field_name="ratings")
+
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        exclude = ['account', 'restaurant', 'date_created', 'content']

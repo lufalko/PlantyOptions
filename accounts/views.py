@@ -30,7 +30,7 @@ import json
 # Create your views here.
 from .models import *
 from .forms import *
-from .filters import RestaurantFilter, HomepageFilter, GetAddressFilter
+from .filters import *
 from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
 from .utils import get_friend_request_or_false
@@ -190,15 +190,15 @@ def user(request):
     comments = Comment.objects.all()
 
     if request.method == 'POST':
-        comment_form = CreateCommentForm(request.POST or None)
+        #comment_form = CreateCommentForm(request.POST or None)
         userForm = UserUpdateForm(request.POST, instance=currentUser)
         pictureForm = PictureUpdateForm(request.POST,
                                         request.FILES,
                                         instance=currentUser)
         if userForm.is_valid():
-            content = request.POST.get('content')
-            comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
-            comment.save()
+            #content = request.POST.get('content')
+            #comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
+            #comment.save()
 
             userForm.save()
             pictureForm.save()
@@ -208,9 +208,10 @@ def user(request):
     else:
         userForm = UserUpdateForm(instance=currentUser)
         pictureForm = PictureUpdateForm(instance=currentUser)
-        comment_form = CreateCommentForm()
+        #comment_form = CreateCommentForm()
 
-    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, 'comment_form': comment_form}
+    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, #'comment_form': comment_form
+    }
     return render(request, 'accounts/user.html', context)
 
 
@@ -346,13 +347,18 @@ def restaurant_detail(request, pk, underpage=1):
 
     foods = Food.objects.all()
     queryset = Restaurant.objects.get(pk=pk)
+
     comments = Comment.objects.all()
     ratings = comments.filter(restaurant=pk)
     ratingCount = len(ratings)
+
     totalLikes = queryset.getTotalLikes()
     session = rd_update.objects.get(id=1)
     underpage = underpage
     pk_value = pk
+
+    myFilter = CommentFilter(request.GET, queryset=comments)
+    comments = myFilter.qs
 
     if request.method == 'POST':
         comment_form = CreateCommentForm(request.POST or None)
@@ -369,7 +375,8 @@ def restaurant_detail(request, pk, underpage=1):
 
     context = {
         'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
-        'foods': foods, 'ratingCount': ratingCount, 'totalLikes': totalLikes, 'session': session, 'underpage': underpage, 'pk_value': pk_value
+        'foods': foods, 'ratingCount': ratingCount, 'totalLikes': totalLikes,
+        'session': session, 'underpage': underpage, 'pk_value': pk_value, 'myFilter': myFilter
     }
     return render(request, 'restaurant_detail.html', context)
 
@@ -382,9 +389,12 @@ def likeView(request, pk):
 
 
 def article_detail(request, pk):
-    queryset = Article.objects.get(pk=pk)
+    article = Article.objects.get(pk=pk)
+    ingredients = article.ingredients.all()
+    recipe = article.recipe
+
     context = {
-        'queryset': queryset
+        'article': article, 'ingredients': ingredients, 'recipe': recipe
     }
     return render(request, 'article_detail.html', context)
 

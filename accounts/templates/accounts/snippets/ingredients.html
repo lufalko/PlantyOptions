@@ -1,0 +1,43 @@
+<div class="ingredients-container">
+    <div class="ingredients-headline">
+        <p>Zutatenliste</p>
+    </div>
+    <div class="ingredients-body">
+        <ul>
+            {% for i in ingredients %}
+            <li>{{i.name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if kcal > 0 %}
+    <div class="ingredients-nutritional">
+        <ul>
+            <li>{{article.carbs}}</li>
+            <li>{{article.protein}}</li>
+            <li>{{article.fat}}</li>
+            <li>{{article.kcal}}</li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+<div class="ingredients-open">
+    <div id="ingredients-icon-top"></div>
+    <div id="ingredients-icon-middle"></div>
+    <div id="ingredients-icon-bottom"></div>
+</div>
+
+<script>
+
+    $(document).ready(function() {
+	    $(".ingredients-open").addEventListener('click', function(){
+		    if ($('.ingredients-container').css('display') == 'none'){
+		        $('.ingredients-container').slideDown();
+		    } else {
+		        $(this).next().slideUp();
+		    }
+		});
+    });
+
+
+</script>

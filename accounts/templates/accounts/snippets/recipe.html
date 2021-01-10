@@ -1,0 +1,14 @@
+<div class="recipe-container">
+    <div class="recipe-header">
+        <div class="recipe-name">
+            <p>{{recipe.name}}</p>
+        </div>
+        <div class="recipe-data">
+            <p>Dauer: {{recipe.duration}}</p>
+            <p>Portionen: {{recipe.portions}}</p>
+        </div>
+    </div>
+    <div class="recipe-body">
+        <p>{{recipe.instructions|linebreaks}}</p>
+    </div>
+</div>
