@@ -510,6 +510,7 @@ nav a:hover{
     border: none;
     border-radius:20px;
     transition:.5s ease;
+    cursor: pointer;
 }
 
 #best_restaurants_button:hover{
