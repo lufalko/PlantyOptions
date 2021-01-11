@@ -1,3 +1,8 @@
+<div class="ingredients-open">
+    <div id="ingredients-icon-top"></div>
+    <div id="ingredients-icon-middle"></div>
+    <div id="ingredients-icon-bottom"></div>
+</div>
 <div class="ingredients-container">
     <div class="ingredients-headline">
         <p>Zutatenliste</p>
@@ -5,7 +10,7 @@
     <div class="ingredients-body">
         <ul>
             {% for i in ingredients %}
-            <li>{{i.name}}</li>
+            <li><p style="float: left; clear: left;">{{i.value}} g</p><p style="float: right;">{{i.ingredient.name}}</p></li>
             {% endfor %}
         </ul>
     </div>
@@ -21,23 +26,26 @@
     {% endif %}
 </div>
 
-<div class="ingredients-open">
-    <div id="ingredients-icon-top"></div>
-    <div id="ingredients-icon-middle"></div>
-    <div id="ingredients-icon-bottom"></div>
-</div>
-
 <script>
 
-    $(document).ready(function() {
-	    $(".ingredients-open").addEventListener('click', function(){
-		    if ($('.ingredients-container').css('display') == 'none'){
-		        $('.ingredients-container').slideDown();
-		    } else {
-		        $(this).next().slideUp();
-		    }
-		});
-    });
+    function myFunction() {
+           document.getElementById(".ingredients-container").classList.toggle("show");
+       }
+
+
+        window.onclick = function(event) {
+          if (!event.target.matches('.ingredients-open')) {
+            console.log('clicked!');
+            var dropdowns = document.getElementsByClassName(".ingredients-container");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
 
 
 </script>

@@ -390,11 +390,11 @@ def likeView(request, pk):
 
 def article_detail(request, pk):
     article = Article.objects.get(pk=pk)
-    ingredients = article.ingredients.all()
     recipe = article.recipe
+    ingredients = recipe.ingredients.all()
 
     context = {
-        'article': article, 'ingredients': ingredients, 'recipe': recipe
+        'article': article, 'recipe': recipe, 'ingredients': ingredients
     }
     return render(request, 'article_detail.html', context)
 
@@ -434,5 +434,3 @@ class FoodsApi(APIView):
         qs = Food.objects.all()
         serializer = FoodSerializer(qs, many=True)
         return Response(serializer.data)
-
-

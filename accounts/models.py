@@ -327,11 +327,20 @@ class Ingredient(models.Model):
         return self.name
 
 
+class IngredientValue(models.Model):
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    value = models.IntegerField(null=False, default=0)
+
+    def __str__(self):
+        return self.ingredient.name + ' | ' + str(self.value)
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=200, null=False)
     duration = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(12)], blank=True, default=0)
     portions = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(12)], null=False)
     instructions = models.TextField(max_length=6000, null=False)
+    ingredients = models.ManyToManyField(IngredientValue, blank=True)
 
     def __str__(self):
         return self.name
@@ -345,13 +354,15 @@ class Article(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     ingredientList = models.BooleanField(null=True, default=False)
-    ingredients = models.ManyToManyField(Ingredient, blank=True)
     recipe = models.ForeignKey(Recipe, blank=True, null=True, on_delete=models.CASCADE)
 
     kcal = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
     carbs = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
     protein = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
     fat = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+
+    # def save(self, *args, **kwargs):
+    #    data = serializers.serialize("json", self.ingredients)
 
     # def save(self, *args, **kwargs):
     #    super().save(*args, **kwargs)
@@ -366,14 +377,14 @@ class Article(models.Model):
     #        totalCarbs += i.carbs
     #        totalProtein += i.protein
     #        totalFat += i.fat
-     #       if i == 0:
-     #           return
+    #       if i == 0:
+    #           return
 
     #    self.kcal = totalCalories
-     #   self.carbs = totalCarbs
-     #   self.protein = totalProtein
-     #   self.fat = totalFat
-     #   self.save()
+    #   self.carbs = totalCarbs
+    #   self.protein = totalProtein
+    #   self.fat = totalFat
+    #   self.save()
 
     def __str__(self):
         return self.headline

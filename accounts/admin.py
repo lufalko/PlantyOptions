@@ -40,3 +40,5 @@ admin.site.register(Coworker)
 admin.site.register(Restaurant)
 admin.site.register(Recipe)
 admin.site.register(Ingredient)
+admin.site.register(IngredientValue)
+

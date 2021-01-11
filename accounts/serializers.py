@@ -6,11 +6,11 @@ from django import forms
 
 class TagSerializer(serializers.ModelSerializer):
 
-     def to_representation(self, value):
-          return { "tags": value.name }
+    def to_representation(self, value):
+        return {"tags": value.name}
+
 
 class RestaurantSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Restaurant
         fields = (
