@@ -363,7 +363,7 @@ def restaurant_detail(request, pk, underpage=1):
 
     isLiked = False
 
-    if queryset.likes.filter(Account=request.user):
+    if queryset.filter(likes=request.user):
         isLiked = True
 
     if request.method == 'POST':
