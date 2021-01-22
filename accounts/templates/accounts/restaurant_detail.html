@@ -44,27 +44,25 @@
        <div id="rd_foods_head">
            <p id="rd_vegetarisch">?vegetarisch</p>
            <p id="rd_vegan">?vegan</p>
+           <p id="rd_toGo">Außer Haus</p>
 
            <input type="text" placeholder="suche Gericht" id="rd_food_searchbar" onkeyup="searchbar()">
 
            <div id="rd_foods_tags" onmouseup="mouse_up()" onmousedown="mouse_down()">
                <p class="rd_food_tag">Alles</p>
                 {% for j in foods %}
-                    {% if j.restaurant == queryset %}
                         {% for l in j.tags.all %}
                             <p class="rd_food_tag">{{l}}</p>
                         {% endfor %}
-                    {% endif %}
                 {% endfor %}
            </div>
 
        </div>
-
-        <div id="rd_foods_body">
+        <div id="rd_toGo_body">
 
             <div class="rd_dishes">
                 {% for j in foods %}
-                {% if j.restaurant == queryset %}
+                {% if j.toGO %}
 
                  <p class="rd_food_category">{{j.category}}</p>
 
@@ -74,13 +72,34 @@
 
 
                 {% for j in foods %}
-                    {% if j.restaurant == queryset %}
+                    {% if j.toGo %}
+            <div class="rd_food_block">
+                <p class="rd_block_name">{{j.name}}</p>
+                <p class="rd_block_description">{{j.description}}</p>
+                <p class="rd_block_price">{{j.toGo}}€</p>
+             </div>
+                    {% endif %}
+                {% endfor %}
+
+        </div>
+
+        <div id="rd_foods_body">
+
+            <div class="rd_dishes">
+                {% for j in foods %}
+
+                 <p class="rd_food_category">{{j.category}}</p>
+
+                {% endfor %}
+            </div>
+
+
+                {% for j in foods %}
             <div class="rd_food_block">
                 <p class="rd_block_name">{{j.name}}</p>
                 <p class="rd_block_description">{{j.description}}</p>
                 <p class="rd_block_price">{{j.price}}€</p>
              </div>
-                    {% endif %}
                 {% endfor %}
 
         </div>

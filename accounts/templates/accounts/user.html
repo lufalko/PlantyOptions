@@ -108,7 +108,11 @@
         </div>
     </div>
 
-    <div id="user_saved_display" class="user_options"></div>
+    <div id="user_saved_display" class="user_options">
+        {% for i in liked %}
+            {{ i.name }}
+        {% endfor %}
+    </div>
 
     <div id="user_friends_display" class="user_options"></div>
 
