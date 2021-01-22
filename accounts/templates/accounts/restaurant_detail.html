@@ -10,6 +10,7 @@
     {% endfor %}
 </div>
 <div id="rd_header">
+
 {% ifequal i.restaurant_picture None %}
     <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
 {% else %}
@@ -20,12 +21,19 @@
         <p id="rd_av_rating">{{queryset.averageRating}}</p>
         <p id="rd_amount_rating">({{queryset.getAmountRating}})</p>
     </div>
-    <br>
-    <p>gefällt ({{ totalLikes }}) Person/en</p>
+
+<!--- <p>gefällt ({{ totalLikes }}) Person/en</p> -->
     {% if user.is_authenticated %}
     <form action="{% url 'like_restaurant' queryset.pk %}" method="POST">
         {% csrf_token %}
-        <button type="submit" name="restaurant_id" value="{{ queryset.id }}" class="like-btn">Like</button>
+
+                {% if user in queryset.likes.all %}
+
+                    <button type="submit" name="restaurant_id" value="{{ queryset.id }}" class="like-btn" id="rd_likebtn"><img class="herz_leer" src="{% static 'assets/herz_voll.svg' %}"></button>
+        {% else %}
+                    <button type="submit" name="restaurant_id" value="{{ queryset.id }}" class="like-btn" id="rd_likebtn"><img class="herz_leer" src="{% static 'assets/herz_leer.svg' %}"></button>
+
+        {% endif %}
     </form>
     {% endif %}
 
@@ -189,10 +197,10 @@
             {% endif %}
         </div>
 
-        <form method="get">
+        <!--<form method="get">
             {{myFilter.form}}
             <button id="restaurants_search_button" class="btn btn-primary" type="submit">Suchen</button>
-        </form>
+        </form> -->
 
         {% for comment in comments.all reversed %}
             {% if comment.restaurant.name == queryset.name %}
@@ -286,9 +294,12 @@
     let rd_head = document.getElementById("rd_body_header");
     let header_p = rd_head.getElementsByTagName("p");
 
+
     var newURL = window.location.href;
 
     active["{{ underpage }}"] = 1;
+
+    document.getElementsByClassName("like-btn")[0].addEventListener('click', function(){document.getElementsByClassName("herz_leer")[0].setAttribute('src', "{% static 'assets/herz_voll.svg' %}")});
 
     document.getElementsByClassName("rd_food_tag")[0].style.backgroundColor = "rgb(112,175,107)";
     document.getElementsByClassName("rd_food_tag")[0].style.color = "white";
@@ -366,7 +377,11 @@
 
                 let w = array[i] / stars * 100;
                 element.style.width = w + "%";
+                if(Number.isNaN(w)){
+                    w = 0;
+                }
                 pp[i].innerHTML = Math.round(w) + "%";
+                console.log(w);
         }
     }
 

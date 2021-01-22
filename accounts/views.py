@@ -383,7 +383,7 @@ def restaurant_detail(request, pk, underpage=1, **kwargs):
     context = {
         'queryset': queryset, 'comments': comments, 'comment_form': comment_form,
         'foods': foods, 'ratingCount': ratingCount, 'totalLikes': totalLikes,
-        'session': session, 'underpage': underpage, 'pk_value': pk_value, 'myFilter': myFilter
+        'session': session, 'underpage': underpage, 'pk_value': pk_value, 'myFilter': myFilter, 'isLiked': isLiked, 'liked': liked
     }
     return render(request, 'restaurant_detail.html', context)
 

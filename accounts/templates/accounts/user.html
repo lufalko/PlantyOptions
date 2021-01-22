@@ -16,9 +16,8 @@
     {% endifequal %}
     </div>
     <p id="user_username">{{user.username}}</p>
-    <p id="user_biographie">{{user.biography}}</p>
-
     <p id="user_start_edit" onclick="startEdit()">Profil bearbeiten</p>
+    <p id="user_biographie">{{user.biography}}</p>
 
     {% if request.user.is_authenticated %}
     {% if friend_requests %}
