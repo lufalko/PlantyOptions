@@ -188,6 +188,7 @@ def articlePage(request):
 def user(request):
     currentUser = request.user
     comments = Comment.objects.all()
+    liked = Restaurant.objects.filter(likes=currentUser)
 
     if request.method == 'POST':
         #comment_form = CreateCommentForm(request.POST or None)
@@ -210,7 +211,7 @@ def user(request):
         pictureForm = PictureUpdateForm(instance=currentUser)
         #comment_form = CreateCommentForm()
 
-    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, #'comment_form': comment_form
+    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, 'liked': liked, #comment_form': comment_form
     }
     return render(request, 'accounts/user.html', context)
 
@@ -345,8 +346,8 @@ def map(request):
 
 def restaurant_detail(request, pk, underpage=1):
 
-    foods = Food.objects.all()
     queryset = Restaurant.objects.get(pk=pk)
+    foods = Food.objects.filter(restaurant=queryset)
 
     comments = Comment.objects.all()
     ratings = comments.filter(restaurant=pk)
@@ -390,8 +391,13 @@ def likeView(request, pk):
 
 def article_detail(request, pk):
     article = Article.objects.get(pk=pk)
-    recipe = article.recipe
-    ingredients = recipe.ingredients.all()
+    if article.recipe:
+        recipe = article.recipe
+        ingredients = recipe.ingredients.all()
+    else:
+        recipe = None;
+        ingredients = None;
+
 
     context = {
         'article': article, 'recipe': recipe, 'ingredients': ingredients

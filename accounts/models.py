@@ -293,6 +293,7 @@ class Food(models.Model):
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=200, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
+    toGo = models.FloatField(null=True, blank=True)
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     price = models.FloatField(null=True)
@@ -407,4 +408,7 @@ class Coworker(models.Model):
     email = models.CharField(max_length=150, null=False)
     social = models.CharField(max_length=250, null=False)
     title = models.CharField(max_length=50)
-    bio = models.CharField(max_length=250)
+    bio = models.CharField(max_length=35)
+
+    def __str__(self):
+        return self.name

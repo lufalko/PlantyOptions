@@ -352,8 +352,8 @@ nav a:hover{
     object-fit: cover;
 }
 .articles-text{
-    width: 80%;
-    margin: 10px 10% 0 10%;
+    width: 60%;
+    margin: 10px 20% 0 20%;
     text-align: center;
 }
 .articles-text p{
@@ -403,11 +403,12 @@ nav a:hover{
     z-index: 5;
     background: white;
     box-shadow:0px 0px 1px #000000;
-    width: 300px;
+    width: 275px;
     min-height: auto;
     max-height: calc(100% - 150px);
     padding: 20px;
     border-radius: 20px;
+    overflow: hidden;
 }
 .ingredients-headline{
     text-align: center;
@@ -419,6 +420,7 @@ nav a:hover{
 }
 .ingredients-body ul{
     list-style: none;
+    padding-inline-start: 0;
 }
 .ingredients-body li{
     margin: 5px 10px 5px 10px;
@@ -2133,10 +2135,7 @@ display: none;
     float:center;
     padding:20px;
     margin-top:20px;
-    border-radius: 20px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: lightgrey;
+    border-bottom: solid 1px lightgrey;
 }
 
 
@@ -2149,9 +2148,9 @@ display: none;
     position:relative;
     left:10vw;
     margin-top:10vh;
-    border-bottom-style: solid;
+    /*border-bottom-style: solid;
     border-width: 1px;
-    border-color: lightgrey;
+    border-color: lightgrey;*/
     margin-bottom:30px;
 }
 
@@ -2845,6 +2844,21 @@ display: none;
 
     transition: background-color 0.5s;
     border-radius: 20px 0 0 20px ;
+    border-right: 1px solid lightgrey;
+    border-left: 2px solid lightgrey;
+}
+
+#rd_toGo{
+    clear: both;
+    float: left;
+    border-top: 2px solid lightgrey;
+    border-bottom: 2px solid lightgrey;
+
+    padding: 2px;
+    width: 150px;
+
+    transition: background-color 0.5s;
+    border-radius: 20px;
     border-right: 1px solid lightgrey;
     border-left: 2px solid lightgrey;
 }
