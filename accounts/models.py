@@ -1,3 +1,5 @@
+import json
+import requests
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -185,7 +187,7 @@ class Restaurant(models.Model):
     zip_code = models.CharField(max_length=5, default="86444")
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(blank=True)
-    averageRating = models.FloatField(default=0)
+    averageRating = models.FloatField(default=0, blank=True)
 
     mon = models.CharField(max_length=50, blank=True, null=True)
     tue = models.CharField(max_length=50, blank=True, null=True)
@@ -195,8 +197,8 @@ class Restaurant(models.Model):
     sat = models.CharField(max_length=50, blank=True, null=True)
     sun = models.CharField(max_length=50, blank=True, null=True)
 
-    latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
-    longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
 
     likes = models.ManyToManyField(Account, related_name='liked_restaurant', blank=True)
 
@@ -227,7 +229,7 @@ class Restaurant(models.Model):
                 totalPrice += i.price
                 count += 1
 
-        if count is not None:
+        if count is not 0:
             return totalPrice / count
         else:
             return 0
@@ -256,6 +258,15 @@ class Restaurant(models.Model):
         if avg is not 0:
             avg = round(avg)
         self.averageRating = avg
+
+        endpoint = "http://www.mapquestapi.com/geocoding/v1/address?key=pljcJn2jh4GxsasQpqj0O11GaS4TLUJm&location=" + self.address + ",%20" + self.city + ",%20Germany,%20" + self.zip_code + ".json"
+        data = requests.get(endpoint).json()
+
+        lat = json.loads(str(data['results'][0]['locations'][0]['latLng']['lat']))
+        lng = json.loads(str(data['results'][0]['locations'][0]['latLng']['lng']))
+
+        self.latitude = lat
+        self.longitude = lng
 
         super().save(*args, **kwargs)
 
