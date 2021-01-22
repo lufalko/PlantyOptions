@@ -22,9 +22,9 @@ urlpatterns = [
     path('map/', views.map, name='map'),
 
     path('articles/', views.articlePage, name='articles'),
+    path('article_detail/<str:pk>/', views.article_detail, name='article_detail'),
     path('restaurant_detail/<str:pk>/', views.restaurant_detail, name='restaurant_detail'),
     path('restaurant_detail/<str:pk>/<int:underpage>', views.restaurant_detail, name='restaurant_detail'),
-    path('article_detail/<str:pk>/', views.article_detail, name='article_detail'),
 
     path('api-auth/', include('rest_framework.urls')),
     path('data_api/', views.DataApi.as_view(), name='data_api'),

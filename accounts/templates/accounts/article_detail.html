@@ -2,4 +2,33 @@
 
 {% block content %}
 
+{% if article.ingredientList %}
+    {% include 'snippets/ingredients.html' %}
+{% endif %}
+
+<div class="articles-detail-container">
+    <div class="articles-banner">
+        <img id="article_banner" src="{{article.banner.url}}">
+    </div>
+    <div class="articles-text">
+        <div class="articles-headline">
+            <p>{{article.headline}}</p>
+        </div>
+        <div class="articles-subtitle">
+            <p>{{article.subtitle}}</p>
+        </div>
+        <div class="article-date">
+             <p>{{article.date_created}}</p>
+        </div>
+        <div class="articles-content">
+            <p>{{article.article_body}}</p>
+        </div>
+        {% if article.recipe %}
+        <div>
+            {% include 'snippets/recipe.html' %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
 {% endblock %}

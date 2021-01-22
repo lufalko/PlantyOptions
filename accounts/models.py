@@ -1,3 +1,5 @@
+import json
+import requests
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -185,17 +187,18 @@ class Restaurant(models.Model):
     zip_code = models.CharField(max_length=5, default="86444")
     tags = models.ManyToManyField(Tag)
     affordability = models.FloatField(blank=True)
+    averageRating = models.FloatField(default=0, blank=True)
 
-    mon = models.CharField(max_length=50, null=True)
-    tue = models.CharField(max_length=50, null=True)
-    wed = models.CharField(max_length=50, null=True)
-    thu = models.CharField(max_length=50, null=True)
-    fri = models.CharField(max_length=50, null=True)
-    sat = models.CharField(max_length=50, null=True)
-    sun = models.CharField(max_length=50, null=True)
+    mon = models.CharField(max_length=50, blank=True, null=True)
+    tue = models.CharField(max_length=50, blank=True, null=True)
+    wed = models.CharField(max_length=50, blank=True, null=True)
+    thu = models.CharField(max_length=50, blank=True, null=True)
+    fri = models.CharField(max_length=50, blank=True, null=True)
+    sat = models.CharField(max_length=50, blank=True, null=True)
+    sun = models.CharField(max_length=50, blank=True, null=True)
 
-    latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
-    longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
 
     likes = models.ManyToManyField(Account, related_name='liked_restaurant', blank=True)
 
@@ -204,21 +207,6 @@ class Restaurant(models.Model):
 
     # def lat_lng(self):
     #    return list(getattr(self.point, 'coords', [])[::-1])
-
-    def getAverageRating(self):
-        comments = Comment.objects.all()
-        avg = 0
-        count = 0
-        for i in comments:
-            if i.restaurant == self:
-                avg += i.ratings
-                if count is 0:
-                    count += 1
-                else:
-                    avg = avg / 2
-        if avg is not 0:
-            avg = round(avg)
-        return avg
 
     def getAmountRating(self):
         comments = Comment.objects.all()
@@ -241,7 +229,7 @@ class Restaurant(models.Model):
                 totalPrice += i.price
                 count += 1
 
-        if count is not None:
+        if count is not 0:
             return totalPrice / count
         else:
             return 0
@@ -255,8 +243,31 @@ class Restaurant(models.Model):
             afford = 2
         elif price >= 10.5:
             afford = 3
-
         self.affordability = afford
+
+        comments = Comment.objects.all()
+        avg = 0
+        count = 0
+        for i in comments:
+            if i.restaurant == self:
+                avg += i.ratings
+                if count is 0:
+                    count += 1
+                else:
+                    avg = avg / 2
+        if avg is not 0:
+            avg = round(avg)
+        self.averageRating = avg
+
+        endpoint = "http://www.mapquestapi.com/geocoding/v1/address?key=pljcJn2jh4GxsasQpqj0O11GaS4TLUJm&location=" + self.address + ",%20" + self.city + ",%20Germany,%20" + self.zip_code + ".json"
+        data = requests.get(endpoint).json()
+
+        lat = json.loads(str(data['results'][0]['locations'][0]['latLng']['lat']))
+        lng = json.loads(str(data['results'][0]['locations'][0]['latLng']['lng']))
+
+        self.latitude = lat
+        self.longitude = lng
+
         super().save(*args, **kwargs)
 
     def getPK(self):
@@ -301,22 +312,90 @@ class Food(models.Model):
 
 class Comment(models.Model):
     account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL)
+    # parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='subcomment')
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     content = models.TextField(default='')
     ratings = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
-    fields = '__all__'
+
+    def save(self, *args, **kwargs):
+        instance = super(Comment, self).save(*args, **kwargs)
+        self.restaurant.save()
+        return instance
 
     def __str__(self):
         return self.account.username + ' | Rating: ' + str(self.ratings)
+
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=200, null=False)
+    kcal = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(1000)], blank=True, default=0)
+    carbs = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(99)], blank=True, default=0)
+    protein = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(99)], blank=True, default=0)
+    fat = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(99)], blank=True, default=0)
+
+    def __str__(self):
+        return self.name
+
+
+class IngredientValue(models.Model):
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    value = models.IntegerField(null=False, default=0)
+
+    def __str__(self):
+        return self.ingredient.name + ' | ' + str(self.value)
+
+
+class Recipe(models.Model):
+    name = models.CharField(max_length=200, null=False)
+    duration = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(12)], blank=True, default=0)
+    portions = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(12)], null=False)
+    instructions = models.TextField(max_length=6000, null=False)
+    ingredients = models.ManyToManyField(IngredientValue, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Article(models.Model):
     banner = models.ImageField(null=True, default='dashboard-BG.jpg')
     headline = models.CharField(max_length=200, null=False, default='Unnamed')
     subtitle = models.CharField(max_length=300, null=False, default='Unnamed')
-    article_body = models.CharField(max_length=4000, null=False, default='Lorem Ipsum')
+    article_body = models.TextField(max_length=4000, null=False, default='Lorem Ipsum')
     date_created = models.DateTimeField(auto_now_add=True)
+
+    ingredientList = models.BooleanField(null=True, default=False)
+    recipe = models.ForeignKey(Recipe, blank=True, null=True, on_delete=models.CASCADE)
+
+    kcal = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+    carbs = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+    protein = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+    fat = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(3000)], null=True, blank=True)
+
+    # def save(self, *args, **kwargs):
+    #    data = serializers.serialize("json", self.ingredients)
+
+    # def save(self, *args, **kwargs):
+    #    super().save(*args, **kwargs)
+    #    ingredients = self.ingredients.all()
+    #    totalCalories = 0
+    #    totalCarbs = 0
+    #    totalProtein = 0
+    #    totalFat = 0
+
+    #    for i in ingredients:
+    #        totalCalories += i.kcal
+    #        totalCarbs += i.carbs
+    #        totalProtein += i.protein
+    #        totalFat += i.fat
+    #       if i == 0:
+    #           return
+
+    #    self.kcal = totalCalories
+    #   self.carbs = totalCarbs
+    #   self.protein = totalProtein
+    #   self.fat = totalFat
+    #   self.save()
 
     def __str__(self):
         return self.headline

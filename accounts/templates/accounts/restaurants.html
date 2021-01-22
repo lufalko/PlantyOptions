@@ -33,7 +33,7 @@
         <p><a class="restaurants_name_link" href="{% url 'restaurant_detail' pk=i.pk underpage=0 %}">{{i.name}}</a></p>
     </div>
     <div class="restaurants_rating" >
-            <p>{{i.getAverageRating}}</p>
+            <p>{{i.averageRating}}</p>
     </div>
     <div class="restaurants_tags">
         <p>
@@ -125,7 +125,7 @@
         </div>
         <div id="restaurants_aside_right_bottom" >
             <div id="restaurants_aside_right_bottom_text">
-                <p id="restaurants_map_link"><a href="{% url 'map' %}">Map anzeigen</a></p>
+                <p id="restaurants_map_link"><a href="{% url 'map' %}">Karte anzeigen</a></p>
 
             <div id="restaurants_aside_right_bottom_text_restaurant">
                 <p id="restaurants_map_name">Restaurant Name</p>
@@ -693,7 +693,7 @@ window.onresize = reportWindowSize;
         slides.item(i).onmouseover = function(){
             var dataname = this.getAttribute("data-name");
             var mappoint = document.getElementsByClassName(dataname);
-            mappoint[0].src = "{% static 'assets/PO_Icon_Green.png' %}"
+            mappoint[0].src = "{% static 'assets/PO_Icon_DarkGreen.svg' %}"
         };
 
        slides.item(i).onmouseleave = function(){

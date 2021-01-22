@@ -17,15 +17,17 @@
 {% endifequal %}
 <p id="rd_name">{{queryset.name}}</p>
     <div id="rd_rating">
-        <p id="rd_av_rating">{{queryset.getAverageRating}}</p>
+        <p id="rd_av_rating">{{queryset.averageRating}}</p>
         <p id="rd_amount_rating">({{queryset.getAmountRating}})</p>
     </div>
     <br>
     <p>gefällt ({{ totalLikes }}) Person/en</p>
+    {% if user.is_authenticated %}
     <form action="{% url 'like_restaurant' queryset.pk %}" method="POST">
         {% csrf_token %}
-        <button type="submit", name="restaurant_id", value="{{ queryset.id }}", class="like-btn">Like</button>
+        <button type="submit" name="restaurant_id" value="{{ queryset.id }}" class="like-btn">Like</button>
     </form>
+    {% endif %}
 
 </div>
 
@@ -146,43 +148,52 @@
 
          </div>
 
+
         <div id="rd_comments_block">
 
         <div id="rd_addcoment">
 
-        {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
+            <p id="rd_add_text">Kommentar hinzufügen</p>
+            <div class="post-comment-section">
+                <div id="rd_stars"></div>
+                <form method="POST">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="submit" value="Kommentar Abschicken" class="submit_button">
+                </form>
+            </div>
 
-        <p id="rd_add_text">Kommentar hinzufügen</p>
-        <div class="post-comment-section">
-        <form method="POST">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <input type="submit" value="Submit" class="submit_button">
+            {% else %}
+            <p id="rd_nolog">Logge dich ein, um einen Kommentar zu verfassen!</p>
+
+            {% endif %}
+        </div>
+
+        <form method="get">
+            {{myFilter.form}}
+            <button id="restaurants_search_button" class="btn btn-primary" type="submit">Suchen</button>
         </form>
-        </div>
-
-        {% else %}
-
-        <p id="rd_nolog">Logge dich ein, um einen Kommentar zu verfassen!</p>
-
-        {% endif %}
-
-            <div id="rd_stars"></div>
-
-        </div>
 
         {% for comment in comments.all reversed %}
             {% if comment.restaurant.name == queryset.name %}
+                {% include 'accounts/snippets/comment_template.html' %}
 
-            {% include 'accounts/snippets/comment_template.html' %}
-
+            <!--<p class="rd_answer_text">Antworten</p>
+            <div class="rd_addsubcomment">
+                <div class="post-subcomment-section">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <input type="submit" value="Antworten" class="submit_button">
+                    </form>
+                </div>
+            </div>-->
             {% endif %}
         {% endfor %}
         </div>
-
     </div>
-
-    </div>
+</div>
 
 
 <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="{% static 'assets/up.svg' %}"></button>

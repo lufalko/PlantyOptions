@@ -13,7 +13,7 @@ class RestaurantFilter(django_filters.FilterSet):
     class Meta:
         model = Restaurant
         fields = '__all__'
-        exclude = ['location', 'restaurant_picture', 'address', 'houseNumber', 'state', 'latitude', 'longitude', 'likes', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+        exclude = ['location', 'restaurant_picture', 'address', 'houseNumber', 'state', 'averageRating', 'latitude', 'longitude', 'likes', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 
 class GetAddressFilter(django_filters.FilterSet):
@@ -33,3 +33,11 @@ class HomepageFilter(django_filters.FilterSet):
         fields = ['restaurant_name']
         # exclude = ['location', 'restaurant_picture', 'rating', 'tags', 'affordability']
 
+
+class CommentFilter(django_filters.FilterSet):
+    restaurant_rating = NumberFilter(field_name="ratings")
+
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        exclude = ['account', 'restaurant', 'date_created', 'content']

@@ -1,0 +1,51 @@
+<div class="ingredients-open">
+    <div id="ingredients-icon-top"></div>
+    <div id="ingredients-icon-middle"></div>
+    <div id="ingredients-icon-bottom"></div>
+</div>
+<div class="ingredients-container">
+    <div class="ingredients-headline">
+        <p>Zutatenliste</p>
+    </div>
+    <div class="ingredients-body">
+        <ul>
+            {% for i in ingredients %}
+            <li><p style="float: left; clear: left;">{{i.value}} g</p><p style="float: right;">{{i.ingredient.name}}</p></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if kcal > 0 %}
+    <div class="ingredients-nutritional">
+        <ul>
+            <li>{{article.carbs}}</li>
+            <li>{{article.protein}}</li>
+            <li>{{article.fat}}</li>
+            <li>{{article.kcal}}</li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+
+    function myFunction() {
+           document.getElementById(".ingredients-container").classList.toggle("show");
+       }
+
+
+        window.onclick = function(event) {
+          if (!event.target.matches('.ingredients-open')) {
+            console.log('clicked!');
+            var dropdowns = document.getElementsByClassName(".ingredients-container");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+
+
+</script>
