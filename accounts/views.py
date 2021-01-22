@@ -344,7 +344,7 @@ def map(request):
     return render(request, 'accounts/map.html', context)
 
 
-def restaurant_detail(request, pk, underpage=1):
+def restaurant_detail(request, pk, underpage=1, **kwargs):
 
     queryset = Restaurant.objects.get(pk=pk)
     foods = Food.objects.filter(restaurant=queryset)
@@ -361,9 +361,10 @@ def restaurant_detail(request, pk, underpage=1):
     myFilter = CommentFilter(request.GET, queryset=comments)
     comments = myFilter.qs
 
+    liked = Restaurant.objects.filter(likes=request.user)
     isLiked = False
 
-    if queryset.likes.filter(Account=request.user):
+    if liked:
         isLiked = True
 
     if request.method == 'POST':
