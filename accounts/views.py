@@ -361,12 +361,6 @@ def restaurant_detail(request, pk, underpage=1, **kwargs):
     myFilter = CommentFilter(request.GET, queryset=comments)
     comments = myFilter.qs
 
-    liked = Restaurant.objects.filter(likes=request.user)
-    isLiked = False
-
-    if liked:
-        isLiked = True
-
     if request.method == 'POST':
         comment_form = CreateCommentForm(request.POST or None)
 
