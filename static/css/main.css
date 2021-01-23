@@ -2743,7 +2743,7 @@ display: none;
 }
 
 #rd_likebtn{
-    float: right;
+    float: bottom;
 }
 
 #rd_rating img{
@@ -2872,18 +2872,20 @@ display: none;
 }
 
 #rd_toGo{
-    clear: both;
+
     float: left;
-    border-top: 2px solid lightgrey;
-    border-bottom: 2px solid lightgrey;
+    border: 2px solid lightgrey;
 
     padding: 2px;
     width: 150px;
+    margin-right: 20px;
 
     transition: background-color 0.5s;
     border-radius: 20px;
-    border-right: 1px solid lightgrey;
-    border-left: 2px solid lightgrey;
+}
+
+#rd_vegetarisch:hover, #rd_toGo:hover, #rd_vegan:hover {
+    cursor: pointer;
 }
 
 #rd_foods_tags{
@@ -3348,14 +3350,14 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 542px) {
 
     #rd_food_searchbar{
         width: 130px;
     }
 
     #rd_vegan, #rd_vegetarisch{
-        width: calc((100% - 160px)/2);
+        width: calc((100% - 65px)/3);
     }
 
 }

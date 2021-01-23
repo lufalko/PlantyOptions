@@ -16,24 +16,24 @@
 {% else %}
     <img src="{{queryset.restaurant_picture.url}}">
 {% endifequal %}
-<p id="rd_name">{{queryset.name}}</p>
+    <p id="rd_name">{{queryset.name}}</p>
     <div id="rd_rating">
         <p id="rd_av_rating">{{queryset.averageRating}}</p>
         <p id="rd_amount_rating">({{queryset.getAmountRating}})</p>
     </div>
 
-<!--- <p>gefällt ({{ totalLikes }}) Person/en</p> -->
+
+
     {% if user.is_authenticated %}
     <form action="{% url 'like_restaurant' queryset.pk %}" method="POST">
         {% csrf_token %}
-
-                {% if user in queryset.likes.all %}
-
-                    <button type="submit" name="restaurant_id" value="{{ queryset.id }}" class="like-btn" id="rd_likebtn"><img class="herz_leer" src="{% static 'assets/herz_voll.svg' %}"></button>
-        {% else %}
-                    <button type="submit" name="restaurant_id" value="{{ queryset.id }}" class="like-btn" id="rd_likebtn"><img class="herz_leer" src="{% static 'assets/herz_leer.svg' %}"></button>
-
-        {% endif %}
+        <button type="submit" name="restaurant_id" value="{{ queryset.id }}" class="like-btn" id="rd_likebtn">
+            {% if user in queryset.likes.all %}
+                <img class="herz_leer" src="{% static 'assets/herz_voll.svg' %}">
+            {% else %}
+                <img class="herz_leer" src="{% static 'assets/herz_leer.svg' %}">
+            {% endif %}
+        </button>
     </form>
     {% endif %}
 
@@ -50,9 +50,9 @@
     </div>
     <div class="rd_options">
        <div id="rd_foods_head">
+            <p id="rd_toGo">Außer Haus</p>
            <p id="rd_vegetarisch">?vegetarisch</p>
            <p id="rd_vegan">?vegan</p>
-           <p id="rd_toGo">Außer Haus</p>
 
            <input type="text" placeholder="suche Gericht" id="rd_food_searchbar" onkeyup="searchbar()">
 
@@ -66,7 +66,7 @@
            </div>
 
        </div>
-        <div id="rd_toGo_body">
+       <!-- <div id="rd_toGo_body">
 
             <div class="rd_dishes">
                 {% for j in foods %}
@@ -89,7 +89,7 @@
                     {% endif %}
                 {% endfor %}
 
-        </div>
+        </div> -->
 
         <div id="rd_foods_body">
 
@@ -280,6 +280,7 @@
     let vegetarisch = false;
     let active= [0,0,0,0];
     let veg_list = [];
+    let togo = [];
     let queryset = "{{queryset}}"
     let food_tags = [];
     let tag_list = [];
@@ -293,6 +294,7 @@
     let counter = 0;
     let rd_head = document.getElementById("rd_body_header");
     let header_p = rd_head.getElementsByTagName("p");
+    let delivery = false;
 
 
     var newURL = window.location.href;
@@ -381,7 +383,7 @@
                     w = 0;
                 }
                 pp[i].innerHTML = Math.round(w) + "%";
-                console.log(w);
+
         }
     }
 
@@ -526,9 +528,17 @@
             } else {
                 veg_list[i] = false;
             }
-            tag_list[i] = food.tags;
+
+            if (food.delivery == false){
+                togo[i] = false;
+                 console.log(food.delivery)
+            }
+            else {
+                togo[i] = true
+            }
+            tag_list[i] = food.tags
             i++;
-        }
+            }
         })
 
         for(let j=0; j < tag_list.length; j++){
@@ -597,7 +607,7 @@
                  }
              }
          }
-    console.log("hey");
+
          render_options();
          render_body();
 
@@ -622,6 +632,7 @@
                  document.getElementById('rd_vegan').innerHTML = vegan_counter + ' Vegan';
                  document.getElementById('rd_vegan').style.userSelect = "none";
                  document.getElementById('rd_vegetarisch').style.userSelect = "none";
+                 document.getElementById('rd_toGo').style.userSelect = "none";
              }
          }
 
@@ -712,13 +723,59 @@
              })
          }
 
+         function render_delivery() {
+             let element = document.getElementById("rd_toGo");
+
+             element.addEventListener("mouseover", function () {
+                 if (!delivery) {
+                     this.style.backgroundColor = "#70af6b"
+                 }
+             });
+             element.addEventListener("mouseover", function () {
+                 if (!delivery) {
+                     this.style.borderColor = "#70af6b"
+                 }
+             });
+             element.addEventListener("mouseleave", function () {
+                 if (!delivery) {
+                     this.style.backgroundColor = "transparent";
+                 }
+             });
+             element.addEventListener("mouseleave", function () {
+                 if (!delivery) {
+                     this.style.borderColor = "lightgrey"
+                 }
+             });
+
+             element.addEventListener('click', function () {
+
+                 if (!delivery) {
+                     this.style.backgroundColor = "rgb(112,175,107)";
+                     this.style.borderColor = "rgb(112,175,107)";
+                     delivery = true;
+                 } else {
+                     delivery = false;
+                     this.style.backgroundColor = "transparent";
+                     this.style.borderColor = "lightgrey";
+                 }
+                 render_food();
+                 count_cat();
+             })
+         }
+
          function render_food() {
 
              let category = document.getElementsByClassName('rd_food_block');
 
              let foods = document.getElementsByClassName("rd_food_block");
+
+
              for (let i = 0; i < foods.length; i++) {
                  let check = false;
+
+
+
+
                  for (let j = 0; j < tag_list[i].length; j++) {
 
                      if (tag_list[i][j] == tag_now) {
@@ -775,6 +832,15 @@
                                  }
                              }
                          }
+                     }
+                 }
+             }
+
+            for (let i = 0; i < togo.length; i++) {
+                 if (delivery) {
+                     if (togo[i] == false) {
+                         foods[i].style.display = "none";
+                         console.log("done");
                      }
                  }
              }
@@ -852,8 +918,8 @@
                      foods[i].style.display = "inline-block";
                  }
              }
-             count_cat();
              render_food();
+             count_cat();
 
          }
 
@@ -932,6 +998,7 @@
 
          render_vegan();
          render_vegetarisch();
+         render_delivery();
          render_food_tags();
          count_cat();
          starrating();
