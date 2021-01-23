@@ -178,6 +178,7 @@ class Tag(models.Model):
 class Restaurant(models.Model):
     restaurant_picture = models.ImageField(null=True, default='dashboard-BG.jpg')
     name = models.CharField(max_length=200, null=True)
+    description = models.TextField(max_length=250, null=True)
 
     address = models.CharField(max_length=128, blank=True)
     houseNumber = models.IntegerField(default=1)
@@ -255,8 +256,7 @@ class Restaurant(models.Model):
                     count += 1
                 else:
                     avg = avg / 2
-        if avg is not 0:
-            avg = round(avg)
+
         self.averageRating = avg
 
         endpoint = "http://www.mapquestapi.com/geocoding/v1/address?key=pljcJn2jh4GxsasQpqj0O11GaS4TLUJm&location=" + self.address + ",%20" + self.city + ",%20Germany,%20" + self.zip_code + ".json"

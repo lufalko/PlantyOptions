@@ -927,17 +927,20 @@ select:-webkit-autofill:focus {
     text-align: left;
     overflow-y: scroll;
     margin-bottom: 5px;
+    outline: none;
 }
 
 #user_change_header > #id_biography:focus,
 #user_change_header > #id_biography:hover{
     border-bottom: 1px solid var(--poGreen);
     width: calc(100% - 150px - 30px);
+    outline: none;
 }
 #user_change_header > #id_username:focus,
 #user_change_header > #id_username:hover{
     border-bottom: 1px solid var(--poGreen);
     width: calc(100% - 150px - 230px);
+    outline: none;
 }
 
 #user_start_edit{

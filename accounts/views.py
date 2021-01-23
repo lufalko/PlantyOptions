@@ -107,7 +107,7 @@ def loginPage(request):
             return redirect('home')
         elif usr is None:
             messages.info(request, 'Nutzername oder Passwort inkorrekt')
-        elif usr.ist_active == False:
+        elif usr.is_active == False:
             messages.info(request, 'Account muss verifiziert werden')
 
 
