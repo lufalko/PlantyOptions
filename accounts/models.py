@@ -294,7 +294,7 @@ class Food(models.Model):
     name = models.CharField(max_length=200, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
     toGo = models.FloatField(null=True, blank=True)
-    delivery = models.BooleanField(null=True, default=False)
+    # delivery = models.BooleanField(null=True, default=False)
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     price = models.FloatField(null=True)

@@ -536,9 +536,9 @@
                 veg_list[i] = false;
             }
 
-            if (food.delivery == false){
+            if (food.toGo == null){
                 togo[i] = false;
-                 console.log(food.delivery)
+                 console.log(food.toGo)
             }
             else {
                 togo[i] = true;
@@ -827,7 +827,7 @@
                          foods = document.getElementsByClassName("rd_food_block");
                          for (let i = 0; i < foods.length; i++) {
                              let check = false;
-                             for (let j = 0; j < tag_list[i].length; j++) {
+                             for (let j = 0; j < 1; j++) {
 
                                  if (tag_list[i][j] == tag_now) {
                                      check = true;

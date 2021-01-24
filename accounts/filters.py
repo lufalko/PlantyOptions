@@ -13,7 +13,7 @@ class RestaurantFilter(django_filters.FilterSet):
     class Meta:
         model = Restaurant
         fields = '__all__'
-        exclude = ['location', 'restaurant_picture', 'address', 'houseNumber', 'state', 'averageRating', 'latitude', 'longitude', 'likes', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+        exclude = ['location', 'restaurant_picture', 'description', 'address', 'houseNumber', 'state', 'averageRating', 'latitude', 'longitude', 'likes', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 
 class GetAddressFilter(django_filters.FilterSet):
