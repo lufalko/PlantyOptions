@@ -286,9 +286,11 @@
     let active= [0,0,0,0];
     let veg_list = [];
     let togo = [];
+    let togo_price = [];
     let queryset = "{{queryset}}"
     let food_tags = [];
     let tag_list = [];
+    let price = [];
     let tag_now = "Alles";
     let request = new XMLHttpRequest()
     let mouseup = true;
@@ -539,9 +541,11 @@
                  console.log(food.delivery)
             }
             else {
-                togo[i] = true
+                togo[i] = true;
             }
-            tag_list[i] = food.tags
+            tag_list[i] = food.tags;
+            togo_price[i] = food.toGo;
+            price[i] = food.price;
             i++;
             }
         })
@@ -724,7 +728,6 @@
                      this.style.borderColor = "lightgrey";
                  }
                  render_food();
-
              })
          }
 
@@ -849,6 +852,12 @@
                      }
                  }
              }
+            if(delivery){
+                let devfood = document.getElementsByClassName("rd_block_price");
+                for(let i= 0; i <devfood.length; i++){
+                    devfood.innerHTML=food.togo
+                }
+            }
          }
 
          function render_food_tags() {
