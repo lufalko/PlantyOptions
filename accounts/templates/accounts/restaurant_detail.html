@@ -11,10 +11,10 @@
 </div>
 <div id="rd_header">
 
-{% ifequal i.restaurant_picture None %}
+{% ifequal queryset.restaurant_picture None %}
     <img id="rd_profile_image" src="{% static 'assets/dashboard-BG.jpg' %}">
 {% else %}
-    <img src="{{queryset.restaurant_picture.url}}">
+    <img id="rd_profile_image" src="{{queryset.restaurant_picture.url}}">
 {% endifequal %}
     <p id="rd_name">{{queryset.name}}</p>
     <div id="rd_rating">
