@@ -843,7 +843,6 @@
                      }
                  }
              }
-
             for (let i = 0; i < togo.length; i++) {
                  if (delivery) {
                      if (togo[i] == false) {
@@ -852,10 +851,15 @@
                      }
                  }
              }
+            let devfood = document.getElementsByClassName("rd_block_price");
             if(delivery){
-                let devfood = document.getElementsByClassName("rd_block_price");
                 for(let i= 0; i <devfood.length; i++){
-                    devfood.innerHTML=food.togo
+                    devfood[i].innerHTML = togo_price[i] + "€";
+                }
+            }
+            else{
+                for(let i= 0; i <devfood.length; i++){
+                    devfood[i].innerHTML = price[i]  + "€";
                 }
             }
          }

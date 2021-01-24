@@ -46,23 +46,22 @@ body {
 
 .like-btn{
     appearance: none;
-    padding: 10px;
     background-color: white;
     border-radius: 10px;
-    border: 2px solid lightgrey;
+   border: none;
     color: black;
-    transition: 0.5s;
+    transition: background-color 0.5s;
     outline: none;
 }
 .like-btn:hover{
     cursor: pointer;
-
 }
 
 .herz_leer{
     height: 20px;
     width: 20px;
 }
+
 .click_text{
     margin: 0px;
     font-weight: 600;
@@ -2668,20 +2667,20 @@ display: none;
 #rd_tags{
     display: inline-block;
     width: 100vw;
-    background-color: #70af6b;
+    border-bottom: 1px solid lightgrey;
 }
 
 #rd_tags p{
     display: inline-block;
-    color: #f1f1f1;
+    color: black;
     margin:0px;
-    padding: 0px;
+    padding: 2px;
     padding-right: 5px;
     padding-left: 5px;
 }
 
 #rd_tags p:hover{
-    color: white;
+    color: #3F3C54;
     cursor: pointer;
     transition: color 0.5s;
 }
@@ -2746,7 +2745,8 @@ display: none;
 }
 
 #rd_likebtn{
-    float: bottom;
+    float: left;
+    margin-top: 10px;
 }
 
 #rd_rating img{
@@ -2765,10 +2765,11 @@ display: none;
 #rd_description{
     display: inline-block;
     width: calc(100% - 135px - 25px);
-    height: 70px;
+    height: 75px;
     text-align: left;
     float: left;
     background-color: white;
+    overflow-y: scroll;
 }
 
 #rd_description p{
@@ -2837,20 +2838,19 @@ display: none;
 #rd_foods_head{
     display: inline-block;
     width: 100%;
+}
 
+#rd_vegan, #rd_vegetarisch, #rd_toGo, #rd_food_searchbar{
+    display: inline-block;
+    max-width: 150px;
+    width: calc((100% - 63px)/4);
+    padding: 2px;
 }
 
 #rd_vegan{
-
-    display: inline-block;
     float: left;
-
     border-top: 2px solid lightgrey;
     border-bottom: 2px solid lightgrey;
-
-    padding: 2px;
-    width: 150px;
-
     transition: background-color 0.5s, border-color 0.5s;
     border-radius: 0 20px 20px 0;
     border-left: 1px solid lightgrey;
@@ -2858,16 +2858,9 @@ display: none;
 }
 
 #rd_vegetarisch{
-
-    display: inline-block;
     float: left;
-
     border-top: 2px solid lightgrey;
     border-bottom: 2px solid lightgrey;
-
-    padding: 2px;
-    width: 150px;
-
     transition: background-color 0.5s;
     border-radius: 20px 0 0 20px ;
     border-right: 1px solid lightgrey;
@@ -2875,16 +2868,24 @@ display: none;
 }
 
 #rd_toGo{
-
     float: left;
     border: 2px solid lightgrey;
-
-    padding: 2px;
-    width: 150px;
+    max-width: 150px;
     margin-right: 20px;
-
     transition: background-color 0.5s;
     border-radius: 20px;
+}
+
+#rd_food_searchbar{
+    font-family: Montserrat;
+    appearance: none;
+    float: right;
+    border: 2px solid lightgrey;
+    border-radius: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+    margin-top: 14px;
+    margin-bottom: 14px;
 }
 
 #rd_vegetarisch:hover, #rd_toGo:hover, #rd_vegan:hover {
@@ -2957,22 +2958,6 @@ display: none;
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
-}
-
-#rd_food_searchbar{
-    font-family: Montserrat;
-    appearance: none;
-
-    display: inline-block;
-    float: right;
-    border: 2px solid lightgrey;
-    border-radius: 20px;
-    font-size: 14px;
-    padding: 2px;
-    padding-left: 10px;
-    margin-top: 14px;
-    margin-bottom: 14px;
-    width: 200px;
 }
 
 #rd_foods_body{
@@ -3351,7 +3336,45 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 }
 
+@media only screen and (max-width: 600px) {
 
+    #rd_profile_image{
+        height: 100px;
+        width: 100px;
+    }
+
+    #rd_body_header, #rd_food_searchbar, #rd_header, #rd_foods_head, #rd_foods_body, #rd_tags, .rd_block_description, .rd_block_price {
+        font-size: 13px;
+    }
+
+    #rd_name{
+        font-size: 20px;
+    }
+
+    #rd_rating img{
+        height: 16px;
+        width: auto;
+        margin-right: 4px;
+    }
+
+    #rd_rating{
+        margin-top: -2px;
+    }
+
+    #rd_description{
+        width: calc(100% - 100px - 25px);
+        height: 51px;
+    }
+
+    #rd_amount_rating{
+        margin-left: 3px;
+    }
+
+    #rd_likebtn{
+        margin-top: 5px;
+    }
+
+}
 
 @media only screen and (max-width: 542px) {
 
@@ -3362,13 +3385,7 @@ textarea#id_content:focus, textarea#id_content:hover {
     #rd_vegan, #rd_vegetarisch{
         width: calc((100% - 65px)/3);
     }
-
 }
-
-
-
-
-
 
 /*footer*/
 
