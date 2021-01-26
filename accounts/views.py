@@ -187,7 +187,7 @@ def articlePage(request):
 @login_required(login_url='login')
 def user(request):
     currentUser = request.user
-    comments = Comment.objects.all()
+    comments = Comment.objects.filter(account=request.user)
     liked = Restaurant.objects.filter(likes=currentUser)
 
     if request.method == 'POST':

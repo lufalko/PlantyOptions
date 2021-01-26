@@ -831,13 +831,15 @@ select:-webkit-autofill:focus {
 }
 
 .user_header_class{
-    width:calc(100% - 50px);
-    margin-top: 25px;
+    width: 60%;
     display: inline-block;
+    text-align: left;
 }
 
 #user_change_header{
+    width: 60%;
     display: none;
+    text-align: left;
 }
 
 
@@ -981,14 +983,22 @@ select:-webkit-autofill:focus {
 #user_username{
     float: left;
     text-align: left;
-    font-size: 25px;
+    font-size: 35px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: #3F3C54;
     margin: 0px;
     margin-top: -5px;
-    margin-bottom: 10px;
     padding: 0px;
+}
+#user_name{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 5px 0px 0px 0px;
+}
+#user_biographie{
+    margin: 0px;
 }
 
 #user_data_button{
@@ -1006,9 +1016,8 @@ select:-webkit-autofill:focus {
 }
 
 #user_body{
-    width: calc(100% - 50px);
-    margin-left: 25px;
-    margin-top: 25px;
+    width: 60%;
+    margin-left: 20%;
     height: 40vh;
 
 }
@@ -1057,13 +1066,15 @@ select:-webkit-autofill:focus {
 #user_information_display{
     width: 100%;
 }
+#user_saved_display{
+    width: 100%;
+    display: block;
+}
 
 #user_information_display p{
     float: left;
     clear: left;
     width: 50%;
-    height: 30px;
-    margin: 20px 0px 10px 0px;
 }
 #user_information_display input{
     float: right;
@@ -1124,8 +1135,8 @@ select:-webkit-autofill:focus {
 
 #user_comments{
     max-width: 100%;
-    height: 225px;
-     display: flex; /* displays flex-items (children) inline */
+    height: 450px;
+    display: block;
     overflow-x: auto;
 
 }
@@ -1389,7 +1400,6 @@ select:-webkit-autofill:focus {
     text-align: left;
     margin-bottom: 25px;
 
-
     overflow: hidden;
     padding-left: 10px;
 
@@ -1475,15 +1485,20 @@ select:-webkit-autofill:focus {
     color: #45354d;
 }
 
-
-
-
-
 .restaurants_name{
         margin-top: -2px;
         margin-bottom: 0px;
         display: inline-block;
-    }
+}
+.restaurants_block p{
+    margin: 0px;
+}
+.restaurants_adresse_adresse{
+    margin: 0px;
+}
+.restaurants_adresse_entfernung{
+    margin: 0px;
+}
 
 .restaurants_anzahl_vegetarisch{
     margin: 0px;
@@ -1491,6 +1506,7 @@ select:-webkit-autofill:focus {
     border-radius: 20px 0 0 20px ;
     border: 1px solid lightgrey;
     width: calc((100% - 137px - 50px)/2);
+    height: 17px;
     text-align: center;
 }
 
@@ -1512,7 +1528,11 @@ select:-webkit-autofill:focus {
     border: 1px solid lightgrey;
     border-left: none;
     width: calc((100% - 137px - 50px)/2);
+    height: 17px;
     text-align: center;
+}
+.restaurants_anzahl_vegetarisch p, .restaurants_anzahl_vegan p{
+    margin: 0px;
 }
 
 
@@ -2574,6 +2594,7 @@ display: none;
     .restaurants_anzahl_vegetarisch{
 
     width: calc((100% - 100px - 18px)/2);
+    height:
 
     }
     .restaurants_anzahl_vegan{
@@ -3249,6 +3270,7 @@ textarea#id_content:focus, textarea#id_content:hover {
     max-height: 163px;
     overflow-y: scroll;
     margin-bottom: 10px!important;
+    margin-left: 10px;
     text-align: left;
     padding-right: 10px;
 }
@@ -3256,7 +3278,7 @@ textarea#id_content:focus, textarea#id_content:hover {
 .rd_comment_text ::-webkit-scrollbar {
   -webkit-appearance: scrollbartrack-vertical;
   width: 6px;
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .rd_comment_time{

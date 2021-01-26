@@ -23,7 +23,7 @@
     <div class='restaurants_block' data-name="restaurant{{ forloop.counter0 }}">
     <div class="restaurants_img">
         {% ifequal i.restaurant_picture None %}
-        <img src="{% static 'assets/dashboard-BG.jpg' %}">
+            <img src="{% static 'assets/dashboard-BG.jpg' %}">
         {% else %}
              <img src="{{i.restaurant_picture.url}}">
         {% endifequal %}
