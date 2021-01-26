@@ -47,9 +47,10 @@ body {
 .like-btn{
     appearance: none;
     background-color: white;
-    border-radius: 10px;
-   border: none;
+    border: none;
     color: black;
+    width:22px;
+    height: 20px;
     transition: background-color 0.5s;
     outline: none;
 }
@@ -58,8 +59,10 @@ body {
 }
 
 .herz_leer{
-    height: 20px;
-    width: 20px;
+    height: 22px;
+    width: 22px;
+    margin-left: -6px;
+    margin-top: -2px;
 }
 
 .click_text{
@@ -2685,6 +2688,7 @@ display: none;
     transition: color 0.5s;
 }
 
+
 #rd_header{
 
     display: inline-block;
@@ -2745,8 +2749,7 @@ display: none;
 }
 
 #rd_likebtn{
-    float: left;
-    margin-top: 10px;
+    float: right;
 }
 
 #rd_rating img{
@@ -2765,11 +2768,11 @@ display: none;
 #rd_description{
     display: inline-block;
     width: calc(100% - 135px - 25px);
-    height: 75px;
+    height: 100px;
     text-align: left;
     float: left;
     background-color: white;
-    overflow-y: scroll;
+    margin: 0px;
 }
 
 #rd_description p{
@@ -2786,23 +2789,28 @@ display: none;
 
 }
 
-#rd_body_header{
-
-    display: inline-block;
-    width: calc(100vw - 50px);
+#rd_body_header {
+    float: left;
+    display: block;
+    width: 100%;
     background-color: white;
+    overflow: auto;
+    white-space: nowrap !important;
+    padding-bottom: 10px;
+}
 
+#rd_body_header::-webkit-scrollbar{
+    display: none;
 }
 
 
 #rd_body_header p{
+    min-width: 110px;
     display: inline-block;
-    float: left;
     margin:0px;
-    margin-bottom: 10px;
+    float: left;
     padding-top: 10px;
     padding-bottom: 10px;
-
     color: white;
     width: calc(25%);
     background-color: #3F3C54;
@@ -2816,22 +2824,13 @@ display: none;
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
     transition: background-color 0.5s;
-
 }
-
-
-#rd_body_header p:hover{
-
-}
-
-
 
 .rd_options{
 
     background-color: white;
     width: 100%;
     height: auto;
-    min-height: 600px;
 
 }
 
@@ -2840,11 +2839,12 @@ display: none;
     width: 100%;
 }
 
-#rd_vegan, #rd_vegetarisch, #rd_toGo, #rd_food_searchbar{
+#rd_vegan, #rd_vegetarisch, #rd_toGo{
     display: inline-block;
     max-width: 150px;
-    width: calc((100% - 63px)/4);
+    width: calc((100% - 113px)/4);
     padding: 2px;
+    min-width: 109px;
 }
 
 #rd_vegan{
@@ -2880,12 +2880,15 @@ display: none;
     font-family: Montserrat;
     appearance: none;
     float: right;
+    padding: 2px;
     border: 2px solid lightgrey;
-    border-radius: 20px;
     font-size: 14px;
     padding-left: 10px;
     margin-top: 14px;
     margin-bottom: 14px;
+    margin-left: 20px;
+    max-width: 200px;
+    width: calc((100% - 113px)/4 + 50px);
 }
 
 #rd_vegetarisch:hover, #rd_toGo:hover, #rd_vegan:hover {
@@ -3126,24 +3129,24 @@ textarea#id_content:focus, textarea#id_content:hover {
 #rd_addcoment{
     display: inline-block;
     float: left;
-    width: calc(100% - 24px);
+    width: calc(100%);
     margin-bottom: 25px;
     overflow: hidden;
     margin-bottom: 25px;
-    border-radius: 20px;
-    padding: 10px;
     padding-bottom: 0px;
 
 }
 
 #rd_addcoment textarea{
     border: none;
-    width: calc(100% - 20px);
+    width: calc(100% - 10px);
     resize: none;
+    float: right;
     background-color: #f1f1f1;
     font-family: Montserrat;
     font-size: 14px;
     padding: 5px;
+    display: inline-block;
 }
 
 #rd_addcoment textarea::-webkit-scrollbar{
@@ -3204,7 +3207,7 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 
 .rd_comment{
-    width: calc(100% - 24px) ;
+    width: calc(100%) ;
    /* background-color: #f4f8f4; */
     overflow: hidden;
     margin-bottom: 25px;
@@ -3258,7 +3261,7 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 .rd_comment_time{
     float: left;
-    margin: 20px 0 0 20px;
+    margin: 18px 0 0 10px;
     display: inline-block;
     max-height: 400px;
     text-align: left;
@@ -3326,65 +3329,209 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 #rd_stars img{
     height: 19px;
-    margin-right: 4px;
+    margin: 0px;
+    margin-top: 0px;
+    margin-left: 4px;
 }
+
+.rd_time, .rd_tag{
+     display: inline-block;
+    width: 100%;
+    padding: 10px;
+     margin: 0px;
+    margin-bottom: 5px;
+}
+
+.rd_time{
+    background-color: lightgrey;
+    padding: 10px;
+    width: 160px;
+}
+
+.rd_tag{
+    background-color: darkgrey;
+    padding: 10px;
+    width: 90px;
+}
+
+#rd_tage{
+    text-align: left;
+    float: left;
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 100px;
+    margin-right: 15px;
+}
+
+#rd_times{
+    text-align: right;
+    display: inline-block;
+    width: 180px;
+    float: right;
+}
+
+#rd_openingHours{
+    display: inline-block;
+
+}
+
+#rd_submit_button{
+        margin: 0px;
+    margin-top: 25px;
+    margin-bottom: 0px !important;
+    }
 
 @media only screen and (max-width: 700px) {
     #rd_comments_block {
         width: calc(100%);
     }
 
+     #rd_profile_image{
+        height: 70px;
+        width: 70px;
+    }
+
+    #rd_name{
+        font-size: 25px;
+        margin-right: calc(100% - 425px);
+    }
+
+       #rd_amount_rating{
+        margin-left: 3px;
+    }
+
+       #rd_description{
+        width: calc(100%);
+        height: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
-
-    #rd_profile_image{
-        height: 100px;
-        width: 100px;
-    }
 
     #rd_body_header, #rd_food_searchbar, #rd_header, #rd_foods_head, #rd_foods_body, #rd_tags, .rd_block_description, .rd_block_price {
         font-size: 13px;
     }
 
-    #rd_name{
-        font-size: 20px;
+    #rd_vegetarisch, #rd_vegan, #rd_toGo{
+        width: calc((100% - 42px)/3);
+        max-width: 200px;
+        margin-bottom: 20px;
+        min-width: 0px;
     }
-
-    #rd_rating img{
-        height: 16px;
-        width: auto;
-        margin-right: 4px;
-    }
-
-    #rd_rating{
-        margin-top: -2px;
-    }
-
-    #rd_description{
-        width: calc(100% - 100px - 25px);
-        height: 51px;
-    }
-
-    #rd_amount_rating{
-        margin-left: 3px;
-    }
-
-    #rd_likebtn{
-        margin-top: 5px;
+    #rd_food_searchbar{
+        width: 100%;
+        max-width: 100%;
+        padding-top: 6px;
+        padding-bottom: 6px;
     }
 
 }
 
-@media only screen and (max-width: 542px) {
+@media only screen and (max-width: 400px) {
 
-    #rd_food_searchbar{
-        width: 130px;
+    #rd_body_header p{
+        float: none;
+        margin-left: -5px;
     }
 
-    #rd_vegan, #rd_vegetarisch{
-        width: calc((100% - 65px)/3);
+    #rd_header{
+        margin-left: 10px;
+        margin-right: 10px;
+        width: calc(100vw - 20px);
     }
+    #rd_description{
+        width: 100%;
+    }
+    #rd_name{
+        font-size: 20px;
+        margin-right: 20px;
+    }
+
+    #rd_profile_image{
+        margin-right: 10px;
+    }
+
+    #rd_body{
+         width: calc(100vw - 20px);
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    #rd_vegetarisch, #rd_vegan{
+        width: calc((100% - 138px)/ 2);
+        min-width: 90px;
+    }
+
+    #rd_toGo{
+        margin-right: 10px;
+    }
+
+    .rd_options{
+        width: 100%;
+        font-size: 13px;
+    }
+
+    #rd_addcoment{
+        display: inline-block;
+        float: left;
+        width: calc(100%);
+        margin-bottom: 25px;
+        overflow: hidden;
+        margin-bottom: 0px;
+        padding: 0px;
+    }
+
+    #rd_add_text{
+        margin-left: 0px;
+        text-align: left;
+    }
+
+    #rd_stars{
+        float: right;
+        margin-top: -2px;
+    }
+
+    #rd_stars img{
+        margin-top: 0px;
+        height: 15px;
+    }
+
+    #rd_addcoment textarea{
+    border: none;
+    width: calc(100%);
+    resize: none;
+    background-color: #f1f1f1;
+    font-family: Montserrat;
+    font-size: 14px;
+    padding: 5px;
+    }
+
+    #rd_submit_button{
+        font-size: 13px;
+        width: auto;
+        padding: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px!important;
+    }
+
+    .rd_comment{
+        width: 100%;
+        padding: 0px;
+    }
+
+    .rd_comment_time{
+        display: none;
+    }
+
+    .rd_comment_rating{
+        margin-right: 0px;
+    }
+
+
 }
 
 /*footer*/
