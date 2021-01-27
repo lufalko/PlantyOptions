@@ -86,8 +86,8 @@ body {
 #icon{
     position: relative;
     margin-left: 10px;
-    margin-top: 7px;
-    width:200px;
+    margin-top: calc((61px - 36px)/2 - 1px);
+    width:150px;
     float:left;
     z-index: 3;
 }
@@ -111,15 +111,21 @@ nav a{
 
 }
 
+#nav_dropdown{
+    display: none;
+}
 
 #navbar_reiter{
     position: absolute;
-
-    left: 50%;
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
-    transform: translate(-50%,-50%);
-
+#nav_profile_pic{
+    float: right;
+    margin-top: 5.5px;
+    margin-right: 5.5px;
 }
 
 #navbar_reiter a{
@@ -129,9 +135,11 @@ nav a{
 
 nav a:hover{
    color: rgb(108,183,90);
-
 }
 
+ #nav_dropdown_side{
+     display: none;
+ }
 
 .nav-account{
     list-style-type: none;
@@ -2481,18 +2489,26 @@ display: none;
 
 
 
-  #restaurants_bottom{
-      display: block;
+    #restaurants_bottom{
+        display: block;
+    }
 
-  }
+    #navbar_reiter{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
-  #navbar_reiter{
-      display: none;
-  }
+    #navbar_reiter a{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
 
-  body::-webkit-scrollbar {
-  display: none;
-}
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
 
     #restaurants_filter::-webkit-scrollbar{
         display: block;
@@ -2509,12 +2525,18 @@ display: none;
 
 @media only screen and (max-width: 700px) {
 
+    #navbar_reiter{
+        display: none;
+    }
 
-  nav{
+
+    nav{
         font-size: 14px;
-  }
+    }
 
-
+    #icon{
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 570px) {
@@ -3427,6 +3449,44 @@ textarea#id_content:focus, textarea#id_content:hover {
         height: auto;
         margin-top: 20px;
         margin-bottom: 20px;
+    }
+
+    #nav_dropdown_side{
+        display: block;
+        width: 0px;
+        height: calc(100vh - 61px);
+        max-width: calc(100vw);
+        position: fixed;
+        top: 61px;
+        background-color: white;
+        border-right: none;
+        transition: width 0.5s ease-in;
+        overflow: hidden;
+    }
+
+    #nav_dropdown{
+        display: inline-block;
+        float: left;
+        background-color: #3F3C54;
+        border-radius: 50%;
+        width:  41px;
+        height: 41px;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+    #nav_drop_reiter{
+        margin-top: 20px;
+    }
+
+    #nav_drop_reiter a{
+        display: inline-block;
+        white-space: nowrap;
+        padding: 10px;
+        border-bottom: 1px solid lightgrey;
+        float: left;
+        width: calc(100% - 20px);
+        text-align: left;
     }
 }
 

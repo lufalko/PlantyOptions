@@ -1,63 +1,59 @@
 {% load static %}
 
 <nav class="navbar">
+    <input type="image" id="nav_profile_pic" src="{{user.profile_picture.url}}" onclick='myFunction()' class="dropbtn">
     <div class="nav-logo">
-        <img id="icon" src="{% static 'assets/PO_Logo_Wide.svg' %}" alt="logo">
+        <a  href="{% url 'home' %}"><img id="icon" src="{% static 'assets/PO_Logo_Wide.svg' %}"  href="{% url 'home' %}" alt="logo"></a>
     </div>
 
-        <div id="navbar_reiter">
-            <a href="{% url 'home' %}">Start</a>
+    <div id="navbar_reiter">
+        <a href="{% url 'home' %}">Start</a>
 
-            <a href="{% url 'restaurants' %}">Restaurants</a>
+        <a href="{% url 'restaurants' %}">Restaurants</a>
 
-            <a href="{% url 'about' %}">Über uns</a>
+        <a href="{% url 'about' %}">Über uns</a>
 
-            <!--<a href="{% url 'social' %}">social</a>
-            -->
-        </div>
-
-    <div class="dropdown">
-
-        <input type="image" src="{{user.profile_picture.url}}" onclick='myFunction()' class="dropbtn">
-
-      <div id="myDropdown" class="dropdown-content">
-            <div id="navbar_login">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}">Ausloggen</a>
-                {% else %}
-                    <a href="{% url 'login' %}">Einloggen</a>
-                {% endif %}
-            </div>
-            <div id="navbar_register">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'user' %}">Profil</a>
-                {% else %}
-                    <a href="{% url 'register' %}">Registrieren</a>
-                {% endif %}
-            </div>
-      </div>
+        <!--<a href="{% url 'social' %}">social</a>
+        -->
     </div>
 
+    <div id="nav_dropdown"></div>
+
+    <div id="nav_dropdown_side">
+
+        <div id="nav_drop_reiter">
+
+        <a href="{% url 'home' %}">Start</a>
+
+        <a href="{% url 'restaurants' %}">Restaurants</a>
+
+        <a href="{% url 'about' %}">Über uns</a>
+
+        <!--<a href="{% url 'social' %}">social</a>
+        -->
+         </div>
+    </div>
 
     <script>
-
-       function myFunction() {
-           document.getElementById("myDropdown").classList.toggle("show");
-       }
-
-
-        window.onclick = function(event) {
-          if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-              var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-              }
+        let open_dropdown = false;
+        document.getElementById("nav_dropdown").addEventListener("click", function(){
+            console.log(open_dropdown);
+            if(open_dropdown == false){
+                document.getElementById("nav_dropdown_side").style.borderRight = "1px solid lightgrey";
+                document.getElementById("nav_dropdown_side").style.width = "300px";
+                open_dropdown = true;
             }
-          }
+            else{
+                document.getElementById("nav_dropdown_side").style.width = "0px";
+                 setTimeout(dropdown_out, 500);
+                open_dropdown = false;
+            }
+        })
+
+        function dropdown_out(){
+            document.getElementById("nav_dropdown_side").style.border = "none";
         }
+
     </script>
 
 </nav>
