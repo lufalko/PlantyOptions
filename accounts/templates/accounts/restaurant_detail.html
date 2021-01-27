@@ -318,7 +318,9 @@
 
     active["{{ underpage }}"] = 1;
 
-    document.getElementsByClassName("like-btn")[0].addEventListener('click', function(){document.getElementsByClassName("herz_leer")[0].setAttribute('src', "{% static 'assets/herz_voll.svg' %}")});
+    if(document.getElementsByClassName("like-btn").length != 0) {
+        document.getElementsByClassName("like-btn")[0].addEventListener('click', function(){document.getElementsByClassName("herz_leer")[0].setAttribute('src', "{% static 'assets/herz_voll.svg' %}")});
+    }
 
     document.getElementsByClassName("rd_food_tag")[0].style.backgroundColor = "rgb(112,175,107)";
     document.getElementsByClassName("rd_food_tag")[0].style.color = "white";
