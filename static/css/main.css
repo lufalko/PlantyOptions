@@ -105,6 +105,14 @@ nav{
 
 }
 
+#nav_background{
+    display: none;
+    width: 100%;
+    height: 61px;
+    margin-bottom: 25px;
+    background-color: white;
+}
+
 nav a{
     text-decoration: none;
     color: black;
@@ -2698,12 +2706,31 @@ display: none;
 
 /*restaurants_details*/
 
+#rd_wrap{
+    display: inline-block;
+    width: 100vw;
+    max-width: 1200px;
+    overflow: hidden;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    min-height: calc(100vh - 111px);
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+    margin-top: -25px;
+    background-color: white;
+}
+
+#rd_main_body{
+    background-color: #f5f5f5;
+}
+
 #rd_banner{
 
     display: inline-block;
     background-color: rgb(112, 175, 107);
     height: 200px;
-    width: 100vw;
+    width: 100%;
     margin-top: -25px;
     background-image: url('../assets/dashboard-BG.jpg');
     background-size: cover;
@@ -2712,7 +2739,7 @@ display: none;
 
 #rd_tags{
     display: inline-block;
-    width: 100vw;
+    width: 100%;
     border-bottom: 1px solid lightgrey;
 }
 
@@ -2736,7 +2763,7 @@ display: none;
 
     display: inline-block;
 
-    width: calc(100vw - 50px);
+    width: calc(100% - 50px);
 
     margin-left: 25px;
     margin-right: 25px;
@@ -2826,7 +2853,7 @@ display: none;
 #rd_body{
     background-color:lightgrey ;
     display: inline-block;
-    width: calc(100vw - 50px);
+    width: calc(100% - 50px);
     margin-left: 25px;
     margin-right: 25px;
 
@@ -3175,14 +3202,13 @@ textarea#id_content:focus, textarea#id_content:hover {
     width: calc(100%);
     margin-bottom: 25px;
     overflow: hidden;
-    margin-bottom: 25px;
     padding-bottom: 0px;
 
 }
 
 #rd_addcoment textarea{
     border: none;
-    width: calc(100% - 10px);
+    width: calc(100%);
     resize: none;
     float: right;
     background-color: #f1f1f1;
@@ -3254,7 +3280,6 @@ textarea#id_content:focus, textarea#id_content:hover {
    /* background-color: #f4f8f4; */
     overflow: hidden;
     margin-bottom: 25px;
-    padding: 10px;
     max-height: 300px;
 }
 
@@ -3317,7 +3342,6 @@ textarea#id_content:focus, textarea#id_content:hover {
     display: inline-block;
     float: right;
     margin-top: 15px;
-    margin-right: 10px;
 }
 
 .rd_comment_rating img{
@@ -3326,9 +3350,8 @@ textarea#id_content:focus, textarea#id_content:hover {
 }
 
 #rd_add_text{
-    margin-top: 10px;
+    margin: 0px;
     margin-bottom: 20px;
-    margin-left: 10px;
     float: left;
 }
 
@@ -3363,11 +3386,9 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 #rd_stars{
     display: inline-block;
-    position: relative;
+    margin-top: -14px;
     height: 20px;
     float: right;
-
-
     cursor: pointer;
 }
 
@@ -3425,7 +3446,21 @@ textarea#id_content:focus, textarea#id_content:hover {
     margin-bottom: 0px !important;
     }
 
+@media only screen and (max-width: 1200px){
+    #rd_wrap{
+    border-left: none;
+    }
+}
+
 @media only screen and (max-width: 700px) {
+
+    .navbar{
+        position: fixed;
+    }
+
+    #nav_background{
+        display: inline-block;
+    }
     #rd_comments_block {
         width: calc(100%);
     }
@@ -3455,7 +3490,7 @@ textarea#id_content:focus, textarea#id_content:hover {
         display: block;
         width: 0px;
         height: calc(100vh - 61px);
-        max-width: calc(100vw);
+        max-width: calc(100%);
         position: fixed;
         top: 61px;
         background-color: white;
@@ -3464,16 +3499,29 @@ textarea#id_content:focus, textarea#id_content:hover {
         overflow: hidden;
     }
 
-    #nav_dropdown{
+    .nav_dropdown{
         display: inline-block;
         float: left;
-        background-color: #3F3C54;
-        border-radius: 50%;
-        width:  41px;
-        height: 41px;
-        margin-top: 10px;
-        margin-left: 10px;
+        margin: 10px;
+        margin-left: 15px;
     }
+
+     .nav_dropdown {
+      width: 35px;
+    }
+
+     .nav_dropdown div {
+      background-color: #70af6b;
+      border-radius: 20px;
+      content: '';
+      display: block;
+      height: 5px;
+      margin: 7px 0;
+      transition: all .2s ease-in-out;
+         transform-origin: 0% 50%;
+    }
+
+
 
     #nav_drop_reiter{
         margin-top: 20px;
@@ -3483,9 +3531,11 @@ textarea#id_content:focus, textarea#id_content:hover {
         display: inline-block;
         white-space: nowrap;
         padding: 10px;
+        padding-left: 0px;
+        margin-left: 25px;
         border-bottom: 1px solid lightgrey;
         float: left;
-        width: calc(100% - 20px);
+        width: calc(100% - 60px);
         text-align: left;
     }
 }
@@ -3521,7 +3571,7 @@ textarea#id_content:focus, textarea#id_content:hover {
     #rd_header{
         margin-left: 10px;
         margin-right: 10px;
-        width: calc(100vw - 20px);
+        width: calc(100% - 20px);
     }
     #rd_description{
         width: 100%;
@@ -3536,7 +3586,7 @@ textarea#id_content:focus, textarea#id_content:hover {
     }
 
     #rd_body{
-         width: calc(100vw - 20px);
+         width: calc(100% - 20px);
         margin-right: 10px;
         margin-left: 10px;
     }

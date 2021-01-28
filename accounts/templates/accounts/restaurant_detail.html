@@ -3,6 +3,8 @@
 
 {% block content %}
 {% csrf_token %}
+<body id="rd_main_body">
+<div id="rd_wrap">
 <div id="rd_banner"></div>
 <div id="rd_tags">
     {% for k in queryset.tags.all %}
@@ -239,6 +241,9 @@
 
 
 <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="{% static 'assets/up.svg' %}"></button>
+
+    </div>
+</body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -1036,8 +1041,8 @@
 
          // When the user clicks on the button, scroll to the top of the document
          function topFunction() {
-             document.body.scrollTop = 262; // For Safari
-             document.documentElement.scrollTop = 262; // For Chrome, Firefox, IE and Opera
+             document.body.scrollTop = 0; // For Safari
+             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
          }
 
          stars(document.getElementById("rd_rating"));

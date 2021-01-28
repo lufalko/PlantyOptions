@@ -1,7 +1,7 @@
 {% load static %}
 
 <nav class="navbar">
-    <input type="image" id="nav_profile_pic" src="{{user.profile_picture.url}}" onclick='myFunction()' class="dropbtn">
+
     <div class="nav-logo">
         <a  href="{% url 'home' %}"><img id="icon" src="{% static 'assets/PO_Logo_Wide.svg' %}"  href="{% url 'home' %}" alt="logo"></a>
     </div>
@@ -17,7 +17,11 @@
         -->
     </div>
 
-    <div id="nav_dropdown"></div>
+    <div class="nav_dropdown">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
     <div id="nav_dropdown_side">
 
@@ -32,20 +36,58 @@
         <!--<a href="{% url 'social' %}">social</a>
         -->
          </div>
+
+
     </div>
+
+    <div class="dropdown">
+
+        <input type="image" src="{{user.profile_picture.url}}" onclick='myFunction()' class="dropbtn">
+
+      <div id="myDropdown" class="dropdown-content">
+            <div id="navbar_login">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Ausloggen</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Einloggen</a>
+                {% endif %}
+            </div>
+            <div id="navbar_register">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'user' %}">Profil</a>
+                {% else %}
+                    <a href="{% url 'register' %}">Registrieren</a>
+                {% endif %}
+            </div>
+      </div>
+    </div>
+
 
     <script>
         let open_dropdown = false;
-        document.getElementById("nav_dropdown").addEventListener("click", function(){
-            console.log(open_dropdown);
+        document.getElementsByClassName("nav_dropdown")[0].addEventListener("click", function(){
+
+            let icon = document.getElementsByClassName("nav_dropdown")[0];
+            let rects = icon.getElementsByTagName("div");
+
             if(open_dropdown == false){
+
+                rects[0].style.transform = 'rotate(45deg)';
+                rects[1].style.opacity = '0';
+                rects[2].style.transform = 'rotate(-45deg)';
+
                 document.getElementById("nav_dropdown_side").style.borderRight = "1px solid lightgrey";
                 document.getElementById("nav_dropdown_side").style.width = "300px";
                 open_dropdown = true;
             }
+
             else{
+                rects[0].style.transform = 'rotate(0deg)';
+                rects[1].style.opacity = '1';
+                rects[2].style.transform = 'rotate(0deg)';
+
                 document.getElementById("nav_dropdown_side").style.width = "0px";
-                 setTimeout(dropdown_out, 500);
+                setTimeout(dropdown_out, 500);
                 open_dropdown = false;
             }
         })
@@ -54,7 +96,30 @@
             document.getElementById("nav_dropdown_side").style.border = "none";
         }
 
+        function myFunction() {
+           document.getElementById("myDropdown").classList.toggle("show");
+       }
+
+
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+
+
     </script>
 
 </nav>
+
+<div id="nav_background">
+
+</div>
 
