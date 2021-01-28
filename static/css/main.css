@@ -372,10 +372,17 @@ nav a:hover{
 
 /* --------- Articles Detail ---------*/
 
+#articles_wrapper{
+    display: inline-block;
+    width: 100%;
+    max-width: 1600px;
+}
+
 .articles-detail-container{
     position: relative;
     width:100%;
     padding-bottom: 50px;
+    margin-top: -25px;
 }
 .articles-banner{
     position: relative;
@@ -389,9 +396,12 @@ nav a:hover{
     object-fit: cover;
 }
 .articles-text{
-    width: 60%;
-    margin: 10px 20% 0 20%;
+    width: calc(100% - 335px);
+    float: left;
+    margin-left: 25px;
     text-align: center;
+    max-width: 900px;
+    padding-bottom: 85px;
 }
 .articles-text p{
     margin: 10px 0px 10px 0px;
@@ -427,25 +437,76 @@ nav a:hover{
     margin-top: 25px;
 }
 
+#article_dd{
+    display: none;
+    background-color: rgba(63,60,84,0.8);
+    position: fixed;
+    bottom: -140px;
+    border-radius: 60px;
+    width: 70%;
+    max-width: 150px;
+    height: 180px;
+    left: 50%;
+    transform: translate(-50%,0);
+    color: white;
+}
 
+#article_dd:hover{
+    cursor: pointer;
+     background-color: rgba(63,60,84,0.9);
+}
 
+#article_dd p{
+    opacity: 1;
+    font-weight: 700;
+    margin-top: 12px;
+    user-select: none;
+    -webkit-user-select: none;
+}
 
+@media only screen and (min-width: 1300px) {
+    .articles-text{
+    width: calc(100% - 670px);
+    display: inline-block;
+    margin-left: 335px;
+    text-align: center;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+     .articles-text{
+    width: calc(100% - 50px);
+    display: inline-block;
+    margin-left: 25px;
+    text-align: center;
+    }
+    #article_dd{
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .articles-content{
+        font-size: 14px;
+    }
+}
 
 /* ----------- Ingredient List ------------*/
 
 .ingredients-container{
     display: block;
-    position: fixed;
-    margin: -10px 10px 10px 30px;
+    position: relative;
+    float: right;
+    margin-right: 25px;
     z-index: 5;
     background: white;
-    box-shadow:0px 0px 1px #000000;
-    width: 275px;
+    border: 2px solid lightgrey;
+    width: 235px;
     min-height: auto;
-    max-height: calc(100% - 150px);
-    padding: 20px;
+    padding: 10px;
     border-radius: 20px;
     overflow: hidden;
+    botoom: auto;
 }
 .ingredients-headline{
     text-align: center;
@@ -462,6 +523,10 @@ nav a:hover{
 .ingredients-body li{
     margin: 5px 10px 5px 10px;
 }
+.ingredients-body li p{
+    max-width: 100px;
+    text-align: left;
+}
 .ingredients-open{
     position: fixed;
     margin: 0px 0px 0px 50px;
@@ -471,6 +536,7 @@ nav a:hover{
     background-color: white;
     border: 1px solid lightgray;
     z-index: 6;
+    display: none;
 }
 .ingredients-open:hover{
     cursor: pointer;
@@ -497,7 +563,81 @@ nav a:hover{
     background-color: lightgray;
 }
 
+#ingredients_x{
+    display: none;
+    float: right;
+    margin: 5%;
+    margin-top: -42px;
+    margin-bottom: 0px;
+    width: 20px;
+    height: 20px;
+}
 
+#ingredients_x:hover{
+    cursor: pointer;
+}
+
+#ingredients_x::after{
+    content: "";
+    rotation-point: center;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 5px;
+    height: 25px;
+    background-color: #3F3C54;
+}
+#ingredients_x div{
+   position: absolute;
+    rotation-point: center;
+    transform: rotate(-45deg);
+    width: 5px;
+    height: 25px;
+    margin-left: 10px;
+    background-color: #3F3C54
+}
+
+.ingredients-headline p{
+    text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+    .ingredients-container{
+        position: fixed;
+        top: auto;
+        float: none;
+        left: 50%;
+        transform: translate(-50%,0);
+        bottom: -500px;
+        z-index: 5;
+        background: white;
+        border: 1px solid lightgrey;
+        width: 100%;
+        min-height: auto;
+        padding: 10px;
+        border-radius: 0px;
+        border-bottom: none;
+        overflow: hidden;
+        transition: bottom 0.5s ease-in-out;
+    }
+
+    .ingredients-body li{
+        display: inline-block;
+        width: 42.5%;
+        float: left;
+        margin-left: 5%;
+        margin-right: 0px;
+    }
+    .ingredients-body li p{
+        padding: 0px;
+        margin: 0px;
+        text-align: left;
+        max-width: 70px;
+    }
+
+    #ingredients_x{
+        display: block;
+    }
+}
 
 
 /* --------- recipe ---------- */
@@ -520,6 +660,15 @@ nav a:hover{
     font-size: 16px;
     clear: both;
     padding: 10px 0px 0px 40px;
+}
+
+@media only screen and (max-width: 450px) {
+    .recipe-body{
+    text-align: left;
+    font-size: 14px;
+    clear: both;
+    padding: 10px 0px 0px 40px;
+    }
 }
 
 
@@ -2192,7 +2341,6 @@ display: none;
     height:auto;
     position:relative;
     left:25vw;
-    float:center;
     padding:20px;
     margin-top:20px;
     border-bottom: solid 1px lightgrey;

@@ -2,14 +2,17 @@
 
 {% block content %}
 
-{% if article.ingredientList %}
-    {% include 'snippets/ingredients.html' %}
-{% endif %}
-
+<div id="articles_wrapper">
 <div class="articles-detail-container">
     <div class="articles-banner">
         <img id="article_banner" src="{{article.banner.url}}">
     </div>
+
+
+{% if article.ingredientList %}
+    {% include 'snippets/ingredients.html' %}
+{% endif %}
+
     <div class="articles-text">
         <div class="articles-headline">
             <p>{{article.headline}}</p>
@@ -30,5 +33,74 @@
         {% endif %}
     </div>
 </div>
+
+</div>
+
+<div id="article_dd">
+    <p>Zutaten</p>
+</div>
+
+<script>
+
+    let dd = false;
+
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    window.onresize = function (){
+        if(document.body.clientWidth < 900){
+            if( document.getElementsByClassName("ingredients-container")[0].style.position != "fixed") {
+                document.getElementsByClassName("ingredients-container")[0].style.position = "fixed";
+                document.getElementsByClassName("ingredients-container")[0].style.bottom = "-500px";
+                dd = false;
+            }
+        }
+        if(document.body.clientWidth > 899){
+             document.getElementsByClassName("ingredients-container")[0].style.top = "69px";
+            document.getElementsByClassName("ingredients-container")[0].style.position = "relative";
+            scrollFunction();
+            document.getElementsByClassName("ingredients-container")[0].style.height = "auto";
+            document.getElementsByClassName("ingredients-container")[0].style.bottom = "auto";
+        }
+    }
+
+    function scrollFunction() {
+        console.log(document.body.scrollTop);
+        if(document.body.clientWidth > 899) {
+            if (document.body.scrollTop > 260) {
+                document.getElementsByClassName("ingredients-container")[0].style.position = "fixed";
+                document.getElementsByClassName("ingredients-container")[0].style.top = "69px";
+                document.getElementsByClassName("ingredients-container")[0].style.right = "0px";
+            } else {
+                document.getElementsByClassName("ingredients-container")[0].style.position = "relative";
+                document.getElementsByClassName("ingredients-container")[0].style.top = "auto";
+            }
+        }
+    }
+
+    document.getElementById("article_dd").addEventListener('click',function (){
+        if(!dd){
+            document.getElementsByClassName('ingredients-container')[0].style.bottom = 0 + "px";
+            dd = true;
+        }
+        else{
+            document.getElementsByClassName('ingredients-container')[0].style.bottom = "-500px"
+            dd = false;
+        }
+    })
+
+    document.getElementById("ingredients_x").addEventListener('click',function (){
+        if(!dd){
+            document.getElementsByClassName('ingredients-container')[0].style.bottom = 0 + "px";
+            dd = true;
+        }
+        else{
+            document.getElementsByClassName('ingredients-container')[0].style.bottom = "-500px"
+            dd = false;
+        }
+    })
+
+</script>
 
 {% endblock %}

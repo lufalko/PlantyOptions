@@ -6,11 +6,14 @@
 <div class="ingredients-container">
     <div class="ingredients-headline">
         <p>Zutatenliste</p>
+        <div id="ingredients_x">
+            <div></div>
+        </div>
     </div>
     <div class="ingredients-body">
         <ul>
             {% for i in ingredients %}
-            <li><p style="float: left; clear: left;">{{i.value}} g</p><p style="float: right;">{{i.ingredient.name}}</p></li>
+            <li><p style="float: left; clear: left">{{i.ingredient.name}}</p><p style="float: right; clear: right;">{{i.value}} g</p></li>
             {% endfor %}
         </ul>
     </div>
