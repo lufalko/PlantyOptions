@@ -9,12 +9,12 @@
             <div class="main_searchbar">
 
                 <form method="GET" class="main_searchbar_textfield" action="{% url 'restaurants' %}">
+                    <button class="search_button" onclick="nameFilter">
+                        <img id="lupe" src="{% static 'assets/Lupe.png' %}" alt="search">
+                    </button>
                     <input name="search" id="main_restaurantsFilter" type="text" placeholder="Suche nach einem Restaurant">
                 </form>
 
-                <button class="search_button" onclick="nameFilter">
-                        <img id="lupe" src="{% static 'assets/Lupe.png' %}" alt="search">
-                </button>
 
 
             </div>
