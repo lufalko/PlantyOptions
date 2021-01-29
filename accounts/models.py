@@ -255,7 +255,7 @@ class Restaurant(models.Model):
         if count is 0:
             avg = 0
         else:
-            avg = avg / 2
+            avg = avg / count
 
         self.averageRating = avg
 
