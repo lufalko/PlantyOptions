@@ -246,16 +246,16 @@ class Restaurant(models.Model):
             afford = 3
         self.affordability = afford
 
-        comments = Comment.objects.all()
+        comments = Comment.objects.filter(restaurant=self)
         avg = 0
         count = 0
         for i in comments:
-            if i.restaurant == self:
-                avg += i.ratings
-                if count is 0:
-                    count += 1
-                else:
-                    avg = avg / 2
+            avg += i.ratings
+            count += 1
+        if count is 0:
+            avg = 0
+        else:
+            avg = avg / 2
 
         self.averageRating = avg
 
