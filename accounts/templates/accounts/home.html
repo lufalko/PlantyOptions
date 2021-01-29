@@ -8,11 +8,11 @@
         <div id="main_row1">
             <div class="main_searchbar">
 
-                <form method="get" class="main_searchbar_textfeld">
-                    {{homeFilter.form}}
+                <form method="GET" class="main_searchbar_textfield" action="{% url 'restaurants' %}">
+                    <input name="search" id="main_restaurantsFilter" type="text" placeholder="Suche nach einem Restaurant">
                 </form>
 
-                <button class="search_button" type="submit">
+                <button class="search_button" onclick="nameFilter">
                         <img id="lupe" src="{% static 'assets/Lupe.png' %}" alt="search">
                 </button>
 
@@ -43,7 +43,7 @@
 
         <div id="main_row3">
             <img id="best_restaurants_img" src="{% static 'assets/best_restaurants.jpg' %}" alt="best restaurants">
-            <form action="restaurants/?name=&city=&zip_code=&affordability=&rating=5">
+            <form action="{% url 'restaurants' 5 %}">
                 <button id="best_restaurants_button" type="submit">Beste Restaurants</button>
             </form>
 
@@ -66,9 +66,6 @@
 
 
         </div>
-
-
-
 
 </div>
 

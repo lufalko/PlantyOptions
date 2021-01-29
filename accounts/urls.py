@@ -13,6 +13,8 @@ urlpatterns = [
     path('friend_requests/<user_id>/', views.friend_requests, name='friend_requests'),
 
     path('restaurants/', views.restaurants, name='restaurants'),
+    path('restaurants/<int:average>', views.restaurants, name='restaurants'),
+
     path('like/<int:pk>', views.likeView, name='like_restaurant'),
     path('about/', views.about, name='about'),
     path('social/', views.social, name='social'),
