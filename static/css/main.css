@@ -505,7 +505,7 @@ nav a:hover{
     min-height: auto;
     padding: 10px;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: scroll;
     botoom: auto;
 }
 .ingredients-headline{
@@ -613,10 +613,10 @@ nav a:hover{
         border: 1px solid lightgrey;
         width: 100%;
         min-height: auto;
+        max-height: 300px;
         padding: 10px;
         border-radius: 0px;
         border-bottom: none;
-        overflow: hidden;
         transition: bottom 0.5s ease-in-out;
     }
 
@@ -989,22 +989,32 @@ select:-webkit-autofill:focus {
 
 /* -------- User Page -------- */
 
+#user_wrapper{
+    display: inline-block;
+    width: 100%;
+    padding: 25px;
+    /*border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;*/
+    max-width: 1200px;
+    margin-top: -25px;
+}
+
 #user_banner{
     width: 100%;
     height: 20vh;
     background-color: grey;
 }
 
-.user_header_class{
-    width: 60%;
-    display: inline-block;
+#user_header{
     text-align: left;
+    margin-bottom: 25px;
+    display: inline-block;
 }
 
 #user_change_header{
-    width: 60%;
     display: none;
     text-align: left;
+    margin-bottom: 25px;
 }
 
 
@@ -1073,11 +1083,11 @@ select:-webkit-autofill:focus {
 
 #user_change_header > #id_biography{
     display: inline-block;
-    width: 300px;
     transition: ease-in-out, width .5s ease-in-out;
     height: 110px;
     border: none;
     resize: none;
+    width: calc(100% - 175px);
     background-color: white;
     border-bottom: 1px solid lightgrey;
     font-family: Montserrat;
@@ -1085,6 +1095,7 @@ select:-webkit-autofill:focus {
     padding: 5px;
     margin-bottom: 15px;
     float: left;
+    outline: none;
 }
 
 #user_change_header > #user_biographie{
@@ -1099,12 +1110,7 @@ select:-webkit-autofill:focus {
     outline: none;
 }
 
-#user_change_header > #id_biography:focus,
-#user_change_header > #id_biography:hover{
-    border-bottom: 1px solid var(--poGreen);
-    width: calc(100% - 150px - 30px);
-    outline: none;
-}
+
 #user_change_header > #id_username:focus,
 #user_change_header > #id_username:hover{
     border-bottom: 1px solid var(--poGreen);
@@ -1181,10 +1187,6 @@ select:-webkit-autofill:focus {
 }
 
 #user_body{
-    width: 60%;
-    margin-left: 20%;
-    height: 40vh;
-
 }
 
 
@@ -1196,6 +1198,7 @@ select:-webkit-autofill:focus {
     display: inline-block;
     background-color: white;
     text-align: center;
+    margin-bottom: 25px;
 
 }
 
@@ -1300,7 +1303,6 @@ select:-webkit-autofill:focus {
 
 #user_comments{
     max-width: 100%;
-    height: 450px;
     display: block;
     overflow-x: auto;
 
@@ -1363,6 +1365,24 @@ select:-webkit-autofill:focus {
     user-drag: none;
 }
 
+
+@media only screen and (max-width: 1250px) {
+
+    /*about page*/
+    #user_wrapper{
+        padding: 0px;
+        padding-top: 25px;
+        width: calc(100% - 50px);
+    }
+}
+
+@media only screen and (max-width: 490px) {
+
+    /*about page*/
+    #user_wrapper{
+        width: calc(100% - 20px);
+    }
+}
 
 
 

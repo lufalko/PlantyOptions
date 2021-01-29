@@ -6,6 +6,7 @@
 <!--<div id="user_banner"></div>-->
 
 <form method="POST" enctype="multipart/form-data">
+<div id="user_wrapper">
     {% csrf_token %}
 <div id="user_header" class="user_header_class">
     <div class="user_logo_container">
@@ -224,6 +225,10 @@
     reader.readAsDataURL(event.target.files[0]);
     };
 
+    for (let i = 0; i < document.getElementsByClassName("rd_comment_rating").length; i++) {
+             stars(document.getElementsByClassName("rd_comment_rating")[i]);
+         }
+
     function stars(elements) {
 
         let SternArray = new Array(5);
@@ -317,8 +322,6 @@
     }
     render_options();
     render_body();
-    starrating();
-    changeStars();
 
 </script>
 
