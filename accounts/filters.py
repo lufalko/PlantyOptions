@@ -25,15 +25,6 @@ class GetAddressFilter(django_filters.FilterSet):
         fields = ['zip_code', 'city']
 
 
-class HomepageFilter(django_filters.FilterSet):
-    restaurant_name = django_filters.CharFilter(field_name='name', label='')
-
-    class Meta:
-        model = Restaurant
-        fields = ['restaurant_name']
-        # exclude = ['location', 'restaurant_picture', 'rating', 'tags', 'affordability']
-
-
 class CommentFilter(django_filters.FilterSet):
     restaurant_rating = NumberFilter(field_name="ratings")
 

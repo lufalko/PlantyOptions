@@ -24,9 +24,11 @@ BASE_DIR: Union[Union[str, bytes], Any] = os.path.dirname(os.path.dirname(os.pat
 SECRET_KEY = 'yyubmz9(2_o8!y=b$zj)fi_oc+l)r6np4^%r)tpu5tr80z-efv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        "plantyoptions.de",
+]
 
 # Application definition
 
@@ -146,5 +148,5 @@ EMAIL_HOST_USER = 'info@plantyoptions.de'
 EMAIL_HOST_PASSWORD = '86154#Options'
 
 
-if os.getlogin()=="luisb":
-    GDAL_LIBRARY_PATH = r"D:\Documents\Studium\3.Semester\Webanwendungen\PlantyOptions\plantyoptions\venv\Lib\site-packages\osgeo\gdal301.dll"
+# if os.getlogin()=="luisb":
+#     GDAL_LIBRARY_PATH = r"D:\Documents\Studium\3.Semester\Webanwendungen\PlantyOptions\plantyoptions\venv\Lib\site-packages\osgeo\gdal301.dll"

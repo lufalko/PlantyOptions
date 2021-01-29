@@ -1,5 +1,6 @@
 /venv
 /accounts/queryDemos.py
+/PlantyOptions/settings.py
 /.idea
 /database/logfile
 /database/pg_stat_tmp

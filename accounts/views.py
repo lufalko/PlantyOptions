@@ -60,7 +60,7 @@ def register(request):
             name = request.POST.get('first_name')
             account = Account.objects.get(first_name=name)
             key = str(account.pk)
-            href = "http://127.0.0.1:8000/verification/" + key
+            href = "http://plantyoption.de/verification/" + key
 
             # email verification
             template = render_to_string('snippets/email_template.html', {'name': name, 'hyperrefference': href})
@@ -128,16 +128,18 @@ def home(request):
     restaurants = Restaurant.objects.all()
     foods = Food.objects.all()
 
-    homeFilter = HomepageFilter(request.GET, queryset=restaurants)
-    restaurants = homeFilter.qs
-
     context = {'articles': articles, 'comments': comments,
-               'restaurants': restaurants, 'homeFilter': homeFilter,
-               'foods': foods}
+               'restaurants': restaurants, 'foods': foods}
 
     return render(request, 'accounts/home.html', context)
 
 
+def best_restaurants():
+
+    rating = 5
+    request.session['rating'] = rating
+
+    return HttpResonseRedirect(reverse(search_results))
 
 def comment_template():
     comments = Comment.objects.all()
@@ -156,18 +158,25 @@ def userMap(request):
     return render(request, 'accounts/map.html')
 
 
-def restaurants(request):
+def restaurants(request, average=None):
     restaurants = Restaurant.objects.annotate(avg_rating=Avg('comment__ratings'))
 
     foods = Food.objects.all()
     comments = Comment.objects.all()
 
     myFilter = RestaurantFilter(request.GET, queryset=restaurants)
+
     addressFilter = GetAddressFilter(request.GET, queryset=restaurants)
 
-    restaurants = myFilter.qs
+    if average:
+        restaurants = Restaurant.objects.filter(averageRating=average)
+    elif request.GET.get('search'):
+        restaurants = Restaurant.objects.filter(name=request.GET.get('search'))
+    else:
+        restaurants = myFilter.qs
 
     context = {'restaurants': restaurants, 'myFilter': myFilter,'addressFilter': addressFilter, 'foods': foods, 'comments': comments}
+
     return render(request, 'accounts/restaurants.html', context)
 
 
