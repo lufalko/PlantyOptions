@@ -4,3 +4,4 @@
 /database/logfile
 /database/pg_stat_tmp
 __pycache__
+/PlantyOptions/settings.py
