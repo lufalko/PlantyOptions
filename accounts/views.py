@@ -60,7 +60,7 @@ def register(request):
             name = request.POST.get('first_name')
             account = Account.objects.get(first_name=name)
             key = str(account.pk)
-            href = "http://127.0.0.1:8000/verification/" + key
+            href = "http://plantyoption.de/verification/" + key
 
             # email verification
             template = render_to_string('snippets/email_template.html', {'name': name, 'hyperrefference': href})
