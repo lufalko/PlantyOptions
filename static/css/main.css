@@ -24,8 +24,10 @@ body {
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 6px;
+}
 
-
+input{
+    appearance: none;
 }
 
 ::-webkit-scrollbar-thumb {
