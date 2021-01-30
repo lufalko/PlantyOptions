@@ -1766,13 +1766,13 @@ select:-webkit-autofill:focus {
         margin-left: 4px;
         margin-right: 0px;
     }
-    .restaurants_rating{
-        display: inline-block;
-        float: right;
-        margin-top: -5px;
-        margin-right: 15px;
 
-    }
+.restaurants_rating{
+    display: inline-block;
+    float: right;
+    margin-top: -5px;
+    margin-right: 15px;
+}
 
 .restaurants_rating p{
    display: none;
@@ -2642,24 +2642,23 @@ display: none;
         overflow-y: paged-y !important;
     }
 
+    .restaurants_rating{
+        margin-right: 0px;
+    }
+
+    .restaurants_anzahl_vegetarisch, .restaurants_anzahl_vegan{
+         width: calc((100% - 137px - 22px)/2);
+    }
 
   #restaurants_aside_left{
-
     position: fixed;
     display: none;
     background-color: white;
-
     top: 0px;
-
-
-
     height: 100vh !important;
     width: 100vw;
-
     font-size: 14px;
-
     margin-right: -25px;
-
 }
 
   #restaurants_filter{
@@ -2668,8 +2667,6 @@ display: none;
       width: 70%;
       margin-left: 15%;
   }
-
-
 
     #restaurants_bottom{
         display: block;
