@@ -2624,12 +2624,20 @@ display: none;
       grid-column-gap: 25px;
   }
 
+  #restaurants_map_link {
+      display: none;
+  }
+
   #restaurants_aside_right{
       display: none;
   }
 
   #restaurants_aside_left{
      margin-left: 0px;
+  }
+
+  #restaurants_aside_right_bottom_text_restaurant{
+      display: none;
   }
 
 }
