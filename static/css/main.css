@@ -1613,7 +1613,7 @@ select:-webkit-autofill:focus {
     display: none;
     margin-top: 5px;
     margin-right: 25px;
-
+    width: 100%;
 }
 
 .restaurants_food{
@@ -2585,14 +2585,6 @@ display: none;
 }
 
 
-@media only screen and (max-width: 1220px) {
-
-
-
-
-
-
-}
 
 @media only screen and (max-width: 1070px) {
 
@@ -2745,6 +2737,10 @@ display: none;
         height:80vw;
     }
 
+    .restaurants_dishes{
+        margin-top: 35px;
+    }
+
     #restaurants_body_content{
         margin-right: 20px;
         margin-left: 20px;
@@ -2885,6 +2881,13 @@ display: none;
         width: 94px;
       }
 
+}
+
+@media only screen and (max-device-width: 480px) {
+    #id_tags{
+       height: 100px;
+        border: 1px solid lightgrey;
+    }
 }
 
 /*restaurants_details*/
