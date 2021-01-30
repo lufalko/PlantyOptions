@@ -271,11 +271,13 @@ window.onresize = reportWindowSize;
          let restaurant_blocks = document.getElementsByClassName("restaurants_block");
          for (let i = 0; i < restaurant_blocks.length; i++) {
             restaurant_blocks[i].addEventListener('mouseover', function (){
-                document.getElementById("restaurants_aside_right_bottom_text_restaurant").style.display = "block";
+                if(window.innerWidth >= 1051) {
+                    document.getElementById("restaurants_aside_right_bottom_text_restaurant").style.display = "block";
 
-                document.getElementById("restaurants_map_name").innerHTML =  document.getElementsByClassName("restaurants_name_link")[i].innerHTML;
-                document.getElementById("restaurants_map_adresse").innerHTML =  document.getElementsByClassName("restaurants_adresse_adresse")[i].innerHTML;
-                document.getElementById("restaurants_map_entfernung").innerHTML =  document.getElementsByClassName("restaurants_adresse_entfernung")[i].innerHTML;
+                    document.getElementById("restaurants_map_name").innerHTML = document.getElementsByClassName("restaurants_name_link")[i].innerHTML;
+                    document.getElementById("restaurants_map_adresse").innerHTML = document.getElementsByClassName("restaurants_adresse_adresse")[i].innerHTML;
+                    document.getElementById("restaurants_map_entfernung").innerHTML = document.getElementsByClassName("restaurants_adresse_entfernung")[i].innerHTML;
+                }
             })
         }
     }
