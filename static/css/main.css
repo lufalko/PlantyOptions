@@ -31,6 +31,11 @@ input{
     -webkit-appearance: none;
 }
 
+select{
+    appearance: none;
+    -webkit-appearance: none;
+}
+
 ::-webkit-scrollbar-thumb {
 
   border-radius: 9px;
