@@ -9,6 +9,7 @@ html, body {
     padding: 0;
     width: 100%;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -18,7 +19,6 @@ body {
     text-align: center;
     overflow-x: hidden;
     background-color: white;
-    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
