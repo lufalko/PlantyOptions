@@ -34,5 +34,6 @@ urlpatterns = [
     re_path(r'^rd_update_counter/$', views.rd_update_counter, name="rd_update_counter"),
     re_path(r'^rd_update_counter/(?P<query>.+)/$', views.rd_update_counter, name="rd_update_counter"),
 
-    path('verification/<str:pk>/', views.VerifivationView, name='verification')
+    path('verification/<str:pk>/', views.VerifivationView, name='verification'),
+    path('password/', views.change_password, name='change_password'),
 ]

@@ -4,14 +4,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.urls.exceptions import NoReverseMatch
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, get_user_model
 
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.contrib.sites.shortcuts import get_current_site
 
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -19,11 +20,14 @@ from django.template.loader import render_to_string
 from django.shortcuts import render
 
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 
 from django.views.generic import TemplateView
 
 from django.urls import path, reverse_lazy, reverse
 from django.views.generic import ListView
+
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 import json
 
@@ -35,13 +39,21 @@ from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
 from .utils import get_friend_request_or_false
 from .friend_request_status import FriendRequestStatus
-from accounts.models import rd_update
+from .tokens import *
 
+from django.conf import settings
+
+from accounts.models import rd_update
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from itertools import chain
+
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+User = get_user_model()
 
 
 
@@ -63,7 +75,7 @@ def register(request):
             href = "http://plantyoption.de/verification/" + key
 
             # email verification
-            template = render_to_string('snippets/email_template.html', {'name': name, 'hyperrefference': href})
+            template = render_to_string('snippets/email_verification_template.html', {'name': name, 'hyperrefference': href})
 
             emailMessage = EmailMessage(
                 'Danke, dass du dich auf plantyoptions.de angemeldet hast!',
@@ -91,6 +103,105 @@ def VerifivationView(request, pk):
     account.save()
 
     return redirect('login')
+
+
+@require_http_methods(["GET", "POST"])
+def change_password(request):
+    msg = ''
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            email = request.POST.get('email')
+            qs = Account.objects.filter(email=email)
+            site = get_current_site(request)
+
+            if len(qs) > 0:
+                user = qs[0]
+                user.is_active = False  # User needs to be inactive for the reset password duration
+                user.profile.reset_password = True
+                user.save()
+
+                message = render_to_string('account/snippets/password_reset_mail.html', {
+                    'user': user,
+                    'protocol': 'http',
+                    'domain': plantyoptions.de,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
+                })
+
+                message = Mail(
+                    from_email='info@plantyoptions.de',
+                    to_emails=email,
+                    subject='Passwortwiederherstellung für plantyoptions.de',
+                    html_content=message)
+                try:
+                    sg = SendGridAPIClient(config['SENDGRID_API_KEY'])
+                    response = sg.send(message)
+                except Exception as e:
+                    print(e)
+
+            messages.add_message(request, messages.SUCCESS, 'Email {0} gesendet.'.format(email))
+            msg = 'Wenn die von dir eingegebene Email in unserer Datenbank zu finden ist, senden wir eine Nachricht zu dieser Adresse.'
+        else:
+            messages.add_message(request, messages.WARNING, 'Keine Email angegeben.')
+            return render(request, 'accounts/snippets/change_password.html', {'form': form})
+
+    return render(request, 'accounts/snippets/change_password.html', {'form': PasswordChangeForm, 'msg': msg})
+
+
+@require_http_methods(["GET", "POST"])
+def reset(request, uidb64, token):
+
+    if request.method == 'POST':
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = Account.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
+            messages.add_message(request, messages.WARNING, str(e))
+            user = None
+
+        if user is not None and password_reset_token.check_token(user, token):
+            form = PasswordChangeForm(request.user, request.POST)
+            if form.is_valid():
+                form.save()
+                update_session_auth_hash(request, form.user)
+
+                user.is_active = True
+                user.profile.reset_password = False
+                user.save()
+                messages.add_message(request, messages.SUCCESS, 'Passwort erfolgreich zurückgesetzt.')
+                return redirect('login')
+            else:
+                context = {
+                    'form': form,
+                    'uid': uidb64,
+                    'token': token
+                }
+                messages.add_message(request, messages.WARNING, 'Passwort konnte nicht zurückgesetzt werden.')
+                return render(request, 'accounts/snippets/change_password.html', context)
+        else:
+            messages.add_message(request, messages.WARNING, 'Link zum Zurücksetzen des Passwortes ungültig.')
+            messages.add_message(request, messages.WARNING, 'Bitte fordere einen erneutes Zurücksetzen des Passwortes an.')
+
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = Account.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
+        messages.add_message(request, messages.WARNING, str(e))
+        user = None
+
+    if user is not None and password_reset_token.check_token(user, token):
+        context = {
+            'form': PasswordChangeForm(request.user, request.POST),
+            'uid': uidb64,
+            'token': token
+        }
+        return render(request, 'accounts/snippets/change_password.html', context)
+    else:
+        messages.add_message(request, messages.WARNING, 'Link zum Zurücksetzen des Passwortes ungültig.')
+        messages.add_message(request, messages.WARNING, 'Bitte fordere einen erneutes Zurücksetzen des Passwortes an.')
+
+    return redirect('home')
 
 
 def loginPage(request):
