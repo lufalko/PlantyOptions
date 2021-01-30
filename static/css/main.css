@@ -2640,6 +2640,7 @@ display: none;
     #restaurants_body_content{
         height: auto !important;
         overflow-y: paged-y !important;
+        width: calc(100% - 45px);
     }
 
     .restaurants_rating{
@@ -2729,6 +2730,12 @@ display: none;
     .about_teammember{
         width:80vw;
         height:80vw;
+    }
+
+    #restaurants_body_content{
+        height: auto !important;
+        overflow-y: paged-y !important;
+        width: calc(100% - 35px);
     }
 
     .restaurants_dishes{
@@ -3749,6 +3756,17 @@ textarea#id_content:focus, textarea#id_content:hover {
         margin-right: calc(0px);
     }
 
+      #rd_likebtn{
+          margin-top: -5px;
+      }
+
+}
+
+@media only screen and (max-width: 490px) {
+    #rd_rating{
+        margin-top: 0px;
+    }
+    #
 }
 
 @media only screen and (max-width: 400px) {
