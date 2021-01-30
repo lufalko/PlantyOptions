@@ -9,6 +9,7 @@ html, body {
       padding: 0;
       width: 100%;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -2980,10 +2981,8 @@ display: none;
 
 #rd_rating{
     display: inline-block;
-    float: left;
+    float: right;
     height: 25px;
-
-
     margin-top: 0px;
 }
 
@@ -3737,6 +3736,18 @@ textarea#id_content:focus, textarea#id_content:hover {
         max-width: 100%;
         padding-top: 6px;
         padding-bottom: 6px;
+    }
+
+    #rd_rating{
+        display: inline-block;
+        float: left;
+        height: 25px;
+        margin-top: 0px;
+    }
+
+      #rd_name{
+        font-size: 25px;
+        margin-right: calc(0px);
     }
 
 }
