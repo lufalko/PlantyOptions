@@ -58,8 +58,6 @@ select{
     background-color: white;
     border: none;
     color: black;
-    width:22px;
-    height: 20px;
     transition: background-color 0.5s;
     outline: none;
 }
@@ -70,8 +68,6 @@ select{
 .herz_leer{
     height: 22px;
     width: 22px;
-    margin-left: -6px;
-    margin-top: -2px;
 }
 
 .click_text{
@@ -169,8 +165,6 @@ nav a:hover{
     margin-top:-10px;
 }
 
-
-
 .dropbtn {
   background-color: white;
   color: white;
@@ -224,18 +218,16 @@ nav a:hover{
   grid-column-gap: 0px;
   grid-row-gap: 20px;
   grid-template-columns: 100%;
-  min-width: 600px;
   width:100%;
 }
 
 /*grid classes*/
 
 #main_row1{
-    margin-top:-50px;
+    margin-top:-25px;
     grid-column:1/1;
     grid-row:1/1;
-    height: 60vh;
-
+    height: 300px;
     background-image: url('../assets/dashboard-BG.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -245,8 +237,8 @@ nav a:hover{
     background-color:white;
     grid-column:1/1;
     grid-row:2/2;
-    height:500px;
     border-radius:20px;
+    margin-bottom: 50px;
 }
 
 #main_row3{
@@ -270,14 +262,15 @@ nav a:hover{
 /*main_row1*/
 
 .main_searchbar{
-    position:relative;
+    display: inline-block;
     width:40%;
     height:60px;
-    left:30%;
-    top:30vh;
+    margin-top: calc(150px - 30px);
     background-color: white;
     border-radius: 20px;
     white-space: nowrap;
+    max-width: 600px;
+    min-width: 400px;
 }
 
 #main_restaurantsFilter{
@@ -286,10 +279,11 @@ nav a:hover{
     border-radius: 20px;
     border: none;
     font-family: 'Montserrat';
-    font-size: 20px;
+    font-size: 15px;
     padding: 20px;
     position: relative;
 }
+
 .search_button{
     float: right;
     background: #7aaf6b;
@@ -386,9 +380,14 @@ nav a:hover{
     border:none;
 }
 
-
-
-
+@media only screen and (min-width: 1300px) {
+    .articles-text{
+    width: calc(100% - 670px);
+    display: inline-block;
+    margin-left: 335px;
+    text-align: center;
+    }
+}
 
 /* --------- Articles Detail ---------*/
 
@@ -1434,11 +1433,7 @@ select:-webkit-autofill:focus {
     margin-left: calc(50vw - 900px );
     top: -26px;
 
-
-
-
-
-
+     max-height:calc(100vh )
 }
 
 /*#restaurants_header{
@@ -1463,10 +1458,8 @@ select:-webkit-autofill:focus {
     grid-row-end: 1;
     background-color: white;
     height: auto;
-
-
     border-radius: 20px ;
-
+    max-height:calc(100vh );
 
 }
 
@@ -2196,10 +2189,8 @@ display: none;
 }
 
 .article_flex{
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    margin: 10px 10% 10px 10%;
+    display: inline-block;
+    width: 90%;
     align-items: center;
 }
 
@@ -2643,6 +2634,7 @@ display: none;
 
       grid-template-columns: 0px 0px 1Fr 0px;
       grid-column-gap: 0px;
+      max-height: none;
   }
 
     #restaurants_body_content{
@@ -2702,6 +2694,11 @@ display: none;
 
     #restaurants_filter::-webkit-scrollbar{
         display: block;
+    }
+
+    #restaurants_body{
+        max-height: none;
+        padding-bottom: 25px;
     }
 
 
@@ -2986,9 +2983,11 @@ display: none;
 
 #rd_rating{
     display: inline-block;
-    float: right;
+    float: left;
     height: 25px;
     margin-top: 0px;
+    margin-right: 20px;
+     margin-top: -12px;
 }
 
 #rd_av_rating{
@@ -3656,7 +3655,6 @@ textarea#id_content:focus, textarea#id_content:hover {
 
     #rd_name{
         font-size: 25px;
-        margin-right: calc(100% - 425px);
     }
 
        #rd_amount_rating{
@@ -3747,7 +3745,6 @@ textarea#id_content:focus, textarea#id_content:hover {
         display: inline-block;
         float: left;
         height: 25px;
-        margin-top: 0px;
     }
 
       #rd_name{
