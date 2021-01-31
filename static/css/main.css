@@ -109,8 +109,11 @@ nav{
 
 }
 
+.navbar{
+    position: fixed;
+}
+
 #nav_background{
-    display: none;
     width: 100%;
     height: 61px;
     margin-bottom: 25px;
@@ -1526,8 +1529,6 @@ select:-webkit-autofill:focus {
     background-color: white;
     height: auto;
     border-radius: 20px ;
-    max-height:calc(100vh );
-
 }
 
 #restaurants_body p{
@@ -1554,23 +1555,33 @@ select:-webkit-autofill:focus {
     color: darkgrey;
 }
 
+#restaurants_whitespace{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+}
+
+#restaurants_fixed_whitespace{
+    width: calc(100% - 22.75%*2 - 78px - 52px);
+    height: 85px;
+    background-color: white;
+    position: fixed;
+    margin-left: 25px;
+}
+
 #restaurants_Adresseingabe_Headline_underline{
-
-    grid-column-start: 3;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 1;
-
+    position: fixed;
+    width: calc(100% - 22.75%*2 - 55px - 82px);
+    max-width: 840px;
     border: 2px solid lightgrey;
     border-radius: 20px;
     text-align: left;
     color: darkgrey;
     overflow: hidden;
-
+    background-color: white;
     margin-top: 25px;
     margin-left: 25px;
     margin-right: 25px;
-
 }
 
 .restaurants_food_category{
@@ -1620,8 +1631,6 @@ select:-webkit-autofill:focus {
 
     overflow: hidden;
     overflow-y: scroll;
-
-    height: calc(100vh - 110px);
 
     margin-top: 25px;
     margin-left: 25px;
@@ -1837,7 +1846,7 @@ select:-webkit-autofill:focus {
 .restaurants_rating{
     display: inline-block;
     float: right;
-    margin-top: -5px;
+    margin-top: -4px;
     margin-right: 15px;
 }
 
@@ -1895,18 +1904,11 @@ select:-webkit-autofill:focus {
 
 #restaurants_aside_left{
 
-    grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 1;
     background-color: white;
-
-    border-radius: 20px ;
-
-    height: 482px !important;
-
+    position: fixed;
+    width: 320px;
+    margin-left: 130px;
     font-size: 14px;
-
     margin-right: -25px;
 
 }
@@ -1917,9 +1919,10 @@ select:-webkit-autofill:focus {
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 1;
-
+    position: fixed;
+    margin-left: 1375px;
     height: 400px;
-
+    width: 380px;
     margin-top: 25px;
 }
 
@@ -1930,7 +1933,6 @@ select:-webkit-autofill:focus {
     grid-row-start: 1;
     grid-row-end: 1;
 
-
     border-radius: 20px;
     margin-top: 25px;
 
@@ -1938,11 +1940,14 @@ select:-webkit-autofill:focus {
 }
 
 #restaurants_aside_right_bottom_text_restaurant{
+    position: fixed;
     font-size: 14px;
     text-align: left;
     display: none;
 }
 #restaurants_aside_right_bottom_text{
+    top: 486px;
+    position: fixed;
     text-decoration: none;
     font-size: 10px;
     text-align: left;
@@ -1986,6 +1991,7 @@ select:-webkit-autofill:focus {
     top: 0px;
     height: 100vh;
     width: 100vw;
+    max-height: 100vh;
 
     background-color: white;
 
@@ -2561,18 +2567,22 @@ display: none;
     }
 
     #restaurants_aside_right{
-        height: 21.2vw;
+        width: calc(22.75% - 15px);
+        height:  calc(22.75vw - 15px);
+        margin-left: 130px;
+        font-size: 14px;
+        margin-right: 0px;
+        right: 25px;
     }
-
 
     #restaurants_aside_right_bottom_text{
         margin-top: calc(21.2vw + 10px);
+        top: auto;
     }
 
     #restaurants_aside_left{
-        display: inline-block;
-        float: right;
-        margin-left: calc(-25px);
+        width: calc(22.75% + 40px);
+        margin-left: -25px;
     }
 
 }
@@ -2686,12 +2696,25 @@ display: none;
   }
 
   #restaurants_aside_left{
-     margin-left: 0px;
+     width: 280px;
+    margin-left: 0px;
   }
 
   #restaurants_aside_right_bottom_text_restaurant{
       display: none;
   }
+
+  #restaurants_fixed_whitespace{
+        width:calc(100% - 280px - 75px);
+        height: 85px;
+        background-color: white;
+        position: fixed;
+        margin-left: 25px;
+    }
+
+    #restaurants_Adresseingabe_Headline_underline{
+        width: calc(100% - 280px - 79px);
+    }
 
 }
 
@@ -2708,6 +2731,15 @@ display: none;
         height: auto !important;
         overflow-y: paged-y !important;
         width: calc(100% - 45px);
+    }
+
+    #restaurants_fixed_whitespace, #restaurants_whitespace{
+        display: none;
+    }
+
+    #restaurants_Adresseingabe_Headline_underline{
+        position: relative;
+        width: calc(100% - 50px);
     }
 
     .restaurants_rating{
@@ -3055,9 +3087,8 @@ display: none;
     display: inline-block;
     float: left;
     height: 25px;
-    margin-top: 0px;
     margin-right: 20px;
-     margin-top: -12px;
+     margin-top: -14px;
 }
 
 #rd_av_rating{
@@ -3079,7 +3110,6 @@ display: none;
     float: left;
     height: 19px;
     margin-right: 5px;
-
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -3828,6 +3858,7 @@ textarea#id_content:focus, textarea#id_content:hover {
 
       #rd_rating{
         margin-top: 0px;
+        margin-right: calc(100% - 250px);
     }
 
 }

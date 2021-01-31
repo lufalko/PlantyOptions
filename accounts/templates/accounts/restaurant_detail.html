@@ -61,7 +61,7 @@
            <p id="rd_vegetarisch">?vegetarisch</p>
            <p id="rd_vegan">?vegan</p>
 
-           <div id="rd_foods_tags" onmouseup="mouse_up()" onmousedown="mouse_down()">
+           <div id="rd_foods_tags" onmousedown="mouse_down()">
                <p class="rd_food_tag">Alles</p>
                 {% for j in foods %}
                         {% for l in j.tags.all %}
@@ -97,15 +97,6 @@
         </div> -->
 
         <div id="rd_foods_body">
-
-            <div class="rd_dishes">
-                {% for j in foods %}
-
-                 <p class="rd_food_category">{{j.category}}</p>
-
-                {% endfor %}
-            </div>
-
 
                 {% for j in foods %}
             <div class="rd_food_block">
@@ -302,7 +293,6 @@
     let active= [0,0,0,0];
     let veg_list = [];
     let togo = [];
-    let togo_price = [];
     let queryset = "{{queryset}}"
     let food_tags = [];
     let tag_list = [];
@@ -319,6 +309,9 @@
     let header_p = rd_head.getElementsByTagName("p");
     let delivery = false;
     var newURL = window.location.href;
+    let nameList = [];
+    let sortRest = [];
+    let Food_Category = [];
 
     active["{{ underpage }}"] = 1;
 
@@ -550,16 +543,13 @@
                 veg_list[i] = false;
             }
 
-            if (food.toGo == null){
-                togo[i] = false;
-                 console.log(food.toGo)
-            }
-            else {
-                togo[i] = true;
-            }
+            togo[i] = food.toGo;
+            console.log(togo[i])
+            console.log(food.toGo)
             tag_list[i] = food.tags;
-            togo_price[i] = food.toGo;
             price[i] = food.price;
+            nameList[i] = food.name;
+            Food_Category[i] = food.category;
             i++;
             }
         })
@@ -571,7 +561,25 @@
                 let length = tag_list[j][k].length ;
                 length -= 11;
                 tag_list[j][k] = tag_list[j][k].substr(9,length );
+            }
+        }
+        sortFoodArray();
+        count_cat()
+    }
 
+    function sortFoodArray(){
+        let foods = document.getElementsByClassName("rd_food_block")
+        let Prenames = document.getElementsByClassName("rd_block_name");
+        let names = [];
+        for (let i = 0; i < Prenames.length; i++){
+            names[i] = Prenames[i].innerHTML
+        }
+        for (let i = 0; i < Prenames.length; i++){
+            for (let j = 0; j < nameList.length; j++){
+                if(names[j] == nameList[i]){
+                    sortRest[i] = foods[j];
+
+                }
             }
         }
     }
@@ -635,18 +643,14 @@
          render_body();
 
          function count_cat() {
-             let elements = document.getElementsByClassName('rd_dishes');
-             let blocks = document.getElementsByClassName('rd_food_block');
-             for (let i = 0; i < document.getElementsByClassName('rd_dishes').length; i++) {
 
-                 let category = elements[i].getElementsByClassName('rd_food_category');
                  let vegetarian_counter = 0;
                  let vegan_counter = 0;
-                 for (let j = 0; j < category.length; j++) {
-                     if (category[j].innerHTML == 'Vegan' && blocks[j].style.display != "none") {
+                 for (let j = 0; j < Food_Category.length; j++) {
+                     if (Food_Category[j] == 'Vegan' && sortRest[j].style.display != "none") {
                          vegan_counter++;
                      } else {
-                         if (blocks[j].style.display != "none") {
+                         if (sortRest[j].style.display != "none") {
                              vegetarian_counter++;
                          }
                      }
@@ -656,7 +660,7 @@
                  document.getElementById('rd_vegan').style.userSelect = "none";
                  document.getElementById('rd_vegetarisch').style.userSelect = "none";
                  document.getElementById('rd_toGo').style.userSelect = "none";
-             }
+
          }
 
          function render_vegan() {
@@ -781,94 +785,77 @@
                      this.style.borderColor = "lightgrey";
                  }
                  render_food();
-                 count_cat();
              })
          }
 
          function render_food() {
 
-             let category = document.getElementsByClassName('rd_food_block');
+            if(tag_now != "Alles") {
+                for (let i = 0; i < sortRest.length; i++) {
+                }
 
-             let foods = document.getElementsByClassName("rd_food_block");
+                for (let i = 0; i < sortRest.length; i++) {
+                    let check = false;
 
+                    for (let j = 0; j < tag_list[i].length; j++) {
 
-             for (let i = 0; i < foods.length; i++) {
-                 let check = false;
+                        if (tag_list[i][j] == tag_now) {
+                            check = true;
+                            sortRest[i].style.display = "inline-block";
 
+                        } else {
+                            if (check == false) {
+                                sortRest[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                for (let j = 0; j < sortRest.length; j++) {
+                    sortRest[j].style.display = "inline-block";
+                }
+            }
+             count_cat();
 
-
-
-                 for (let j = 0; j < tag_list[i].length; j++) {
-
-                     if (tag_list[i][j] == tag_now) {
-                         check = true;
-                         foods[i].style.display = "inline-block";
-
-                     } else {
-                         if (check == false) {
-                             foods[i].style.display = "none";
-                         }
-                     }
-                 }
-             }
-
-             for (let i = 0; i < category.length; i++) {
+              for (let i = 0; i < sortRest.length; i++) {
                  if (!(!vegan && !vegetarisch) && !(vegan && vegetarisch)) {
 
                      if (!veg_list[i]) {
 
                          if (!vegan) {
-                             category[i].style.display = "none";
+                             sortRest[i].style.display = "none";
                          } else {
-                             if (tag_now == "Alles") {
-                                 category[i].style.display = "inline-block";
-                             }
+
                              //elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "#378C61";
                          }
                      } else {
                          if (!vegetarisch) {
-                             category[i].style.display = "none";
-                         } else {
-                             if (tag_now == "Alles") {
-                                 category[i].style.display = "inline-block";
-                             }//elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "rgb(112,175,107)";
+                             sortRest[i].style.display = "none";
+                            }
                          }
                      }
-                 } else {
-                     if (tag_now == "Alles") {
-                         category[i].style.display = "inline-block";
-                     } else {
-                         foods = document.getElementsByClassName("rd_food_block");
-                         for (let i = 0; i < foods.length; i++) {
-                             let check = false;
-                             for (let j = 0; j < 1; j++) {
-
-                                 if (tag_list[i][j] == tag_now) {
-                                     check = true;
-                                     foods[i].style.display = "inline-block";
-
-                                 } else {
-                                     if (check == false) {
-                                         foods[i].style.display = "none";
-                                     }
-                                 }
-                             }
-                         }
-                     }
-                 }
              }
+
             for (let i = 0; i < togo.length; i++) {
                  if (delivery) {
-                     if (togo[i] == false) {
-                         foods[i].style.display = "none";
-                         console.log("done");
+                     if (togo[i] == null) {
+                         sortRest[i].style.display = "none";
                      }
                  }
              }
-            let devfood = document.getElementsByClassName("rd_block_price");
+            if(delivery){
+                  count_cat();
+              }
+            let devfood = [];
+
+             for (let i = 0; i < sortRest.length; i++) {
+                 devfood[i] = sortRest[i].getElementsByClassName("rd_block_price")[0];
+             }
+
             if(delivery){
                 for(let i= 0; i <devfood.length; i++){
-                    devfood[i].innerHTML = togo_price[i] + "€";
+                    devfood[i].innerHTML = togo[i] + "€";
                 }
             }
             else{
@@ -928,31 +915,7 @@
          }
 
          function food_tags_render(text) {
-
-             let foods = document.getElementsByClassName("rd_food_block");
-
-             for (let i = 0; i < foods.length; i++) {
-                 let check = false;
-                 if (text != "Alles") {
-
-                     for (let j = 0; j < tag_list[i].length; j++) {
-
-                         if (tag_list[i][j] == text) {
-                             check = true;
-                             foods[i].style.display = "inline-block";
-                         } else {
-                             if (check == false) {
-                                 foods[i].style.display = "none";
-                             }
-                         }
-                     }
-                 } else {
-                     foods[i].style.display = "inline-block";
-                 }
-             }
              render_food();
-             count_cat();
-
          }
 
 
@@ -997,7 +960,6 @@
             if (TextInsideP >= 4.7) {
                 SternArray = [1, 1, 1, 1, 1];
             }
-            console.log(SternArray);
 
              for (let i = 0; i < SternArray.length; i++) {
 
@@ -1047,14 +1009,13 @@
          for (let i = 0; i < document.getElementsByClassName("rd_comment_rating").length; i++) {
              stars(document.getElementsByClassName("rd_comment_rating")[i]);
          }
-
          render_vegan();
          render_vegetarisch();
          render_delivery();
          render_food_tags();
-         count_cat();
          starrating();
          changeStars();
+
 
 
 </script>
