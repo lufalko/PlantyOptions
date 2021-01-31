@@ -194,8 +194,8 @@
             document.getElementById("restaurants_aside_left").style.display= "block";
             document.getElementsByClassName("navbar").item(0).style.display = "block";
             document.getElementById("restaurants_wrapper").style.height = " ";
-             document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            //document.body.scrollTop = 0; // For Safari
+            //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
         if(filteropen==false && window.innerWidth<820){
             document.getElementById("restaurants_aside_left").style.display= "none";
@@ -247,14 +247,14 @@ window.onresize = reportWindowSize;
             document.getElementById("restaurants_wrapper").style.height = "10vh";
             filter.style.display = "block";
             document.getElementsByClassName("navbar").item(0).style.display = "none";
-            document.body.scrollTop = 55; // For Safari
-            document.documentElement.scrollTop = 55; // For Chrome, Firefox, IE and Opera
+            //document.body.scrollTop = 55; // For Safari
+            //document.documentElement.scrollTop = 55; // For Chrome, Firefox, IE and Opera
         }
         else{
             filter.style.display = "none";
 
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            //document.body.scrollTop = 0; // For Safari
+            //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             document.getElementsByClassName("navbar").item(0).style.display = "block";
             document.getElementById("restaurants_wrapper").style.height = " ";
 
@@ -736,8 +736,8 @@ function scrollFunction() {
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  //document.body.scrollTop = 0; // For Safari
+  //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
 

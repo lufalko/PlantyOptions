@@ -1503,7 +1503,6 @@ select:-webkit-autofill:focus {
     margin-left: calc(50vw - 900px );
     top: -26px;
 
-     max-height:calc(100vh )
 }
 
 /*#restaurants_header{
@@ -1991,7 +1990,6 @@ select:-webkit-autofill:focus {
     top: 0px;
     height: 100vh;
     width: 100vw;
-    max-height: 100vh;
 
     background-color: white;
 
