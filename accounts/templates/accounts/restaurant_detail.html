@@ -19,10 +19,6 @@
     <img id="rd_profile_image" src="{{queryset.restaurant_picture.url}}">
 {% endifequal %}
     <p id="rd_name">{{queryset.name}}</p>
-    <div id="rd_rating">
-        <p id="rd_av_rating">{{queryset.averageRating}}</p>
-        <p id="rd_amount_rating">({{queryset.getAmountRating}})</p>
-    </div>
 
     {% if user.is_authenticated %}
     <form action="{% url 'like_restaurant' queryset.pk %}" method="POST">
@@ -36,6 +32,11 @@
         </button>
     </form>
     {% endif %}
+
+    <div id="rd_rating">
+        <p id="rd_av_rating">{{queryset.averageRating}}</p>
+        <p id="rd_amount_rating">({{queryset.getAmountRating}})</p>
+    </div>
 
     <div id="rd_description">
         {% if queryset.description %}
