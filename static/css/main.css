@@ -1049,6 +1049,7 @@ select:-webkit-autofill:focus {
  #id_username{
     appearance: none;
     border: none;
+    border-radius: 0px;
     background-color: white;
     border-bottom: 1px solid lightgrey;
     padding: 3px;
@@ -1061,7 +1062,7 @@ select:-webkit-autofill:focus {
     color: #3F3C54;
     margin: 0px;
     margin-bottom: 15px;
-    width: 300px;
+    width: 200px;
     transition: ease-in-out, width .5s ease-in-out;
 }
 
@@ -1102,7 +1103,7 @@ select:-webkit-autofill:focus {
     width: calc(100% - 176px);
 }
 
-#user_change_header > #id_biography{
+ #id_biography{
     display: inline-block;
     transition: ease-in-out, width .5s ease-in-out;
     height: 110px;
@@ -1117,6 +1118,7 @@ select:-webkit-autofill:focus {
     margin-bottom: 15px;
     float: left;
     outline: none;
+    border-radius: 0px;
 }
 
 #user_change_header > #user_biographie{
@@ -1260,6 +1262,10 @@ select:-webkit-autofill:focus {
     display: block;
 }
 
+#id_email, #id_first_name, #id_last_name{
+        border-radius: 0px;
+    }
+
 #user_information_display p{
     float: left;
     clear: left;
@@ -1309,7 +1315,7 @@ select:-webkit-autofill:focus {
     text-align: center;
     border-radius: 10px;
 
-    transition: 0.5s;
+    transition: background-color 0.5s;
 }
 
 #id_profile_picture + label p{
@@ -1455,12 +1461,34 @@ select:-webkit-autofill:focus {
     #id_username:focus,
     #id_username:focus:hover{
     border-bottom: 1px solid var(--poGreen);
-    width: calc(100% - 105px);
+    width: calc(100% );
     outline: none;
     }
-
+    #id_username:focus,
+    #id_username:hover{
+    border-bottom: 1px solid var(--poGreen);
+    width: calc(100%);
+    outline: none;
+    }
     #id_username{
-        width:calc(100px);
+        width:calc(100%);
+        margin-top: 15px;
+    }
+    #id_email, #id_first_name, #id_last_name{
+        width:calc(100% - 111px);
+        border-radius: 0px;
+    }
+    .user_p_container p{
+        width: 85px;
+    }
+    #id_biography{
+    height: 110px;
+    width: calc(100%);
+    border-bottom: 1px solid lightgrey;
+    font-family: Montserrat;
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 0px;
     }
 }
 
@@ -1470,6 +1498,31 @@ select:-webkit-autofill:focus {
     /*about page*/
     #user_wrapper{
         width: calc(100% - 20px);
+    }
+}
+
+@media only screen and (max-width: 370px) {
+
+    #id_biography{
+    height: 140px;
+    width: calc(100%);
+    border-bottom: 1px solid lightgrey;
+    font-family: Montserrat;
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 0px;
+    }
+
+    #user_username{
+        font-size: 20px;
+    }
+
+    #user_name{
+        font-size: 13px;
+    }
+
+    #user_start_edit{
+        font-size: 12px;
     }
 }
 
@@ -1777,7 +1830,6 @@ select:-webkit-autofill:focus {
     display: inline-block;
     border-radius: 20px 0 0 20px ;
     border: 1px solid lightgrey;
-    width: calc((100% - 137px - 36px)/2);
     height: 17px;
     text-align: center;
     float: left;
@@ -1800,10 +1852,14 @@ select:-webkit-autofill:focus {
     border-radius: 0 20px 20px 0;
     border: 1px solid lightgrey;
     border-left: none;
-    width: calc((100% - 137px - 36px)/2);
     height: 17px;
     text-align: center;
 }
+
+.restaurants_anzahl_vegan, .restaurants_anzahl_vegetarisch{
+     width: calc((100% - 137px - 22px)/2);
+}
+
 .restaurants_anzahl_vegetarisch p, .restaurants_anzahl_vegan p{
     margin: 0px;
 }
@@ -1846,7 +1902,6 @@ select:-webkit-autofill:focus {
     display: inline-block;
     float: right;
     margin-top: -4px;
-    margin-right: 15px;
 }
 
 .restaurants_rating p{
@@ -1962,16 +2017,17 @@ select:-webkit-autofill:focus {
     margin: 0px;
 }
 
-
-
-
-
 #restaurants_map_name{
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     margin-bottom: 5px !important;
     color: #45354d;
+}
+
+#restaurants_map_adresse{
+    display: inline-block;
+    float: right;
 }
 
 #restaurants_aside_right_bottom_text_restaurant img{
@@ -3086,7 +3142,6 @@ display: none;
     float: left;
     height: 25px;
     margin-right: 20px;
-     margin-top: -14px;
 }
 
 #rd_av_rating{
@@ -3101,6 +3156,7 @@ display: none;
 }
 
 #rd_likebtn{
+     margin-top: -3px;
     float: right;
 }
 
@@ -3851,7 +3907,7 @@ textarea#id_content:focus, textarea#id_content:hover {
     }
 
       #rd_likebtn{
-          margin-top: -3px;
+          margin-top: -55px;
       }
 
       #rd_rating{

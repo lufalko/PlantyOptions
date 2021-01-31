@@ -727,7 +727,7 @@ function stars(elements) {
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 60 && !filteropen && window.innerWidth<820 || document.documentElement.scrollTop > 20 && !filteropen && window.innerWidth<820 ) {
+  if (document.body.scrollTop > 60 && !filteropen || document.documentElement.scrollTop > 20 && !filteropen ) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
@@ -736,8 +736,8 @@ function scrollFunction() {
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-  //document.body.scrollTop = 0; // For Safari
-  //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
 
