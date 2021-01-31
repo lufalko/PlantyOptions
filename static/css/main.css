@@ -3701,7 +3701,7 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 @media only screen and (max-width: 1200px){
     #rd_wrap{
-    border-left: none;
+    border: none;
     }
 }
 
