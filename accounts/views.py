@@ -51,8 +51,8 @@ from rest_framework.response import Response
 
 from itertools import chain
 
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+# from sendgrid import SendGridAPIClient
+# from sendgrid.helpers.mail import Mail
 
 User = get_user_model()
 
