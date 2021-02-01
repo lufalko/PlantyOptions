@@ -71,7 +71,7 @@ def register(request):
             account = authenticate(email=email, password=raw_password)
 
             name = request.POST.get('first_name')
-            account = Account.objects.get(first_name=name)
+            account = Account.objects.get(email=email)
             token = account_activation_token.make_token(account)
             uid = urlsafe_base64_encode(force_bytes(account.pk))
             href = "http://plantyoption.de/verification/" + uid + "/" + token
