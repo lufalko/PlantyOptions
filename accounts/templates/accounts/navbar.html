@@ -42,24 +42,25 @@
 
     <div class="dropdown">
 
-        <input type="image" src="{{user.profile_picture.url}}" onclick='myFunction()' class="dropbtn">
-
-      <div id="myDropdown" class="dropdown-content">
-            <div id="navbar_login">
-                {% if user.is_authenticated %}
+        <div id="myDropdown" class="dropdown-content">
+            {% if user.is_authenticated %}
+            <input type="image" src="{{user.profile_picture.url}}" onclick='myFunction()' class="dropbtn">
+                <div id="navbar_login">
                     <a href="{% url 'logout' %}">Ausloggen</a>
-                {% else %}
-                    <a href="{% url 'login' %}">Einloggen</a>
-                {% endif %}
-            </div>
-            <div id="navbar_register">
-                {% if user.is_authenticated %}
+                </div>
+                <div id="navbar_register">
                     <a href="{% url 'user' %}">Profil</a>
-                {% else %}
+                </div>
+            {% else %}
+            <input type="image" src="{% static 'assets/ProfilePlaceholder.svg %}" onclick='myFunction()' class="dropbtn">
+                <div id="navbar_login">
+                    <a href="{% url 'logout' %}">Einloggen</a>
+                </div>
+                <div id="navbar_register">
                     <a href="{% url 'register' %}">Registrieren</a>
-                {% endif %}
-            </div>
-      </div>
+                </div>
+            {% endif %}
+        </div>
     </div>
 
 

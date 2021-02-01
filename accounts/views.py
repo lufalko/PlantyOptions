@@ -74,7 +74,7 @@ def register(request):
             account = Account.objects.get(email=email)
             token = account_activation_token.make_token(account)
             uid = urlsafe_base64_encode(force_bytes(account.pk))
-            href = "http://plantyoption.de/verification/" + uid + "/" + token
+            href = "http://plantyoptions.de/verification/" + uid + "/" + token
 
             # email verification
             template = render_to_string('snippets/email_verification_template.html', {'name': name, 'hyperrefference': href})
@@ -99,7 +99,7 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
-def VerifivationView(request, uid, token):
+def VerificationView(request, uid, token):
     try:
         uid = force_text(urlsafe_base64_decode(uid))
         user = Account.objects.get(pk=uid)

@@ -35,6 +35,6 @@ urlpatterns = [
     re_path(r'^rd_update_counter/$', views.rd_update_counter, name="rd_update_counter"),
     re_path(r'^rd_update_counter/(?P<query>.+)/$', views.rd_update_counter, name="rd_update_counter"),
 
-    path('verification/<str:uid>/<str:token>/', views.VerifivationView, name='verification'),
+    path('verification/<str:uid>/<str:token>/', views.VerificationView, name='verification'),
     path('reset/<str:uid>/<str:token>/', views.reset, name='reset'),
 ]

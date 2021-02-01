@@ -299,7 +299,7 @@ class Food(models.Model):
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     price = models.FloatField(null=True)
-    description = models.CharField(max_length=400, null=True)
+    description = models.CharField(max_length=400, null=True, blank=True)
 
     def getRestaurantName(self, obj):
         return obj.restaurant.name

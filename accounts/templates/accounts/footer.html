@@ -1,12 +1,39 @@
-
+{% load static %}
 
 <footer>
+    <div id="footer_container">
+        <div id="footer_left_container">
+            <img id="footer_icon" src="{% static 'assets/PO_Icon_White.svg' %}">
+        </div>
+        <div id="footer_right_container">
+            <h1>plantyoptions.de</h1>
+            <ul id="inner_footer_right">
+                <div class="inner_footer_right_list">
+                    <li><h2>navigation</h2></li>
+                    <ul>
+                        <li><p>Home</p></li>
+                        <li><p>Restaurants</p></li>
+                        <li><p>About</p></li>
+                        <li><p>Registration</p></li>
+                    </ul>
+                </div>
+                <div class="inner_footer_right_list">
+                    <li><h2>contact</h2></li>
+                    <ul>
+                        <li><p>luis@plantyoptions.de</p></li>
+                        <li><p>robin@plantyoptions.de</p></li>
+                        <li><p>anne@plantyopitons.de</p></li>
+                        <li><p>lucas@plantyopitons.de</p></li>
+                    </ul>
+                </div>
+                <div class="inner_footer_right_list">
+                    <li><h2>social</h2></li>
+                    <ul>
+                        <li id="footer_social"><img src="{% static 'assets/instagram.png' %}" alt="instagram: Planty Options"><p>@planty_options</p></li>
+                    </ul>
+                </div>
+            </ul>
 
-    <p>Dies ist unser Footer!</p>
-
-
-
-
-
-
+        </div>
+    </div>
 </footer>
