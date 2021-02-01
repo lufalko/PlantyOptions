@@ -5,9 +5,9 @@
 }
 
 html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
     scroll-behavior: smooth;
 }
 
@@ -23,8 +23,16 @@ body {
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 6px;
+}
 
+input{
+    appearance: none;
+    -webkit-appearance: none;
+}
 
+select{
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -49,8 +57,6 @@ body {
     background-color: white;
     border: none;
     color: black;
-    width:22px;
-    height: 20px;
     transition: background-color 0.5s;
     outline: none;
 }
@@ -61,8 +67,6 @@ body {
 .herz_leer{
     height: 22px;
     width: 22px;
-    margin-left: -6px;
-    margin-top: -2px;
 }
 
 .click_text{
@@ -105,8 +109,11 @@ nav{
 
 }
 
+.navbar{
+    position: fixed;
+}
+
 #nav_background{
-    display: none;
     width: 100%;
     height: 61px;
     margin-bottom: 25px;
@@ -159,8 +166,6 @@ nav a:hover{
     text-decoration: none;
     margin-top:-10px;
 }
-
-
 
 .dropbtn {
   background-color: white;
@@ -215,18 +220,16 @@ nav a:hover{
   grid-column-gap: 0px;
   grid-row-gap: 20px;
   grid-template-columns: 100%;
-  min-width: 600px;
   width:100%;
 }
 
 /*grid classes*/
 
 #main_row1{
-    margin-top:-50px;
+    margin-top:-25px;
     grid-column:1/1;
     grid-row:1/1;
-    height: 60vh;
-
+    height: 300px;
     background-image: url('../assets/dashboard-BG.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -236,8 +239,8 @@ nav a:hover{
     background-color:white;
     grid-column:1/1;
     grid-row:2/2;
-    height:500px;
     border-radius:20px;
+    margin-bottom: 50px;
 }
 
 #main_row3{
@@ -261,14 +264,15 @@ nav a:hover{
 /*main_row1*/
 
 .main_searchbar{
-    position:relative;
+    display: inline-block;
     width:40%;
     height:60px;
-    left:30%;
-    top:30vh;
+    margin-top: calc(150px - 30px);
     background-color: white;
     border-radius: 20px;
     white-space: nowrap;
+    max-width: 600px;
+    min-width: 400px;
 }
 
 #main_restaurantsFilter{
@@ -277,10 +281,11 @@ nav a:hover{
     border-radius: 20px;
     border: none;
     font-family: 'Montserrat';
-    font-size: 20px;
+    font-size: 15px;
     padding: 20px;
     position: relative;
 }
+
 .search_button{
     float: right;
     background: #7aaf6b;
@@ -377,9 +382,14 @@ nav a:hover{
     border:none;
 }
 
-
-
-
+@media only screen and (min-width: 1300px) {
+    .articles-text{
+    width: calc(100% - 670px);
+    display: inline-block;
+    margin-left: 335px;
+    text-align: center;
+    }
+}
 
 /* --------- Articles Detail ---------*/
 
@@ -1036,9 +1046,10 @@ select:-webkit-autofill:focus {
     margin-right: 25px;
 }
 
-#user_change_header > #id_username{
+ #id_username{
     appearance: none;
     border: none;
+    border-radius: 0px;
     background-color: white;
     border-bottom: 1px solid lightgrey;
     padding: 3px;
@@ -1051,7 +1062,7 @@ select:-webkit-autofill:focus {
     color: #3F3C54;
     margin: 0px;
     margin-bottom: 15px;
-    width: 300px;
+    width: 200px;
     transition: ease-in-out, width .5s ease-in-out;
 }
 
@@ -1092,7 +1103,7 @@ select:-webkit-autofill:focus {
     width: calc(100% - 176px);
 }
 
-#user_change_header > #id_biography{
+ #id_biography{
     display: inline-block;
     transition: ease-in-out, width .5s ease-in-out;
     height: 110px;
@@ -1107,14 +1118,12 @@ select:-webkit-autofill:focus {
     margin-bottom: 15px;
     float: left;
     outline: none;
+    border-radius: 0px;
 }
 
-#user_change_header > #user_biographie{
+#user_biographie{
 
-    display: inline-block;
     margin: 0px;
-    width: 300px;
-    height: 92px;
     text-align: left;
     overflow-y: scroll;
     margin-bottom: 5px;
@@ -1122,8 +1131,8 @@ select:-webkit-autofill:focus {
 }
 
 
-#user_change_header > #id_username:focus,
-#user_change_header > #id_username:hover{
+#id_username:focus,
+#id_username:hover{
     border-bottom: 1px solid var(--poGreen);
     width: calc(100% - 150px - 230px);
     outline: none;
@@ -1209,7 +1218,7 @@ select:-webkit-autofill:focus {
     display: inline-block;
     background-color: white;
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 
 }
 
@@ -1224,7 +1233,7 @@ select:-webkit-autofill:focus {
     padding-bottom: 10px;
 
     color: white;
-    width: calc(100%/3);
+    width: calc(100%/2);
     background-color: #3F3C54;
 
     cursor: pointer;
@@ -1236,8 +1245,8 @@ select:-webkit-autofill:focus {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
     transition: background-color 0.5s;
-
 }
+
 #user_body_header:hover{
     cursor: pointer;
 }
@@ -1249,6 +1258,10 @@ select:-webkit-autofill:focus {
     width: 100%;
     display: block;
 }
+
+#id_email, #id_first_name, #id_last_name{
+        border-radius: 0px;
+    }
 
 #user_information_display p{
     float: left;
@@ -1299,7 +1312,7 @@ select:-webkit-autofill:focus {
     text-align: center;
     border-radius: 10px;
 
-    transition: 0.5s;
+    transition: background-color 0.5s;
 }
 
 #id_profile_picture + label p{
@@ -1380,18 +1393,136 @@ select:-webkit-autofill:focus {
 @media only screen and (max-width: 1250px) {
 
     /*about page*/
-    #user_wrapper{
+    #user_wrapper {
         padding: 0px;
         padding-top: 25px;
         width: calc(100% - 50px);
     }
 }
 
+    @media only screen and (max-width: 600px) {
+
+    /*about page*/
+    #user_biographie{
+        font-size: 13px;
+        display: inline-block;
+        margin-top: 5px;
+    }
+
+    .user_logo_container, .user_logo_container img{
+        width: 90px;
+        height: 90px;
+        margin-right: 15px;
+    }
+
+    #user_username{
+        font-size: 25px;
+    }
+
+    #user_name{
+        display: inline-block;
+        float: left;
+        font-size: 15px;
+        margin-top: -11px;
+    }
+
+    #user_body_header p{
+        font-size: 13px;
+    }
+    #user_pic_change{
+         width: 90px;
+        height: 90px;
+    }
+    #id_profile_picture{
+         width: 90px;
+        height: 90px;
+        margin-top: 0px;
+    }
+    #id_profile_picture + label{
+         width: 90px;
+        height: 90px;
+        margin-top: -90px;
+    }
+    #output{
+        margin-top: -90px;
+        border-radius: 10px;
+    }
+    #id_profile_picture + label p{
+        font-size: 14px;
+        margin-top: calc((90px - 36px)/2);
+        margin-bottom: 0px;
+    }
+
+    #user_pic_change{
+        margin-top: -90px;
+    }
+
+
+    #id_username:focus,
+    #id_username:focus:hover{
+    border-bottom: 1px solid var(--poGreen);
+    width: calc(100% );
+    outline: none;
+    }
+    #id_username:focus,
+    #id_username:hover{
+    border-bottom: 1px solid var(--poGreen);
+    width: calc(100%);
+    outline: none;
+    }
+    #id_username{
+        width:calc(100%);
+        margin-top: 15px;
+    }
+    #id_email, #id_first_name, #id_last_name{
+        width:calc(100% - 111px);
+        border-radius: 0px;
+    }
+    .user_p_container p{
+        width: 85px;
+    }
+    #id_biography{
+    height: 110px;
+    width: calc(100%);
+    border-bottom: 1px solid lightgrey;
+    font-family: Montserrat;
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 0px;
+    }
+}
+
+
 @media only screen and (max-width: 490px) {
 
     /*about page*/
     #user_wrapper{
         width: calc(100% - 20px);
+    }
+}
+
+@media only screen and (max-width: 370px) {
+
+    #id_biography{
+    height: 140px;
+    width: calc(100%);
+    border-bottom: 1px solid lightgrey;
+    font-family: Montserrat;
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 0px;
+    }
+
+    #user_username{
+        font-size: 20px;
+    }
+
+    #user_name{
+        font-size: 13px;
+    }
+
+    #user_start_edit{
+        font-size: 12px;
     }
 }
 
@@ -1425,11 +1556,6 @@ select:-webkit-autofill:focus {
     margin-left: calc(50vw - 900px );
     top: -26px;
 
-
-
-
-
-
 }
 
 /*#restaurants_header{
@@ -1454,11 +1580,7 @@ select:-webkit-autofill:focus {
     grid-row-end: 1;
     background-color: white;
     height: auto;
-
-
     border-radius: 20px ;
-
-
 }
 
 #restaurants_body p{
@@ -1485,23 +1607,33 @@ select:-webkit-autofill:focus {
     color: darkgrey;
 }
 
+#restaurants_whitespace{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+}
+
+#restaurants_fixed_whitespace{
+    width: calc(100% - 22.75%*2 - 78px - 52px);
+    height: 85px;
+    background-color: white;
+    position: fixed;
+    margin-left: 25px;
+}
+
 #restaurants_Adresseingabe_Headline_underline{
-
-    grid-column-start: 3;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 1;
-
+    position: fixed;
+    width: calc(100% - 22.75%*2 - 55px - 82px);
+    max-width: 840px;
     border: 2px solid lightgrey;
     border-radius: 20px;
     text-align: left;
     color: darkgrey;
     overflow: hidden;
-
+    background-color: white;
     margin-top: 25px;
     margin-left: 25px;
     margin-right: 25px;
-
 }
 
 .restaurants_food_category{
@@ -1552,8 +1684,6 @@ select:-webkit-autofill:focus {
     overflow: hidden;
     overflow-y: scroll;
 
-    height: calc(100vh - 110px);
-
     margin-top: 25px;
     margin-left: 25px;
     margin-right: 25px;
@@ -1597,7 +1727,6 @@ select:-webkit-autofill:focus {
     margin-bottom: 25px;
 
     overflow: hidden;
-    padding-left: 10px;
 
 }
 
@@ -1605,7 +1734,7 @@ select:-webkit-autofill:focus {
     display: none;
     margin-top: 5px;
     margin-right: 25px;
-
+    width: 100%;
 }
 
 .restaurants_food{
@@ -1701,9 +1830,9 @@ select:-webkit-autofill:focus {
     display: inline-block;
     border-radius: 20px 0 0 20px ;
     border: 1px solid lightgrey;
-    width: calc((100% - 137px - 50px)/2);
     height: 17px;
     text-align: center;
+    float: left;
 }
 
 .restaurants_anzahl_vegetarisch , .restaurants_anzahl_vegan {
@@ -1723,10 +1852,14 @@ select:-webkit-autofill:focus {
     border-radius: 0 20px 20px 0;
     border: 1px solid lightgrey;
     border-left: none;
-    width: calc((100% - 137px - 50px)/2);
     height: 17px;
     text-align: center;
 }
+
+.restaurants_anzahl_vegan, .restaurants_anzahl_vegetarisch{
+     width: calc((100% - 137px - 22px)/2);
+}
+
 .restaurants_anzahl_vegetarisch p, .restaurants_anzahl_vegan p{
     margin: 0px;
 }
@@ -1761,16 +1894,15 @@ select:-webkit-autofill:focus {
 .restaurants_rating img{
         height: 16px;
         margin: 4px;
-        margin-right: 5px;
-        margin-left: 0px;
+        margin-left: 4px;
+        margin-right: 0px;
     }
-    .restaurants_rating{
-        display: inline-block;
-        float: right;
-        margin-top: -5px;
-        margin-right: 20px;
 
-    }
+.restaurants_rating{
+    display: inline-block;
+    float: right;
+    margin-top: -4px;
+}
 
 .restaurants_rating p{
    display: none;
@@ -1826,18 +1958,11 @@ select:-webkit-autofill:focus {
 
 #restaurants_aside_left{
 
-    grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 1;
     background-color: white;
-
-    border-radius: 20px ;
-
-    height: 482px !important;
-
+    position: fixed;
+    width: 320px;
+    margin-left: 130px;
     font-size: 14px;
-
     margin-right: -25px;
 
 }
@@ -1848,9 +1973,10 @@ select:-webkit-autofill:focus {
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 1;
-
+    position: fixed;
+    margin-left: 1375px;
     height: 400px;
-
+    width: 380px;
     margin-top: 25px;
 }
 
@@ -1861,7 +1987,6 @@ select:-webkit-autofill:focus {
     grid-row-start: 1;
     grid-row-end: 1;
 
-
     border-radius: 20px;
     margin-top: 25px;
 
@@ -1869,11 +1994,14 @@ select:-webkit-autofill:focus {
 }
 
 #restaurants_aside_right_bottom_text_restaurant{
+    position: fixed;
     font-size: 14px;
     text-align: left;
     display: none;
 }
 #restaurants_aside_right_bottom_text{
+    top: 486px;
+    position: fixed;
     text-decoration: none;
     font-size: 10px;
     text-align: left;
@@ -1889,16 +2017,17 @@ select:-webkit-autofill:focus {
     margin: 0px;
 }
 
-
-
-
-
 #restaurants_map_name{
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     margin-bottom: 5px !important;
     color: #45354d;
+}
+
+#restaurants_map_adresse{
+    display: inline-block;
+    float: right;
 }
 
 #restaurants_aside_right_bottom_text_restaurant img{
@@ -2187,10 +2316,8 @@ display: none;
 }
 
 .article_flex{
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    margin: 10px 10% 10px 10%;
+    display: inline-block;
+    width: 90%;
     align-items: center;
 }
 
@@ -2494,18 +2621,22 @@ display: none;
     }
 
     #restaurants_aside_right{
-        height: 21.2vw;
+        width: calc(22.75% - 15px);
+        height:  calc(22.75vw - 15px);
+        margin-left: 130px;
+        font-size: 14px;
+        margin-right: 0px;
+        right: 25px;
     }
-
 
     #restaurants_aside_right_bottom_text{
         margin-top: calc(21.2vw + 10px);
+        top: auto;
     }
 
     #restaurants_aside_left{
-        display: inline-block;
-        float: right;
-        margin-left: calc(-25px);
+        width: calc(22.75% + 40px);
+        margin-left: -25px;
     }
 
 }
@@ -2576,14 +2707,6 @@ display: none;
 }
 
 
-@media only screen and (max-width: 1220px) {
-
-
-
-
-
-
-}
 
 @media only screen and (max-width: 1070px) {
 
@@ -2611,12 +2734,6 @@ display: none;
         height:40vw;
     }
 
-
-
-
-
-
-
   #restaurants_wrapper {
       width: 100vw;
       margin-left: 0px;
@@ -2624,13 +2741,34 @@ display: none;
       grid-column-gap: 25px;
   }
 
+  #restaurants_map_link {
+      display: none;
+  }
+
   #restaurants_aside_right{
       display: none;
   }
 
   #restaurants_aside_left{
-     margin-left: 0px;
+     width: 280px;
+    margin-left: 0px;
   }
+
+  #restaurants_aside_right_bottom_text_restaurant{
+      display: none;
+  }
+
+  #restaurants_fixed_whitespace{
+        width:calc(100% - 280px - 75px);
+        height: 85px;
+        background-color: white;
+        position: fixed;
+        margin-left: 25px;
+    }
+
+    #restaurants_Adresseingabe_Headline_underline{
+        width: calc(100% - 280px - 79px);
+    }
 
 }
 
@@ -2640,31 +2778,41 @@ display: none;
 
       grid-template-columns: 0px 0px 1Fr 0px;
       grid-column-gap: 0px;
+      max-height: none;
   }
 
     #restaurants_body_content{
         height: auto !important;
         overflow-y: paged-y !important;
+        width: calc(100% - 45px);
     }
 
+    #restaurants_fixed_whitespace, #restaurants_whitespace{
+        display: none;
+    }
+
+    #restaurants_Adresseingabe_Headline_underline{
+        position: relative;
+        width: calc(100% - 50px);
+    }
+
+    .restaurants_rating{
+        margin-right: 0px;
+    }
+
+    .restaurants_anzahl_vegetarisch, .restaurants_anzahl_vegan{
+         width: calc((100% - 137px - 22px)/2);
+    }
 
   #restaurants_aside_left{
-
     position: fixed;
     display: none;
     background-color: white;
-
     top: 0px;
-
-
-
     height: 100vh !important;
     width: 100vw;
-
     font-size: 14px;
-
     margin-right: -25px;
-
 }
 
   #restaurants_filter{
@@ -2673,8 +2821,6 @@ display: none;
       width: 70%;
       margin-left: 15%;
   }
-
-
 
     #restaurants_bottom{
         display: block;
@@ -2699,6 +2845,11 @@ display: none;
 
     #restaurants_filter::-webkit-scrollbar{
         display: block;
+    }
+
+    #restaurants_body{
+        max-height: none;
+        padding-bottom: 25px;
     }
 
 
@@ -2734,14 +2885,15 @@ display: none;
         height:80vw;
     }
 
+    #restaurants_body_content{
+        height: auto !important;
+        overflow-y: paged-y !important;
+        width: calc(100% - 35px);
+    }
 
-
-
-
-
-
-
-
+    .restaurants_dishes{
+        margin-top: 35px;
+    }
 
     #restaurants_body_content{
         margin-right: 20px;
@@ -2781,7 +2933,7 @@ display: none;
     }
     .restaurants_rating img{
         height: 13px;
-        margin: 4px;
+        margin-top: 5px;
         margin-right: 2px;
         margin-left: 0px;
     }
@@ -2800,18 +2952,20 @@ display: none;
 
     }
 
-    .restaurants_anzahl_vegetarisch{
-
-    width: calc((100% - 100px - 18px)/2);
-    height:
-
-    }
     .restaurants_anzahl_vegan{
 
-    width: calc((100% - 100px - 18px)/2);
-
+    width: calc((100% - 100px - 17px)/2);
+    float: right;
+        margin-top: -2px;
     }
 
+     .restaurants_anzahl_vegetarisch{
+
+    width: calc((100% - 100px - 17px)/2);
+    float: right;
+    margin-right: 3px;
+         margin-top: -2px;
+    }
 
 
 }
@@ -2883,6 +3037,13 @@ display: none;
 
 }
 
+@media only screen and (max-device-width: 480px) {
+    #id_tags{
+       height: 100px;
+        border: 1px solid lightgrey;
+    }
+}
+
 /*restaurants_details*/
 
 #rd_wrap{
@@ -2894,8 +3055,7 @@ display: none;
     border-right: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
     min-height: calc(100vh - 111px);
-    margin-bottom: 50px;
-    padding-bottom: 10px;
+    padding-bottom: 25px;
     margin-top: -25px;
     background-color: white;
 }
@@ -2981,9 +3141,7 @@ display: none;
     display: inline-block;
     float: left;
     height: 25px;
-
-
-    margin-top: 0px;
+    margin-right: 20px;
 }
 
 #rd_av_rating{
@@ -2998,6 +3156,7 @@ display: none;
 }
 
 #rd_likebtn{
+     margin-top: -3px;
     float: right;
 }
 
@@ -3005,7 +3164,6 @@ display: none;
     float: left;
     height: 19px;
     margin-right: 5px;
-
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -3627,7 +3785,7 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 @media only screen and (max-width: 1200px){
     #rd_wrap{
-    border-left: none;
+    border: none;
     }
 }
 
@@ -3651,7 +3809,6 @@ textarea#id_content:focus, textarea#id_content:hover {
 
     #rd_name{
         font-size: 25px;
-        margin-right: calc(100% - 425px);
     }
 
        #rd_amount_rating{
@@ -3738,7 +3895,34 @@ textarea#id_content:focus, textarea#id_content:hover {
         padding-bottom: 6px;
     }
 
+    #rd_rating{
+        display: inline-block;
+        float: left;
+        height: 25px;
+    }
+
+      #rd_name{
+        font-size: 25px;
+        margin-right: calc(40px);
+    }
+
+      #rd_likebtn{
+          margin-top: -55px;
+      }
+
+      #rd_rating{
+        margin-top: 0px;
+        margin-right: calc(100% - 250px);
+    }
+
 }
+
+@media only screen and (max-width: 500px) {
+      #rd_name{
+        margin-right: calc(0px);
+    }
+}
+
 
 @media only screen and (max-width: 400px) {
 

@@ -4,31 +4,32 @@
 
     <div id="restaurants_wrapper">
 
+    <div id="restaurants_header">
+        <div id="restaurants_searchbarIcon"></div>
+        <div id="restaurants_searchbar"></div>
+     </div>
 
+    <div id="restaurants_body">
+    <div id="restaurants_fixed_whitespace"></div>
+    <div id="restaurants_Adresseingabe_Headline_underline">
+         <input type="text" placeholder="Stadt oder Postleitzahl" id="restaurants_Adresseingabe_Headline" oninput="address_input()">
+    </div>
 
-        <div id="restaurants_header">
-            <div id="restaurants_searchbarIcon"></div>
-            <div id="restaurants_searchbar"></div>
-         </div>
+    <div id="restaurants_body_content">
 
-        <div id="restaurants_body">
-            <div id="restaurants_Adresseingabe_Headline_underline">
-              <!--  <input type="text" placeholder="Adresse, i.e. Bahnhofsstraße 1">-->
-
-                 <input type="text" placeholder="Stadt oder Postleitzahl" id="restaurants_Adresseingabe_Headline" oninput="address_input()">
-            </div>
-            <div id="restaurants_body_content">
-                {% for i in restaurants %}
+    <div id="restaurants_whitespace"></div>
+        {% for i in restaurants %}
 
     <div class='restaurants_block' data-name="restaurant{{ forloop.counter0 }}">
+
     <div class="restaurants_img">
         {% ifequal i.restaurant_picture None %}
             <img src="{% static 'assets/dashboard-BG.jpg' %}">
         {% else %}
              <img src="{{i.restaurant_picture.url}}">
         {% endifequal %}
-
     </div>
+
     <div class="restaurants_name">
         <p><a class="restaurants_name_link" href="{% url 'restaurant_detail' pk=i.pk underpage=0 %}">{{i.name}}</a></p>
     </div>
@@ -55,15 +56,12 @@
     <p class="restaurants_adresse_entfernung">?km entfernt</p>
     </div>
 
-    <div class="restaurants_anzahl_vegetarisch">
-
-        <p>? Vegetarisch</p>
-
-    </div>
     <div class="restaurants_anzahl_vegan">
-
         <p>? Vegan</p>
+    </div>
 
+    <div class="restaurants_anzahl_vegetarisch">
+        <p>? Vegetarisch</p>
     </div>
 
         <div class="restaurants_dishes">
@@ -113,7 +111,7 @@
                 </div>
                     <button id="restaurants_search_button" class="btn btn-primary" type="submit">Suchen</button>
                 </form>
-                    <a id="restaurants_filter_reset" href="http://127.0.0.1:8000/restaurants/">Filter zurücksetzen</a>
+                    <a id="restaurants_filter_reset" href="http://plantyoptions.de/restaurants/">Filter zurücksetzen</a>
 
 
             </div>
@@ -196,9 +194,8 @@
             document.getElementById("restaurants_aside_left").style.display= "block";
             document.getElementsByClassName("navbar").item(0).style.display = "block";
             document.getElementById("restaurants_wrapper").style.height = " ";
-             document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-            document.getElementById("restaurants_body_content").style.height = "calc(100vh - 110px)"
+            //document.body.scrollTop = 0; // For Safari
+            //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
         if(filteropen==false && window.innerWidth<820){
             document.getElementById("restaurants_aside_left").style.display= "none";
@@ -250,14 +247,14 @@ window.onresize = reportWindowSize;
             document.getElementById("restaurants_wrapper").style.height = "10vh";
             filter.style.display = "block";
             document.getElementsByClassName("navbar").item(0).style.display = "none";
-            document.body.scrollTop = 55; // For Safari
-            document.documentElement.scrollTop = 55; // For Chrome, Firefox, IE and Opera
+            //document.body.scrollTop = 55; // For Safari
+            //document.documentElement.scrollTop = 55; // For Chrome, Firefox, IE and Opera
         }
         else{
             filter.style.display = "none";
 
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            //document.body.scrollTop = 0; // For Safari
+            //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             document.getElementsByClassName("navbar").item(0).style.display = "block";
             document.getElementById("restaurants_wrapper").style.height = " ";
 
@@ -271,11 +268,13 @@ window.onresize = reportWindowSize;
          let restaurant_blocks = document.getElementsByClassName("restaurants_block");
          for (let i = 0; i < restaurant_blocks.length; i++) {
             restaurant_blocks[i].addEventListener('mouseover', function (){
-                document.getElementById("restaurants_aside_right_bottom_text_restaurant").style.display = "block";
+                if(window.innerWidth >= 1051) {
+                    document.getElementById("restaurants_aside_right_bottom_text_restaurant").style.display = "block";
 
-                document.getElementById("restaurants_map_name").innerHTML =  document.getElementsByClassName("restaurants_name_link")[i].innerHTML;
-                document.getElementById("restaurants_map_adresse").innerHTML =  document.getElementsByClassName("restaurants_adresse_adresse")[i].innerHTML;
-                document.getElementById("restaurants_map_entfernung").innerHTML =  document.getElementsByClassName("restaurants_adresse_entfernung")[i].innerHTML;
+                    document.getElementById("restaurants_map_name").innerHTML = document.getElementsByClassName("restaurants_name_link")[i].innerHTML;
+                    document.getElementById("restaurants_map_adresse").innerHTML = document.getElementsByClassName("restaurants_adresse_adresse")[i].innerHTML;
+                    document.getElementById("restaurants_map_entfernung").innerHTML = document.getElementsByClassName("restaurants_adresse_entfernung")[i].innerHTML;
+                }
             })
         }
     }
@@ -728,7 +727,7 @@ function stars(elements) {
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 60 && !filteropen && window.innerWidth<820 || document.documentElement.scrollTop > 20 && !filteropen && window.innerWidth<820 ) {
+  if (document.body.scrollTop > 60 && !filteropen || document.documentElement.scrollTop > 20 && !filteropen ) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";

@@ -50,11 +50,10 @@
         </div>
     </div>
 
-    {{userForm.username}}
     <p id="user_stop_edit" class="click_text" onclick="stopEdit()">bearbeiten beenden</p>
-    <br>
-    <br>
-    <br>
+
+    {{userForm.username}}
+
     {% if user.biography is not None %}
         {{userForm.biography}}
     {% else %}
@@ -83,7 +82,6 @@
     <div id="user_body_header">
         <p id="user_home">Meine Kommentare</p>
         <p id="user_saved">Meine Restaurants</p>
-        <p id="user_friends">Meine Freunde</p>
     </div>
 
     <div id="user_information_display" class="user_options">
@@ -132,14 +130,15 @@
                 <p class="restaurants_adresse_entfernung">?km entfernt</p>
                 </div>
 
-                <div class="restaurants_anzahl_vegetarisch">
-
-                    <p>? Vegetarisch</p>
-
-                </div>
                 <div class="restaurants_anzahl_vegan">
 
                     <p>? Vegan</p>
+
+                </div>
+
+                <div class="restaurants_anzahl_vegetarisch">
+
+                    <p>? Vegetarisch</p>
 
                 </div>
 
@@ -179,6 +178,7 @@
 
     let active= [1,0,0];
     let newElement = document.getElementsByClassName('$0');
+    let classesNodeList = document.querySelectorAll(".restaurants_rating");
     newElement.textContent = "Never Mind";
 
     document.getElementById("user_home").style.backgroundColor= "#70af6b";
@@ -237,24 +237,39 @@
 
         elements.getElementsByTagName('p')[0].style.display = "none";
 
-        if (TextInsideP == 0.0) {
-            SternArray = [0, 0, 0, 0, 0];
-        }
-        if (TextInsideP == 1.0) {
-            SternArray = [1, 0, 0, 0, 0];
-        }
-        if (TextInsideP == 2.0) {
-            SternArray = [1, 1, 0, 0, 0];
-        }
-        if (TextInsideP == 3.0) {
-            SternArray = [1, 1, 1, 0, 0];
-        }
-        if (TextInsideP == 4.0) {
-            SternArray = [1, 1, 1, 1, 0];
-        }
-        if (TextInsideP == 5.0) {
-            SternArray = [1, 1, 1, 1, 1];
-        }
+        if (TextInsideP < 0.3) {
+        SternArray = [0, 0, 0, 0, 0];
+    }
+    if (TextInsideP < 0.7 && TextInsideP >= 0.3) {
+        SternArray = [0.5, 0, 0, 0, 0];
+    }
+    if (TextInsideP >= 0.7 && TextInsideP < 1.3) {
+        SternArray = [1, 0, 0, 0, 0];
+    }
+    if (TextInsideP >= 1.3 && TextInsideP < 1.7) {
+        SternArray = [1, 0.5, 0, 0, 0];
+    }
+    if (TextInsideP >= 1.7 && TextInsideP < 2.3) {
+        SternArray = [1, 1, 0, 0, 0];
+    }
+    if (TextInsideP >= 2.3 && TextInsideP < 2.7) {
+        SternArray = [1, 1, 0.5, 0, 0];
+    }
+    if (TextInsideP >= 2.7 && TextInsideP < 3.3) {
+        SternArray = [1, 1, 1, 0, 0];
+    }
+    if (TextInsideP >= 3.3 && TextInsideP < 3.7) {
+        SternArray = [1, 1, 1, 0.5, 0];
+    }
+    if (TextInsideP >= 3.7 && TextInsideP < 4.3) {
+        SternArray = [1, 1, 1, 1, 0];
+    }
+    if (TextInsideP >= 4.3 && TextInsideP < 4.7) {
+        SternArray = [1, 1, 1, 1, 0.5];
+    }
+    if (TextInsideP >= 4.7) {
+        SternArray = [1, 1, 1, 1, 1];
+    }
 
         for (let i = 0; i < SternArray.length; i++) {
 
@@ -262,6 +277,10 @@
 
             if (SternArray[i] == 1) {
                 element.setAttribute('src', "{% static 'assets/stern.png' %}");
+            }
+
+            if (SternArray[i] == 0.5) {
+                element.setAttribute('src', "{% static 'assets/stern_halb.png' %}");
             }
 
             if (SternArray[i] == 0) {
@@ -319,6 +338,9 @@
 
     for(let i = 0; i < document.getElementsByClassName("user_comment_rating").length; i++){
        stars(document.getElementsByClassName("user_comment_rating")[i]);
+    }
+    for(let i = 0; i < document.getElementsByClassName("restaurants_rating").length; i++){
+       stars(document.getElementsByClassName("restaurants_rating")[i]);
     }
     render_options();
     render_body();
