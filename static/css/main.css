@@ -382,6 +382,8 @@ nav a:hover{
 #all_articles{
     background: white;
     display: inline-block;
+    margin-right: calc(50% - 200px);
+    margin-left: calc(50% - 200px);
     height:30px;
     width:25%;
     max-width: 400px;
