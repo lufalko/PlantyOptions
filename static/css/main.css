@@ -4162,6 +4162,49 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 }
 
+.articles_wrapper{
+    display: inline-block;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.articles_food_suggestion{
+    width: calc(100% - 50px);
+    display: inline-block;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.articles_suggestion_img{
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-right: 25px;
+}
+.articles_food_suggestion > a{
+    text-decoration: none;
+    color: black;
+}
+
+.articles_suggestion_title p{
+    text-decoration: none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    color: #3F3C54;
+    font-weight: 700;
+}
+
+.articles_suggestion_text{
+    width: calc(100% - 125px);
+    margin-left: 125px;
+}
+
+.articles_suggestion_text p{
+    margin: 0px;
+    padding: 0px;
+}
+
 /*footer*/
 
 #footer_container{
