@@ -11,6 +11,7 @@ urlpatterns = [
     path('profile/<str:pk>/', views.profile, name='profile'),
     path('friend_requests', views.send_friend_request, name='friend_requests'),
     path('friend_requests/<user_id>/', views.friend_requests, name='friend_requests'),
+    path('password/', views.change_password, name='change_password'),
 
     path('restaurants/', views.restaurants, name='restaurants'),
     path('restaurants/<int:average>', views.restaurants, name='restaurants'),
@@ -34,5 +35,6 @@ urlpatterns = [
     re_path(r'^rd_update_counter/$', views.rd_update_counter, name="rd_update_counter"),
     re_path(r'^rd_update_counter/(?P<query>.+)/$', views.rd_update_counter, name="rd_update_counter"),
 
-    path('verification/<str:pk>/', views.VerifivationView, name='verification')
+    path('verification/<str:uid>/<str:token>/', views.VerifivationView, name='verification'),
+    path('reset/<str:uid>/<str:token>/', views.reset, name='reset'),
 ]
