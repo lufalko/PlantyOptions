@@ -1151,6 +1151,7 @@ select:-webkit-autofill:focus {
     text-align: left;
     margin-bottom: 25px;
     display: inline-block;
+    width: 100%;
 }
 
 #user_change_header{
@@ -1611,6 +1612,9 @@ select:-webkit-autofill:focus {
     margin-bottom: 15px;
     margin-top: 0px;
     }
+    #user_biographie{
+        width: 100%;
+    }
 }
 
 
@@ -1968,7 +1972,6 @@ select:-webkit-autofill:focus {
 
 .restaurants_anzahl_vegan{
 
-    margin-left: -4px;
     display: inline-block;
     border-radius: 0 20px 20px 0;
     border: 1px solid lightgrey;
@@ -1978,7 +1981,7 @@ select:-webkit-autofill:focus {
 }
 
 .restaurants_anzahl_vegan, .restaurants_anzahl_vegetarisch{
-     width: calc((100% - 137px - 22px)/2);
+     width: calc((100% - 137px - 26px)/2);
 }
 
 .restaurants_anzahl_vegetarisch p, .restaurants_anzahl_vegan p{
