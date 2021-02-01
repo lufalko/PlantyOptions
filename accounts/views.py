@@ -28,6 +28,7 @@ from django.urls import path, reverse_lazy, reverse
 from django.views.generic import ListView
 
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_text, force_bytes
 
 import json
 
@@ -71,8 +72,9 @@ def register(request):
 
             name = request.POST.get('first_name')
             account = Account.objects.get(first_name=name)
-            key = str(account.pk)
-            href = "http://plantyoption.de/verification/" + key
+            token = account_activation_token.make_token(account)
+            uid = urlsafe_base64_encode(force_bytes(account.pk))
+            href = "http://plantyoption.de/verification/" + uid + "/" + token
 
             # email verification
             template = render_to_string('snippets/email_verification_template.html', {'name': name, 'hyperrefference': href})
@@ -97,10 +99,19 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
-def VerifivationView(request, pk):
-    account = Account.objects.get(pk=pk)
-    account.is_active = True
-    account.save()
+def VerifivationView(request, uid, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uid))
+        user = Account.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, Account.DoesNotExist) as e:
+        messages.add_message(request, messages.WARNING, str(e))
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True  # now we're activating the user
+        user.save()
+    else:
+        messages.add_message(request, messages.WARNING, 'Der Aktivierungslink ist nicht vergeben.')
 
     return redirect('login')
 
@@ -108,83 +119,82 @@ def VerifivationView(request, pk):
 @require_http_methods(["GET", "POST"])
 def change_password(request):
     msg = ''
-    if request.method == "POST":
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            email = request.POST.get('email')
-            qs = Account.objects.filter(email=email)
-            site = get_current_site(request)
+    if request.user.is_authenticated == False:
+        if request.method == "POST":
+            form = UserForgotPasswordForm(request.POST)
+            if form.is_valid():
+                email = request.POST.get('email')
+                user = Account.objects.get(email=email)
+                site = get_current_site(request)
 
-            if len(qs) > 0:
-                user = qs[0]
                 user.is_active = False  # User needs to be inactive for the reset password duration
-                user.profile.reset_password = True
+                user.reset_password = True
                 user.save()
 
-                message = render_to_string('account/snippets/password_reset_mail.html', {
-                    'user': user,
-                    'protocol': 'http',
-                    'domain': plantyoptions.de,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': account_activation_token.make_token(user),
-                })
+                token = password_reset_token.make_token(user)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                href = "http://plantyoption.de/reset/" + uid + "/" + token
 
-                message = Mail(
-                    from_email='info@plantyoptions.de',
-                    to_emails=email,
-                    subject='Passwortwiederherstellung für plantyoptions.de',
-                    html_content=message)
-                try:
-                    sg = SendGridAPIClient(config['SENDGRID_API_KEY'])
-                    response = sg.send(message)
-                except Exception as e:
-                    print(e)
+                # email verification
+                template = render_to_string('snippets/password_reset_mail.html', {'name': user.first_name, 'username': user.username , 'hyperrefference': href})
 
-            messages.add_message(request, messages.SUCCESS, 'Email {0} gesendet.'.format(email))
-            msg = 'Wenn die von dir eingegebene Email in unserer Datenbank zu finden ist, senden wir eine Nachricht zu dieser Adresse.'
-        else:
-            messages.add_message(request, messages.WARNING, 'Keine Email angegeben.')
-            return render(request, 'accounts/snippets/change_password.html', {'form': form})
+                emailMessage = EmailMessage(
+                    'Passwortwiederherstellung von plantyoptions.de',
+                    template,
+                    settings.EMAIL_HOST_USER,
+                    [email]
+                )
+                emailMessage.fail_silently = False
+                emailMessage.send()
 
-    return render(request, 'accounts/snippets/change_password.html', {'form': PasswordChangeForm, 'msg': msg})
+                messages.add_message(request, messages.SUCCESS, 'Email {0} gesendet.'.format(email))
+                msg = 'Wenn die von dir eingegebene Email in unserer Datenbank zu finden ist, senden wir eine Nachricht zu dieser Adresse.'
+            else:
+                messages.add_message(request, messages.WARNING, 'Keine Email angegeben.')
+                return render(request, 'accounts/change_password.html', {'form': form})
+
+        return render(request, 'accounts/change_password.html', {'form': PasswordChangeForm, 'msg': msg})
+
+    else:
+        return redirect('home')
 
 
 @require_http_methods(["GET", "POST"])
-def reset(request, uidb64, token):
+def reset(request, uid, token):
 
     if request.method == 'POST':
         try:
-            uid = force_text(urlsafe_base64_decode(uidb64))
+            uid = force_text(urlsafe_base64_decode(uid))
             user = Account.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
             messages.add_message(request, messages.WARNING, str(e))
             user = None
 
         if user is not None and password_reset_token.check_token(user, token):
-            form = PasswordChangeForm(request.user, request.POST)
+            form = PasswordChangeForm(user, request.POST)
             if form.is_valid():
                 form.save()
                 update_session_auth_hash(request, form.user)
 
                 user.is_active = True
-                user.profile.reset_password = False
+                user.reset_password = False
                 user.save()
                 messages.add_message(request, messages.SUCCESS, 'Passwort erfolgreich zurückgesetzt.')
                 return redirect('login')
             else:
                 context = {
                     'form': form,
-                    'uid': uidb64,
+                    'uid': uid,
                     'token': token
                 }
                 messages.add_message(request, messages.WARNING, 'Passwort konnte nicht zurückgesetzt werden.')
-                return render(request, 'accounts/snippets/change_password.html', context)
+                return render(request, 'accounts/change_password.html', context)
         else:
             messages.add_message(request, messages.WARNING, 'Link zum Zurücksetzen des Passwortes ungültig.')
             messages.add_message(request, messages.WARNING, 'Bitte fordere einen erneutes Zurücksetzen des Passwortes an.')
 
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_text(urlsafe_base64_decode(uid))
         user = Account.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
         messages.add_message(request, messages.WARNING, str(e))
@@ -192,16 +202,16 @@ def reset(request, uidb64, token):
 
     if user is not None and password_reset_token.check_token(user, token):
         context = {
-            'form': PasswordChangeForm(request.user, request.POST),
-            'uid': uidb64,
+            'form': PasswordChangeForm(user, request.POST),
+            'uid': uid,
             'token': token
         }
-        return render(request, 'accounts/snippets/change_password.html', context)
+        return render(request, 'accounts/snippets/reset_password.html', context)
     else:
         messages.add_message(request, messages.WARNING, 'Link zum Zurücksetzen des Passwortes ungültig.')
         messages.add_message(request, messages.WARNING, 'Bitte fordere einen erneutes Zurücksetzen des Passwortes an.')
 
-    return redirect('home')
+    return redirect('login')
 
 
 def loginPage(request):
