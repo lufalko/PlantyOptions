@@ -727,6 +727,7 @@ function stars(elements) {
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
+    console.log(document.body.scrollTop);
   if (document.body.scrollTop > 60 && !filteropen || document.documentElement.scrollTop > 20 && !filteropen ) {
     mybutton.style.display = "block";
   } else {
