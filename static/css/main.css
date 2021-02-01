@@ -9,7 +9,6 @@ html, body {
     padding: 0;
     width: 100%;
     scroll-behavior: smooth;
-    overflow-y: overlay;
 }
 
 body {
@@ -19,6 +18,7 @@ body {
     text-align: center;
     overflow-x: hidden;
     background-color: white;
+    overflow: overlay;
 }
 
 ::-webkit-scrollbar {
@@ -184,6 +184,7 @@ nav a:hover{
   display: inline-block;
   float:right;
   margin:5px;
+    margin-right: 10px;
 }
 
 .dropdown-content {
@@ -2185,25 +2186,6 @@ select:-webkit-autofill:focus {
 
 #restaurants_background{
 
-    position: fixed;
-    z-index: 0;
-    top: 0px;
-    height: 100vh;
-    width: 100vw;
-
-    background-color: white;
-
-    /*background-color: #85697A;*/
-
-    /*background-image: url("http://127.0.0.1:8000/static/assets/dashboard-BG.jpg"); */
-
-    -webkit-background-size: cover;
-     -moz-background-size: cover;
-     -o-background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-height: 120vw;
-    opacity: 0.2;
 }
 
 #restaurants_searchbar{
@@ -2501,6 +2483,11 @@ display: none;
     height:50px;
   border-radius: 4px; /* Rounded corners */
   font-size: 18px; /* Increase font size */
+}
+
+#myBtn img{
+    width: 28px;
+    height: auto;
 }
 
 #myBtn:hover {
@@ -4166,6 +4153,7 @@ textarea#id_content:focus, textarea#id_content:hover {
     display: inline-block;
     width: 100%;
     max-width: 1000px;
+    min-height: 80vh;
 }
 
 .articles_food_suggestion{
@@ -4180,6 +4168,7 @@ textarea#id_content:focus, textarea#id_content:hover {
     height: 100px;
     float: left;
     margin-right: 25px;
+    border-radius: 10px;
 }
 .articles_food_suggestion > a{
     text-decoration: none;
@@ -4203,6 +4192,58 @@ textarea#id_content:focus, textarea#id_content:hover {
 .articles_suggestion_text p{
     margin: 0px;
     padding: 0px;
+    text-decoration: none;
+    color: black;
+}
+
+#articles_header{
+    text-align: left;
+    float: left;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 40px;
+    margin-left: 150px;
+}
+
+@media only screen and (max-width: 500px) {
+    .articles_food_suggestion{
+        width: calc(100% - 40px);
+    }
+    .articles_suggestion_img{
+        margin-right: 10px;
+    }
+    #articles_header{
+       margin-left: 13 s0px;
+    }
+    .articles_suggestion_text{
+        width: calc(100% - 110px);
+        margin-left: 110px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #articles_header{
+        font-size: 30px;
+    }
+    .articles_food_suggestion{
+        width: calc(100% - 40px);
+    }
+    .articles_suggestion_img{
+        margin-right: 10px;
+    }
+    #articles_header{
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+    .articles_suggestion_text{
+    width: calc(100% - 110px);
+    margin-left: 110px;
+        font-size: 13px;
+    }
+
+    .articles_suggestion_title p{
+        font-size: 15px;
+    }
 }
 
 /*footer*/

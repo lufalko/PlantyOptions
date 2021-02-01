@@ -6,13 +6,16 @@
     <div class="articles_wrapper">
         <p id="articles_header">Artikel</p>
     {% for i in articles %}
+        <a href="{% url 'article_detail' pk=i.pk %}">
         <div class="articles_food_suggestion">
-                <a href="{% url 'article_detail' pk=i.pk %}">
+
                     <img class="articles_suggestion_img" src="{{i.banner.url}}" alt="food suggestion">
                     <div class="articles_suggestion_title"><p>{{i.headline}}</p></div>
                     <div class="articles_suggestion_text"><p>{{i.subtitle}}</p></div>
-                </a>
+
         </div>
+
+            </a>
     {% endfor %}
     </div>
 
