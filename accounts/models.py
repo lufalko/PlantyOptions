@@ -343,10 +343,12 @@ class Ingredient(models.Model):
 
 class IngredientValue(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    value = models.IntegerField(null=False, default=0)
+    valueInGrams = models.IntegerField(null=False, default=0)
+    otherValue = models.IntegerField(null=True, blank=True)
+    otherValueName = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.ingredient.name + ' | ' + str(self.value)
+        return self.ingredient.name + ' | ' + str(self.valueInGrams)
 
 
 class Recipe(models.Model):
