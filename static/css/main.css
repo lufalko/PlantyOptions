@@ -274,6 +274,7 @@ nav a:hover{
     white-space: nowrap;
     max-width: 600px;
     min-width: 400px;
+    overflow: hidden;
 }
 
 #main_restaurantsFilter{
@@ -298,8 +299,8 @@ nav a:hover{
 }
 #lupe{
     margin: 0px;
-    width:30px;
-    height:30px;
+    width:34px;
+    height:34px;
 }
 
 #id_restaurant_name{
@@ -854,9 +855,23 @@ nav a:hover{
          width: 100%;
          border-radius: 0px;
      }
+     #main_row4{
+        width:calc(100% - 50px);
+        margin: 0px;
+        margin-left: 25px;
+        height: auto;
+    }
 }
 
 @media only screen and (max-width: 490px) {
+
+    #main_row4{
+        width:calc(100% - 20px);
+        margin: 0px;
+        margin-left: 10px;
+        height: auto;
+    }
+
     .suggestion_text{
         display: none;
     }
