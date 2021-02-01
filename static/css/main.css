@@ -229,7 +229,8 @@ nav a:hover{
     margin-top:-25px;
     grid-column:1/1;
     grid-row:1/1;
-    height: 300px;
+    height: 30vw;
+    min-height: 300px;
     background-image: url('../assets/dashboard-BG.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -267,8 +268,8 @@ nav a:hover{
     display: inline-block;
     width:40%;
     height:60px;
-    margin-top: calc(150px - 30px);
-    background-color: white;
+    margin-top: calc(15vw - 30px);
+    max-margin: 150px;
     border-radius: 20px;
     white-space: nowrap;
     max-width: 600px;
@@ -276,9 +277,9 @@ nav a:hover{
 }
 
 #main_restaurantsFilter{
-    width: 100%;
+    width: calc(100% - 60px);
     height: 100%;
-    border-radius: 20px;
+    border-radius: 20px 0px 0px 20px;
     border: none;
     font-family: 'Montserrat';
     font-size: 15px;
@@ -296,6 +297,7 @@ nav a:hover{
     z-index: 1;
 }
 #lupe{
+    margin: 0px;
     width:30px;
     height:30px;
 }
@@ -312,7 +314,7 @@ nav a:hover{
 }
 
 .main_searchbar_textfeld{
-    width: -webkit-calc(100% - 60px);
+    width: -webkit-calc(100%);
 }
 
 
@@ -320,7 +322,6 @@ nav a:hover{
 
 .food_suggestion{
     width: 29%;
-    height: 350px;
     display: inline-flex;
     border-radius: 20px;
     margin:2%;
@@ -328,6 +329,8 @@ nav a:hover{
     position: relative;
     align-items: center;
     transition:.5s ease;
+    overflow: hidden;
+    text-decoration: none;
 }
 
 .food_suggestion:hover{
@@ -348,13 +351,19 @@ nav a:hover{
     font-size: 18px;
     font-weight: bold;
     z-index: 2;
+    text-decoration:none;
+    color: black;
 }
 
 .suggestion_text{
     position: relative;
     text-align: left;
     margin:5px;
+    margin-bottom: 0px;
     z-index: 2;
+    max-height: 93px;
+    overflow: scroll;
+    text-decoration:none;
 }
 .suggestion_background{
     position: relative;
@@ -365,31 +374,61 @@ nav a:hover{
     z-index: 2;
 }
 
+.suggestion_background a:link, a:visited{
+  text-decoration: none!important;
+  color: black;
+}
+
 #all_articles{
     background: white;
-    position: relative;
+    display: inline-block;
     height:30px;
     width:25%;
+    max-width: 400px;
+    min-width: 200px;
     border: 1px solid lightgrey;
     border-radius:20px;
     font-size:18px;
     text-decoration:none;
     transition:.5s ease;
+    outline: none;
 }
 
 #all_articles:hover{
     background-color: #7aaf6b;
-    border:none;
+    border: 1px solid #7aaf6b;
+    cursor: pointer;
 }
 
-@media only screen and (min-width: 1300px) {
-    .articles-text{
-    width: calc(100% - 670px);
+.article_flex{
     display: inline-block;
-    margin-left: 335px;
-    text-align: center;
+    width: calc(100% - 50px);
+    max-width: 1300px;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1300px) {
+    .articles-text {
+        width: calc(100% - 670px);
+        display: inline-block;
+        margin-left: 335px;
+        text-align: center;
+    }
+
+    .food_suggestion {
+        width: calc((100% - 83px) / 3);
+        display: inline-flex;
+        border-radius: 20px;
+        margin: 12.5px;
+        color: black;
+        position: relative;
+        align-items: center;
+        transition: .5s ease;
+        overflow: hidden;
     }
 }
+
+
 
 /* --------- Articles Detail ---------*/
 
@@ -710,6 +749,7 @@ nav a:hover{
     bottom:50%;
     width:50vw;
     height:50px;
+    min-width: 200px;
 }
 
 #best_restaurants_button{
@@ -790,7 +830,87 @@ nav a:hover{
     margin-top:20px;
 }
 
+@media only screen and (max-width: 800px) {
+    .main_searchbar {
+        margin-top: calc(120px);
+    }
+    #main_row1{
+        height: 300px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .suggestion_text{
+        display: none;
+    }
+    .suggestion_img{
+    height: 100px
+    }
+     .article_flex{
+         width: calc(100% - 25px);
+     }
+     #best_restaurants_img{
+         width: 100%;
+         border-radius: 0px;
+     }
+}
 
+@media only screen and (max-width: 490px) {
+    .suggestion_text{
+        display: none;
+    }
+    .suggestion_img{
+    height: 100px
+    }
+    .food_suggestion{
+        width: calc((100% - 38px) / 3);
+        margin: 5px;
+    }
+    .suggestion_title{
+        font-size: 15px;
+        margin-top: 5px;
+    }
+     .article_flex{
+         width: calc(100% - 10px);
+     }
+      .main_searchbar {
+        width: 90%;
+          height: 50px;
+          margin-top: 70px;
+          min-width: 0px;
+    }
+    .search_button{
+        padding: 10px;
+    }
+
+    #main_row1{
+        height: 200px;
+        min-height: 200px;
+    }
+    #main_restaurantsFilter{
+        width: calc(100% - 50px);
+    }
+
+    #all_articles{
+        font-size: 16px;
+    }
+
+    #main_row2{
+        margin-bottom: 10px;
+    }
+
+    #main_row3{
+        height: 150px;
+    }
+
+}
+
+@media only screen and (max-width: 330px) {
+
+    .suggestion_title{
+        font-size: 14px;
+        margin-top: 5px;
+    }
+}
 
 
 
@@ -1366,7 +1486,7 @@ select:-webkit-autofill:focus {
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: #45354d;
+    color: #3F3C54;
     margin-bottom: 5px;
     margin-left: 10px;
 }
@@ -1802,12 +1922,12 @@ select:-webkit-autofill:focus {
 
 .restaurants_name a{
     text-decoration: none;
-    color: #45354d;
+    color: #3F3C54;
 }
 
 .restaurants_name_link{
     text-decoration: none;
-    color: #45354d;
+    color: #3F3C54;
 }
 
 .restaurants_name{
@@ -2022,7 +2142,7 @@ select:-webkit-autofill:focus {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     margin-bottom: 5px !important;
-    color: #45354d;
+    color: #3F3C54;
 }
 
 #restaurants_map_adresse{
@@ -2310,20 +2430,6 @@ display: none;
 
 /* ------- Article detail ----------*/
 
-.suggestion_background a:link, a:visited{
-  text-decoration: none!important;
-  color: black;
-}
-
-.article_flex{
-    display: inline-block;
-    width: 90%;
-    align-items: center;
-}
-
-
-
-
 
 
 /* --------- Restaurants ------------*/
@@ -2424,7 +2530,7 @@ display: none;
 .restaurants_link{
     text-decoration: none;
     font-size: 13px;
-    color: #45354d;
+    color: #3F3C54;
 }
 
 #mapid{
@@ -2683,7 +2789,7 @@ display: none;
     .restaurants_link{
     text-decoration: none;
     font-size: 10px;
-    color: #45354d;
+    color: #3F3C54;
 }
 
     #mapid{
@@ -3638,13 +3744,14 @@ textarea#id_content:focus, textarea#id_content:hover {
     object-fit:cover;
 }
 
+
 .rd_comment_username{
     display: inline-block;
     float: left;
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: #45354d;
+    color: #3F3C54;
     margin-top: 16px;
 }
 
