@@ -9,27 +9,24 @@
             <h1>plantyoptions.de</h1>
             <ul id="inner_footer_right">
                 <div class="inner_footer_right_list">
-                    <li><h2>navigation</h2></li>
+                    <li><h2>Navigation</h2></li>
                     <ul>
-                        <li><p>Home</p></li>
-                        <li><p>Restaurants</p></li>
-                        <li><p>About</p></li>
-                        <li><p>Registration</p></li>
+                        <li><a href="{% url 'home' %}"><p>Home</p></a></li>
+                        <li><a href="{% url 'restaurants' %}"><p>Restaurants</p></a></li>
+                        <li><a href="{% url 'about' %}"><p>About</p></a></li>
+                        <li><a href="{% url 'register' %}"><p>Registration</p></a></li>
                     </ul>
                 </div>
                 <div class="inner_footer_right_list">
-                    <li><h2>contact</h2></li>
+                    <li><h2>Kontakt</h2></li>
                     <ul>
-                        <li><p>luis@plantyoptions.de</p></li>
-                        <li><p>robin@plantyoptions.de</p></li>
-                        <li><p>anne@plantyopitons.de</p></li>
-                        <li><p>lucas@plantyopitons.de</p></li>
+                        <li><p>info@plantyoptions.de</p></li>
                     </ul>
                 </div>
                 <div class="inner_footer_right_list">
-                    <li><h2>social</h2></li>
+                    <li><h2>Soziale Netzwerke</h2></li>
                     <ul>
-                        <li id="footer_social"><img src="{% static 'assets/instagram.png' %}" alt="instagram: Planty Options"><p>@planty_options</p></li>
+                        <a id="footer_social" href="https://www.instagram.com/planty_options/" target="blank"><li><img src="{% static 'assets/instagram.png' %}" alt="instagram: Planty Options"><p>@planty_options</p></a></li>
                     </ul>
                 </div>
             </ul>
