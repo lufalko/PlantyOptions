@@ -2000,6 +2000,8 @@ select:-webkit-autofill:focus {
     overflow: hidden;
     overflow-y: scroll;
 
+    min-height: 100vh;
+
     margin-top: 25px;
     margin-left: 25px;
     margin-right: 25px;

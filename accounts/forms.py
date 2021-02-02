@@ -55,6 +55,24 @@ class CreateCommentForm(forms.ModelForm):
         model = Comment
         fields = ['content', 'ratings']
 
+        user = None
+
+        def __init__(self, *args, **kwargs):
+            self.user = self.request.user
+
+        def clean_email_address(self):
+            email = self.cleaned_data.get('email_address')
+
+            if self.user and self.user.email == email:
+                return email
+
+            if UserProfile.objects.filter(email=email).count():
+                raise forms.ValidationError(
+                    u'That email address already exists.'
+                )
+
+            return email
+
         widgets = {'content': forms.Textarea(attrs={'class': 'form-control'}),
                    'ratings': forms.NumberInput}
 
