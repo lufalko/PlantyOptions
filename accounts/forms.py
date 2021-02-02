@@ -18,7 +18,15 @@ class CreateUserForm(UserCreationForm):
         model = Account
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
 
-        widgets = {'first_name': forms.TextInput(attrs={'placeholder': 'Vorname ...'}),
+        # helper = FormHelper()
+        # helper.form_class = 'form-group'
+        # helper.layout = Layout(
+        #    Field('username', css_class='form-control mt-2 mb-3'),
+        # )
+
+        widgets = {'first_name': forms.TextInput(attrs={'id': 'registration_username',
+                                                        'placeholder': 'Vorname ...'
+                                                        }),
                    'last_name': forms.TextInput(attrs={'placeholder': 'Nachname ...'}),
                    'username': forms.TextInput(attrs={'placeholder': 'Nutzername ...'}),
                    }
