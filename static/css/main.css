@@ -973,7 +973,7 @@ nav a:hover{
     margin-left: 25px;
     margin-right: 25px;
 }
-.signInput-group-append > #id_username{
+#user_change_header .signInput-group-append > #id_username{
     font-size: 14px;
 }
 .signIn-container{
@@ -1014,6 +1014,19 @@ nav a:hover{
 }
 .signIn-data-input{
 
+    font-family: Montserrat;
+    appearance: none;
+
+    border-radius: 20px;
+    border: none;
+    font-size: 14px;
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: transparent;
+}
+.signIn-panel-container #id_username{
     font-family: Montserrat;
     appearance: none;
 
@@ -1243,7 +1256,7 @@ select:-webkit-autofill:focus {
     margin-right: 25px;
 }
 
- #id_username{
+ #user_change_header #id_username{
     appearance: none;
     border: none;
     border-radius: 0px;
@@ -1328,8 +1341,8 @@ select:-webkit-autofill:focus {
 }
 
 
-#id_username:focus,
-#id_username:hover{
+#user_change_header #id_username:focus,
+#user_change_header #id_username:hover{
     border-bottom: 1px solid var(--poGreen);
     width: calc(100% - 150px - 230px);
     outline: none;
@@ -1655,19 +1668,19 @@ select:-webkit-autofill:focus {
     }
 
 
-    #id_username:focus,
-    #id_username:focus:hover{
+    #user_change_header #id_username:focus,
+    #user_change_header #id_username:focus:hover{
     border-bottom: 1px solid var(--poGreen);
     width: calc(100% );
     outline: none;
     }
-    #id_username:focus,
-    #id_username:hover{
+    #user_change_header #id_username:focus,
+    #user_change_header #id_username:hover{
     border-bottom: 1px solid var(--poGreen);
     width: calc(100%);
     outline: none;
     }
-    #id_username{
+    #user_change_header #id_username{
         width:calc(100%);
         margin-top: 15px;
     }
