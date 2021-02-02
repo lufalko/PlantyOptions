@@ -741,15 +741,17 @@ function scrollFunction() {
   }
   if (document.body.scrollTop > height ) {
     console.log("reached");
-      document.getElementById("restaurants_aside_left").style.top= height - document.body.scrollTop + 60;
-      document.getElementById("restaurants_aside_right").style.top = height - document.body.scrollTop + 60;
-      document.getElementById("restaurants_Adresseingabe_Headline_underline").style.top = height - document.body.scrollTop + 60;
-      relative_p = true;
+    document.getElementById("restaurants_aside_left").style.top= height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_aside_right").style.top = height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_Adresseingabe_Headline_underline").style.top = height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_fixed_whitespace").style.top = height - document.body.scrollTop + 60;
+    relative_p = true;
   }
   else if(relative_p){
-      document.getElementById("restaurants_aside_left").style.top= "auto";
-      document.getElementById("restaurants_aside_right").style.top = "auto";
-      document.getElementById("restaurants_Adresseingabe_Headline_underline").style.top = "auto";
+    document.getElementById("restaurants_aside_left").style.top= "auto";
+    document.getElementById("restaurants_aside_right").style.top = "auto";
+    document.getElementById("restaurants_Adresseingabe_Headline_underline").style.top = "auto";
+    document.getElementById("restaurants_fixed_whitespace").style.top = "auto";
       relative_p = false
     }
 }
