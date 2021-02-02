@@ -319,6 +319,7 @@ def user(request):
     currentUser = request.user
     comments = Comment.objects.filter(account=request.user)
     liked = Restaurant.objects.filter(likes=currentUser)
+    foods = Food.objects.all()
 
     if request.method == 'POST':
         #comment_form = CreateCommentForm(request.POST or None)
@@ -327,9 +328,6 @@ def user(request):
                                         request.FILES,
                                         instance=currentUser)
         if userForm.is_valid():
-            #content = request.POST.get('content')
-            #comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
-            #comment.save()
 
             userForm.save()
             pictureForm.save()
@@ -341,7 +339,7 @@ def user(request):
         pictureForm = PictureUpdateForm(instance=currentUser)
         #comment_form = CreateCommentForm()
 
-    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, 'liked': liked, #comment_form': comment_form
+    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, 'liked': liked, 'foods': foods
     }
     return render(request, 'accounts/user.html', context)
 

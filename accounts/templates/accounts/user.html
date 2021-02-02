@@ -88,7 +88,23 @@
 
         <div id="user_comments">
             {% for comment in comments reversed %}
-            {% include 'accounts/snippets/comment_template.html' %}
+                <div class="rd_comment">
+                <div class="display_comment">
+                <div class="rd_comment_profilepic">
+                {% if comment.restaurant.restaurant_picture %}
+                <img class="rd_profilepic" src="{{comment.restaurant.restaurant_picture.url}}" alt="Profilbild">
+                {% else %}
+                <img class="rd_profilepic" src="{% static 'assets/PO_Icon_White_BG.png' %}" alt="Profilbild">
+                {% endif %}
+                </div>
+                <a href="{% url 'restaurant_detail' pk=comment.restaurant.pk underpage=0 %}"><div class="rd_comment_username">{{ comment.restaurant.name }}</div></a>
+                <div class="rd_comment_time">{{ comment.date_created }}</div>
+                <div class="rd_comment_rating">
+                <p> {{ comment.ratings }} </p>
+                </div>
+                <div class="rd_comment_text">{{ comment.content }}</div>
+                </div>
+                </div>
             {% endfor %}
         </div>
     </div>
@@ -161,6 +177,7 @@
                     {% endif %}
                     {% endfor %}
                 </div>
+
                 <div class="restaurants_vegetarische_Optionen"></div>
             </div>
             {% endfor %}

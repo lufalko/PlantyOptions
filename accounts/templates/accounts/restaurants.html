@@ -120,17 +120,16 @@
 
 
         <div id="restaurants_aside_right">
-        </div>
-        <div id="restaurants_aside_right_bottom" >
-            <div id="restaurants_aside_right_bottom_text">
-                <p id="restaurants_map_link"><a href="{% url 'map' %}">Karte anzeigen</a></p>
-
-            <div id="restaurants_aside_right_bottom_text_restaurant">
-                <p id="restaurants_map_name">Restaurant Name</p>
-                 <img src="{% static 'assets/PO_Icon_Green_Fill.svg' %}">
-                <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
-                <p id="restaurants_map_entfernung">? km Entfernt</p>
-            </div>
+            <div id="restaurants_aside_right_bottom" >
+                <div id="restaurants_aside_right_bottom_text">
+                    <p id="restaurants_map_link"><a href="{% url 'map' %}">Karte anzeigen</a></p>
+                    <div id="restaurants_aside_right_bottom_text_restaurant">
+                        <p id="restaurants_map_name">Restaurant Name</p>
+                         <img src="{% static 'assets/PO_Icon_Green_Fill.svg' %}">
+                        <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
+                        <p id="restaurants_map_entfernung">? km Entfernt</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -726,13 +725,35 @@ function stars(elements) {
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
 
+let relative_p = false;
+var p = document.getElementById("restaurants_aside_right");
+let style = window.getComputedStyle(p);
+let margin = style.marginLeft;
+
 function scrollFunction() {
-    console.log(document.body.scrollTop);
+    let height = document.getElementById("restaurants_wrapper").offsetHeight;
+    height = height - 525;
+
   if (document.body.scrollTop > 60 && !filteropen || document.documentElement.scrollTop > 20 && !filteropen ) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
   }
+  if (document.body.scrollTop > height ) {
+    console.log("reached");
+    document.getElementById("restaurants_aside_left").style.top= height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_aside_right").style.top = height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_Adresseingabe_Headline_underline").style.top = height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_fixed_whitespace").style.top = height - document.body.scrollTop + 60;
+    relative_p = true;
+  }
+  else if(relative_p){
+    document.getElementById("restaurants_aside_left").style.top= "auto";
+    document.getElementById("restaurants_aside_right").style.top = "auto";
+    document.getElementById("restaurants_Adresseingabe_Headline_underline").style.top = "auto";
+    document.getElementById("restaurants_fixed_whitespace").style.top = "auto";
+      relative_p = false
+    }
 }
 
 // When the user clicks on the button, scroll to the top of the document
