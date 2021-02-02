@@ -1894,6 +1894,7 @@ select:-webkit-autofill:focus {
     margin-left: calc(50vw - 900px );
     top: -26px;
     min-height: calc(100vh - 86px);
+    max-width: 100vw;
 
 }
 
@@ -1962,8 +1963,8 @@ select:-webkit-autofill:focus {
 
 #restaurants_Adresseingabe_Headline_underline{
     position: fixed;
-    width: calc(100% - 22.75%*2 - 55px - 82px);
-    max-width: 840px;
+    width: calc(100% - 22.75%*2 - 25px - 82px);
+    max-width: 846px;
     border: 2px solid lightgrey;
     border-radius: 20px;
     text-align: left;
@@ -2021,7 +2022,6 @@ select:-webkit-autofill:focus {
     grid-row-end: 1;
 
     overflow: hidden;
-    overflow-y: scroll;
 
     min-height: 100vh;
 
@@ -2317,6 +2317,9 @@ select:-webkit-autofill:focus {
     margin-left: 1375px;
     height: 400px;
     width: 380px;
+    overflow: hidden;
+    max-height: 400px;
+    max-width: 380px;
     margin-top: 25px;
 }
 
@@ -2938,6 +2941,10 @@ display: none;
         font-size: 14px;
         margin-right: 0px;
         right: 25px;
+    }
+
+    #restaurants_Adresseingabe_Headline_underline {
+        width: calc(100% - 22.75% * 2 - 50px - 82px);
     }
 
     #restaurants_aside_right_bottom_text{
