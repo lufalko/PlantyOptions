@@ -260,7 +260,7 @@ nav a:hover{
     grid-row:4/4;
     width:80vw;
     margin-left:10vw;
-    height:400px;
+    margin-bottom: 50px;
     border-radius:20px;
 }
 
@@ -572,7 +572,7 @@ nav a:hover{
     min-height: auto;
     padding: 10px;
     border-radius: 20px;
-    overflow: scroll;
+    overflow: overlay;
     botoom: auto;
 }
 .ingredients-headline{
@@ -693,12 +693,14 @@ nav a:hover{
         float: left;
         margin-left: 5%;
         margin-right: 0px;
+        white-space: normal!important;
+        word-wrap: break-word;
     }
     .ingredients-body li p{
         padding: 0px;
         margin: 0px;
         text-align: left;
-        max-width: 70px;
+        max-width: none;
     }
 
     #ingredients_x{
@@ -730,11 +732,31 @@ nav a:hover{
 }
 
 @media only screen and (max-width: 450px) {
+      .ingredients-body li p{
+        font-size: 14px;
+          max-width: 100px;
+    }
+
     .recipe-body{
     text-align: left;
     font-size: 14px;
     clear: both;
     padding: 10px 0px 0px 40px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+      .ingredients-body li p{
+        font-size: 13px;
+          max-width: 90px;
+    }
+
+}
+
+@media only screen and (max-width: 340px) {
+      .ingredients-body li p{
+        font-size: 12px;
+          max-width: 80px;
     }
 }
 
@@ -863,7 +885,7 @@ nav a:hover{
         width:calc(100% - 50px);
         margin: 0px;
         margin-left: 25px;
-        height: auto;
+         margin-bottom: 50px;
     }
 }
 
@@ -1756,6 +1778,7 @@ select:-webkit-autofill:focus {
     width: 1800px;
     margin-left: calc(50vw - 900px );
     top: -26px;
+    min-height: calc(100vh - 86px);
 
 }
 
@@ -2800,7 +2823,7 @@ display: none;
     }
 
     #restaurants_aside_right_bottom_text{
-        margin-top: calc(21.2vw + 10px);
+        margin-top: calc(21.2vw - 10px);
         top: auto;
     }
 
