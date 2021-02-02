@@ -2338,12 +2338,13 @@ select:-webkit-autofill:focus {
     display: none;
 }
 #restaurants_aside_right_bottom_text{
-    top: 486px;
     position: fixed;
     text-decoration: none;
     font-size: 10px;
     text-align: left;
     display: block;
+    margin-top: calc(380px);
+    top: auto;
 }
 
 #restaurants_aside_right_bottom_text a{
