@@ -1417,6 +1417,7 @@ select:-webkit-autofill:focus {
 }
 
 #user_body{
+    min-height: 50vh;
 }
 
 

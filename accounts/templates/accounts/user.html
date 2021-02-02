@@ -175,7 +175,8 @@
 </form>
 
 <script>
-
+    let vegetarisch = false;
+    let vegan = false;
     let active= [1,0,0];
     let newElement = document.getElementsByClassName('$0');
     let classesNodeList = document.querySelectorAll(".restaurants_rating");
@@ -294,6 +295,27 @@
         }
     }
 
+    for (let i = 0; i < document.getElementsByClassName('restaurants_dishes').length; i++){
+        let elements = document.getElementsByClassName('restaurants_dishes');
+        let category = elements[i].getElementsByClassName('restaurants_food_category');
+        let vegetarian_counter = 0;
+        let vegan_counter = 0;
+        for (let j = 0; j < category.length; j++){
+            if(category[j].innerHTML == 'Vegan') {
+               vegan_counter++;
+            }
+            else {
+               vegetarian_counter++;
+                }
+            }
+        document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].innerHTML= vegetarian_counter + ' Vegetarisch';
+        document.getElementsByClassName('restaurants_anzahl_vegan')[i].innerHTML= vegan_counter + ' Vegan';
+        //document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].style.padding = "2px";
+        //document.getElementsByClassName('restaurants_anzahl_vegan')[i].style.padding = "2px";
+        document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].style.userSelect = "none";
+        document.getElementsByClassName('restaurants_anzahl_vegan')[i].style.userSelect = "none";
+    }
+
 
 
     function render_options(){
@@ -342,6 +364,114 @@
     for(let i = 0; i < document.getElementsByClassName("restaurants_rating").length; i++){
        stars(document.getElementsByClassName("restaurants_rating")[i]);
     }
+
+    function render_food(number){
+        let elements = document.getElementsByClassName('restaurants_dishes');
+        let category = elements[number].getElementsByClassName('restaurants_food_category');
+        for (let i = 0; i < category.length; i++){
+            if(category[i].innerHTML == 'Vegan') {
+                if (!vegan) {
+                    elements[number].getElementsByClassName('restaurants_food')[i].style.display = "none";
+                } else {
+                    elements[number].getElementsByClassName('restaurants_food')[i].style.display = "block";
+                    elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "#378C61";
+                }
+            }
+            else {
+                if (!vegetarisch) {
+                    elements[number].getElementsByClassName('restaurants_food')[i].style.display = "none";
+                } else {
+                    elements[number].getElementsByClassName('restaurants_food')[i].style.display = "block";
+                    elements[number].getElementsByClassName('restaurants_category_mark')[i].style.backgroundColor = "rgb(112,175,107)";
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < document.getElementsByClassName('restaurants_dishes').length; i++){
+        let elements = document.getElementsByClassName('restaurants_dishes');
+        let category = elements[i].getElementsByClassName('restaurants_food_category');
+        let vegetarian_counter = 0;
+        let vegan_counter = 0;
+        for (let j = 0; j < category.length; j++){
+            if(category[j].innerHTML == 'Vegan') {
+               vegan_counter++;
+            }
+            else {
+               vegetarian_counter++;
+                }
+            }
+        document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].innerHTML= vegetarian_counter + ' Vegetarisch';
+        document.getElementsByClassName('restaurants_anzahl_vegan')[i].innerHTML= vegan_counter + ' Vegan';
+        //document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].style.padding = "2px";
+        //document.getElementsByClassName('restaurants_anzahl_vegan')[i].style.padding = "2px";
+        document.getElementsByClassName('restaurants_anzahl_vegetarisch')[i].style.userSelect = "none";
+        document.getElementsByClassName('restaurants_anzahl_vegan')[i].style.userSelect = "none";
+    }
+
+    function vegetarischDropdown() {
+        var elements = document.getElementsByClassName("restaurants_anzahl_vegetarisch");
+        for (let i = 0; i < elements.length; i++) {
+
+        elements[i].addEventListener("mouseover",  function(){ if(!vegetarisch){this.style.backgroundColor = "rgb(112,175,107)"}});
+        elements[i].addEventListener("mouseover",  function(){ if(!vegetarisch){this.style.borderColor = "rgb(112,175,107)"}});
+        elements[i].addEventListener("mouseleave",  function(){ if(!vegetarisch){this.style.backgroundColor = "transparent";}});
+        elements[i].addEventListener("mouseleave",  function(){ if(!vegetarisch){this.style.borderColor = "lightgrey"}});
+
+        elements[i].addEventListener('click', function (){
+            if(!vegetarisch) {
+                document.getElementsByClassName("restaurants_dishes")[i].style.display = "block";
+                this.style.backgroundColor = "rgb(112,175,107)";
+                this.style.borderColor = "rgb(112,175,107)";
+                vegetarisch = true;
+            }
+            else{
+                if(!vegan) {
+                    document.getElementsByClassName("restaurants_dishes")[i].style.display = "none";
+                }
+                vegetarisch = false;
+                this.style.backgroundColor = "transparent";
+                this.style.borderColor = "lightgrey";
+            }
+              render_food(i);
+        })
+        }
+    }
+
+    function veganDropdown() {
+        var elements = document.getElementsByClassName("restaurants_anzahl_vegan");
+        for (let i = 0; i < elements.length; i++) {
+
+        elements[i].addEventListener("mouseover",  function(){ if(!vegan){this.style.backgroundColor = "#378C61"}});
+        elements[i].addEventListener("mouseover",  function(){ if(!vegan){this.style.borderColor = "#378C61"}});
+        elements[i].addEventListener("mouseleave",  function(){ if(!vegan){this.style.backgroundColor = "transparent";}});
+        elements[i].addEventListener("mouseleave",  function(){ if(!vegan){this.style.borderColor = "lightgrey"}});
+
+        elements[i].addEventListener('click', function (){
+            if(!vegan) {
+                document.getElementsByClassName("restaurants_dishes")[i].style.display = "block";
+                this.style.backgroundColor = "#378C61";
+                this.style.borderColor = "#378C61";
+                vegan = true;
+
+            }
+            else{
+                if(!vegetarisch) {
+                    document.getElementsByClassName("restaurants_dishes")[i].style.display = "none";
+                }
+                vegan = false;
+                this.style.backgroundColor = "transparent";
+                this.style.borderColor = "lightgrey";
+            }
+              render_food(i);
+        })
+        }
+    }
+
+
+
+    vegetarischDropdown();
+    veganDropdown()
     render_options();
     render_body();
 
