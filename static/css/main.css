@@ -2309,11 +2309,7 @@ select:-webkit-autofill:focus {
 
 #restaurants_aside_right {
 
-    grid-column-start: 4;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 1;
-    position: fixed;
+    position: fixed !important;
     margin-left: 1375px;
     height: 400px;
     width: 380px;
@@ -2332,8 +2328,6 @@ select:-webkit-autofill:focus {
 
     border-radius: 20px;
     margin-top: 25px;
-
-
 }
 
 #restaurants_aside_right_bottom_text_restaurant{

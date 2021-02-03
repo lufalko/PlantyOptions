@@ -663,7 +663,7 @@ function stars(elements) {
     }).addTo(mymap);
 
 
-	//Daten
+	//daten
 	let restaurantN = document.getElementsByClassName("restaurantName");
     let restaurantA = document.getElementsByClassName("restaurantAdresse")
     let restaurantLat = document.getElementsByClassName("restaurantLatitude");
@@ -726,9 +726,7 @@ function stars(elements) {
 window.onscroll = function() {scrollFunction()};
 
 let relative_p = false;
-var p = document.getElementById("restaurants_aside_right");
-let style = window.getComputedStyle(p);
-let margin = style.marginLeft;
+
 
 function scrollFunction() {
     let height = document.getElementById("restaurants_wrapper").offsetHeight;
