@@ -2307,6 +2307,11 @@ select:-webkit-autofill:focus {
 
 }
 
+#restaurants_map_block{
+    width: 100%;
+    height: 100%;
+}
+
 #restaurants_aside_right {
 
     position: fixed !important;
