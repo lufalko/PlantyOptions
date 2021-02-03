@@ -2332,7 +2332,6 @@ select:-webkit-autofill:focus {
     grid-row-end: 1;
 
     border-radius: 20px;
-    margin-top: 25px;
 }
 
 #restaurants_aside_right_bottom_text_restaurant{
@@ -2347,7 +2346,6 @@ select:-webkit-autofill:focus {
     font-size: 10px;
     text-align: left;
     display: block;
-    margin-top: calc(380px);
     top: auto;
 }
 
@@ -2947,7 +2945,7 @@ display: none;
     }
 
     #restaurants_aside_right_bottom_text{
-        margin-top: calc(21.2vw - 10px);
+
         top: auto;
     }
 
