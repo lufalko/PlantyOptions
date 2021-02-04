@@ -293,7 +293,7 @@ class Food(models.Model):
         ('Vegetarian', 'Vegetarian'),
     )
 
-    restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
+    restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
     toGoPrice = models.FloatField(null=True, blank=True)
