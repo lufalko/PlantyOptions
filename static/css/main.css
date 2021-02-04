@@ -1983,7 +1983,7 @@ select:-webkit-autofill:focus {
 }
 
 #restaurants_fixed_whitespace{
-    width: calc(100% - 22.75%*2 - 78px - 52px);
+    width: calc(100% - 22.75%*2 - 78px - 42px);
     height: 85px;
     background-color: white;
     position: fixed;
