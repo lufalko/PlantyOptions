@@ -3348,7 +3348,6 @@ display: none;
 
 @media only screen and (max-width: 415px) {
     #restaurants_stars img{
-        float: right;
         margin: 0px;
         margin-right: 3px;
     }
