@@ -528,6 +528,14 @@ def article_detail(request, pk):
     article = Article.objects.get(pk=pk)
     if article.recipe:
         recipe = article.recipe
+        duration = None
+        unit = ''
+        if recipe.duration < 1:
+            duration = int(recipe.duration * 60)
+            unit = 'min'
+        else:
+            duration = recipe.duration
+            unit = 'h'
         ingredients = recipe.ingredients.all()
     else:
         recipe = None;
@@ -535,7 +543,7 @@ def article_detail(request, pk):
 
 
     context = {
-        'article': article, 'recipe': recipe, 'ingredients': ingredients
+        'article': article, 'recipe': recipe, 'duration': duration, 'unit': unit, 'ingredients': ingredients
     }
     return render(request, 'article_detail.html', context)
 

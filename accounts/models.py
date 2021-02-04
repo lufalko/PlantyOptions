@@ -8,6 +8,7 @@ from django.contrib.gis.db.models import PointField
 from django.conf import settings
 
 
+
 # Create your models here.
 
 
