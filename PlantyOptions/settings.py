@@ -27,7 +27,7 @@ SECRET_KEY = 'yyubmz9(2_o8!y=b$zj)fi_oc+l)r6np4^%r)tpu5tr80z-efv'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-        "plantyoptions.de",
+    "plantyoptions.de",
 ]
 
 
