@@ -51,7 +51,6 @@
     </div>
 
     <div class="restaurants_adresse">
-   <!-- <img src="{% static 'assets/PO_Icon_Green_Fill.png' %}"> -->
     <p class="restaurants_adresse_adresse">{{i.address}} {{i.houseNumber}}, {{i.city}} </p>
     <p class="restaurants_adresse_entfernung">?km entfernt</p>
     </div>
@@ -708,7 +707,7 @@ function stars(elements) {
         slides.item(i).onmouseover = function(){
             var dataname = this.getAttribute("data-name");
             var mappoint = document.getElementsByClassName(dataname);
-            mappoint[0].src = "{% static 'assets/PO_Icon_Darkgreen.png' %}"
+            mappoint[0].src = "{% static 'assets/PO_Icon_Darkgreen.svg' %}"
         };
 
        slides.item(i).onmouseleave = function(){
