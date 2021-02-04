@@ -661,7 +661,6 @@
                  document.getElementById('rd_toGo').style.userSelect = "none";
 
          }
-
          function render_vegan() {
              let element = document.getElementById("rd_vegan");
 
@@ -754,20 +753,12 @@
              element.addEventListener("mouseover", function () {
                  if (!delivery) {
                      this.style.backgroundColor = "#70af6b"
-                 }
-             });
-             element.addEventListener("mouseover", function () {
-                 if (!delivery) {
                      this.style.borderColor = "#70af6b"
                  }
              });
              element.addEventListener("mouseleave", function () {
                  if (!delivery) {
                      this.style.backgroundColor = "transparent";
-                 }
-             });
-             element.addEventListener("mouseleave", function () {
-                 if (!delivery) {
                      this.style.borderColor = "lightgrey"
                  }
              });
