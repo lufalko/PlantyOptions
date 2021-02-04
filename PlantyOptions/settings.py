@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
         "plantyoptions.de",
 ]
 
+
 # Application definition
 
 INSTALLED_APPS = [

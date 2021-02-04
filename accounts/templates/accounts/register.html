@@ -1,11 +1,14 @@
-{% extends 'accounts/main.html' %}
+{% extends 'accounts/main_registration_login.html' %}
+
+{% load static %}
 
 {% block content %}
 <div id="signIn-background"></div>
+<div id="signIn_icon"><img src="{% static 'assets/PO_Icon_White.svg' %}"></div>
 	<div class="signIn-container">
 		<div class="signIn-panel-container">
 		<h3 id="form-title">REGISTRIEREN</h3>
-			<form method="POST" action="">
+			<form method="POST">
 
                 {% csrf_token %}
 

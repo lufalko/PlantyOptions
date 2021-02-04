@@ -41,8 +41,11 @@
     </div>
 
     <div class="dropdown">
-
+        {% if user.is_authenticated %}
         <input type="image" src="{{user.profile_picture.url}}" onclick='myFunction()' class="dropbtn">
+        {% else %}
+        <input type="image" src="{% static 'assets/ProfilePlaceholder.svg' %}" onclick='myFunction()' class="dropbtn">
+        {% endif %}
 
       <div id="myDropdown" class="dropdown-content">
             <div id="navbar_login">

@@ -54,10 +54,12 @@ class Account(AbstractBaseUser):
     username = models.CharField(max_length=40, blank=False, null=True)
     date_joined = models.DateTimeField(verbose_name='date_joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last_login', auto_now=True)
+
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    reset_password = models.BooleanField(default=False)
 
     first_name = models.CharField(max_length=200, blank=False, null=True)
     last_name = models.CharField(max_length=200, blank=False, null=True)
@@ -294,12 +296,11 @@ class Food(models.Model):
     restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=200, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
-    toGo = models.FloatField(null=True, blank=True)
-    # delivery = models.BooleanField(null=True, default=False)
+    toGoPrice = models.FloatField(null=True, blank=True)
     rating = models.FloatField(null=True)
     tags = models.ManyToManyField(Tag)
     price = models.FloatField(null=True)
-    description = models.CharField(max_length=400, null=True)
+    description = models.CharField(max_length=400, null=True, blank=True)
 
     def getRestaurantName(self, obj):
         return obj.restaurant.name
@@ -343,10 +344,12 @@ class Ingredient(models.Model):
 
 class IngredientValue(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    value = models.IntegerField(null=False, default=0)
+    valueInGrams = models.IntegerField(null=False, default=0)
+    otherValue = models.IntegerField(null=True, blank=True)
+    otherValueName = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.ingredient.name + ' | ' + str(self.value)
+        return self.ingredient.name + ' | ' + str(self.valueInGrams)
 
 
 class Recipe(models.Model):

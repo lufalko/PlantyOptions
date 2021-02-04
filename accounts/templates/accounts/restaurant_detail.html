@@ -20,6 +20,11 @@
 {% endifequal %}
     <p id="rd_name">{{queryset.name}}</p>
 
+    <div id="rd_rating">
+        <p id="rd_av_rating">{{queryset.averageRating}}</p>
+        <p id="rd_amount_rating">({{queryset.getAmountRating}})</p>
+    </div>
+
     {% if user.is_authenticated %}
     <form action="{% url 'like_restaurant' queryset.pk %}" method="POST">
         {% csrf_token %}
@@ -33,10 +38,6 @@
     </form>
     {% endif %}
 
-    <div id="rd_rating">
-        <p id="rd_av_rating">{{queryset.averageRating}}</p>
-        <p id="rd_amount_rating">({{queryset.getAmountRating}})</p>
-    </div>
 
     <div id="rd_description">
         {% if queryset.description %}
@@ -52,7 +53,7 @@
         <p id="rd_food_drinks">Essen/Trinken</p>
         <p id="rd_opening_hours">Öffnungszeiten</p>
         <p id="rd_food_location">Standort</p>
-        <p id="rd_contact">Kommentare</p>
+        <p id="rd_contact">Bewertungen</p>
     </div>
     <div class="rd_options">
        <div id="rd_foods_head">
@@ -188,7 +189,6 @@
         <div id="rd_comments_block">
 
         <div id="rd_addcoment">
-
             {% if user.is_authenticated %}
             <p id="rd_add_text">Kommentar hinzufügen</p>
             <div class="post-comment-section">
@@ -202,7 +202,6 @@
 
             {% else %}
             <p id="rd_nolog">Logge dich ein, um einen Kommentar zu verfassen!</p>
-
             {% endif %}
         </div>
 
@@ -543,9 +542,9 @@
                 veg_list[i] = false;
             }
 
-            togo[i] = food.toGo;
+            togo[i] = food.toGoPrice;
             console.log(togo[i])
-            console.log(food.toGo)
+            console.log(food.toGoPrice)
             tag_list[i] = food.tags;
             price[i] = food.price;
             nameList[i] = food.name;

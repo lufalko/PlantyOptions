@@ -3,19 +3,19 @@
 {% block content %}
 
 
-    <div class="article_flex">
+    <div class="articles_wrapper">
+        <p id="articles_header">Artikel</p>
     {% for i in articles %}
-        <div class="food_suggestion">
-            <div class="effect-1"></div>
-            <div class="effect-2"></div>
-            <div class="suggestion_background">
-                <a href="{% url 'article_detail' pk=i.pk %}">
-                    <img class="suggestion_img" src="{{i.banner.url}}" alt="food suggestion">
-                    <div class="suggestion_title">{{i.headline}}</div>
-                    <div class="suggestion_text">{{i.subtitle}}</div>
-                </a>
-            </div>
+        <a href="{% url 'article_detail' pk=i.pk %}">
+        <div class="articles_food_suggestion">
+
+                    <img class="articles_suggestion_img" src="{{i.banner.url}}" alt="food suggestion">
+                    <div class="articles_suggestion_title"><p>{{i.headline}}</p></div>
+                    <div class="articles_suggestion_text"><p>{{i.subtitle}}</p></div>
+
         </div>
+
+            </a>
     {% endfor %}
     </div>
 

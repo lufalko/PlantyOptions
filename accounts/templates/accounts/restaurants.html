@@ -120,17 +120,17 @@
 
 
         <div id="restaurants_aside_right">
-        </div>
-        <div id="restaurants_aside_right_bottom" >
-            <div id="restaurants_aside_right_bottom_text">
-                <p id="restaurants_map_link"><a href="{% url 'map' %}">Karte anzeigen</a></p>
-
-            <div id="restaurants_aside_right_bottom_text_restaurant">
-                <p id="restaurants_map_name">Restaurant Name</p>
-                 <img src="{% static 'assets/PO_Icon_Green_Fill.svg' %}">
-                <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
-                <p id="restaurants_map_entfernung">? km Entfernt</p>
-            </div>
+            <div id="restaurants_map_block"></div>
+            <div id="restaurants_aside_right_bottom" >
+                <div id="restaurants_aside_right_bottom_text">
+                    <p id="restaurants_map_link"><a href="{% url 'map' %}">Karte anzeigen</a></p>
+                    <div id="restaurants_aside_right_bottom_text_restaurant">
+                        <p id="restaurants_map_name">Restaurant Name</p>
+                         <img src="{% static 'assets/PO_Icon_Green_Fill.svg' %}">
+                        <p id="restaurants_map_adresse">Beispielstraße 3, 86163 Augsburg</p>
+                        <p id="restaurants_map_entfernung">? km Entfernt</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -653,7 +653,7 @@ function stars(elements) {
 
 
     //map erstellen
-    var mymap = L.map('restaurants_aside_right').setView([48.37, 10.89779], 12);
+    var mymap = L.map('restaurants_map_block').setView([48.37, 10.89779], 12);
 
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
         attribution: 'PlantyOptions',
@@ -708,7 +708,7 @@ function stars(elements) {
         slides.item(i).onmouseover = function(){
             var dataname = this.getAttribute("data-name");
             var mappoint = document.getElementsByClassName(dataname);
-            mappoint[0].src = "{% static 'assets/PO_Icon_DarkGreen.svg' %}"
+            mappoint[0].src = "{% static 'assets/PO_Icon_DarkGreen.png' %}"
         };
 
        slides.item(i).onmouseleave = function(){
@@ -726,18 +726,39 @@ function stars(elements) {
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
 
+let relative_p = false;
+
+
 function scrollFunction() {
-  if (document.body.scrollTop > 60 && !filteropen && window.innerWidth<820 || document.documentElement.scrollTop > 20 && !filteropen && window.innerWidth<820 ) {
+    let height = document.getElementById("restaurants_wrapper").offsetHeight;
+    height = height - 525;
+
+  if (document.body.scrollTop > 60 && !filteropen || document.documentElement.scrollTop > 20 && !filteropen ) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
   }
+  if (document.body.scrollTop > height ) {
+    console.log("reached");
+    document.getElementById("restaurants_aside_left").style.top= height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_aside_right").style.top = height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_Adresseingabe_Headline_underline").style.top = height - document.body.scrollTop + 60;
+    document.getElementById("restaurants_fixed_whitespace").style.top = height - document.body.scrollTop + 60;
+    relative_p = true;
+  }
+  else if(relative_p){
+    document.getElementById("restaurants_aside_left").style.top= "auto";
+    document.getElementById("restaurants_aside_right").style.top = "auto";
+    document.getElementById("restaurants_Adresseingabe_Headline_underline").style.top = "auto";
+    document.getElementById("restaurants_fixed_whitespace").style.top = "auto";
+      relative_p = false
+    }
 }
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-  //document.body.scrollTop = 0; // For Safari
-  //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
 

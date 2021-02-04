@@ -4,14 +4,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.urls.exceptions import NoReverseMatch
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, get_user_model
 
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.contrib.sites.shortcuts import get_current_site
 
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -19,11 +20,15 @@ from django.template.loader import render_to_string
 from django.shortcuts import render
 
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 
 from django.views.generic import TemplateView
 
 from django.urls import path, reverse_lazy, reverse
 from django.views.generic import ListView
+
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_text, force_bytes
 
 import json
 
@@ -35,13 +40,21 @@ from .decorators import unauthenticated_user, allowed_users
 from .serializers import *
 from .utils import get_friend_request_or_false
 from .friend_request_status import FriendRequestStatus
-from accounts.models import rd_update
+from .tokens import *
 
+from django.conf import settings
+
+from accounts.models import rd_update
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from itertools import chain
+
+# from sendgrid import SendGridAPIClient
+# from sendgrid.helpers.mail import Mail
+
+User = get_user_model()
 
 
 
@@ -58,12 +71,13 @@ def register(request):
             account = authenticate(email=email, password=raw_password)
 
             name = request.POST.get('first_name')
-            account = Account.objects.get(first_name=name)
-            key = str(account.pk)
-            href = "http://plantyoption.de/verification/" + key
+            account = Account.objects.get(email=email)
+            token = account_activation_token.make_token(account)
+            uid = urlsafe_base64_encode(force_bytes(account.pk))
+            href = "http://plantyoptions.de/verification/" + uid + "/" + token
 
             # email verification
-            template = render_to_string('snippets/email_template.html', {'name': name, 'hyperrefference': href})
+            template = render_to_string('snippets/email_verification_template.html', {'name': name, 'hyperrefference': href})
 
             emailMessage = EmailMessage(
                 'Danke, dass du dich auf plantyoptions.de angemeldet hast!',
@@ -85,10 +99,117 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
-def VerifivationView(request, pk):
-    account = Account.objects.get(pk=pk)
-    account.is_active = True
-    account.save()
+def VerificationView(request, uid, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uid))
+        user = Account.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, Account.DoesNotExist) as e:
+        messages.add_message(request, messages.WARNING, str(e))
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True  # now we're activating the user
+        user.save()
+    else:
+        messages.add_message(request, messages.WARNING, 'Der Aktivierungslink ist nicht vergeben.')
+
+    return redirect('login')
+
+
+@require_http_methods(["GET", "POST"])
+def change_password(request):
+    msg = ''
+    if request.user.is_authenticated == False:
+        if request.method == "POST":
+            form = UserForgotPasswordForm(request.POST)
+            if form.is_valid():
+                email = request.POST.get('email')
+                user = Account.objects.get(email=email)
+                site = get_current_site(request)
+
+                user.is_active = False  # User needs to be inactive for the reset password duration
+                user.reset_password = True
+                user.save()
+
+                token = password_reset_token.make_token(user)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                href = "http://plantyoption.de/reset/" + uid + "/" + token
+
+                # email verification
+                template = render_to_string('snippets/password_reset_mail.html', {'name': user.first_name, 'username': user.username , 'hyperrefference': href})
+
+                emailMessage = EmailMessage(
+                    'Passwortwiederherstellung von plantyoptions.de',
+                    template,
+                    settings.EMAIL_HOST_USER,
+                    [email]
+                )
+                emailMessage.fail_silently = False
+                emailMessage.send()
+
+                messages.add_message(request, messages.SUCCESS, 'Email {0} gesendet.'.format(email))
+                msg = 'Wenn die von dir eingegebene Email in unserer Datenbank zu finden ist, senden wir eine Nachricht zu dieser Adresse.'
+            else:
+                messages.add_message(request, messages.WARNING, 'Keine Email angegeben.')
+                return render(request, 'accounts/change_password.html', {'form': form})
+
+        return render(request, 'accounts/change_password.html', {'form': PasswordChangeForm, 'msg': msg})
+
+    else:
+        return redirect('home')
+
+
+@require_http_methods(["GET", "POST"])
+def reset(request, uid, token):
+
+    if request.method == 'POST':
+        try:
+            uid = force_text(urlsafe_base64_decode(uid))
+            user = Account.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
+            messages.add_message(request, messages.WARNING, str(e))
+            user = None
+
+        if user is not None and password_reset_token.check_token(user, token):
+            form = PasswordChangeForm(user, request.POST)
+            if form.is_valid():
+                form.save()
+                update_session_auth_hash(request, form.user)
+
+                user.is_active = True
+                user.reset_password = False
+                user.save()
+                messages.add_message(request, messages.SUCCESS, 'Passwort erfolgreich zurückgesetzt.')
+                return redirect('login')
+            else:
+                context = {
+                    'form': form,
+                    'uid': uid,
+                    'token': token
+                }
+                messages.add_message(request, messages.WARNING, 'Passwort konnte nicht zurückgesetzt werden.')
+                return render(request, 'accounts/change_password.html', context)
+        else:
+            messages.add_message(request, messages.WARNING, 'Link zum Zurücksetzen des Passwortes ungültig.')
+            messages.add_message(request, messages.WARNING, 'Bitte fordere einen erneutes Zurücksetzen des Passwortes an.')
+
+    try:
+        uid = force_text(urlsafe_base64_decode(uid))
+        user = Account.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
+        messages.add_message(request, messages.WARNING, str(e))
+        user = None
+
+    if user is not None and password_reset_token.check_token(user, token):
+        context = {
+            'form': PasswordChangeForm(user, request.POST),
+            'uid': uid,
+            'token': token
+        }
+        return render(request, 'accounts/snippets/reset_password.html', context)
+    else:
+        messages.add_message(request, messages.WARNING, 'Link zum Zurücksetzen des Passwortes ungültig.')
+        messages.add_message(request, messages.WARNING, 'Bitte fordere einen erneutes Zurücksetzen des Passwortes an.')
 
     return redirect('login')
 
@@ -198,6 +319,7 @@ def user(request):
     currentUser = request.user
     comments = Comment.objects.filter(account=request.user)
     liked = Restaurant.objects.filter(likes=currentUser)
+    foods = Food.objects.all()
 
     if request.method == 'POST':
         #comment_form = CreateCommentForm(request.POST or None)
@@ -206,9 +328,6 @@ def user(request):
                                         request.FILES,
                                         instance=currentUser)
         if userForm.is_valid():
-            #content = request.POST.get('content')
-            #comment = Comment.objects.create(restaurant=queryset, account=request.user, content=content)
-            #comment.save()
 
             userForm.save()
             pictureForm.save()
@@ -220,7 +339,7 @@ def user(request):
         pictureForm = PictureUpdateForm(instance=currentUser)
         #comment_form = CreateCommentForm()
 
-    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, 'liked': liked, #comment_form': comment_form
+    context = {'user': currentUser, 'userForm': userForm, 'pictureForm': pictureForm, 'comments': comments, 'liked': liked, 'foods': foods
     }
     return render(request, 'accounts/user.html', context)
 

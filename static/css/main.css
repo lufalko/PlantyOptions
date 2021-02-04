@@ -18,6 +18,7 @@ body {
     text-align: center;
     overflow-x: hidden;
     background-color: white;
+    overflow: overlay;
 }
 
 ::-webkit-scrollbar {
@@ -183,6 +184,7 @@ nav a:hover{
   display: inline-block;
   float:right;
   margin:5px;
+    margin-right: 10px;
 }
 
 .dropdown-content {
@@ -229,7 +231,8 @@ nav a:hover{
     margin-top:-25px;
     grid-column:1/1;
     grid-row:1/1;
-    height: 300px;
+    height: 30vw;
+    min-height: 300px;
     background-image: url('../assets/dashboard-BG.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -257,7 +260,7 @@ nav a:hover{
     grid-row:4/4;
     width:80vw;
     margin-left:10vw;
-    height:400px;
+    margin-bottom: 50px;
     border-radius:20px;
 }
 
@@ -267,18 +270,19 @@ nav a:hover{
     display: inline-block;
     width:40%;
     height:60px;
-    margin-top: calc(150px - 30px);
-    background-color: white;
+    margin-top: calc(15vw - 30px);
+    max-margin: 150px;
     border-radius: 20px;
     white-space: nowrap;
     max-width: 600px;
     min-width: 400px;
+    overflow: hidden;
 }
 
 #main_restaurantsFilter{
-    width: 100%;
+    width: calc(100% - 60px);
     height: 100%;
-    border-radius: 20px;
+    border-radius: 20px 0px 0px 20px;
     border: none;
     font-family: 'Montserrat';
     font-size: 15px;
@@ -294,10 +298,13 @@ nav a:hover{
     padding: 15px;
     position: relative;
     z-index: 1;
+    margin-top: -2px;
 }
 #lupe{
-    width:30px;
-    height:30px;
+    margin: 0px;
+    margin-top: 1px;
+    width:34px;
+    height:34px;
 }
 
 #id_restaurant_name{
@@ -312,7 +319,7 @@ nav a:hover{
 }
 
 .main_searchbar_textfeld{
-    width: -webkit-calc(100% - 60px);
+    width: -webkit-calc(100%);
 }
 
 
@@ -320,7 +327,6 @@ nav a:hover{
 
 .food_suggestion{
     width: 29%;
-    height: 350px;
     display: inline-flex;
     border-radius: 20px;
     margin:2%;
@@ -328,6 +334,8 @@ nav a:hover{
     position: relative;
     align-items: center;
     transition:.5s ease;
+    overflow: hidden;
+    text-decoration: none;
 }
 
 .food_suggestion:hover{
@@ -348,13 +356,19 @@ nav a:hover{
     font-size: 18px;
     font-weight: bold;
     z-index: 2;
+    text-decoration:none;
+    color: black;
 }
 
 .suggestion_text{
     position: relative;
     text-align: left;
     margin:5px;
+    margin-bottom: 0px;
     z-index: 2;
+    max-height: 93px;
+    overflow: scroll;
+    text-decoration:none;
 }
 .suggestion_background{
     position: relative;
@@ -365,31 +379,63 @@ nav a:hover{
     z-index: 2;
 }
 
+.suggestion_background a:link, a:visited{
+  text-decoration: none!important;
+  color: black;
+}
+
 #all_articles{
     background: white;
-    position: relative;
+    display: inline-block;
+    margin-right: calc(50% - 200px);
+    margin-left: calc(50% - 200px);
     height:30px;
     width:25%;
+    max-width: 400px;
+    min-width: 200px;
     border: 1px solid lightgrey;
     border-radius:20px;
     font-size:18px;
     text-decoration:none;
     transition:.5s ease;
+    outline: none;
 }
 
 #all_articles:hover{
     background-color: #7aaf6b;
-    border:none;
+    border: 1px solid #7aaf6b;
+    cursor: pointer;
 }
 
-@media only screen and (min-width: 1300px) {
-    .articles-text{
-    width: calc(100% - 670px);
+.article_flex{
     display: inline-block;
-    margin-left: 335px;
-    text-align: center;
+    width: calc(100% - 50px);
+    max-width: 1300px;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1300px) {
+    .articles-text {
+        width: calc(100% - 670px);
+        display: inline-block;
+        margin-left: 335px;
+        text-align: center;
+    }
+
+    .food_suggestion {
+        width: calc((100% - 83px) / 3);
+        display: inline-flex;
+        border-radius: 20px;
+        margin: 12.5px;
+        color: black;
+        position: relative;
+        align-items: center;
+        transition: .5s ease;
+        overflow: hidden;
     }
 }
+
+
 
 /* --------- Articles Detail ---------*/
 
@@ -526,7 +572,7 @@ nav a:hover{
     min-height: auto;
     padding: 10px;
     border-radius: 20px;
-    overflow: scroll;
+    overflow: overlay;
     botoom: auto;
 }
 .ingredients-headline{
@@ -647,12 +693,14 @@ nav a:hover{
         float: left;
         margin-left: 5%;
         margin-right: 0px;
+        white-space: normal!important;
+        word-wrap: break-word;
     }
     .ingredients-body li p{
         padding: 0px;
         margin: 0px;
         text-align: left;
-        max-width: 70px;
+        max-width: none;
     }
 
     #ingredients_x{
@@ -684,11 +732,31 @@ nav a:hover{
 }
 
 @media only screen and (max-width: 450px) {
+      .ingredients-body li p{
+        font-size: 14px;
+          max-width: 100px;
+    }
+
     .recipe-body{
     text-align: left;
     font-size: 14px;
     clear: both;
     padding: 10px 0px 0px 40px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+      .ingredients-body li p{
+        font-size: 13px;
+          max-width: 90px;
+    }
+
+}
+
+@media only screen and (max-width: 340px) {
+      .ingredients-body li p{
+        font-size: 12px;
+          max-width: 80px;
     }
 }
 
@@ -710,6 +778,7 @@ nav a:hover{
     bottom:50%;
     width:50vw;
     height:50px;
+    min-width: 200px;
 }
 
 #best_restaurants_button{
@@ -790,13 +859,115 @@ nav a:hover{
     margin-top:20px;
 }
 
+@media only screen and (max-width: 800px) {
+    .main_searchbar {
+        margin-top: calc(120px);
+    }
+    #main_row1{
+        height: 300px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .suggestion_text{
+        display: none;
+    }
+    .suggestion_img{
+    height: 100px
+    }
+     .article_flex{
+         width: calc(100% - 25px);
+     }
+     #best_restaurants_img{
+         width: 100%;
+         border-radius: 0px;
+     }
+     #main_row4{
+        width:calc(100% - 50px);
+        margin: 0px;
+        margin-left: 25px;
+         margin-bottom: 50px;
+    }
+}
 
+@media only screen and (max-width: 490px) {
+
+    #main_row4{
+        width:calc(100% - 20px);
+        margin: 0px;
+        margin-left: 10px;
+        height: auto;
+    }
+
+    .suggestion_text{
+        display: none;
+    }
+    .suggestion_img{
+    height: 100px
+    }
+    .food_suggestion{
+        width: calc((100% - 38px) / 3);
+        margin: 5px;
+    }
+    .suggestion_title{
+        font-size: 15px;
+        margin-top: 5px;
+    }
+     .article_flex{
+         width: calc(100% - 10px);
+     }
+      .main_searchbar {
+        width: 90%;
+          height: 50px;
+          margin-top: 70px;
+          min-width: 0px;
+    }
+    .search_button{
+        padding: 10px;
+    }
+
+    #main_row1{
+        height: 200px;
+        min-height: 200px;
+    }
+    #main_restaurantsFilter{
+        width: calc(100% - 50px);
+    }
+
+    #all_articles{
+        font-size: 16px;
+    }
+
+    #main_row2{
+        margin-bottom: 10px;
+    }
+
+    #main_row3{
+        height: 150px;
+
+    }
+
+}
+
+@media only screen and (max-width: 330px) {
+
+    .suggestion_title{
+        font-size: 14px;
+        margin-top: 5px;
+    }
+}
 
 
 
 
 
 /* ---------- Sign In ----------*/
+
+#signIn_icon{
+    display: none;
+    position: relative;
+    width: 20%;
+    margin: 0px 40%;
+}
 
 #signIn-background{
     width: 100%;
@@ -831,7 +1002,7 @@ nav a:hover{
     margin-left: 25px;
     margin-right: 25px;
 }
-.signInput-group-append > #id_username{
+#user_change_header .signInput-group-append > #id_username{
     font-size: 14px;
 }
 .signIn-container{
@@ -884,6 +1055,19 @@ nav a:hover{
     padding-bottom: 5px;
     background: transparent;
 }
+.signIn-panel-container #id_username{
+    font-family: Montserrat;
+    appearance: none;
+
+    border-radius: 20px;
+    border: none;
+    font-size: 14px;
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: transparent;
+}
 .signIn-msg{
     margin: 20px 0px 20px 0px;
     padding: 5px 0px 10px 5px;
@@ -895,12 +1079,113 @@ nav a:hover{
     color: white;
 }
 
+@media only screen and (max-width: 700px) {
+    #signIn_icon{
+        display: block;
+    }
+    #signIn_icon img{
+        width: 100px;
+        margin-top: 50px;
+    }
+    #signIn-background{
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        margin-top: -25px;
+        background-color: rgb(112,175,107);
+        transform: skewY(0deg);
+    }
 
+    .signIn-container{
+        color: white;
+    }
 
+    .signIn-panel-container{
+        padding-top: 20px;
+	    background-color: transparent;
+        box-shadow: none;
+    }
 
+    .signIn_btn{
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+    }
+    .signInput-group-append{
+        background-color: var(--poGreen)
+    }
+    .signInput-group-append input{
+        color: white;
+    }
+    .signInput-group-append input::placeholder{
+        color: white;
+    }
+    .input-group-append{
+        border: 2px solid white;
+        color: white;
+    }
+    input:-webkit-autofill {
+        -webkit-text-fill-color: white;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #signIn_icon{
+        display: block;
+        text-align: center;
+    }
+    #signIn_icon img{
+        width: 70px;
+        margin-top: 30px;
+    }
+    #signIn-background{
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        margin-top: -25px;
+        background-color: rgb(112,175,107);
+        transform: skewY(0deg);
+    }
+
+    .signIn-container{
+        color: white;
+    }
+
+    .signIn-panel-container{
+        padding-top: 20px;
+	    background-color: transparent;
+        box-shadow: none;
+        width: 280px;
+    }
+
+    .signIn_btn{
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+    }
+    .signInput-group-append input{
+        color: white;
+    }
+    .signInput-group-append input::placeholder{
+        color: white;
+    }
+    .input-group-append{
+        border: 2px solid white;
+        color: white;
+    }
+    input:-webkit-autofill {
+        -webkit-text-fill-color: white;
+    }
+}
 
 /* ----------- Login ----------- */
 
+#login_icon{
+    display: none;
+    position: fixed;
+    width: 20%;
+    margin: 0px 40%;
+}
 #login-background{
     width: 100%;
     height: 100vh;
@@ -920,7 +1205,6 @@ nav a:hover{
 	position: relative;
 	align-items: center;
 	justify-content: center;
-	padding: 10px;
 	border-radius: 5px;
 }
 
@@ -932,7 +1216,6 @@ nav a:hover{
 	background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 5px darkgrey;
-
 }
 
 .login_btn{
@@ -1006,6 +1289,56 @@ select:-webkit-autofill:focus {
 }
 
 
+@media only screen and (max-width: 700px) {
+    #login_icon{
+        display: block;
+    }
+    #login_icon img{
+        width: 100px;
+        margin-top: 50px;
+    }
+    #login-background{
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        margin-top: -25px;
+        background-color: rgb(112,175,107);
+        transform: skewY(0deg);
+    }
+
+    .login-container{
+        color: white;
+    }
+
+    .login-panel-container{
+        padding-top: 220px;
+	    background-color: transparent;
+        box-shadow: none;
+    }
+
+    .login_btn{
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+    }
+    .input-group-text{
+
+    }
+    .login-data-input{
+        color: white;
+    }
+    .login-data-input::placeholder{
+        color: white;
+    }
+    .input-group-append{
+        border: 2px solid white;
+        color: white;
+    }
+    input:-webkit-autofill {
+        -webkit-text-fill-color: white;
+    }
+}
+
 
 
 /* -------- User Page -------- */
@@ -1030,6 +1363,7 @@ select:-webkit-autofill:focus {
     text-align: left;
     margin-bottom: 25px;
     display: inline-block;
+    width: 100%;
 }
 
 #user_change_header{
@@ -1046,9 +1380,10 @@ select:-webkit-autofill:focus {
     margin-right: 25px;
 }
 
- #id_username{
+ #user_change_header #id_username{
     appearance: none;
     border: none;
+    border-radius: 0px;
     background-color: white;
     border-bottom: 1px solid lightgrey;
     padding: 3px;
@@ -1061,7 +1396,7 @@ select:-webkit-autofill:focus {
     color: #3F3C54;
     margin: 0px;
     margin-bottom: 15px;
-    width: 300px;
+    width: 200px;
     transition: ease-in-out, width .5s ease-in-out;
 }
 
@@ -1102,7 +1437,7 @@ select:-webkit-autofill:focus {
     width: calc(100% - 176px);
 }
 
-#user_change_header > #id_biography{
+ #id_biography{
     display: inline-block;
     transition: ease-in-out, width .5s ease-in-out;
     height: 110px;
@@ -1117,14 +1452,12 @@ select:-webkit-autofill:focus {
     margin-bottom: 15px;
     float: left;
     outline: none;
+    border-radius: 0px;
 }
 
-#user_change_header > #user_biographie{
+#user_biographie{
 
-    display: inline-block;
     margin: 0px;
-    width: 300px;
-    height: 92px;
     text-align: left;
     overflow-y: scroll;
     margin-bottom: 5px;
@@ -1132,8 +1465,8 @@ select:-webkit-autofill:focus {
 }
 
 
-#id_username:focus,
-#id_username:hover{
+#user_change_header #id_username:focus,
+#user_change_header #id_username:hover{
     border-bottom: 1px solid var(--poGreen);
     width: calc(100% - 150px - 230px);
     outline: none;
@@ -1208,6 +1541,7 @@ select:-webkit-autofill:focus {
 }
 
 #user_body{
+    min-height: 50vh;
 }
 
 
@@ -1260,6 +1594,10 @@ select:-webkit-autofill:focus {
     display: block;
 }
 
+#id_email, #id_first_name, #id_last_name{
+        border-radius: 0px;
+    }
+
 #user_information_display p{
     float: left;
     clear: left;
@@ -1309,7 +1647,7 @@ select:-webkit-autofill:focus {
     text-align: center;
     border-radius: 10px;
 
-    transition: 0.5s;
+    transition: background-color 0.5s;
 }
 
 #id_profile_picture + label p{
@@ -1363,7 +1701,7 @@ select:-webkit-autofill:focus {
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: #45354d;
+    color: #3F3C54;
     margin-bottom: 5px;
     margin-left: 10px;
 }
@@ -1402,6 +1740,8 @@ select:-webkit-autofill:focus {
     /*about page*/
     #user_biographie{
         font-size: 13px;
+        display: inline-block;
+        margin-top: 5px;
     }
 
     .user_logo_container, .user_logo_container img{
@@ -1415,9 +1755,10 @@ select:-webkit-autofill:focus {
     }
 
     #user_name{
+        display: inline-block;
+        float: left;
         font-size: 15px;
         margin-top: -11px;
-        margin-bottom: 55px;
     }
 
     #user_body_header p{
@@ -1452,15 +1793,40 @@ select:-webkit-autofill:focus {
     }
 
 
-    #id_username:focus,
-    #id_username:focus:hover{
+    #user_change_header #id_username:focus,
+    #user_change_header #id_username:focus:hover{
     border-bottom: 1px solid var(--poGreen);
-    width: calc(100% - 105px);
+    width: calc(100% );
     outline: none;
     }
-
-    #id_username{
-        width:calc(100px);
+    #user_change_header #id_username:focus,
+    #user_change_header #id_username:hover{
+    border-bottom: 1px solid var(--poGreen);
+    width: calc(100%);
+    outline: none;
+    }
+    #user_change_header #id_username{
+        width:calc(100%);
+        margin-top: 15px;
+    }
+    #id_email, #id_first_name, #id_last_name{
+        width:calc(100% - 111px);
+        border-radius: 0px;
+    }
+    .user_p_container p{
+        width: 85px;
+    }
+    #id_biography{
+    height: 110px;
+    width: calc(100%);
+    border-bottom: 1px solid lightgrey;
+    font-family: Montserrat;
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 0px;
+    }
+    #user_biographie{
+        width: 100%;
     }
 }
 
@@ -1470,6 +1836,31 @@ select:-webkit-autofill:focus {
     /*about page*/
     #user_wrapper{
         width: calc(100% - 20px);
+    }
+}
+
+@media only screen and (max-width: 370px) {
+
+    #id_biography{
+    height: 140px;
+    width: calc(100%);
+    border-bottom: 1px solid lightgrey;
+    font-family: Montserrat;
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 0px;
+    }
+
+    #user_username{
+        font-size: 20px;
+    }
+
+    #user_name{
+        font-size: 13px;
+    }
+
+    #user_start_edit{
+        font-size: 12px;
     }
 }
 
@@ -1502,6 +1893,8 @@ select:-webkit-autofill:focus {
     width: 1800px;
     margin-left: calc(50vw - 900px );
     top: -26px;
+    min-height: calc(100vh - 86px);
+    max-width: 100vw;
 
 }
 
@@ -1570,8 +1963,8 @@ select:-webkit-autofill:focus {
 
 #restaurants_Adresseingabe_Headline_underline{
     position: fixed;
-    width: calc(100% - 22.75%*2 - 55px - 82px);
-    max-width: 840px;
+    width: calc(100% - 22.75%*2 - 25px - 82px);
+    max-width: 846px;
     border: 2px solid lightgrey;
     border-radius: 20px;
     text-align: left;
@@ -1629,7 +2022,8 @@ select:-webkit-autofill:focus {
     grid-row-end: 1;
 
     overflow: hidden;
-    overflow-y: scroll;
+
+    min-height: 100vh;
 
     margin-top: 25px;
     margin-left: 25px;
@@ -1749,12 +2143,12 @@ select:-webkit-autofill:focus {
 
 .restaurants_name a{
     text-decoration: none;
-    color: #45354d;
+    color: #3F3C54;
 }
 
 .restaurants_name_link{
     text-decoration: none;
-    color: #45354d;
+    color: #3F3C54;
 }
 
 .restaurants_name{
@@ -1777,7 +2171,6 @@ select:-webkit-autofill:focus {
     display: inline-block;
     border-radius: 20px 0 0 20px ;
     border: 1px solid lightgrey;
-    width: calc((100% - 137px - 36px)/2);
     height: 17px;
     text-align: center;
     float: left;
@@ -1795,15 +2188,18 @@ select:-webkit-autofill:focus {
 
 .restaurants_anzahl_vegan{
 
-    margin-left: -4px;
     display: inline-block;
     border-radius: 0 20px 20px 0;
     border: 1px solid lightgrey;
     border-left: none;
-    width: calc((100% - 137px - 36px)/2);
     height: 17px;
     text-align: center;
 }
+
+.restaurants_anzahl_vegan, .restaurants_anzahl_vegetarisch{
+     width: calc((100% - 137px - 26px)/2);
+}
+
 .restaurants_anzahl_vegetarisch p, .restaurants_anzahl_vegan p{
     margin: 0px;
 }
@@ -1846,7 +2242,6 @@ select:-webkit-autofill:focus {
     display: inline-block;
     float: right;
     margin-top: -4px;
-    margin-right: 15px;
 }
 
 .restaurants_rating p{
@@ -1912,16 +2307,20 @@ select:-webkit-autofill:focus {
 
 }
 
+#restaurants_map_block{
+    width: 100%;
+    height: 100%;
+}
+
 #restaurants_aside_right {
 
-    grid-column-start: 4;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 1;
-    position: fixed;
+    position: fixed !important;
     margin-left: 1375px;
     height: 400px;
     width: 380px;
+    overflow: hidden;
+    max-height: 400px;
+    max-width: 380px;
     margin-top: 25px;
 }
 
@@ -1933,9 +2332,6 @@ select:-webkit-autofill:focus {
     grid-row-end: 1;
 
     border-radius: 20px;
-    margin-top: 25px;
-
-
 }
 
 #restaurants_aside_right_bottom_text_restaurant{
@@ -1945,12 +2341,12 @@ select:-webkit-autofill:focus {
     display: none;
 }
 #restaurants_aside_right_bottom_text{
-    top: 486px;
     position: fixed;
     text-decoration: none;
     font-size: 10px;
     text-align: left;
     display: block;
+    top: auto;
 }
 
 #restaurants_aside_right_bottom_text a{
@@ -1962,16 +2358,17 @@ select:-webkit-autofill:focus {
     margin: 0px;
 }
 
-
-
-
-
 #restaurants_map_name{
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     margin-bottom: 5px !important;
-    color: #45354d;
+    color: #3F3C54;
+}
+
+#restaurants_map_adresse{
+    display: inline-block;
+    float: right;
 }
 
 #restaurants_aside_right_bottom_text_restaurant img{
@@ -1985,25 +2382,6 @@ select:-webkit-autofill:focus {
 
 #restaurants_background{
 
-    position: fixed;
-    z-index: 0;
-    top: 0px;
-    height: 100vh;
-    width: 100vw;
-
-    background-color: white;
-
-    /*background-color: #85697A;*/
-
-    /*background-image: url("http://127.0.0.1:8000/static/assets/dashboard-BG.jpg"); */
-
-    -webkit-background-size: cover;
-     -moz-background-size: cover;
-     -o-background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-height: 120vw;
-    opacity: 0.2;
 }
 
 #restaurants_searchbar{
@@ -2254,20 +2632,6 @@ display: none;
 
 /* ------- Article detail ----------*/
 
-.suggestion_background a:link, a:visited{
-  text-decoration: none!important;
-  color: black;
-}
-
-.article_flex{
-    display: inline-block;
-    width: 90%;
-    align-items: center;
-}
-
-
-
-
 
 
 /* --------- Restaurants ------------*/
@@ -2311,10 +2675,14 @@ display: none;
     opacity: 0.7;
   color: white; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
- width: 40px;
     height:50px;
   border-radius: 4px; /* Rounded corners */
   font-size: 18px; /* Increase font size */
+}
+
+#myBtn img{
+    width: 28px;
+    height: auto;
 }
 
 #myBtn:hover {
@@ -2368,7 +2736,7 @@ display: none;
 .restaurants_link{
     text-decoration: none;
     font-size: 13px;
-    color: #45354d;
+    color: #3F3C54;
 }
 
 #mapid{
@@ -2404,7 +2772,6 @@ display: none;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   grid-template-columns: 100%;
-  min-width: 600px;
   width:100%;
 }
 
@@ -2426,26 +2793,26 @@ display: none;
     background:white;
     grid-column:1/1;
     grid-row:2/2;
-    width:20vw;
-    height:20vw;
+    width:200px;
+    height:200px;
     position: relative;
-    left:40vw;
+    left:calc(50vw - 100px);
     border-radius:50%;
-    margin-top:-10vw;
+    margin-top:-100px;
+    min-height: 200px;
+    min-width: 200px;
 }
 
 
 #about_row3{
     background:white;
-    grid-column:1/1;
-    grid-row:3/3;
-    width:50vw;
+    display: inline-block;
+    width:500px;
     height:auto;
-    position:relative;
-    left:25vw;
-    padding:20px;
+    margin-left:calc(50% - 250px);
     margin-top:20px;
     border-bottom: solid 1px lightgrey;
+    font-size: 16px;
 }
 
 
@@ -2573,8 +2940,12 @@ display: none;
         right: 25px;
     }
 
+    #restaurants_Adresseingabe_Headline_underline {
+        width: calc(100% - 22.75% * 2 - 50px - 82px);
+    }
+
     #restaurants_aside_right_bottom_text{
-        margin-top: calc(21.2vw + 10px);
+
         top: auto;
     }
 
@@ -2627,7 +2998,7 @@ display: none;
     .restaurants_link{
     text-decoration: none;
     font-size: 10px;
-    color: #45354d;
+    color: #3F3C54;
 }
 
     #mapid{
@@ -2745,7 +3116,7 @@ display: none;
     }
 
     .restaurants_anzahl_vegetarisch, .restaurants_anzahl_vegan{
-         width: calc((100% - 137px - 22px)/2);
+         width: calc((100% - 137px - 26px)/2);
     }
 
   #restaurants_aside_left{
@@ -2807,6 +3178,8 @@ display: none;
 
 @media only screen and (max-width: 700px) {
 
+
+
     #navbar_reiter{
         display: none;
     }
@@ -2822,6 +3195,15 @@ display: none;
 }
 
 @media only screen and (max-width: 570px) {
+
+     #about_row3{
+    width: calc(100% - 50px);
+    margin-left:calc(25px);
+    font-size: 15px;
+    }
+    #about_row4{
+        margin-top: 30px;
+    }
 
     /*about page*/
     .about_teammember{
@@ -2854,6 +3236,7 @@ display: none;
  #restaurants_Adresseingabe_Headline_underline{
      margin-left: 20px;
      margin-right: 20px;
+     width: calc(100% - 44px);
  }
 
 
@@ -2896,21 +3279,11 @@ display: none;
 
     }
 
-    .restaurants_anzahl_vegan{
-
-    width: calc((100% - 100px - 17px)/2);
+    .restaurants_anzahl_vegetarisch, .restaurants_anzahl_vegan{
+         width: calc((100% - 100px - 18px)/2);
     float: right;
-        margin-top: -2px;
-    }
-
-     .restaurants_anzahl_vegetarisch{
-
-    width: calc((100% - 100px - 17px)/2);
-    float: right;
-    margin-right: 3px;
          margin-top: -2px;
     }
-
 
 }
 
@@ -2925,7 +3298,7 @@ display: none;
     }
      .restaurants_anzahl_vegetarisch,  .restaurants_anzahl_vegan{
 
-    width: calc((100% - 94px - 12px)/2);
+    width: calc((100% - 94px - 14px)/2);
 
     }
      #restaurants_Adresseingabe_Headline_underline{
@@ -3086,7 +3459,6 @@ display: none;
     float: left;
     height: 25px;
     margin-right: 20px;
-     margin-top: -14px;
 }
 
 #rd_av_rating{
@@ -3101,6 +3473,7 @@ display: none;
 }
 
 #rd_likebtn{
+     margin-top: -3px;
     float: right;
 }
 
@@ -3182,6 +3555,7 @@ display: none;
     background-color: white;
     width: 100%;
     height: auto;
+    min-height: 90vh;
 
 }
 
@@ -3582,13 +3956,14 @@ textarea#id_content:focus, textarea#id_content:hover {
     object-fit:cover;
 }
 
+
 .rd_comment_username{
     display: inline-block;
     float: left;
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: #45354d;
+    color: #3F3C54;
     margin-top: 16px;
 }
 
@@ -3851,7 +4226,7 @@ textarea#id_content:focus, textarea#id_content:hover {
     }
 
       #rd_likebtn{
-          margin-top: -3px;
+          margin-top: -55px;
       }
 
       #rd_rating{
@@ -3973,12 +4348,201 @@ textarea#id_content:focus, textarea#id_content:hover {
 
 }
 
-/*footer*/
-
-footer{
-    display: none;
+.articles_wrapper{
+    display: inline-block;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 80vh;
 }
 
+.articles_food_suggestion{
+    width: calc(100% - 50px);
+    display: inline-block;
+    margin-bottom: 20px;
+    text-align: left;
+}
 
+.articles_suggestion_img{
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-right: 25px;
+    border-radius: 10px;
+}
+.articles_food_suggestion > a{
+    text-decoration: none;
+    color: black;
+}
 
+.articles_suggestion_title p{
+    text-decoration: none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    color: #3F3C54;
+    font-weight: 700;
+}
 
+.articles_suggestion_text{
+    width: calc(100% - 125px);
+    margin-left: 125px;
+}
+
+.articles_suggestion_text p{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color: black;
+}
+
+#articles_header{
+    text-align: left;
+    float: left;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 40px;
+    margin-left: 150px;
+}
+
+@media only screen and (max-width: 500px) {
+    .articles_food_suggestion{
+        width: calc(100% - 40px);
+    }
+    .articles_suggestion_img{
+        margin-right: 10px;
+    }
+    #articles_header{
+       margin-left: 13 s0px;
+    }
+    .articles_suggestion_text{
+        width: calc(100% - 110px);
+        margin-left: 110px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #articles_header{
+        font-size: 30px;
+    }
+    .articles_food_suggestion{
+        width: calc(100% - 40px);
+    }
+    .articles_suggestion_img{
+        margin-right: 10px;
+    }
+    #articles_header{
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+    .articles_suggestion_text{
+    width: calc(100% - 110px);
+    margin-left: 110px;
+        font-size: 13px;
+    }
+
+    .articles_suggestion_title p{
+        font-size: 15px;
+    }
+}
+
+/*footer*/
+
+#footer_container{
+    display: flex;
+    background-color: var(--poGreen);
+    margin: none;
+    padding: 150px 0px 150px 0px;
+    color: white;
+}
+#footer_container a{
+    text-decoration: none;
+    color: white;
+}
+#footer_left_Container{
+    width: 10%;
+    margin-left:10%;
+}
+#footer_icon{
+    height: 50%;
+    margin-left: 25%;
+    margin-top: 50%;
+    text-align: center;
+}
+#footer_right_container{
+    width: 70%;
+    margin: 0px 10% 0px 10%;
+    text-align: left;
+}
+#footer_right_container ul, li{
+    list-style: none;
+    list-style-type: none;
+    list-style-position:inside;
+    margin:0;
+    padding:0;
+}
+#inner_footer_right{
+    display: flex;
+    width: 100%;
+}
+.inner_footer_right_list{
+    display: block;
+    width: 30%;
+}
+.inner_footer_right_list #footer_social{
+    display: inline-flex;
+}
+#footer_social img{
+    position: relative;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+#footer_social p{
+    margin: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+    #inner_footer_right{
+        display: block;
+        width: 100%;
+    }
+    .inner_footer_right_list{
+        display: block;
+        width: 100%;
+        margin-top: 50px;
+    }
+    #footer_icon{
+        height: 60px;
+        margin-left: 25%;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+}
+@media only screen and (max-width: 400px) {
+    #inner_footer_right{
+        display: block;
+        width: 100%;
+    }
+    .inner_footer_right_list{
+        display: block;
+        width: 100%;
+        margin-top: 50px;
+    }
+    #footer_icon{
+        height: 60px;
+        margin-left: 25%;
+        margin-top: 10px;
+        text-align: center;
+    }
+    #footer_right_container h1{
+        font-size: 20px;
+    }
+    .inner_footer_right_list h2 {
+        font-size: 17px;
+    }
+    .inner_footer_right_list p {
+        font-size: 12px;
+    }
+
+}

@@ -13,7 +13,13 @@
     <div class="ingredients-body">
         <ul>
             {% for i in ingredients %}
-            <li><p style="float: left; clear: left">{{i.ingredient.name}}</p><p style="float: right; clear: right;">{{i.value}} g</p></li>
+            <li><p style="float: left; clear: left">{{i.ingredient.name}}</p>
+                {% if i.otherValue %}
+                <p style="float: right; clear: right;">{{i.otherValue}} {% if i.otherValueName %}{{i.otherValueName}}{% else %}g{% endif %}</p>
+                {% else %}
+                <p style="float: right; clear: right;">{{i.valueInGrams}} g</p>
+            {% endif %}
+            </li>
             {% endfor %}
         </ul>
     </div>

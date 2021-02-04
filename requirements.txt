@@ -16,3 +16,4 @@ filters~=1.3.2
 requests~=2.25.1
 enum34~=1.1.6
 typing~=3.7.4.3
+six~=1.15.0
