@@ -3157,7 +3157,7 @@ display: none;
 
   #restaurants_aside_left{
   bottom: -400px;
-      transition: bottom 0.5s;
+  transition: bottom 0.5s;
     position: fixed;
     background-color: white;
     height: 310px;
