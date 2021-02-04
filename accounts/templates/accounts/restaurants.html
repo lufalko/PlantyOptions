@@ -92,6 +92,7 @@
         </div>
 
         <div id="restaurants_aside_left">
+
             <div id="restaurants_filter">
                 <form method="get">
                     {{myFilter.form}}
@@ -115,9 +116,16 @@
 
 
             </div>
-
+             <div id="restaurants_x" class="x">
+            <div></div>
+             </div>
         </div>
 
+       <div id="restaurants_bottom">
+        <div id="restaurants_open_filter">
+            <img src="{% static 'assets/filter.svg' %}">
+        </div>
+    </div>
 
         <div id="restaurants_aside_right">
             <div id="restaurants_map_block"></div>
@@ -147,12 +155,6 @@
         <p class="restaurantPunkte">{{i.lat_lng}}</p>
         -->
     {% endfor %}
-
-    <div id="restaurants_bottom">
-        <div id="restaurants_open_filter">
-            <img src="{% static 'assets/filter.svg' %}">
-        </div>
-    </div>
 
 
   <div id="restaurants_background"> </div>
@@ -191,14 +193,9 @@
     function reportWindowSize() {
         if(window.innerWidth > 819){
             filteropen = false;
-            document.getElementById("restaurants_aside_left").style.display= "block";
-            document.getElementsByClassName("navbar").item(0).style.display = "block";
-            document.getElementById("restaurants_wrapper").style.height = " ";
-            //document.body.scrollTop = 0; // For Safari
-            //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
         if(filteropen==false && window.innerWidth<820){
-            document.getElementById("restaurants_aside_left").style.display= "none";
+
         }
 
     }
@@ -237,30 +234,40 @@ window.onresize = reportWindowSize;
         }
 
     }
+    window.onresize = function (){
+        if (window.innerWidth > 820){
+            document.getElementById("restaurants_aside_left").style.bottom = "auto";
+            filteropen = false;
+        }
+        else if(!filteropen){
+            document.getElementById("restaurants_aside_left").style.bottom = -400;
+        }
+    }
+    document.getElementById("restaurants_open_filter").addEventListener('click',function () {
+        filter();
+    })
+    document.getElementById("restaurants_x").addEventListener('click',function () {
+        filter();
+    })
 
-    document.getElementById("restaurants_open_filter").addEventListener('click',function (){
+    function filter(){
 
         let filter = document.getElementById("restaurants_aside_left");
 
         if(!filteropen) {
-
-            document.getElementById("restaurants_wrapper").style.height = "10vh";
-            filter.style.display = "block";
-            document.getElementsByClassName("navbar").item(0).style.display = "none";
+            filter.style.bottom = "0px";
             //document.body.scrollTop = 55; // For Safari
             //document.documentElement.scrollTop = 55; // For Chrome, Firefox, IE and Opera
         }
         else{
-            filter.style.display = "none";
-
+            filter.style.bottom = "-400px";
             //document.body.scrollTop = 0; // For Safari
             //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-            document.getElementsByClassName("navbar").item(0).style.display = "block";
-            document.getElementById("restaurants_wrapper").style.height = " ";
+
 
         }
         filteropen = !filteropen;
-    })
+    }
 
 
      function render_map_text() {
@@ -738,7 +745,7 @@ function scrollFunction() {
   } else {
     mybutton.style.display = "none";
   }
-  if (document.body.scrollTop > height ) {
+  if (document.body.scrollTop > height && window.innerWidth > 820) {
     console.log("reached");
     document.getElementById("restaurants_aside_left").style.top= height - document.body.scrollTop + 60;
     document.getElementById("restaurants_aside_right").style.top = height - document.body.scrollTop + 60;

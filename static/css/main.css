@@ -53,6 +53,35 @@ select{
 
 }
 
+.x{
+   width: 20px;
+    height: 20px;
+}
+
+.x:hover{
+     cursor: pointer;
+}
+
+.x::after{
+     content: "";
+    rotation-point: center;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 5px;
+    height: 25px;
+    background-color: #3F3C54;
+}
+
+.x div{
+   position: absolute;
+    rotation-point: center;
+    transform: rotate(-45deg);
+    width: 5px;
+    height: 25px;
+    margin-left: 10px;
+    background-color: #3F3C54
+}
+
 .like-btn{
     appearance: none;
     background-color: white;
@@ -2071,6 +2100,10 @@ select:-webkit-autofill:focus {
 
 }
 
+#restaurants_x{
+    display: none;
+}
+
 .restaurants_dishes{
     display: none;
     margin-top: 5px;
@@ -2304,7 +2337,7 @@ select:-webkit-autofill:focus {
     margin-left: 130px;
     font-size: 14px;
     margin-right: -25px;
-
+    bottom: auto;
 }
 
 #restaurants_map_block{
@@ -2469,10 +2502,6 @@ select:-webkit-autofill:focus {
 
     box-sizing: border-box;
      float: right;
-}
-
-#restaurants_filter input[type=text]:focus  {
-
 }
 
 
@@ -2916,10 +2945,6 @@ display: none;
 
 
 
-
-
-
-
 @media only screen and (max-width: 1758px) {
 
 
@@ -3089,6 +3114,17 @@ display: none;
 
 @media only screen and (max-width: 820px) {
 
+    #restaurants_rating_reset{
+        display: none;
+    }
+
+    #restaurants_x{
+    display: block;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+    }
+
   #restaurants_wrapper {
 
       grid-template-columns: 0px 0px 1Fr 0px;
@@ -3120,21 +3156,49 @@ display: none;
     }
 
   #restaurants_aside_left{
+  bottom: -400px;
+      transition: bottom 0.5s;
     position: fixed;
-    display: none;
     background-color: white;
-    top: 0px;
-    height: 100vh !important;
+    height: 310px;
     width: 100vw;
     font-size: 14px;
     margin-right: -25px;
+      z-index: 10;
+      padding-top: 65px;
+      padding-bottom: 25px;
+      border-top: 1px solid lightgrey;
 }
 
-  #restaurants_filter{
-      margin-top: calc((70vh - 460px)/2);
+  #restaurants_filter button{
+      margin-top: 20px;
+  }
 
-      width: 70%;
-      margin-left: 15%;
+  #restaurants_filter input[type=text]{
+      margin: 0px;
+      margin-left: 25px;
+      margin-bottom: 10px;
+      width: calc(100% - 225px);
+      float: left;
+  }
+
+  #restaurants_filter{
+      max-width: 500px;
+      width: calc(100%);
+      display: inline-block;
+      margin: 0px;
+  }
+
+  #restaurants_stars{
+      margin: 0px;
+      margin-top: -176px;
+      margin-right: 20px;
+      float: right;
+  }
+
+  #id_tags{
+      height: 100px;
+      margin-top: 10px;
   }
 
     #restaurants_bottom{
@@ -3226,12 +3290,7 @@ display: none;
         margin-left: 20px;
     }
 
-     #restaurants_filter{
-      margin-top: calc((90vh - 460px)/2);
 
-      width: 90%;
-      margin-left: 5%;
-  }
 
  #restaurants_Adresseingabe_Headline_underline{
      margin-left: 20px;
@@ -3287,15 +3346,21 @@ display: none;
 
 }
 
-@media only screen and (max-width: 374px) {
+@media only screen and (max-width: 415px) {
+    #restaurants_stars img{
+        float: right;
+        margin: 0px;
+        margin-right: 3px;
+    }
 
-    #restaurants_filter{
-          margin-top: calc((85vh - 460px)/2);
-
-          width: 96%;
-          margin-left: 2%;
+    #restaurants_filter input[type=text]{
+        width: calc(100% - 195px);
 
     }
+}
+
+@media only screen and (max-width: 374px) {
+
      .restaurants_anzahl_vegetarisch,  .restaurants_anzahl_vegan{
 
     width: calc((100% - 94px - 14px)/2);
@@ -3356,8 +3421,14 @@ display: none;
 
 @media only screen and (max-device-width: 480px) {
     #id_tags{
-       height: 100px;
+       height: 50px;
         border: 1px solid lightgrey;
+    }
+    #restaurants_stars{
+      margin-top: -126px;
+  }
+    #restaurants_aside_left{
+        height: 260px;
     }
 }
 
@@ -3368,17 +3439,10 @@ display: none;
     width: 100vw;
     max-width: 1200px;
     overflow: hidden;
-    border-left: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
     min-height: calc(100vh - 111px);
     padding-bottom: 25px;
     margin-top: -25px;
     background-color: white;
-}
-
-#rd_main_body{
-    background-color: #f5f5f5;
 }
 
 #rd_banner{
@@ -3505,11 +3569,11 @@ display: none;
 
 
 #rd_body{
-    background-color:lightgrey ;
     display: inline-block;
     width: calc(100% - 50px);
     margin-left: 25px;
     margin-right: 25px;
+    background-color: white;
 
 }
 
