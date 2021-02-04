@@ -1012,9 +1012,6 @@ nav a:hover{
 	margin-bottom: auto;
     position: relative;
 	align-items: center;
-	justify-content: center;
-	padding: 10px;
-	border-radius: 5px;
 }
 .signIn-panel-container{
     margin: auto;
@@ -1098,6 +1095,7 @@ nav a:hover{
 
     .signIn-container{
         color: white;
+        width: 100%;
     }
 
     .signIn-panel-container{
@@ -1155,8 +1153,8 @@ nav a:hover{
         padding-top: 20px;
 	    background-color: transparent;
         box-shadow: none;
-        width: 280px;
-    }
+        width: 90%;
+        }
 
     .signIn_btn{
         background-color: transparent;
@@ -1182,7 +1180,7 @@ nav a:hover{
 
 #login_icon{
     display: none;
-    position: fixed;
+    position: relative;
     width: 20%;
     margin: 0px 40%;
 }
@@ -1280,7 +1278,7 @@ select:-webkit-autofill:focus {
 #messages{
     margin: 80px 0px 20px 0px;
     padding: 5px 0px 10px 5px;
-    width: 80%;
+    width: 90%;
     height: 40px;
     background-color: rgb(112,175,107);
     text-align: center;
@@ -1308,10 +1306,12 @@ select:-webkit-autofill:focus {
 
     .login-container{
         color: white;
+        position: relative;
+	    margin-top: 0px;
     }
 
     .login-panel-container{
-        padding-top: 220px;
+        padding-top: 20px;
 	    background-color: transparent;
         box-shadow: none;
     }
@@ -1336,6 +1336,20 @@ select:-webkit-autofill:focus {
     }
     input:-webkit-autofill {
         -webkit-text-fill-color: white;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    #login_icon img{
+        width: 100%;
+        margin-top: 20vw;
+    }
+    .login-panel-container{
+        width: 90%;
+        height: 90%;
+    }
+    .missing-account-container{
+        font-size: 14px;
     }
 }
 
