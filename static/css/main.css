@@ -2100,10 +2100,6 @@ select:-webkit-autofill:focus {
 
 }
 
-#restaurants_x{
-    display: none;
-}
-
 .restaurants_dishes{
     display: none;
     margin-top: 5px;
@@ -2337,7 +2333,7 @@ select:-webkit-autofill:focus {
     margin-left: 130px;
     font-size: 14px;
     margin-right: -25px;
-    bottom: auto;
+
 }
 
 #restaurants_map_block{
@@ -2502,6 +2498,10 @@ select:-webkit-autofill:focus {
 
     box-sizing: border-box;
      float: right;
+}
+
+#restaurants_filter input[type=text]:focus  {
+
 }
 
 
@@ -2788,7 +2788,125 @@ display: none;
 }
 
 
+@media only screen and (max-width: 1758px) {
 
+
+    #restaurants_wrapper {
+        width: calc(100vw - 50px);
+        margin-left: 25px;
+        margin-right: 25px;
+        column-gap: 25px;
+        grid-template-columns:  calc(4.5% - 29px) calc(18.75% ) 1fr calc(22.75% ) ;
+    }
+
+    #restaurants_aside_right{
+        width: calc(22.75% - 15px);
+        height:  calc(22.75vw - 15px);
+        margin-left: 130px;
+        font-size: 14px;
+        margin-right: 0px;
+        right: 25px;
+    }
+
+    #restaurants_Adresseingabe_Headline_underline {
+        width: calc(100% - 22.75% * 2 - 50px - 82px);
+    }
+
+    #restaurants_aside_right_bottom_text{
+
+        top: auto;
+    }
+
+    #restaurants_aside_left{
+        width: calc(22.75% + 40px);
+        margin-left: -25px;
+    }
+
+}
+
+@media only screen and (max-width: 1500px) {
+    /* ----------- Map Page ----------- */
+
+    #restaurants_body_content_map{
+
+    float: right;
+    overflow: hidden;
+    overflow-y: scroll;
+
+    height: calc(100vh - 110px);
+
+    margin-left: 25px;
+    margin-right: 25px;
+
+    background-color: white;
+    font-size: 15px;
+}
+
+    .restaurants_block_map{
+    font-size: 13px;
+    margin-bottom: 10px;
+    background-color: white;
+
+    text-align: left;
+
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+    .restaurants_block_map:hover{
+    background-color: #fbfbff;
+    border-radius: 10px 0 0 0;
+}
+
+    .restaurants_name_map {
+    font-size: 15px;
+
+}
+
+    .restaurants_link{
+    text-decoration: none;
+    font-size: 10px;
+    color: #3F3C54;
+}
+
+    #mapid{
+    width:70%;
+    height: 700px;
+    margin-left: 30px;
+    float: left;
+}
+
+
+}
+
+@media only screen and (max-width: 1300px) {
+    /* ----------- Map Page ----------- */
+
+    #mapid{
+    height: 500px;
+}
+
+
+}
+
+
+
+@media only screen and (max-width: 1070px) {
+
+    /* ----------- Map Page ----------- */
+
+    #restaurants_body_content_map{
+        display: none;
+    }
+
+
+    #mapid{
+    width:95%;
+    height: 450px;
+    margin-left: 3%;
+    float: left;
+    }
+}
 
 
 
@@ -2943,6 +3061,19 @@ display: none;
     margin-top:30px;
 }
 
+@media only screen and (max-width: 1450px) {
+    .about_teammember_name{
+        font-size:18px;}
+     .about_teammember_title{
+    font-size:13px;
+    }
+    .about_teammember_email{
+        font-size:13px;
+    }
+    .about_teammember_bio{
+        font-size:12px;
+    }
+}
 
 
 @media only screen and (max-width: 1758px) {
@@ -2953,72 +3084,17 @@ display: none;
         margin-left: 25px;
         margin-right: 25px;
         column-gap: 25px;
-        grid-template-columns:  calc(4.5% - 29px) calc(18.75% ) 1fr calc(22.75% ) ;
+        grid-template-columns:  calc(4.5% - 29px) calc(18.75% ) 1fr calc(22.75% );
     }
 
-    #restaurants_aside_right{
+    #restaurants_aside_right {
         width: calc(22.75% - 15px);
-        height:  calc(22.75vw - 15px);
+        height: calc(22.75vw - 15px);
         margin-left: 130px;
         font-size: 14px;
         margin-right: 0px;
         right: 25px;
     }
-
-    #restaurants_Adresseingabe_Headline_underline {
-        width: calc(100% - 22.75% * 2 - 50px - 82px);
-    }
-
-    #restaurants_aside_right_bottom_text{
-
-        top: auto;
-    }
-
-    #restaurants_aside_left{
-        width: calc(22.75% + 40px);
-        margin-left: -25px;
-    }
-
-}
-
-@media only screen and (max-width: 1500px) {
-    /* ----------- Map Page ----------- */
-
-    #restaurants_body_content_map{
-
-    float: right;
-    overflow: hidden;
-    overflow-y: scroll;
-
-    height: calc(100vh - 110px);
-
-    margin-left: 25px;
-    margin-right: 25px;
-
-    background-color: white;
-    font-size: 15px;
-}
-
-    .restaurants_block_map{
-    font-size: 13px;
-    margin-bottom: 10px;
-    background-color: white;
-
-    text-align: left;
-
-    overflow: hidden;
-    padding-left: 10px;
-}
-
-    .restaurants_block_map:hover{
-    background-color: #fbfbff;
-    border-radius: 10px 0 0 0;
-}
-
-    .restaurants_name_map {
-    font-size: 15px;
-
-}
 
     .restaurants_link{
     text-decoration: none;
@@ -3073,6 +3149,19 @@ display: none;
         width:40vw;
         height:40vw;
     }
+    .about_teammember_name{
+        font-size:24px;
+    }
+    .about_teammember_title{
+    font-size:18px;
+    }
+    .about_teammember_email{
+        font-size:18px;
+    }
+    .about_teammember_bio{
+        font-size:18px;
+    }
+
 
   #restaurants_wrapper {
       width: 100vw;
@@ -3156,49 +3245,21 @@ display: none;
     }
 
   #restaurants_aside_left{
-  bottom: -400px;
-      transition: bottom 0.5s;
     position: fixed;
+    display: none;
     background-color: white;
-    height: 310px;
+    top: 0px;
+    height: 100vh !important;
     width: 100vw;
     font-size: 14px;
     margin-right: -25px;
-      z-index: 10;
-      padding-top: 65px;
-      padding-bottom: 25px;
-      border-top: 1px solid lightgrey;
 }
 
-  #restaurants_filter button{
-      margin-top: 20px;
-  }
-
-  #restaurants_filter input[type=text]{
-      margin: 0px;
-      margin-left: 25px;
-      margin-bottom: 10px;
-      width: calc(100% - 225px);
-      float: left;
-  }
-
   #restaurants_filter{
-      max-width: 500px;
-      width: calc(100%);
-      display: inline-block;
-      margin: 0px;
-  }
+      margin-top: calc((70vh - 460px)/2);
 
-  #restaurants_stars{
-      margin: 0px;
-      margin-top: -176px;
-      margin-right: 20px;
-      float: right;
-  }
-
-  #id_tags{
-      height: 100px;
-      margin-top: 10px;
+      width: 70%;
+      margin-left: 15%;
   }
 
     #restaurants_bottom{
@@ -3239,6 +3300,20 @@ display: none;
 }
 
 }
+@media only screen and (max-width: 840px) {
+    .about_teammember_name{
+        font-size:18px;
+    }
+    .about_teammember_title{
+    font-size:13px;
+    }
+    .about_teammember_email{
+        font-size:13px;
+    }
+    .about_teammember_bio{
+        font-size:12px;
+    }
+}
 
 @media only screen and (max-width: 700px) {
 
@@ -3273,6 +3348,18 @@ display: none;
     .about_teammember{
         width:80vw;
         height:80vw;
+    }
+    .about_teammember_name{
+        font-size:24px;
+    }
+    .about_teammember_title{
+    font-size:18px;
+    }
+    .about_teammember_email{
+        font-size:18px;
+    }
+    .about_teammember_bio{
+        font-size:18px;
     }
 
     #restaurants_body_content{
@@ -3346,6 +3433,21 @@ display: none;
 
 }
 
+@media only screen and (max-width: 420px) {
+    .about_teammember_name{
+        font-size:18px;
+    }
+    .about_teammember_title{
+    font-size:13px;
+    }
+    .about_teammember_email{
+        font-size:13px;
+    }
+    .about_teammember_bio{
+        font-size:12px;
+    }
+}
+
 @media only screen and (max-width: 415px) {
     #restaurants_stars img{
         float: right;
@@ -3361,6 +3463,13 @@ display: none;
 
 @media only screen and (max-width: 374px) {
 
+    #restaurants_filter{
+          margin-top: calc((85vh - 460px)/2);
+
+          width: 96%;
+          margin-left: 2%;
+
+    }
      .restaurants_anzahl_vegetarisch,  .restaurants_anzahl_vegan{
 
     width: calc((100% - 94px - 14px)/2);
@@ -3421,14 +3530,8 @@ display: none;
 
 @media only screen and (max-device-width: 480px) {
     #id_tags{
-       height: 50px;
+       height: 100px;
         border: 1px solid lightgrey;
-    }
-    #restaurants_stars{
-      margin-top: -126px;
-  }
-    #restaurants_aside_left{
-        height: 260px;
     }
 }
 
@@ -3439,10 +3542,17 @@ display: none;
     width: 100vw;
     max-width: 1200px;
     overflow: hidden;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
     min-height: calc(100vh - 111px);
     padding-bottom: 25px;
     margin-top: -25px;
     background-color: white;
+}
+
+#rd_main_body{
+    background-color: #f5f5f5;
 }
 
 #rd_banner{
@@ -3569,11 +3679,11 @@ display: none;
 
 
 #rd_body{
+    background-color:lightgrey ;
     display: inline-block;
     width: calc(100% - 50px);
     margin-left: 25px;
     margin-right: 25px;
-    background-color: white;
 
 }
 
