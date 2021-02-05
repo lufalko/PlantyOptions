@@ -51,10 +51,11 @@
     window.onresize = function (){
         if(document.body.clientWidth < 900){
             if( document.getElementsByClassName("ingredients-container")[0].style.position != "fixed") {
-                document.getElementsByClassName("ingredients-container")[0].style.position = "fixed";
+                document.getElementsByClassName("ingredients-container")[0].style.position = "fixed"; }
                 document.getElementsByClassName("ingredients-container")[0].style.bottom = "-500px";
+            document.getElementsByClassName("ingredients-container")[0].style.top = "auto";
                 dd = false;
-            }
+
         }
         if(document.body.clientWidth > 899){
              document.getElementsByClassName("ingredients-container")[0].style.top = "69px";
