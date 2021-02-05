@@ -51,10 +51,11 @@
     window.onresize = function (){
         if(document.body.clientWidth < 900){
             if( document.getElementsByClassName("ingredients-container")[0].style.position != "fixed") {
-                document.getElementsByClassName("ingredients-container")[0].style.position = "fixed";
+                document.getElementsByClassName("ingredients-container")[0].style.position = "fixed"; }
                 document.getElementsByClassName("ingredients-container")[0].style.bottom = "-500px";
+            document.getElementsByClassName("ingredients-container")[0].style.top = "auto";
                 dd = false;
-            }
+
         }
         if(document.body.clientWidth > 899){
              document.getElementsByClassName("ingredients-container")[0].style.top = "69px";
@@ -64,8 +65,9 @@
             document.getElementsByClassName("ingredients-container")[0].style.bottom = "auto";
         }
     }
-
+    let height = document.getElementById("articles_wrapper").offsetHeight;
     function scrollFunction() {
+        console.log("height " + height);
         console.log(document.body.scrollTop);
         if(document.body.clientWidth > 899) {
             if (document.body.scrollTop > 260) {
@@ -75,6 +77,12 @@
             } else {
                 document.getElementsByClassName("ingredients-container")[0].style.position = "relative";
                 document.getElementsByClassName("ingredients-container")[0].style.top = "auto";
+            }
+
+            if (document.body.scrollTop > height - 300) {
+                document.getElementsByClassName("ingredients-container")[0].style.position = "fixed";
+                document.getElementsByClassName("ingredients-container")[0].style.top =  69 + height - 300 - document.body.scrollTop;
+                document.getElementsByClassName("ingredients-container")[0].style.right = "0px";
             }
         }
     }
