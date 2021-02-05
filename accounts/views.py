@@ -540,6 +540,8 @@ def article_detail(request, pk):
     else:
         recipe = None;
         ingredients = None;
+        duration = None;
+        unit = None;
 
 
     context = {
