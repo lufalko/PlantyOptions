@@ -206,12 +206,6 @@ class Restaurant(models.Model):
 
     likes = models.ManyToManyField(Account, related_name='liked_restaurant', blank=True)
 
-    # objects = models.Manager()
-    # point = PointField(srid=4326, null=True)
-
-    # def lat_lng(self):
-    #    return list(getattr(self.point, 'coords', [])[::-1])
-
     def getAmountRating(self):
         comments = Comment.objects.all()
         count = 0
@@ -293,7 +287,7 @@ class Food(models.Model):
         ('Vegetarian', 'Vegetarian'),
     )
 
-    restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
+    restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
     toGoPrice = models.FloatField(null=True, blank=True)
@@ -315,12 +309,20 @@ class Food(models.Model):
 
 
 class Comment(models.Model):
-    account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL)
+    account = models.ForeignKey(Account, null=True, on_delete=models.CASCADE)
     # parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='subcomment')
-    restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.SET_NULL)
+    restaurant = models.ForeignKey(Restaurant, null=True, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     content = models.TextField(default='')
     ratings = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
+
+    def value(self):
+        if self.restaurant:
+            return self.restaurant.name
+        else:
+            return ' '
+
+    name = property(value)
 
     def save(self, *args, **kwargs):
         instance = super(Comment, self).save(*args, **kwargs)
@@ -328,7 +330,7 @@ class Comment(models.Model):
         return instance
 
     def __str__(self):
-        return self.account.username + ' | Rating: ' + str(self.ratings)
+        return self.account.username + ' on ' + self.name + '| Rating: ' + str(self.ratings)
 
 
 class Ingredient(models.Model):
