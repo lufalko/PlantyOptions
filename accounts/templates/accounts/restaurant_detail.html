@@ -779,7 +779,7 @@
          }
 
          function render_food() {
-
+            console.log(tag_now);
             if(tag_now != "Alles") {
                 for (let i = 0; i < sortRest.length; i++) {
                 }
@@ -790,7 +790,7 @@
                     for (let j = 0; j < tag_list[i].length; j++) {
 
                         if (tag_list[i][j] == tag_now) {
-                            check = true;
+
                             sortRest[i].style.display = "inline-block";
 
                         } else {
