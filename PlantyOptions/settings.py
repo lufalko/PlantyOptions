@@ -24,12 +24,11 @@ BASE_DIR: Union[Union[str, bytes], Any] = os.path.dirname(os.path.dirname(os.pat
 SECRET_KEY = 'yyubmz9(2_o8!y=b$zj)fi_oc+l)r6np4^%r)tpu5tr80z-efv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    "plantyoptions.de",
+    # "plantyoptions.de",
 ]
-
 
 # Application definition
 
@@ -76,7 +75,6 @@ TEMPLATES = [
     },
 ]
 
-
 AUTH_USER_MODEL = 'accounts.Account'
 
 WSGI_APPLICATION = 'PlantyOptions.wsgi.application'
@@ -89,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'hsa_2020ws_pyweb_plantyoptions',
         'USER': 'hsa_2020ws_pyweb_plantyoptions',
-        'HOST': 'eseifert.de',
+        'HOST': 'db',  # 'eseifert.de',
         'PASSWORD': 'LYGQ_5P5fYPnjw',
         'PORT': '5432',
     }
@@ -147,7 +145,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'info@plantyoptions.de'
 EMAIL_HOST_PASSWORD = '86154#Options'
-
 
 # if os.getlogin()=="luisb":
 #     GDAL_LIBRARY_PATH = r"D:\Documents\Studium\3.Semester\Webanwendungen\PlantyOptions\plantyoptions\venv\Lib\site-packages\osgeo\gdal301.dll"

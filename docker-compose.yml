@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+  db:
+    container_name: 'db'
+    image: 'postgres'
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_DB=hsa_2020ws_pyweb_plantyoptions
+      - POSTGRES_USER=hsa_2020ws_pyweb_plantyoptions
+      - POSTGRES_PASSWORD=LYGQ_5P5fYPnjw
